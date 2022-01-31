@@ -1,35 +1,24 @@
--- lua/core/global.lua
---
+-- Global Variables
 
-local global = {}
-local home = os.getenv("HOME")
-local path_sep = global.is_windows and "\\" or "/"
-local os_name = vim.loop.os_uname().sysname
+local g = vim.g
 
-function global:load_variables()
-  self.is_mac = os_name == "Darwin"
-  self.is_linux = os_name == "Linux"
-  self.is_windows = os_name == "Windows" or os_name == "Windows_NT"
-  self.vim_path = vim.fn.stdpath("config")
-  if self.is_windows then
-    path_sep = "\\"
-    home = os.getenv("HOMEDRIVE") or "C:"
-    home = home .. (os.getenv("HOMEPATH") or "\\")
-  end
+-- Map leader
+vim.api.nvim_set_keymap("", "<Space>", "<Nop>", {noremap = true, silent = true})
+g.mapleader = " "
+g.maplocalleader = " "
 
-  self.cache_dir = home .. path_sep .. ".cache" .. path_sep .. "nvim" .. path_sep
-  -- self.modules_dir = self.vim_path .. path_sep .. 'modules'
-  self.modules_dir = self.vim_path .. path_sep .. "lua" .. path_sep .. "packer_compiled.lua"
-  self.path_sep =path_sep
-  self.home = home
-  self.data_dir = string.format("%s%ssite%s", vim.fn.stdpath("data"), path_sep, path_sep)
-  self.cache_dir = vim.fn.stdpath("cache")
+-- Global Variables
+g.python3_host_prog = os.getenv('HOME') .. '/.pyenv/versions/neovim/bin/python'
 
-  self.log_dir = string.format("%s", self.cache_dir)
+-- Plugin Global Variables
+g.cursorhold_updatetime = 100 -- plugin: fix-cursorhold
 
-  self.log_path = string.format("%s%s%s", self.log_dir, path_sep, "nvim_debug.log")
+function _G.set_terminal_keymaps()
+  vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], { noremap = true })
+  vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], { noremap = true })
+  vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], { noremap = true })
+  vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], { noremap = true })
+  vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], { noremap = true })
+  vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], { noremap = true })
 end
 
-global:load_variables()
-
-return global 

@@ -1,7 +1,11 @@
--- init.lua 
+-- init.lua
 --
 
-require'core'
 
-    require('keymap').apply_dap_keymaps()
+require('utils').disable_builtins()
+require('core')
+require('plugins')
+require('mappings')
+require('ui')
 
+vim.cmd([[call darkmodesocket#updateTheme()]])

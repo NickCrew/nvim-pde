@@ -31,5 +31,3 @@ function! BufSel(pattern)
 endfunction
 "Bind the BufSel() function to a user-command
 command! -nargs=1 Bs :call BufSel("<args>")
-
-

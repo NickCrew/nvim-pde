@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+if [[ -f startup.log ]]; then
+	mv startup.log startup.1.log
+fi
+nvim --startuptime startup.log -c exit && tail -100 startup.log
