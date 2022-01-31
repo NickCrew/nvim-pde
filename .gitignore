@@ -1,0 +1,4 @@
+tags
+packer_compiled.lua
+vimspector/gadgets/
+!/doc/tags
