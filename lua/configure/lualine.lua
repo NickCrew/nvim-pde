@@ -4,7 +4,7 @@ return {
     require("lualine").setup({
     options = {
       icons_enabled = true,
-      theme = "auto",
+      theme = "tokyonight",
       -- component_separators = { left = "", right = "" },
       -- section_separators = { left = "", right = "" },
       section_separators = "",
@@ -64,7 +64,7 @@ return {
       lualine_z = {},
     },
     tabline = {},
-    extensions = {'quickfix', 'fugitive'},
+    extensions = {'quickfix'},
   })
   end,
 }

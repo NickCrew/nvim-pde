@@ -1,6 +1,7 @@
 -- lua/core/init.lua
 --
 local global = require'core.global'
+local keys = require'keymap'
 local vim = vim
 
 -- Create cache dir and subs dir
@@ -21,6 +22,7 @@ local createdir = function()
   end
 end
 
+-- Disable unneeded distribution plugins
 local disable_distribution_plugins = function()
   vim.g.loaded_gzip = 1
   vim.g.loaded_tar = 1
@@ -42,31 +44,56 @@ local disable_distribution_plugins = function()
   vim.g.loaded_netrwFileHandlers = 1
 end
 
-local leader_map = function()
-  vim.g.mapleader = " "
-  vim.api.nvim_set_keymap('n', ' ', '', {noremap = true})
-  vim.api.nvim_set_keymap('x', ' ', '', {noremap = true})
-end
-
+-- Telescope extensions
 local load_telescope_extensions = function()
-  require('telescope').load_extension('zoxide')
-  require('telescope').load_extension('projects')
-  require('telescope').load_extension('vimspector')
+  local tele = require('telescope')
+  tele.load_extension('zoxide')
+  tele.load_extension('projects')
+  tele.load_extension('vimspector')
+  tele.load_extension('vim_bookmarks')
+  tele.load_extension('fzf')
+  tele.load_extension('ui-select')
+  tele.load_extension('cheatsheet')
+  tele.load_extension('frecency')
+  tele.load_extension('gh')
+  tele.load_extension('dash')
 end
 
+-- Theme
+local load_theme_settings = function()
+  local cmd = vim.cmd
+  vim.g.tokyonight_italic_functions = true
+  vim.g.tokyonight_colors = { 
+    hint = "#018552"
+
+  }
+  cmd([[colorscheme tokyonight]])
+
+
+  cmd([[highlight Normal guibg=none]])
+  cmd([[highlight NonText ctermbg=none]])
+  cmd([[highlight DiagnosticWarn guifg=DarkOrange]])
+end
+
+-- Set leader key
+local apply_leader_map = function()
+  vim.g.mapleader = " "
+  --vim.api.nvim_set_keymap('n', ' ', '', {noremap = true})
+  --vim.api.nvim_set_keymap('x', ' ', '', {noremap = true})
+end
+
+
+-- Load 'er up 
 local load_core = function()
   createdir()
   disable_distribution_plugins()
-  leader_map()
+  apply_leader_map()
 
   require('core.options')
   require('plugins')
-  require('keymap').apply_default_keymaps()
 
-  require('core.theme').apply_default_theme()
-  require('core.dashboard')
-
-  load_telescope_extensions()
+  keys.apply_default_keymaps()
+  load_theme_settings()
 
 end
 

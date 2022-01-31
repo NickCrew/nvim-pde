@@ -3,7 +3,7 @@
   "filetypes": [
     "javascript"
   ],
-  "default": true,
+  "default": false,
   "configuration": {
     "request": "launch",
     "protocol": "auto",

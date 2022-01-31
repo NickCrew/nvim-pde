@@ -4,6 +4,7 @@ return {
     'onsails/lspkind-nvim',
     'hrsh7th/vim-vsnip',
     'hrsh7th/cmp-vsnip',
+    'hrsh7th/vim-vsnip-integ',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-nvim-lsp',
@@ -18,14 +19,11 @@ return {
         vim.fn["vsnip#anonymous"](args.body)
       end,
     },
-    completion = {
-      completeopt = 'menu,menuone,noinsert'
-    },
     mapping = require('keymap').get_cmp_mappings(),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'vsnip' }, -- For vsnip users.
-      }, {
+      --}, {
         { name = 'buffer' },
         --{ name = 'tags' },
         --{ name = 'treesitter' },
@@ -54,6 +52,7 @@ return {
       { name = 'cmdline' }
     })
   })
+  vim.g.vsnip_snippet_dir = vim.fn.stdpath('config')..'/vsnip'
 
   end,
 }

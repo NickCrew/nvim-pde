@@ -1,7 +1,7 @@
 -- lua/lsp/servers.lua
 --
 
-local servers = {
+return {
     --"ansiblels",
     "cssls",
     "diagnosticls",
@@ -17,4 +17,3 @@ local servers = {
     "yamlls"
  
 }
-return servers

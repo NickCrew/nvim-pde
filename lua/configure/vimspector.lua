@@ -3,8 +3,7 @@ return {
   config = function()
     local g = vim.g
     local fn = vim.fn
-    g.vimspector_enable_mappings = 'HUMAN'
-    g.vimspector_base_dir = fn.stdpath('config')..'/vimspector'
+    --g.vimspector_home = fn.stdpath('config')..'/vimspector'
     g.vimspector_install_gadgets = {
         'debugpy',
         'vscode-node-debug2',

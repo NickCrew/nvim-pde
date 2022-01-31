@@ -1,4 +1,8 @@
-local signs = {
+-- lua/lsp/icons.lua
+--
+-- Diagnostic icons
+
+return {
   Error = ' ',
   Warning = ' ',
   Warn = ' ',
@@ -6,4 +10,3 @@ local signs = {
   Information = ' ',
   Info = ' ',
 }
-return signs

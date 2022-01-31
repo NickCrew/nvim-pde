@@ -12,14 +12,15 @@ return {
     'nvim-telescope/telescope-vimspector.nvim',
     'nvim-telescope/telescope-ui-select.nvim',
     'nvim-telescope/telescope-vimspector.nvim',
-    'nvim-telescope/telescope-dap.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
     { 'mrjones2014/dash.nvim', run = 'make install' }
   },
   config = function()
     local trouble = require('trouble.providers.telescope')
+    local actions = require('telescope.actions')
+    local tele = require('telescope')
 
-    require('telescope').setup({
+    tele.setup({
       defaults = {
         vimgrep_arguments = {
           'rg',
@@ -30,14 +31,20 @@ return {
           '--column',
           '--smart-case',
           '--ignore-file',
-          (os.getenv('HOME') .. '/.config/.ignore'),
+          (vim.fn.stdpath('config') .. '/.telescope_ignore'),
         },
         prompt_prefix = '   ',
         file_sorter = require('telescope.sorters').get_fuzzy_file,
         dynamic_preview_title = true,
         mappings = {
-          i = { ['<c-t>'] = trouble.open_with_trouble },
-          n = { ['<c-t>'] = trouble.open_with_trouble },
+          i = { 
+            ['<c-t>'] = trouble.open_with_trouble ,
+            ['<esc>'] = actions.close,
+          },
+          n = { 
+            ['<c-t>'] = trouble.open_with_trouble,
+            ['<esc>'] = actions.close
+          },
         },
       },
       pickers = {
@@ -51,7 +58,7 @@ return {
             '--column',
             '--smart-case',
             '--ignore-file',
-            (os.getenv('HOME') .. '/.config/.ignore'),
+            (vim.fn.stdpath('config') .. '/.telescope_ignore'),
             '--iglob',
             '!.git',
           },
@@ -70,7 +77,7 @@ return {
       },
       dash = {
           -- configure path to Dash.app if installed somewhere other than /Applications/Dash.app
-          dash_app_path = '/Applications/Dash.app',
+          --dash_app_path = '/Applications/Dash.app/Contents/Resources/dashAlfredWorkflow',
           -- search engine to fall back to when Dash has no results, must be one of: 'ddg', 'duckduckgo', 'startpage', 'google'
           search_engine = 'ddg',
           -- debounce while typing, in milliseconds
@@ -99,15 +106,17 @@ return {
       },
     })
 
-    require('telescope').load_extension('fzf')
-    require("telescope").load_extension('ui-select')
-    require('telescope').load_extension('dash')
-    require('telescope').load_extension('cheatsheet')
-    require('telescope').load_extension('dap')
-    require('telescope').load_extension('frecency')
-    require('telescope').load_extension('gh')
+  tele.load_extension('zoxide')
+  tele.load_extension('projects')
+  tele.load_extension('vimspector')
+  tele.load_extension('fzf')
+  tele.load_extension('ui-select')
+  tele.load_extension('cheatsheet')
+  tele.load_extension('frecency')
+  tele.load_extension('gh')
+  tele.load_extension('dash')
 
-    require('keymap').apply_telescope_keymaps()
+  require('keymap').apply_telescope_keymaps()
 
   end,
 }

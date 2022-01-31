@@ -21,5 +21,5 @@ cnoreabbrev Tr TroubleToggle
 cnoreabbrev PC PackerCompile
 cnoreabbrev PI PackerInstall
 
-cnoreabbrev tn tabnext
-cnoreabbrev tp tabprevious
+cnoreabbrev TB ToggleBookmark
+cnoreabbrev TT ToggleTrouble

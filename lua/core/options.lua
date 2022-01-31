@@ -1,98 +1,90 @@
 -- lua/core/options.lua
 --
+
 local global = require("core.global")
+local o = vim.o
 
-local function bind_option(options)
-  for k, v in pairs(options) do
-    if v == true or v == false then
-      vim.cmd("set " .. k)
-    else
-      vim.cmd("set " .. k .. "=" .. v)
-    end
-  end
-end
+o.termguicolors = true
 
--- stylua: ignore start
-local function load_options()
-  local global_local = {
-    autochdir       = false;
-    autoread        = true;
-    autowrite       = false;
-    backspace       = 'indent,eol,start';
-    backup          = false;
-    completeopt     = 'menu,menuone,noselect';
-    encoding        = 'utf-8';
-    errorbells      = false;
-    fileformats     = 'unix,dos,mac';
-    foldmarker      = '{{{,}}}';
-    foldmethod      = 'marker';
-    formatoptions   = 'o';
-    gdefault        = true;
-    hidden          = true;
-    hlsearch        = true;
-    ignorecase      = true;
-    incsearch       = true;
-    joinspaces      = false;
-    laststatus      = 2;
-    linespace       = 0;
-    magic           = true;
-    modeline        = true;
-    mouse           = 'a';
-    ruler           = true;
-    showcmd         = true;
-    showmatch       = true;
-    showmode        = true;
-    signcolumn      = "auto:1";  --auto auto:2  "number"
-    smartcase       = true;
-    splitbelow      = true;
-    splitright      = true;
-    startofline     = false;
-    swapfile        = false;
-    termguicolors   = true;
-    textwidth       = 0;
-    undodir         = global.cache_dir .. 'undo/';
-    undofile        = true;
-    wildignore      = '.git/**,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**';
-    wildignorecase  = true;
-    wildmenu        = false;
-    wildmode        = 'longest,list,full';
+-- Encoding and Line Endings
+o.encoding = 'utf-8'
+o.fileformats = 'unix,dos,mac'  -- line endings to try
 
-  }
+-- Quality of Life
+o.errorbells = false    -- shut up
+o.autochdir = false     -- automatically cd to current directory of open file
+o.magic = true          -- give certain characters special meaning with backslash
+o.mouse = 'a'           -- mouse enabled in all modes
+o.startofline = false   -- place cursor at start of line for certain commands e.g. S-g, gg, Ctrl-U, Ctrl-D
+o.backspace = 'indent,eol,start'  -- traditional backspace behavior
 
-  local bw_local    = {
-    autoindent      = true;
-    expandtab       = true;
-    foldenable      = true;
-    linebreak       = true;
-    shiftwidth      = 4;
-    softtabstop     = 4;
-    tabstop         = 4;
-    wrap            = false;
-  }
+-- Completion
+o.completeopt = 'menu,menuone,noselect'
 
-if global.is_mac then
-    vim.g.clipboard = {
-      name = "macOS-clipboard",
-      copy = {
-        ["+"] = "pbcopy",
-        ["*"] = "pbcopy",
-      },
-      paste = {
-        ["+"] = "pbpaste",
-        ["*"] = "pbpaste",
-      },
-      cache_enabled = 0
-    }
-    vim.g.python3_host_prog = '/usr/local/bin/python3'
-  end
-  for name, value in pairs(global_local) do
-    vim.o[name] = value
-  end
-  bind_option(bw_local)
-end
+-- File reading/writing
+o.autoread = true     -- automatically read changed files
+o.hidden = true       -- allow leaving buffer without writing
 
--- stylua: ignore end
+-- Tabs and Indents
+o.expandtab = false   -- expand tabs into spaces
+o.shiftwidth = 4
+o.softtabstop = 4
+o.tabstop = 4
+o.autoindent = true   -- copy indent from current line when starting new line
 
-load_options()
+-- Text behaviour
+-- o.formatoptions = o.formatoptions
+--                    + 't'    -- auto-wrap text using textwidth
+--                    + 'c'    -- auto-wrap comments using textwidth
+--                    + 'r'    -- auto insert comment leader on pressing enter
+--                    - 'o'    -- don't insert comment leader on pressing o
+--                    + 'q'    -- format comments with gq
+--                    - 'a'    -- don't autoformat the paragraphs (use some formatter instead)
+--                    + 'n'    -- autoformat numbered list
+--                    - '2'    -- I am a programmer and not a writer
+--                    + 'j'    -- Join comments smartly
+o.formatoptions = o.formatoptions .. 'o'
+o.joinspaces = false
+
+-- Wrapping
+o.wrap = true
+o.linebreak = true
+o.textwidth = 0
+
+-- Folding
+o.foldenable = true
+o.foldmarker = '{{{,}}}'
+o.foldmethod = 'marker'
+
+-- Searching
+o.hlsearch = true
+o.incsearch = true
+o.inccommand = true
+o.smartcase = true
+
+-- Look and feel
+o.ruler = true
+o.laststatus = 2
+o.showcmd = true
+o.showmatch = false
+o.showmode = false
+o.splitbelow = true
+o.splitright = true
+o.number = true
+o.signcolumn = "auto:2"  -- max columns allowed in gutter. syntax: auto:N
+
+-- Backup/Undo/Swap
+o.backup = false
+o.swapfile = false
+o.undodir = global.cache_dir .. 'undo/'
+o.undofile = true
+
+-- Wildmenu
+o.wildmenu = true
+o.wildmode = 'longest,list,full'
+o.wildignorecase = true
+o.wildignore = '.git/**,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**'
+
+vim.g.python3_host_prog = os.getenv('HOME')..'/.pyenv/versions/neovim/bin/python'
 
 

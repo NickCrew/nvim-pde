@@ -1,5 +1,6 @@
 -- lsp/init.lua
 --
+local vim = vim
 
 local signs = require('lsp.icons')
 for type, icon in pairs(signs) do
@@ -12,21 +13,25 @@ vim.diagnostic.config({
   virtual_text = true,
   signs = true,
   underline = true,
-  update_in_insert = true,
+  update_in_insert = false,
   severity_sort = true,
 })
 
-require'toggle_lsp_diagnostics'.init()
+require('toggle_lsp_diagnostics').init()
 require('lsp.ui-customization')
+require("rust-tools").setup({})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local on_attach = function(_, bufnr)
+  -- show type info in virtual text
+  require'virtualtypes'.on_attach()
   -- show diagnostics on hover
   vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})')
   -- LSP keybindings
   require('keymap').apply_lsp_keymaps()
+  -- LSP Signature
   require('lsp_signature').on_attach({
     bind = true,
     handler_opts = {
@@ -41,9 +46,9 @@ end
 
 -- currently installed servers
 local lsp_installer_servers = require('nvim-lsp-installer.servers')
--- desired servers
-local servers = require('lsp.servers')
 
+-- Desired servers
+local servers = require('lsp.servers')
 -- Loop through the servers listed above.
 for _, server_name in pairs(servers) do
     local server_available, server = lsp_installer_servers.get_server(server_name)

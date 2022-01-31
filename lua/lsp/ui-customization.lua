@@ -1,3 +1,18 @@
+-- lua/lsp/handlers.lua
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
+local lsp = vim.lsp
+local handlers = lsp.handlers
+
+handlers['textDocument/hover'] = lsp.with(handlers.hover,
+  {
+    border = 'rounded'
+  }
+)
+
+handlers['textDocument/signatureHelp'] = lsp.with(handlers.signature_help,
+  {
+    border = 'rounded'
+  }
+)
+
+

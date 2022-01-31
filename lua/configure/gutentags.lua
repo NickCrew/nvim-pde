@@ -1,5 +1,8 @@
-return function()
+return {
+'ludovicchabant/vim-gutentags',
+config = function ()
   -- https://www.reddit.com/r/vim/comments/d77t6j/guide_how_to_setup_ctags_with_gutentags_properly/
+  local global = require'core.global'
   local g = vim.g
   g.gutentags_ctags_exclude = {
           '*.git', '*.svg', '*.hg',
@@ -51,11 +54,11 @@ return function()
 
     g.gutentags_add_default_project_roots = false
     g.gutentags_project_root = {'package.json', '.git'}
-    g.gutentags_cache_dir = vim.fn.expand('~/.cache/nvim/ctags/')
+    g.gutentags_cache_dir = global.cache_dir .. '/tags'
     g.gutentags_generate_on_new = true
     g.gutentags_generate_on_missing = true
     g.gutentags_generate_on_write = true
     g.gutentags_generate_on_empty_buffer = true
-    cmd([[command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')]])
     g.gutentags_ctags_extra_args = {'--tag-relative=yes', '--fields=+ailmnS', }
-end
+  end
+}

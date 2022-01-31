@@ -1,64 +1,115 @@
 local fn = vim.fn
-local packer_bootstrap = false
+local packer_bootstrap = false 
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
 return require('packer').startup(function(use)
-  use('wbthomason/packer.nvim')
-  -- Manage Startup and Launch
-  use { 'lewis6991/impatient.nvim', 'dstein64/vim-startuptime' }
+  -- Packer itself
+  use {'wbthomason/packer.nvim'}
+
+  -- Do more faster
+  use { 'lewis6991/impatient.nvim' }
+  use { 'dstein64/vim-startuptime' }
+
   -- Reload neovim
   use { 'famiu/nvim-reload' }
-  -- Debuggers
-  use(require('configure.vimspector'))
-  use(require('configure.dapinstall'))
-  -- Language Support
+
+
+   -- Language Support
   use(require('configure.lspconfig'))
   use(require('configure.treesitter'))
+  use { 'liuchengxu/vista.vim' }
+
   -- Diagnostics
   use(require('configure.trouble'))
-  -- Search
-  use(require('configure.telescope'))
+
+  -- Search, Bookmarks, Fuzzy Finding
+  use { 'ggandor/lightspeed.nvim' }
+
+  use(require('configure.nvim-telescope'))
+  use(require('configure.marks'))
+  use(require('configure.hslens'))
+
+  -- Debugging
+  use(require('configure.dapinstall'))
+  use(require('configure.sniprun'))
+  use(require('configure.vimspector'))
+  use {
+  'sakhnik/nvim-gdb', 
+  run = 'bash ./install.sh',
+  }
+  -- Running tests
+  use {
+    "rcarriga/vim-ultest",
+    requires = {"vim-test/vim-test"},
+    run = ":UpdateRemotePlugins"
+  }
+
   -- Completion
   use(require('configure.completion'))
+
   -- Git integration
   use(require('configure.git'))
+
   -- File drawer
   use(require('configure.nvim-tree'))
+
   -- Indent guides
   use(require('configure.indent-blankline'))
+
   -- Fancy status bar
   use(require('configure.lualine'))
+
   -- Buffer management and bar
   use(require('configure.bufferline'))
+
   -- Show inline color labels
   use(require('configure.colorizer'))
+
   -- Enhanced comments
   use(require('configure.todo-comments'))
+
   -- Nice notifications
   use(require('configure.nvim-notify'))
-  use {
-    'goolord/alpha-nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' }
-  }
+
+  use(require('configure.dashboard'))
+
   -- Move code easily
-  use(require('configure.vim-move'))
+  use {
+    'matze/vim-move',
+    setup = function()
+      vim.g.move_key_modifier = 'S'  -- Shift
+    end,
+  }
+
   -- Keybinding helper
   use(require('configure.which-key'))
+
   -- Better quickfix window
-  use{'kevinhwang91/nvim-bqf'}
+  use  {'kevinhwang91/nvim-bqf'}
+
   -- Movement
-  use { 'chaoren/vim-wordmotion', 'justinmk/vim-sneak' }
+  use {'chaoren/vim-wordmotion'}
+
   -- Formatting
-  use('sbdchd/neoformat')
+  use {'sbdchd/neoformat'}
+
   -- Easy commenting
-  use('tpope/vim-commentary')
+  use {'tpope/vim-commentary'}
+
   -- Improved history with tree-style viewer
-  use('simnalamburt/vim-mundo')
+  use {'simnalamburt/vim-mundo'}
+
   -- Better pane navigation
-  use(require('configure.navigator'))
+  use {
+    'numToStr/Navigator.nvim',
+    config = function()
+        require('Navigator').setup()
+    end
+  }
+
   -- Help Remember stuff
   use {
     'sudormrfbin/cheatsheet.nvim',
@@ -66,17 +117,15 @@ return require('packer').startup(function(use)
       require('cheatsheet').setup()
     end
   }
+
   -- Project manager
   use {
   "ahmedkhalf/project.nvim",
   config = function()
-    require("project_nvim").setup {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
+    require("project_nvim").setup()
   end
   }
+
   -- Wrapping/delimiters
   use {
     'machakann/vim-sandwich',
@@ -86,6 +135,7 @@ return require('packer').startup(function(use)
       end
     }
   }
+
   -- Generate docs
   use {
     "danymat/neogen",
@@ -96,6 +146,7 @@ return require('packer').startup(function(use)
         }
     end
   }
+
   -- Smooth Scrolling
   use {
     'karb94/neoscroll.nvim',
@@ -105,6 +156,7 @@ return require('packer').startup(function(use)
       })
     end,
   }
+
   -- Markdown
   use {
     'ellisonleao/glow.nvim',
@@ -112,12 +164,12 @@ return require('packer').startup(function(use)
       vim.g.glow_binary_path = vim.env.HOME .. "/bin"
     end
   }
-  -- Tags and symbols
-  use { 'liuchengxu/vista.vim' } 
-  use {'ludovicchabant/vim-gutentags', config=require('configure.gutentags')} 
+
 
   -- Themes
-  use(require('configure.themes'))
+  use { 'rebelot/kanagawa.nvim' }
+  use { 'luisiacc/gruvbox-baby' }
+  use { 'folke/tokyonight.nvim', branch = 'main' }
 
   if packer_bootstrap then
     require('packer').sync()

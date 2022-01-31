@@ -42,8 +42,7 @@ return {
         },
       },
       view = {
-        side = 'right',
-        width = 40,
+        width = 35,
         auto_resize = false,
       },
       update_focused_file = {
