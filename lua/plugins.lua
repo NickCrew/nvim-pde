@@ -26,8 +26,6 @@ return require('packer').startup(function(use)
   use(require('configure.trouble'))
 
   -- Search, Bookmarks, Fuzzy Finding
-  use { 'ggandor/lightspeed.nvim' }
-
   use(require('configure.nvim-telescope'))
   use(require('configure.marks'))
   use(require('configure.hslens'))
@@ -88,7 +86,21 @@ return require('packer').startup(function(use)
   use(require('configure.which-key'))
 
   -- Better quickfix window
-  use  {'kevinhwang91/nvim-bqf'}
+  use {
+    'phaazon/hop.nvim',
+    requires = {
+      'nvim-telescope/telescope-hop.nvim'
+    },
+    config = function()
+      require('hop').setup({
+        case_insensitive = true,
+        char2_fallback_key = '<CR>',
+      })
+
+    require'telescope'.load_extension("hop")
+    end
+  }
+
 
   -- Movement
   use {'chaoren/vim-wordmotion'}

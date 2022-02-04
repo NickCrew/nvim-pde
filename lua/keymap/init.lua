@@ -52,10 +52,6 @@ function M.apply_default_keymaps()
     -- Search
     { '<leader>l', ':noh<CR>'},
 
-    -- Show hide info
-    {'<C-k>o', ':copen<CR>'},
-    {'<C-k>c', ':close<CR>'},
-
     -- Yank/Paste
     {'<leader>p', '"*p'},
     {'<leader>y', '"*y'},
@@ -73,15 +69,15 @@ function M.apply_default_keymaps()
     {'<C-k>v',  ':Vista!!<CR>'},
     -- Gitsigns
     {'<leader>gb', ':Gitsigns toggle_current_line_blame<CR>'},
+    {'Q','<nop>'},
+    {'<leader>;', ':HopWord<CR>'},
+    {'<leader>:', ':HopLine<CR>'}
 
   })
 
   bind_plug({
     -- Marks
     {'<leader>b', '<Plug>BookmarksListAll'},
-    -- Lightspeed
-    {'<leader>s', '<Plug>Lightspeed_s'},
-    {'<leader><leader>s', '<Plug>Lightspeed_S'},
     -- SnipRun
     {'<leader>sr', '<Plug>SnipRun'}
   })
@@ -114,7 +110,7 @@ function M.apply_telescope_keymaps()
     { '<leader>h', ':Telescope command_history<CR>' },
     { '<leader>r', ':Telescope registers<CR>' },
     { '<leader>m', ':Telescope marks<CR>' },
-    { '<leader>;', ':Telescope commands<CR>' },
+    { '<C-k>c', ':Telescope commands<CR>' },
     { '<leader>pr', ':Telescope projects<CR>' },
     { '<C-k>d', ':Telescope dap commands<CR>' },
     { '<leader>k', ':Telescope keymaps<CR>'},
@@ -199,11 +195,27 @@ function M.apply_lsp_keymaps()
     { '<leader>ao', '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>'},
     -- Dostics mapping
     { '<leader>ee', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>'},
-    { '[g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>'},
+   { '[g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>'},
     { ']g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>'},
   })
 end
 
+function M.apply_qf_keymaps()
+  bind({
+    {'<leader>lo', "<cmd>lua require'qf'.open('l')<CR>"}, -- Open location list
+    {'<leader>lc', "<cmd>lua require'qf'.close('l')<CR>"}, -- Close location list
+    {'<leader>ll', "<cmd>lua require'qf'.toggle('l', t'ue)<CR>"}, -- Toggle location list and stay in current window
+    {'<leader>co', "<cmd>lua require'qf'.open('c')<CR>"}, -- Open quickfix list
+    {'<leader>cc', "<cmd>lua require'qf'.close('c')<CR>"}, -- Close quickfix list
+    {'<leader>cl', "<cmd>lua require'qf'.toggle('c', true)<CR>"}, --Toggle quickfix list and stay in current window
+    {'\\j',  "<cmd>lua require'qf'.below('l')<CR>"}, -- Go to next location list entry from cursor
+    {'\\k',  "<cmd>lua require'qf'.above('l')<CR>"}, -- Go to previous location list entry from cursor
+    {'\\J',  "<cmd>lua require'qf'.below('c')<CR>"}, -- Go to next quickfix entry from cursor
+    {'\\K',  "<cmd>lua require'qf'.above('c')<CR>"}, -- Go to previous quickfix entry from cursor
+    {']q', "<cmd>lua require'qf'.below('visible')<CR>"}, -- Go to next entry from cursor in visible list
+    {'[q', "<cmd>lua require'qf'.above('visible')<CR>"}, -- Go to previous entry from cursor in visible list
+  })
+end
 
 function M.get_cmp_mappings()
   return {
