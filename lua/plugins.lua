@@ -29,110 +29,353 @@ return require("packer").startup(function(use)
 
   -- Do more faster
   use({ "lewis6991/impatient.nvim" })
+
   use({ "dstein64/vim-startuptime" })
+
   use({ "famiu/nvim-reload" })
 
+  use({
+    "RishabhRD/popfix",
+    "RishabhRD/nvim-lsputils",
+    config = function()
+      require("lsp.lsputils")
+    end,
+  })
+
+  -- Popup preview window for LSP
+  use({
+    "rmagatti/goto-preview",
+    config = function()
+      require("goto-preview").setup({})
+    end,
+  })
+
   -- Language Support
-  use(require("configure.lspconfig"))
-  use(require("configure.treesitter"))
+  use({
+    "neovim/nvim-lspconfig",
+    event = "BufRead",
+    requires = {
+      "jubnzv/virtual-types.nvim",
+      "ray-x/lsp_signature.nvim",
+      "williamboman/nvim-lsp-installer",
+      "jose-elias-alvarez/nvim-lsp-ts-utils",
+      "folke/lsp-colors.nvim",
+      "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+    },
+    config = function()
+      require("lsp")
+    end,
+  })
+
+  use({
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
+  })
+
+  use({
+    "kosayoda/nvim-lightbulb",
+  })
+
+  -- Syntax highlighting
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    requires = {
+      "p00f/nvim-ts-rainbow",
+      "romgrk/nvim-treesitter-context",
+      "nvim-treesitter/playground",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      {
+        "nvim-treesitter/playground",
+        cmd = {
+          "TSPlaygroundToggle",
+          "TSHighlightCapturesUnderCursor",
+        },
+      },
+    },
+    run = ":TSUpdate",
+    config = function()
+      require("configure.treesitter")
+    end,
+  })
+
+  use({
+    "akinsho/nvim-toggleterm.lua",
+    cmd = "ToggleTerm",
+    config = function()
+      require("configs.toggleterm").config()
+    end,
+  })
 
   -- Search and command palette
-  use {
+  use({
     "lazytanuki/nvim-mapper",
-    config = function() require("nvim-mapper").setup{
-require("nvim-mapper").setup({
-    -- do not assign the default keymap (<leader>MM)
-    no_map = false,
-    -- where should ripgrep look for your keybinds definitions.
-    -- Default config search path is ~/.config/nvim/lua
-    search_path = os.getenv("HOME") .. "/.config/nvim/lua",
-    -- what should be done with the selected keybind when pressing enter.
-    -- Available actions:
-    --   * "definition" - Go to keybind definition (default)
-    --   * "execute" - Execute the keybind command
-    action_on_enter = "definition",
-})
-    } end,
-    before = "telescope.nvim"
-}
-use {
+    config = function()
+      require("nvim-mapper").setup({
+        no_map = false,
+        search_path = os.getenv("HOME") .. "/.config/nvim/lua",
+        action_on_enter = "definition",
+      })
+    end,
+    before = "telescope.nvim",
+  })
+
+  -- Telescope plugins
+  use({
     "nvim-telescope/telescope-vimspector.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
     "nvim-telescope/telescope-media-files.nvim",
     "nvim-telescope/telescope-frecency.nvim",
     "jvgrootveld/telescope-zoxide",
     "nvim-telescope/telescope-github.nvim",
-    before = "telescope.nvim"
-}
-  use(require("configure.nvim-telescope"))
+    {
+      "nvim-telescope/telescope-dap.nvim",
+      requires = "mfussenegger/nvim-dap",
+    },
+    before = "telescope.nvim",
+  })
 
-  -- Debugging
-  use(require('debuggers.dap.nvim-dap'))
-  use(require('debuggers.dap.nvim-dap-install'))
-  use(require('debuggers.dap.nvim-dap-python'))
-  use(require('debuggers.dap.nvim-dap-telescope'))
-  use(require('debuggers.vimspector'))
-  use(require('debuggers.gdb'))
-  use(require('debuggers.run'))
-  use(require('debuggers.tests'))
+  -- Telescope
+  use({
+    "nvim-telescope/telescope.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-lua/popup.nvim",
+      "folke/trouble.nvim",
+      "tami5/sqlite.lua",
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+      "nvim-telescope/telescope-symbols.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
+      { "mrjones2014/dash.nvim", run = "make install" },
+    },
+    config = function()
+      require("configure.telescope")
+    end,
+  })
+
+  -- DAP Plugin for Python
+  use({
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    requires = {
+      "mfussenegger/nvim-dap",
+    },
+    config = function()
+      local python_path = os.getenv("HOME") .. "/.pyenv/versions/debugpy/bin/python"
+      require("dap-python").setup(python_path)
+    end,
+  })
+
+  -- Debug Adapter Installer
+  use({
+    "Pocco81/DAPInstall",
+    config = function()
+      local di = require("dap-install")
+      di.setup({
+        installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
+      })
+      di.config("jsnode", {}, "python", {})
+    end,
+  })
+
+  -- Virtual text for DAP debugging
+  use({
+    "theHamsta/nvim-dap-virtual-text",
+    requires = "mfussenegger/nvim-dap",
+    config = function()
+      require("nvim-dap-virtual-text").setup()
+    end,
+  })
+
+  -- DAP and DAP User Interface
+  use({
+    "mfussenegger/nvim-dap",
+    "rcarriga/nvim-dap-ui",
+    config = function()
+      require("dapui").setup()
+      -- -- Dap UI will open automatically
+      local dap, dapui = require("dap"), require("dapui")
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
+    end,
+  })
+
+  -- Vimspector - alternative debugger
+  use({
+    "puremourning/vimspector",
+    before = "telescope.nvim",
+    config = function()
+      require("configure.vimspector")
+    end,
+    disabled = true,
+  })
+
+  use({
+    "rcarriga/vim-ultest",
+    requires = { "vim-test/vim-test" },
+    run = ":UpdateRemotePlugins",
+  })
+
+  use({
+    "sakhnik/nvim-gdb",
+    run = "bash ./install.sh",
+  })
+
+  use({
+    "michaelb/sniprun",
+    run = "bash ./install.sh",
+    config = function()
+      require("sniprun").setup({
+        selected_interpreters = { "Python" },
+        repl_enable = { "Python" },
+      })
+    end,
+  })
 
   -- Marks and Bookmarks
-  use(require("configure.marks"))
+  use({
+    "chentau/marks.nvim",
+    config = function()
+      require("configure.marks")
+    end,
+  })
 
   -- Completion
-  use(require("configure.completion"))
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "onsails/lspkind-nvim",
+      "hrsh7th/vim-vsnip",
+      "hrsh7th/cmp-vsnip",
+      "hrsh7th/vim-vsnip-integ",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-nvim-lua",
+    },
+    config = function()
+      require("configure.completion")
+    end,
+  })
+  -- Completion
 
   -- Git integration
-  use(require("configure.git"))
+  use({
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("configure.gitsigns").config()
+    end,
+  })
 
-  -- File drawer
-  use(require("configure.nvim-tree"))
+  -- File tree
+  use({
+    "kyazdani42/nvim-tree.lua",
+    cmd = "NvimTreeToggle",
+    config = function()
+      require("configure.nvim-tree")
+    end,
+  })
 
-  -- Indent guides
-  use(require("configure.indent-blankline"))
+  use({
+    "nvim-lualine/lualine.nvim",
+    after = "bufferline.nvim",
+    config = function()
+      require("configure.lualine").astro_config()
+    end,
+  })
+  use({
+    "akinsho/bufferline.nvim",
+    after = "nvim-web-devicons",
+    config = function()
+      require("configure.bufferline").astro_config()
+    end,
+  })
 
-  -- Fancy status bar
-  use(require("configure.lualine"))
-
-  -- Buffer management and bar
-  use(require("configure.bufferline"))
+  -- Better buffer closing
+  use({
+    "moll/vim-bbye",
+    after = "bufferline.nvim",
+  })
 
   -- Show inline color labels
-  use(require("configure.colorizer"))
+  use({
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({
+        "css",
+        "scss",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "html",
+      })
+    end,
+  })
+
+  -- Indent Guides
+  use({
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("configure.indent-blankline")
+    end,
+  })
 
   -- Enhanced comments
-  use(require("configure.todo-comments"))
+  use({
+    "folke/todo-comments.nvim",
+    config = function()
+      require("configure.todo-comments")
+    end,
+  })
 
-  -- Nice notifications
-  use(require("configure.nvim-notify"))
+  use({
+    "rcarriga/nvim-notify",
+    config = function()
+      require("configure.nvim-notify")
+    end,
+  })
 
   -- Splash Screen
-  use(require("configure.dashboard"))
+  use({
+    "goolord/alpha-nvim",
+    requires = {
+      "kyazdani42/nvim-web-devicons",
+    },
+    config = function()
+      require("configure.dashboard")
+    end,
+  })
 
   -- Tag and symbol sidebar
-  use ({ 'liuchengxu/vista.vim' })
-
+  use({ "liuchengxu/vista.vim" })
 
   -- FLoating command line
-  use ({'voldikss/vim-floaterm'})
-  use {
-    'VonHeikemen/fine-cmdline.nvim',
-    requires = {
-      {'MunifTanjim/nui.nvim'}
-    }
-  }
+  use({ "voldikss/vim-floaterm" })
+
+  use({
+    "VonHeikemen/fine-cmdline.nvim",
+    requires = "MunifTanjim/nui.nvim",
+  })
 
   -- Index search results
-  use ({
-    'kevinhwang91/nvim-hlslens',
-    branch = 'main',
-    keys = {{'n', '*'}, {'n', '#'}, {'n', 'n'}, {'n', 'N'}},
-    config = function ()
-      require('hlslens').setup({
-          calm_down = true,
-          nearest_only = true,
+  use({
+    "kevinhwang91/nvim-hlslens",
+    branch = "main",
+    keys = { { "n", "*" }, { "n", "#" }, { "n", "n" }, { "n", "N" } },
+    config = function()
+      require("hlslens").setup({
+        calm_down = true,
+        nearest_only = true,
       })
-    end
+    end,
   })
 
   -- Move code easily
@@ -144,7 +387,12 @@ use {
   })
 
   -- Keybinding helper
-  use(require("configure.which-key"))
+  use({
+    "folke/which-key.nvim",
+    config = function()
+      require("configure.which-key")
+    end,
+  })
 
   -- Better quickfix window
   use({
@@ -154,7 +402,6 @@ use {
         case_insensitive = true,
         char2_fallback_key = "<CR>",
       })
-
     end,
   })
 
@@ -235,9 +482,11 @@ use {
   })
 
   -- Themes
-  use({ "rebelot/kanagawa.nvim" })
-  use({ "luisiacc/gruvbox-baby" })
-  use({ "folke/tokyonight.nvim", branch = "main" })
+  use({ "ellisonleao/gruvbox.nvim" })
+  use({
+    "folke/tokyonight.nvim",
+    branch = "main",
+  })
 
   if packer_bootstrap then
     require("packer").sync()

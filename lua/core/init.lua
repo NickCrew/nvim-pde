@@ -26,45 +26,31 @@ end
 
 -- Disable unneeded distribution plugins
 local disable_distribution_plugins = function()
-  vim.g.loaded_gzip = 1
-  vim.g.loaded_tar = 1
-  vim.g.loaded_tarPlugin = 1
-  vim.g.loaded_zip = 1
-  vim.g.loaded_zipPlugin = 1
-  vim.g.loaded_getscript = 1
-  vim.g.loaded_getscriptPlugin = 1
-  vim.g.loaded_vimball = 1
-  vim.g.loaded_vimballPlugin = 1
-  vim.g.loaded_matchit = 1
-  vim.g.loaded_matchparen = 1
-  vim.g.loaded_2html_plugin = 1
-  vim.g.loaded_logiPat = 1
-  vim.g.loaded_rrhelper = 1
-  vim.g.loaded_netrw = 1
-  vim.g.loaded_netrwPlugin = 1
-  vim.g.loaded_netrwSettings = 1
-  vim.g.loaded_netrwFileHandlers = 1
-end
-
--- Theme
-local load_theme_settings = function()
-  local cmd = vim.cmd
-  vim.g.tokyonight_italic_functions = true
-  vim.g.tokyonight_colors = {
-    hint = "#018552",
-  }
-  cmd([[colorscheme tokyonight]])
-
-  cmd([[highlight Normal guibg=none]])
-  cmd([[highlight NonText ctermbg=none]])
-  cmd([[highlight DiagnosticWarn guifg=DarkOrange]])
+  vim.g.loaded_gzip = false
+  vim.g.loaded_tar = false
+  vim.g.loaded_tarPlugin = false
+  vim.g.loaded_zip = false
+  vim.g.loaded_zipPlugin = false
+  vim.g.loaded_getscript = false
+  vim.g.loaded_getscriptPlugin = false
+  vim.g.loaded_vimball = false
+  vim.g.loaded_vimballPlugin = false
+  vim.g.loaded_matchit = false
+  vim.g.loaded_matchparen = false
+  vim.g.loaded_2html_plugin = false
+  vim.g.loaded_logiPat = false
+  vim.g.loaded_rrhelper = false
+  vim.g.loaded_netrw = true
+  vim.g.loaded_netrwPlugin = true
+  vim.g.loaded_netrwSettings = true
+  vim.g.loaded_netrwFileHandlers = true
 end
 
 -- Set leader key
 local apply_leader_map = function()
+  vim.api.nvim_set_keymap("", "<Space>", "<Nop>", {noremap = true, silent = true})
   vim.g.mapleader = " "
-  --vim.api.nvim_set_keymap('n', ' ', '', {noremap = true})
-  --vim.api.nvim_set_keymap('x', ' ', '', {noremap = true})
+  vim.g.maplocalleader = " "
 end
 
 -- Load 'er up
@@ -76,7 +62,10 @@ local load_core = function()
   require("core.options")
   require("plugins")
   require('core.mappings')
-  load_theme_settings()
+
+  vim.cmd[[colorscheme gruvbox]]
+ -- vim.cmd([[highlight Normal guibg=none]])
+ -- vim.cmd([[highlight NonText ctermbg=none]])
 end
 
 load_core()

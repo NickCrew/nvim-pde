@@ -2,7 +2,7 @@
 --
 
 local global = require("core.global")
-local o = vim.o
+local o = vim.opt
 
 o.termguicolors = true
 
@@ -19,7 +19,7 @@ o.startofline = false   -- place cursor at start of line for certain commands e.
 o.backspace = 'indent,eol,start'  -- traditional backspace behavior
 
 -- Completion
-o.completeopt = 'menu,menuone,noselect'
+o.completeopt = { "menu", "menuone", "noselect" }
 
 -- File reading/writing
 o.autoread = true     -- automatically read changed files
@@ -43,7 +43,6 @@ o.autoindent = true   -- copy indent from current line when starting new line
 --                    + 'n'    -- autoformat numbered list
 --                    - '2'    -- I am a programmer and not a writer
 --                    + 'j'    -- Join comments smartly
-o.formatoptions = o.formatoptions .. 'o'
 o.joinspaces = false
 
 -- Wrapping

@@ -1,64 +1,86 @@
-return {
-  'kyazdani42/nvim-tree.lua',
-  cmd = 'NvimTreeToggle',
-  setup = function()
-    -- TODO update these once they're implemented in the setup function
-    vim.g.nvim_tree_indent_markers = 1
-    vim.g.nvim_tree_git_hl = 1
-    vim.g.nvim_tree_add_trailing = 1
-    vim.g.nvim_tree_auto_ignore_ft = { 'TelescopePrompt', 'term', 'terminal' }
-    vim.g.nvim_tree_special_files = {}
+-- lua/configure/nvim-tree.lua
+--
 
-    local lsp_icons = require('lsp.icons')
-    vim.g.nvim_tree_icons = {
-      lsp = {
-        hint = lsp_icons.Hint,
-        info = lsp_icons.Information,
-        warning = lsp_icons.Warning,
-        error = lsp_icons.Error,
-      },
-    }
-  end,
-  config = function()
-    local icons = require('lsp.icons')
-    local tree_cb = require('nvim-tree.config').nvim_tree_callback
-    require('nvim-tree').setup({
-      filters = {
-        custom = { '.git', 'node_modules', '.cache', '.DS_Store', '.netrwhist', 'dist' },
-      },
-      git = {
-        ignore = true,
-      },
-      mappings = {
-        custom_only = true,
-        list = {
-          { key = { '<CR>', 'o', '<2-LeftMouse>' }, cb = tree_cb('edit') },
-          { key = '<C-v>', cb = tree_cb('vsplit') },
-          { key = 'R', cb = tree_cb('refresh') },
-          { key = 'a', cb = tree_cb('create') },
-          { key = 'd', cb = tree_cb('remove') },
-          { key = 'r', cb = tree_cb('rename') },
-          { key = '.', cb = tree_cb('cd') },
-        },
-      },
-      view = {
-        width = 35,
-        auto_resize = false,
-      },
-      update_focused_file = {
-        enable = true,
-        update_cwd = false,
-      },
-      auto_close = true,
-      diagnostics = {
-        enable = true,
-        icons = {
-          hint = icons.Hint,
-          info = icons.Info,
-          warning = icons.Warning,
-          error = icons.Error,
-        },
-      },
-    })
-  end,
+require('nvim-tree').setup {
+  filters = {
+    dotfiles = false,
+    custom = {
+      ".git",
+      "node_modules",
+      ".cache",
+    },
+  },
+  disable_netrw = true,
+  hijack_netrw = true,
+  ignore_ft_on_setup = {
+    "dashboard",
+    "startify",
+    "alpha",
+  },
+  auto_close = true,
+  open_on_tab = false,
+  quit_on_open = false,
+  hijack_cursor = true,
+  hide_root_folder = true,
+  update_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
+    ignore_list = {},
+  },
+  diagnostics = {
+    enable = false,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    },
+  },
+  view = {
+    width = 25,
+    height = 30,
+    side = "left",
+    allow_resize = true,
+    hide_root_folder = false,
+    number = false,
+    relativenumber = false,
+    signcolumn = "yes",
+  },
+  git = {
+    enable = true,
+    ignore = false,
+    timeout = 500,
+  },
+  show_icons = {
+    git = 1,
+    folders = 1,
+    files = 1,
+    folder_arrows = 0,
+    tree_width = 30,
+  },
 }
+
+vim.g.nvim_tree_icons = {
+  default = "",
+  symlink = "",
+  git = {
+    deleted = "",
+    ignored = "◌",
+    renamed = "➜",
+    staged = "✓",
+    unmerged = "",
+    unstaged = "✗",
+    untracked = "★",
+  },
+  folder = {
+    default = "",
+    empty = "",
+    empty_open = "",
+    open = "",
+    symlink = "",
+    symlink_open = "",
+  },
+}
+vim.g.nvim_tree_indent_markers = 1
+
