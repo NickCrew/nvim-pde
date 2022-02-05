@@ -59,7 +59,7 @@ o.foldmethod = 'marker'
 -- Searching
 o.hlsearch = true
 o.incsearch = true
-o.inccommand = true
+o.inccommand = "nosplit"
 o.smartcase = true
 
 -- Look and feel

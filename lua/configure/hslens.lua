@@ -7,6 +7,5 @@ return {
         calm_down = true,
         nearest_only = true,
     })
-    require('keymap').apply_hslens_keymaps()
   end
 }

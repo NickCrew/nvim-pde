@@ -30,7 +30,9 @@ return {
     sign = "⚑",
     virt_text = "hello world"
   },
-  mappings = require('keymap').apply_marks_keymaps()
+  mappings = {
+    annotate = "<leader>ab"
+  }
 }
   end
 }

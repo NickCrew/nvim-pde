@@ -1,14 +1,16 @@
 -- lua/core/init.lua
 --
-local global = require'core.global'
-local keys = require'keymap'
+local global = require("core.global")
 local vim = vim
 
 -- Create cache dir and subs dir
 local createdir = function()
   local data_dir = {
-    global.cache_dir .. 'backup', global.cache_dir .. 'session', global.cache_dir .. 'swap',
-    global.cache_dir .. 'tags', global.cache_dir .. 'undo'
+    global.cache_dir .. "backup",
+    global.cache_dir .. "session",
+    global.cache_dir .. "swap",
+    global.cache_dir .. "tags",
+    global.cache_dir .. "undo",
   }
   -- There only check once that If cache_dir exists
   -- Then I don't want to check subs dir exists
@@ -44,31 +46,14 @@ local disable_distribution_plugins = function()
   vim.g.loaded_netrwFileHandlers = 1
 end
 
--- Telescope extensions
-local load_telescope_extensions = function()
-  local tele = require('telescope')
-  tele.load_extension('zoxide')
-  tele.load_extension('projects')
-  tele.load_extension('vimspector')
-  tele.load_extension('vim_bookmarks')
-  tele.load_extension('fzf')
-  tele.load_extension('ui-select')
-  tele.load_extension('cheatsheet')
-  tele.load_extension('frecency')
-  tele.load_extension('gh')
-  tele.load_extension('dash')
-end
-
 -- Theme
 local load_theme_settings = function()
   local cmd = vim.cmd
   vim.g.tokyonight_italic_functions = true
-  vim.g.tokyonight_colors = { 
-    hint = "#018552"
-
+  vim.g.tokyonight_colors = {
+    hint = "#018552",
   }
   cmd([[colorscheme tokyonight]])
-
 
   cmd([[highlight Normal guibg=none]])
   cmd([[highlight NonText ctermbg=none]])
@@ -82,20 +67,16 @@ local apply_leader_map = function()
   --vim.api.nvim_set_keymap('x', ' ', '', {noremap = true})
 end
 
-
--- Load 'er up 
+-- Load 'er up
 local load_core = function()
   createdir()
   disable_distribution_plugins()
   apply_leader_map()
 
-  require('core.options')
-  require('plugins')
-
-  keys.apply_default_keymaps()
+  require("core.options")
+  require("plugins")
+  require('core.mappings')
   load_theme_settings()
-
 end
-
 
 load_core()

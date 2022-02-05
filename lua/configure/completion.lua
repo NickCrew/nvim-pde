@@ -19,7 +19,14 @@ return {
         vim.fn["vsnip#anonymous"](args.body)
       end,
     },
-    mapping = require('keymap').get_cmp_mappings(),
+    mapping = {
+    ['<C-p>'] = require('cmp').mapping.select_prev_item(),
+    ['<C-n>'] = require('cmp').mapping.select_next_item(),
+    ['<C-d>'] = require('cmp').mapping.scroll_docs(-4),
+    ['<C-f>'] = require('cmp').mapping.scroll_docs(4),
+    ['<C-Space'] = require('cmp').mapping.complete({'i','c'}),
+    ['<CR>'] = require('cmp').mapping.confirm({ select = true }),
+    },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'vsnip' }, -- For vsnip users.
