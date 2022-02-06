@@ -1,3 +1,5 @@
+-- lua/configure/completion.lua
+--
 local cmp = require("cmp")
 cmp.setup({
   snippet = {
@@ -6,26 +8,26 @@ cmp.setup({
     end,
   },
   mapping = {
-    ["<C-p>"] = require("cmp").mapping.select_prev_item(),
-    ["<C-n>"] = require("cmp").mapping.select_next_item(),
-    ["<C-d>"] = require("cmp").mapping.scroll_docs(-4),
-    ["<C-f>"] = require("cmp").mapping.scroll_docs(4),
-    ["<C-Space"] = require("cmp").mapping.complete({ "i", "c" }),
-    ["<CR>"] = require("cmp").mapping.confirm({ select = true }),
+    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+    ["<C-e>"] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   },
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    { name = "vsnip" }, -- For vsnip users.
-    --}, {
+    { name = "vsnip" },
+  }, {
     { name = "buffer" },
+    { name = "nvim_lua" },
     --{ name = 'tags' },
     --{ name = 'treesitter' },
     -- { name = "rg" },
-    { name = "nvim_lua" },
   }),
-  formatting = {
-    format = require("lspkind").cmp_format({ with_text = true }),
-  },
   experimental = {
     ghost_text = true,
   },
@@ -45,4 +47,5 @@ cmp.setup.cmdline(":", {
     { name = "cmdline" },
   }),
 })
+
 vim.g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/vsnip"

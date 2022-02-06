@@ -34,14 +34,6 @@ return require("packer").startup(function(use)
 
   use({ "famiu/nvim-reload" })
 
-  use({
-    "RishabhRD/popfix",
-    "RishabhRD/nvim-lsputils",
-    config = function()
-      require("lsp.lsputils")
-    end,
-  })
-
   -- Popup preview window for LSP
   use({
     "rmagatti/goto-preview",
@@ -55,6 +47,8 @@ return require("packer").startup(function(use)
     "neovim/nvim-lspconfig",
     event = "BufRead",
     requires = {
+      "RishabhRD/popfix",
+      "RishabhRD/nvim-lsputils",
       "jubnzv/virtual-types.nvim",
       "ray-x/lsp_signature.nvim",
       "williamboman/nvim-lsp-installer",
@@ -102,7 +96,7 @@ return require("packer").startup(function(use)
     "akinsho/nvim-toggleterm.lua",
     cmd = "ToggleTerm",
     config = function()
-      require("configs.toggleterm").config()
+      require("configure.toggleterm").config()
     end,
   })
 
@@ -246,14 +240,18 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- Completion
+  use({
+    "onsails/lspkind-nvim",
+    before = {'nvim-cmp', 'nvim-lspconfig'}
+  })
+
+  -- Completion and Snippets
   use({
     "hrsh7th/nvim-cmp",
     requires = {
-      "onsails/lspkind-nvim",
-      "hrsh7th/vim-vsnip",
       "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip-integ",
+      "hrsh7th/vim-vsnip",
+      "rafamadriz/friendly-snippets",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
@@ -264,7 +262,6 @@ return require("packer").startup(function(use)
       require("configure.completion")
     end,
   })
-  -- Completion
 
   -- Git integration
   use({
@@ -304,7 +301,6 @@ return require("packer").startup(function(use)
     after = "bufferline.nvim",
   })
 
-  -- Show inline color labels
   use({
     "norcalli/nvim-colorizer.lua",
     config = function()
@@ -332,7 +328,7 @@ return require("packer").startup(function(use)
   use({
     "folke/todo-comments.nvim",
     config = function()
-      require("configure.todo-comments")
+      require('configure.todo-comments')
     end,
   })
 

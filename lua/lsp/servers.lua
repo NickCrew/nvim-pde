@@ -12,8 +12,8 @@ return {
     "remark_ls",
     "rust_analyzer",
     "sumneko_lua",
+    "tflint",
     "tsserver",
     "vimls",
     "yamlls"
- 
 }
