@@ -1,5 +1,6 @@
 
 local M = {}
+
 M.lualine_astro = {
     yellow = "#ecbe7b",
     yellow_1 = "#ff9640",
@@ -31,6 +32,19 @@ M.lualine_gruvbox ={
     blue = "#45888",
     red = "#cc241d"
 }
+
+M.bufferline_astro = {
+    red = "#d47d85",
+    red_1 = "#ec5f67",
+    grey = "#abb2bf",
+    grey_1 = "#787e87",
+    grey_2 = "#D3D3D3",
+    black = "#1e222a",
+    black_1 = "#252931",
+    black_2 = "#2c323c",
+    green = "#95be76",
+    none = "NONE",
+  }
 
 M.bufferline_gruvbox = {
     red_1 = "#cc241d",

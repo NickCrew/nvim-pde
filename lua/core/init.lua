@@ -1,6 +1,7 @@
 -- lua/core/init.lua
 --
-local global = require("core.global")
+local global = require('core.global')
+local utils = require('core.utils')
 local vim = vim
 
 -- Create cache dir and subs dir
@@ -26,24 +27,20 @@ end
 
 -- Disable unneeded distribution plugins
 local disable_distribution_plugins = function()
-  vim.g.loaded_gzip = false
-  vim.g.loaded_tar = false
-  vim.g.loaded_tarPlugin = false
-  vim.g.loaded_zip = false
-  vim.g.loaded_zipPlugin = false
-  vim.g.loaded_getscript = false
-  vim.g.loaded_getscriptPlugin = false
-  vim.g.loaded_vimball = false
-  vim.g.loaded_vimballPlugin = false
-  vim.g.loaded_matchit = false
-  vim.g.loaded_matchparen = false
-  vim.g.loaded_2html_plugin = false
-  vim.g.loaded_logiPat = false
-  vim.g.loaded_rrhelper = false
-  vim.g.loaded_netrw = true
-  vim.g.loaded_netrwPlugin = true
-  vim.g.loaded_netrwSettings = true
-  vim.g.loaded_netrwFileHandlers = true
+  vim.g.loaded_gzip = true
+  vim.g.loaded_tar = true
+  vim.g.loaded_tarPlugin = true
+  vim.g.loaded_zip = true
+  vim.g.loaded_zipPlugin = true
+  vim.g.loaded_getscript = true
+  vim.g.loaded_getscriptPlugin = true
+  vim.g.loaded_vimball = true
+  vim.g.loaded_vimballPlugin = true
+  vim.g.loaded_matchit = true
+  vim.g.loaded_matchparen = true
+  vim.g.loaded_2html_plugin = true
+  vim.g.loaded_logiPat = true
+  vim.g.loaded_rrhelper = true
 end
 
 -- Set leader key
@@ -59,13 +56,11 @@ local load_core = function()
   disable_distribution_plugins()
   apply_leader_map()
 
-  require("core.options")
-  require("plugins")
+  require('core.options')
+  require('core.plugins')
   require('core.mappings')
 
-  vim.cmd[[colorscheme gruvbox]]
- -- vim.cmd([[highlight Normal guibg=none]])
- -- vim.cmd([[highlight NonText ctermbg=none]])
+  require('configure.tokyonight').load_theme(true)
 end
 
 load_core()

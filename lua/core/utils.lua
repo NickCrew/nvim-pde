@@ -3,6 +3,18 @@
 
 local M = {}
 
+function M.apply_transparency()
+  local vim = vim
+   vim.cmd([[highlight Normal guibg=none ctermbg=none]])
+   --vim.cmd([[highlight LineNr guibg=none ctermbg=none]])
+   vim.cmd([[highlight Folded guibg=none ctermbg=none]])
+   vim.cmd([[highlight NonText guibg=none ctermbg=none]])
+   --vim.cmd([[highlight SpecialKey guibg=none ctermbg=none]])
+   --vim.cmd([[highlight VertSplit guibg=none ctermbg=none]])
+   vim.cmd([[highlight SignColumn guibg=none ctermbg=none]])
+   --vim.cmd([[highlight EndOfBuffer guibg=none ctermbg=none]])
+end
+
 function M.resize_split(plus_or_minus)
     local vim = vim
     -- full height window height is screen height minus 3 for bufferline, status line, and command line

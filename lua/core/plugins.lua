@@ -287,14 +287,14 @@ return require("packer").startup(function(use)
     "nvim-lualine/lualine.nvim",
     after = "bufferline.nvim",
     config = function()
-      require("configure.lualine").astro_config()
+      require("configure.lualine")
     end,
   })
   use({
     "akinsho/bufferline.nvim",
     after = "nvim-web-devicons",
     config = function()
-      require("configure.bufferline").astro_config()
+      require("configure.bufferline")
     end,
   })
 
@@ -341,6 +341,10 @@ return require("packer").startup(function(use)
     config = function()
       require("configure.nvim-notify")
     end,
+  })
+
+  use({
+    'tpope/vim-vinegar'
   })
 
   -- Splash Screen
