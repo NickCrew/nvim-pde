@@ -19,7 +19,7 @@ o.startofline = false   -- place cursor at start of line for certain commands e.
 o.backspace = 'indent,eol,start'  -- traditional backspace behavior
 
 -- Completion
-o.completeopt = { "menu", "menuone", "noselect" }
+o.completeopt = { "menuone", "noselect" }
 
 -- File reading/writing
 o.autoread = true     -- automatically read changed files
@@ -70,7 +70,7 @@ o.showmode = false
 o.splitbelow = true
 o.splitright = true
 o.number = true
-o.signcolumn = "auto:2"  -- max columns allowed in gutter. syntax: auto:N
+o.signcolumn = "yes"
 
 -- Backup/Undo/Swap
 o.backup = false

@@ -3,6 +3,11 @@
 
 local M = {}
 
+function M.update_custom_help_tags()
+  local custom_help = vim.fn.stdpath('config') .. '/doc/'
+  vim.cmd([[:helptags custom_help]])
+end
+
 function M.apply_transparency()
   local vim = vim
    vim.cmd([[highlight Normal guibg=none ctermbg=none]])

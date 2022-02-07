@@ -19,7 +19,6 @@ vim.diagnostic.config({
 
 require('toggle_lsp_diagnostics').init()
 require('lsp.handlers')
-require('lsp.lsp-kind')
 
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

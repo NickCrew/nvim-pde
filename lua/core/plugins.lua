@@ -1,6 +1,8 @@
 -- lua/plugins.lua
 --
 
+local vim = vim
+
 -- Detect changes to this file and run :PackerCompile
 vim.cmd([[
   augroup packer_user_config
@@ -146,7 +148,6 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- DAP Plugin for Python
   use({
     "mfussenegger/nvim-dap-python",
     ft = "python",
@@ -154,36 +155,72 @@ return require("packer").startup(function(use)
       "mfussenegger/nvim-dap",
     },
     config = function()
-      local python_path = os.getenv("HOME") .. "/.pyenv/versions/debugpy/bin/python"
-      require("dap-python").setup(python_path)
+      require("dap-python").setup("~/.pyenv/versions/debugpy/bin/python")
     end,
   })
 
-  -- Debug Adapter Installer
   use({
     "Pocco81/DAPInstall",
     config = function()
       local di = require("dap-install")
-      di.setup({
-        installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
-      })
-      di.config("jsnode", {}, "python", {})
+      di.config("jsnode", {}, "python", "codelldb")
     end,
   })
 
-  -- Virtual text for DAP debugging
+  use({
+    "jbyuki/one-small-step-for-vimkind",
+    after = "nvim-dap",
+    config = function()
+      local dap = require("dap")
+      dap.configurations.lua = {
+        {
+          type = "nlua",
+          request = "attach",
+          name = "Attach to running Neovim instance",
+          host = function()
+            local value = vim.fn.input("Host [127.0.0.1]: ")
+            if value ~= "" then
+              return value
+            end
+            return "127.0.0.1"
+          end,
+          port = function()
+            local val = tonumber(vim.fn.input("Port: "))
+            assert(val, "Please provide a port number")
+            return val
+          end,
+        },
+      }
+
+      dap.adapters.nlua = function(callback, config)
+        callback({ type = "server", host = config.host, port = config.port })
+      end
+    end,
+  })
+
+  -- VSCode Debug Adapter Compatibility
+  use({
+    "mfussenegger/nvim-dap",
+  })
+
   use({
     "theHamsta/nvim-dap-virtual-text",
-    requires = "mfussenegger/nvim-dap",
+    requires = {
+
+      "mfussenegger/nvim-dap",
+    },
     config = function()
       require("nvim-dap-virtual-text").setup()
     end,
   })
 
-  -- DAP and DAP User Interface
+  -- User interface for DAP
   use({
-    "mfussenegger/nvim-dap",
     "rcarriga/nvim-dap-ui",
+    requires = {
+
+      "mfussenegger/nvim-dap",
+    },
     config = function()
       require("dapui").setup()
       -- -- Dap UI will open automatically
@@ -210,15 +247,17 @@ return require("packer").startup(function(use)
     disabled = true,
   })
 
+  -- Gnu Debugger
+  use({
+    "sakhnik/nvim-gdb",
+    run = "bash ./install.sh",
+  })
+
+  -- Test Runner
   use({
     "rcarriga/vim-ultest",
     requires = { "vim-test/vim-test" },
     run = ":UpdateRemotePlugins",
-  })
-
-  use({
-    "sakhnik/nvim-gdb",
-    run = "bash ./install.sh",
   })
 
   use({
@@ -241,22 +280,20 @@ return require("packer").startup(function(use)
   })
 
   use({
-    "onsails/lspkind-nvim",
-    before = {'nvim-cmp', 'nvim-lspconfig'}
+    "hrsh7th/vim-vsnip",
+    "rafamadriz/friendly-snippets",
   })
-
   -- Completion and Snippets
   use({
     "hrsh7th/nvim-cmp",
     requires = {
       "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip",
-      "rafamadriz/friendly-snippets",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-nvim-lua",
+      "onsails/lspkind-nvim",
     },
     config = function()
       require("configure.completion")
@@ -328,7 +365,7 @@ return require("packer").startup(function(use)
   use({
     "folke/todo-comments.nvim",
     config = function()
-      require('configure.todo-comments')
+      require("configure.todo-comments")
     end,
   })
 
@@ -340,7 +377,7 @@ return require("packer").startup(function(use)
   })
 
   use({
-    'tpope/vim-vinegar'
+    "tpope/vim-vinegar",
   })
 
   -- Splash Screen
@@ -381,9 +418,7 @@ return require("packer").startup(function(use)
   -- Move code easily
   use({
     "matze/vim-move",
-    setup = function()
-      vim.g.move_key_modifier = "S" -- Shift
-    end,
+    setup = function() end,
   })
 
   -- Keybinding helper
@@ -476,13 +511,38 @@ return require("packer").startup(function(use)
   -- Markdown
   use({
     "ellisonleao/glow.nvim",
-    config = function()
-      vim.g.glow_binary_path = vim.env.HOME .. "/bin"
-    end,
   })
 
   -- Themes
-  use({ "ellisonleao/gruvbox.nvim" })
+  use({
+    "ellisonleao/gruvbox.nvim",
+  })
+
+  use({
+    "luisiacc/gruvbox-baby",
+    branch = "main",
+  })
+
+  use({
+    "rebelot/kanagawa.nvim",
+    config = function()
+      require("kanagawa").setup({
+        undercurl = true, -- enable undercurls
+        commentStyle = "italic",
+        functionStyle = "NONE",
+        keywordStyle = "italic",
+        statementStyle = "bold",
+        typeStyle = "NONE",
+        variablebuiltinStyle = "italic",
+        specialReturn = true, -- special highlight for the return keyword
+        specialException = true, -- special highlight for exception handling keywords
+        transparent = false, -- do not set background color
+        dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+        colors = {},
+        overrides = {},
+      })
+    end,
+  })
   use({
     "folke/tokyonight.nvim",
     branch = "main",

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Install Vimspector debug adapters
+# Wrapper for vimspector install_gadget.py
 
 py_bin="/usr/bin/python3"
 [[ ! -z "$1" ]] && py_bin="$1"
@@ -19,20 +19,5 @@ if [[ ! -d $vimspector_plugin_data ]]; then
     exit 1
 fi
 
-function install_gadget() {
-    $py_bin "${vimspector_plugin_data}/install_gadget.py" \
-        --basedir $vimspector_basedir "$@"
-}
+python "${vimspector_plugin_data}/install_gadget.py" --basedir $vimspector_basedir "$@"
 
-if [[ $update_only == "true" ]]; then
-    install_gadget --upgrade
-else
-    install_gadget \
-        --enable-python \
-        --enable-rust \
-        --enable-bash \
-        --enable-lua 
-
-    install_gadget --force-enable-node 
-    install_gadget --force-enable-firefox 
-fi
