@@ -18,7 +18,16 @@ vim.diagnostic.config({
 })
 
 require('toggle_lsp_diagnostics').init()
-require('lsp.handlers')
+local lsp = vim.lsp
+local handlers = lsp.handlers
+
+handlers["textDocument/hover"] = lsp.with(
+  handlers.hover, { border = "rounded" }
+)
+
+handlers["textDocument/signatureHelp"] = lsp.with(
+  handlers.signature_help, { border = "rounded" }
+)
 
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -50,7 +50,6 @@ return require("packer").startup(function(use)
     event = "BufRead",
     requires = {
       "RishabhRD/popfix",
-      "RishabhRD/nvim-lsputils",
       "jubnzv/virtual-types.nvim",
       "ray-x/lsp_signature.nvim",
       "williamboman/nvim-lsp-installer",

@@ -40,7 +40,8 @@ local load_plugin_global_vars = function()
   g.tokyonight_terminal_colors = true
   g.tokyonight_dark_float = true
   g.tokyonight_hide_inactive_statusline = true
-  g.tokyonight_sidebars = {"qf", "terminal", "packer"}
+  g.tokyonight_sidebars = {"qf", "terminal", "packer", "vista_kind"}
+  g.tokyonight_dark_sidebar = true
   g.tokyonight_transparent = false
   g.tokyonight_transparent_sidebar = false
 
