@@ -4,6 +4,7 @@ local telescope = require('telescope')
 
 telescope.setup({
   defaults = {
+      layout_config = {width = 0.85, prompt_position = "bottom", preview_cutoff = 120, horizontal = {mirror = false}, vertical = {mirror = false}},
     vimgrep_arguments = {
       "rg",
       "--hidden",
@@ -15,11 +16,31 @@ telescope.setup({
       "--ignore-file",
       (vim.fn.stdpath("config") .. "/.telescope_ignore"),
     },
-    prompt_prefix = "   ",
+	--prompt_prefix = "  ",
+	prompt_prefix = " ",
+    selection_caret = " ",
+	selection_strategy = "reset",
+    sorting_strategy = "descending",
+    layout_strategy = "horizontal",
+	generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
+    path_display = {},
+    winblend = 0,
+    border = {},
+    borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
+    color_devicons = true,
+    use_less = true,
+    set_env = {['COLORTERM'] = 'truecolor'}, -- default = nil,
     file_sorter = require("telescope.sorters").get_fuzzy_file,
     dynamic_preview_title = true,
+	file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
     mappings = {
       i = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
         ["<c-t>"] = trouble.open_with_trouble,
         ["<esc>"] = actions.close,
         ["<C-h"] = function(prompt_bufnr)
@@ -33,6 +54,9 @@ telescope.setup({
       n = {
         ["<c-t>"] = trouble.open_with_trouble,
         ["<esc>"] = actions.close,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist
       },
     },
   },

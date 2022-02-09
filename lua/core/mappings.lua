@@ -54,6 +54,7 @@ Mapper.map(
 Mapper.map(
 	"n",
 	"<C-h>",
+    -- "<C-w><C-h>",
 	"<CMD>lua require('Navigator').left()<CR>",
 	opts,
 	"Navigation",
@@ -64,6 +65,7 @@ Mapper.map(
 Mapper.map(
 	"n",
 	"<C-k>",
+    -- "<C-w><C-k>",
 	"<CMD>lua require('Navigator').up()<CR>",
 	opts,
 	"Navigation",
@@ -74,6 +76,7 @@ Mapper.map(
 Mapper.map(
 	"n",
 	"<C-l>",
+    -- "<C-w><C-l>",
 	"<CMD>lua require('Navigator').right()<CR>",
 	opts,
 	"Navigation",
@@ -84,6 +87,7 @@ Mapper.map(
 Mapper.map(
 	"n",
 	"<C-j>",
+    -- "<C-w><C-j>"
 	"<CMD>lua require('Navigator').down()<CR>",
 	opts,
 	"Navigation",

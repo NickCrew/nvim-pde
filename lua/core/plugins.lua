@@ -41,6 +41,22 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	use({ 
+      "kevinhwang91/nvim-bqf",
+      ft = "qf",
+      config = function()
+        require('bqf').setup()
+      end
+    })
+
+	-- optional
+	use({
+		"junegunn/fzf",
+		run = function()
+			vim.fn["fzf#install"]()
+		end,
+	})
+
 	---- Language Support
 	use({
 		"neovim/nvim-lspconfig",
@@ -135,7 +151,7 @@ return require("packer").startup(function(use)
 
 	use({
 		"benfowler/telescope-luasnip.nvim",
-        before = 'telescope',
+		before = "telescope",
 		module = "telescope._extensions.luasnip", -- if you wish to lazy-load
 	})
 

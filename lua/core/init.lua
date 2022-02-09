@@ -75,6 +75,7 @@ local load_core = function()
 
   vim.g.move_key_modifier = "S" -- Shift
   vim.g.glow_binary_path =  os.getenv("HOME").."/bin"
+
   require('core.plugins')
   require('core.mappings')
 
