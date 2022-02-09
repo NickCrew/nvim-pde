@@ -4,7 +4,8 @@ Development environment for Python, Rust, Javascript/Typescript and Lua based on
 
 - Git Integration
 - VS Code compatible:
-	- Debug adapter and graphical debugger
+	- Debug adapter and graphical debugger (`launch.json`)
+	- Task Runner (`tasks.json`)
 	- Language servers
 	- Completion
 	- Auto Formatting

@@ -1,14 +1,23 @@
 -- vim: foldmethod=marker
 --
--- lua/keymap/init.lua
+-- lua/core/mappings.lua
 --
--- We define mappings here in one place just because it makes
--- them easier to keep track of
 
 Mapper = require("mapstuff")
 local opts = { noremap = true, silent = true }
 
--- GoTo Preview {{{
+-- LSP {{{
+
+Mapper.map(
+	"n",
+	"<C-e>v",
+	":Vista!!<CR>",
+	opts,
+	"Symbols",
+	"vista_toggle",
+	"Toggle Vista"
+)
+
 Mapper.map(
 	"n",
 	"gpd",
@@ -48,9 +57,105 @@ Mapper.map(
 	"lsp_gpreviewimp",
 	"Preview Implementation"
 )
+
+-- LSP Diagnostics {{{
+Mapper.map(
+	"n",
+	"<C-e>a",
+	":CodeActionMenu<CR>",
+	opts,
+	"LSP",
+	"lsp_actionmenu",
+	"Show Code Action Menu"
+)
+
+Mapper.map(
+	"n",
+	"<leader><leader>td",
+	":ToggleDiag<CR>",
+	opts,
+	"Diagnostics",
+	"diag_toggle",
+	"Toggle Diagnostics"
+)
+
+Mapper.map(
+	"n",
+	"<leader>xx",
+	"<cmd>TroubleToggle<cr>",
+	opts,
+	"Diagnostics",
+	"trbl_toggle",
+	"Toggle Trouble"
+)
+
+Mapper.map(
+	"n",
+	"<leader>xw",
+	"<cmd>TroubleToggle workspace_diagnostics<cr>",
+	opts,
+	"Diagnostics",
+	"trbl__wkspace",
+	"Workspace Diagnostics"
+)
+
+Mapper.map(
+	"n",
+	"<leader>xd",
+	"<cmd>TroubleToggle document_diagnostics<cr>",
+	opts,
+	"Diagnostics",
+	"trbl_doc",
+	"Document Diagnostics"
+)
+
+Mapper.map(
+	"n",
+	"<leader>xq",
+	"<cmd>TroubleToggle quickfix<cr>",
+	opts,
+	"Diagnostics",
+	"trbl_qfx",
+	"Open Diagnostics in QuickFix"
+)
+
+Mapper.map(
+	"n",
+	"<leader>xl",
+	"<cmd>TroubleToggle loclist<cr>",
+	opts,
+	"Diagnostics",
+	"trbl_loc",
+	"Open Diagnostics in Location List"
+)
+
+Mapper.map(
+	"n",
+	"<leader>gR",
+	"<cmd>TroubleToggle lsp_references<cr>",
+	opts,
+	"Diagnostics",
+	"trbl_ref",
+	"Diagnostics References"
+)
+-- }}}
 -- }}}
 
--- Navigation {{{
+-- Windows and Buffer {{{
+
+-- File Drawer {{{
+Mapper.map(
+	"n",
+	"<C-e>n",
+	":NvimTreeToggle<CR>",
+	opts,
+	"Project",
+	"proj_filetree",
+	"Toggle File Tree"
+)
+-- }}}
+
+-- Navigating Splits (Windows) {{{
 Mapper.map(
 	"n",
 	"<C-h>",
@@ -104,7 +209,9 @@ Mapper.map(
 	"nav_prev",
 	"Move To Previous Window"
 )
+-- }}}
 
+-- Manipulating Windows and Buffers {{{
 Mapper.map(
 	"n",
 	"<A-down>",
@@ -124,62 +231,7 @@ Mapper.map(
 	"nav_resizesplitpos",
 	"Increase Split Size"
 )
--- }}}
 
--- Search {{{
-
-Mapper.map(
-	"n",
-	"<leader>,",
-	":noh<CR>",
-	opts,
-	"Search",
-	"search_nohilites",
-	"Remove Search Highlights"
-)
-
-Mapper.map(
-	"n",
-	"#",
-	"<Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>",
-	opts,
-	"Search",
-	"search_undercursback",
-	"Search Backwards Under Cursor"
-)
-
-Mapper.map(
-	"n",
-	"*",
-	"<Plug>(asterisk-z*)<Cmd>lua require('hlslens').start()<CR>",
-	opts,
-	"Search",
-	"search_undercurs",
-	"Search Forward Under Cursor"
-)
-
-Mapper.map(
-	"n",
-	"N",
-	"<Cmd>execute('normal! ' . v:count1 . 'Nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>",
-	opts,
-	"Search",
-	"search_back",
-	"Next Backwards Match"
-)
-
-Mapper.map(
-	"n",
-	"n",
-	"<Cmd>execute('normal! ' . v:count1 . 'nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>",
-	opts,
-	"Search",
-	"search_fwd",
-	"Next Forward Match"
-)
--- }}}
-
--- Windows and Buffers {{{
 Mapper.map(
 	"n",
 	"Q",
@@ -209,7 +261,9 @@ Mapper.map(
 	"term_floattoggl",
 	"Toggle Floating Terminal"
 )
+-- }}}
 
+-- {{{ Navigating Buffers
 Mapper.map(
 	"n",
 	"<C-e>t",
@@ -249,6 +303,7 @@ Mapper.map(
 	"buf_prev",
 	"Previous Buffer"
 )
+-- }}}
 
 -- }}}
 
@@ -284,36 +339,9 @@ Mapper.map(
 )
 -- }}}
 
--- Telescope and Commands {{{
-Mapper.map(
-	"n",
-	"<C-e>h",
-	":Telescope harpoon marks<CR>",
-	opts,
-	"Telescope",
-	"tele_harpoon",
-	"Show Harpoon Marks"
-)
-Mapper.map(
-	"n",
-	"<leader>lgr",
-	':lua require("telescope").extensions.live_grep_raw.live_grep_raw()',
-	opts,
-	"Telescope",
-	"tele_livegrepraw",
-	"Live Grep Raw"
-)
+-- Telescope {{{
 
-Mapper.map(
-	"n",
-	"<C-e>C",
-	":Cheatsheet<CR>",
-	opts,
-	"Cheatsheets",
-	"cheat_open",
-	"Open Cheatsheet"
-)
-
+-- Native {{{
 Mapper.map(
 	"n",
 	"<leader>ff",
@@ -383,6 +411,38 @@ Mapper.map(
 	"tele_cmds",
 	"Commands"
 )
+-- }}}
+
+-- Extensions {{{
+Mapper.map(
+	"v",
+	"<leader>rr",
+	"<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
+	opts,
+	"Telescope",
+	"tele_refactor",
+	"Refactoring"
+)
+
+Mapper.map(
+	"n",
+	"<C-e>h",
+	":Telescope harpoon marks<CR>",
+	opts,
+	"Telescope",
+	"tele_harpoon",
+	"Show Harpoon Marks"
+)
+
+Mapper.map(
+	"n",
+	"<leader>lgr",
+	':lua require("telescope").extensions.live_grep_raw.live_grep_raw()',
+	opts,
+	"Telescope",
+	"tele_livegrepraw",
+	"Live Grep Raw"
+)
 
 Mapper.map(
 	"n",
@@ -425,7 +485,9 @@ Mapper.map(
 )
 -- }}}
 
--- Debugging {{{
+-- }}}
+
+-- Debugging (nvim-dap) {{{
 Mapper.map(
 	"n",
 	"<F9>",
@@ -527,79 +589,9 @@ Mapper.map(
 )
 -- }}}
 
--- Diagnostics {{{
-Mapper.map(
-	"n",
-	"<leader><leader>td",
-	":ToggleDiag<CR>",
-	opts,
-	"Diagnostics",
-	"diag_toggle",
-	"Toggle Diagnostics"
-)
+-- Moving Around {{{
 
-Mapper.map(
-	"n",
-	"<leader>xx",
-	"<cmd>TroubleToggle<cr>",
-	opts,
-	"Diagnostics",
-	"trbl_toggle",
-	"Toggle Trouble"
-)
-
-Mapper.map(
-	"n",
-	"<leader>xw",
-	"<cmd>TroubleToggle workspace_diagnostics<cr>",
-	opts,
-	"Diagnostics",
-	"trbl__wkspace",
-	"Workspace Diagnostics"
-)
-
-Mapper.map(
-	"n",
-	"<leader>xd",
-	"<cmd>TroubleToggle document_diagnostics<cr>",
-	opts,
-	"Diagnostics",
-	"trbl_doc",
-	"Document Diagnostics"
-)
-
-Mapper.map(
-	"n",
-	"<leader>xq",
-	"<cmd>TroubleToggle quickfix<cr>",
-	opts,
-	"Diagnostics",
-	"trbl_qfx",
-	"Open Diagnostics in QuickFix"
-)
-
-Mapper.map(
-	"n",
-	"<leader>xl",
-	"<cmd>TroubleToggle loclist<cr>",
-	opts,
-	"Diagnostics",
-	"trbl_loc",
-	"Open Diagnostics in Location List"
-)
-
-Mapper.map(
-	"n",
-	"<leader>gR",
-	"<cmd>TroubleToggle lsp_references<cr>",
-	opts,
-	"Diagnostics",
-	"trbl_ref",
-	"Diagnostics References"
-)
--- }}}
-
---- Movement {{{
+-- Motions (hop) {{{
 Mapper.map(
 	"n",
 	"<leader>;",
@@ -671,7 +663,141 @@ Mapper.map(
 )
 -- }}}
 
--- Misc. Plugins {{{
+-- Search (hslens) {{{
+Mapper.map(
+	"n",
+	"<leader>,",
+	":noh<CR>",
+	opts,
+	"Search",
+	"search_nohilites",
+	"Remove Search Highlights"
+)
+
+Mapper.map(
+	"n",
+	"#",
+	"<Plug>(asterisk-z#)<Cmd>lua require('hlslens').start()<CR>",
+	opts,
+	"Search",
+	"search_undercursback",
+	"Search Backwards Under Cursor"
+)
+
+Mapper.map(
+	"n",
+	"*",
+	"<Plug>(asterisk-z*)<Cmd>lua require('hlslens').start()<CR>",
+	opts,
+	"Search",
+	"search_undercurs",
+	"Search Forward Under Cursor"
+)
+
+Mapper.map(
+	"n",
+	"N",
+	"<Cmd>execute('normal! ' . v:count1 . 'Nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>",
+	opts,
+	"Search",
+	"search_back",
+	"Next Backwards Match"
+)
+
+Mapper.map(
+	"n",
+	"n",
+	"<Cmd>execute('normal! ' . v:count1 . 'nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>",
+	opts,
+	"Search",
+	"search_fwd",
+	"Next Forward Match"
+)
+-- }}}
+
+-- }}}
+
+-- {{{ Intellicode (Treesitter)
+
+-- Refactoring {{{
+-- You can also use below = true here to to change the position of the printf
+-- statement (or set two remaps for either one). This remap must be made in normal mode.
+Mapper.map(
+	"n",
+	"<leader>rp",
+	":lua require('refactoring').debug.printf({below = false})<CR>",
+    opts,
+    "Refactoring",
+    "refac_debugprint",
+    "Debug Print"
+)
+
+-- Print var: this remap should be made in visual mode
+Mapper.map(
+	"v",
+	"<leader>rv",
+	":lua require('refactoring').debug.print_var({})<CR>",
+    opts,
+    "Refactoring",
+    "refac_printvar",
+    "Debug Print Variable"
+)
+
+-- Cleanup function: this remap should be made in normal mode
+Mapper.map(
+	"n",
+	"<leader>rc",
+	":lua require('refactoring').debug.cleanup({})<CR>",
+    opts,
+	"Refactoring",
+	"refac_cleanup",
+	"Cleanup"
+)
+
+Mapper.map(
+	"v",
+	"<Leader>re",
+	[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
+	{ noremap = true, silent = true, expr = false },
+	"Refactoring",
+	"refac_exfunc",
+	"Extract Function From Selection"
+) -- Remaps for each of the four debug operations currently offered by the plugin
+
+Mapper.map(
+	"v",
+	"<Leader>rf",
+	[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
+	{ noremap = true, silent = true, expr = false },
+	"Refactoring",
+	"refac_exfunctofile",
+	"Extract Function To File"
+)
+
+Mapper.map(
+	"v",
+	"<Leader>rv",
+	[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
+	{ noremap = true, silent = true, expr = false },
+	"Refactoring",
+	"refac_exvar",
+	"Extract Variable From Selection"
+)
+
+Mapper.map(
+	"v",
+	"<Leader>ri",
+	[[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+	{ noremap = true, silent = true, expr = false },
+	"Refactoring",
+	"refac_invar",
+	"Inline Variable"
+)
+-- }}}
+
+-- }}}
+
+-- Task Runner (launch.json) {{{
 Mapper.map(
 	"n",
 	"<leader>to",
@@ -701,7 +827,23 @@ Mapper.map(
 	"tasks_inputs",
 	"Open Task Input List"
 )
+-- }}}
 
+-- File Management {{{
+Mapper.map(
+	"n",
+	"<C-e>n",
+	":NvimTreeToggle<CR>",
+	opts,
+	"Project",
+	"proj_filetree",
+	"Toggle File Tree"
+)
+--- }}}
+
+-- (Book)Marks {{{
+
+-- Harpoon {{{
 Mapper.map(
 	"n",
 	"<A-h>m",
@@ -760,16 +902,10 @@ Mapper.map(
 	"nav_harpoonnext",
 	"Next Harpoon Target"
 )
-Mapper.map(
-	"n",
-	"<leader>Gm",
-	"<Plug>(git-messenger",
-	{ noremap = false, silent = false },
-	"Git",
-	"git_messenger",
-	"Show Git Messages"
-)
 
+-- }}}
+
+-- Marks {{{
 Mapper.map(
 	"n",
 	"<leader>bm",
@@ -779,7 +915,20 @@ Mapper.map(
 	"bm_listall",
 	"List all bookmarks"
 )
+-- }}}
 
+-- }}}
+
+-- Git {{{
+Mapper.map(
+	"n",
+	"<leader>Gm",
+	"<Plug>(git-messenger",
+	{ noremap = false, silent = false },
+	"Git",
+	"git_messenger",
+	"Show Git Messages"
+)
 Mapper.map(
 	"n",
 	"<leader>gb",
@@ -789,42 +938,16 @@ Mapper.map(
 	"git_toggle_blame",
 	"Toggle Git Blame"
 )
-
-Mapper.map(
-	"n",
-	"<C-e>v",
-	":Vista!!<CR>",
-	opts,
-	"Symbols",
-	"vista_toggle",
-	"Toggle Vista"
-)
-Mapper.map(
-	"n",
-	"<C-e>a",
-	":CodeActionMenu<CR>",
-	opts,
-	"LSP",
-	"lsp_actionmenu",
-	"Show Code Action Menu"
-)
-
-Mapper.map(
-	"n",
-	"<C-e>n",
-	":NvimTreeToggle<CR>",
-	opts,
-	"Project",
-	"proj_filetree",
-	"Toggle File Tree"
-)
 -- }}}
 
--- Vimspector (Disabled) {{{
---
--- vim.g.vimspector_enable_mappings = "HUMAN"
--- local vimspec_opts = { noremap = false, silent = true }
--- Mapper.map("n", "<Leader>di", "<Plug>VimspectorBalloonEval", vimspec_opts, "Debugging", "vimspec_eval", "Vimspector Balloon Evaluation")
--- Mapper.map("n", "<Leader>uf", "<Plug>VimspectorUpFrame", vimspec_opts, "Debugging", "vimspec_upframe", "Vimspector Up Frame")
--- Mapper.map("n", "<Leader>df", "<Plug>VimspectorDownFrame", vimspec_opts, "Debugging", "vimspec_downframe", "Vimspector Down Frame")
+-- Misc. Plugins {{{
+Mapper.map(
+	"n",
+	"<C-e>C",
+	":Cheatsheet<CR>",
+	opts,
+	"Cheatsheets",
+	"cheat_open",
+	"Open Cheatsheet"
+)
 -- }}}

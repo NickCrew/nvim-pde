@@ -21,18 +21,31 @@ return require("packer").startup(function(use)
 	-- Packer itself
 	use({ "wbthomason/packer.nvim" })
 
+    -- Reload Noevim
 	use({ "famiu/nvim-reload" })
 
+    -- Better filetype detection and definitions
 	use({ "nathom/filetype.nvim" })
 
+    -- Fix weirdness with cursor/hover delay
 	use({ "antoinemadec/FixCursorHold.nvim" })
 
+    -- Cool icons
 	use({ "kyazdani42/nvim-web-devicons" })
 
+    -- Improve % movement
 	use({ "andymass/vim-matchup" })
 
-	use(require("configure.rest"))
+    -- RESTful API and HTTP Client
+    use({
+      "NTBBloodbath/rest.nvim",
+      opt = true,
+      config = function()
+        require('configure.rest')
+      end
+    })
 
+    -- less jarring buffer open close 
 	use({
 		"luukvbaal/stabilize.nvim",
 		config = function()
@@ -48,6 +61,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+    -- Better quickfix window
 	use({
 		"kevinhwang91/nvim-bqf",
 		ft = "qf",
@@ -56,7 +70,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- optional
+	-- Fuzzy finder binary
 	use({
 		"junegunn/fzf",
 		run = function()
@@ -64,25 +78,30 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-    use({
-      'ThePrimeagen/harpoon',
-      before = 'telescope.nvim',
-      config = function()
-        require('configure.harpoon')
-      end
-    })
+    -- Better mark-based navigation
+	use({
+		"ThePrimeagen/harpoon",
+		before = "telescope.nvim",
+		config = function()
+			require("configure.harpoon")
+		end,
+	})
 
-    use({
-      'EthanJWright/vs-tasks.nvim',
-      after = 'telescope.nvim',
-      config = function()
-        require('vstask').setup({
-          use_harpoon = true
-        })
-      end
-    })
+    -- Task runner supporting VS Code's launch.json
+	use({
+		"EthanJWright/vs-tasks.nvim",
+		after = "telescope.nvim",
+		config = function()
+			require("vstask").setup({
+				use_harpoon = true,
+			})
+		end,
+	})
 
-	---- Language Support
+	-- Tag and symbol sidebar
+	use({ "liuchengxu/vista.vim" })
+
+	---- Language Server Support
 	use({
 		"neovim/nvim-lspconfig",
 		requires = {
@@ -101,18 +120,33 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+    -- Show status of language server loading in buffer
 	use({
 		"j-hui/fidget.nvim",
 		config = function()
 			require("fidget").setup()
-		end
+		end,
 	})
 
+    -- Popup menu with recommendations
 	use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
 
-	use({ "kosayoda/nvim-lightbulb", })
+    -- Show a lightbulb in the signcolumn when code actions are available
+	use({ "kosayoda/nvim-lightbulb" })
 
-	-- Syntax highlighting
+	-- Refactoring based on treesitter
+	use({
+		"ThePrimeagen/refactoring.nvim",
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+		config = function()
+			require("refactoring").setup({})
+		end,
+	})
+
+	-- Syntax highlighting and parsiging
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		requires = {
@@ -134,11 +168,12 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+    -- Better Terminal handling
 	use({
 		"akinsho/nvim-toggleterm.lua",
 		cmd = "ToggleTerm",
 		config = function()
-			require('configure.toggleterm')
+			require("configure.toggleterm")
 		end,
 	})
 
@@ -170,6 +205,7 @@ return require("packer").startup(function(use)
 		before = "telescope.nvim",
 	})
 
+	-- Alternative Graphical Debugger
 	use({
 		"puremourning/vimspector",
 		requires = {
@@ -183,6 +219,8 @@ return require("packer").startup(function(use)
 		opt = true,
 		disabled = true,
 	})
+
+	-- Enhance LSP Diagnostics
 	use({
 		"folke/trouble.nvim",
 		before = "telescope.nvim",
@@ -191,13 +229,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"benfowler/telescope-luasnip.nvim",
-		before = "telescope",
-		module = "telescope._extensions.luasnip", -- if you wish to lazy-load
-	})
-
-	-- Telescope
+	-- Telescope, fuzzy finder and command palette
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
@@ -214,6 +246,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- Python plugin for nvim-dap debugger
 	use({
 		"mfussenegger/nvim-dap-python",
 		ft = "python",
@@ -225,6 +258,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- Easy installation of debug adapters and configurations
 	use({
 		"Pocco81/DAPInstall",
 		config = function()
@@ -233,6 +267,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- Debug Neovim Lua
 	use({
 		"jbyuki/one-small-step-for-vimkind",
 		after = "nvim-dap",
@@ -268,27 +303,22 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- VSCode Debug Adapter Compatibility
+	-- Graphical debugger compatible with VS Code
 	use({ "mfussenegger/nvim-dap" })
 
+	-- Show debug values as virtual text in the buffer
 	use({
 		"theHamsta/nvim-dap-virtual-text",
-		requires = {
-
-			"mfussenegger/nvim-dap",
-		},
+		requires = { "mfussenegger/nvim-dap" },
 		config = function()
 			require("nvim-dap-virtual-text").setup()
 		end,
 	})
 
-	-- User interface for DAP
+	-- User interface for DAP (auto-launch)
 	use({
 		"rcarriga/nvim-dap-ui",
-		requires = {
-
-			"mfussenegger/nvim-dap",
-		},
+		requires = { "mfussenegger/nvim-dap" },
 		config = function()
 			require("dapui").setup()
 			-- -- Dap UI will open automatically
@@ -319,6 +349,7 @@ return require("packer").startup(function(use)
 		run = ":UpdateRemotePlugins",
 	})
 
+	-- Run any code snippet
 	use({
 		"michaelb/sniprun",
 		run = "bash ./install.sh",
@@ -330,6 +361,9 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- Interactive scratchpad
+	use({ "metakirby5/codi.vim" })
+
 	-- Marks and Bookmarks
 	use({
 		"chentau/marks.nvim",
@@ -338,8 +372,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({ "L3MON4D3/LuaSnip" })
-
+	-- AI completion source
 	use({
 		"tzachar/cmp-tabnine",
 		run = "./install.sh",
@@ -377,8 +410,17 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({ "saadparwaiz1/cmp_luasnip" })
+	-- Lua-based snippet engine
+	use({ "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" })
 
+	-- Telescope extension for LuaSnip
+	use({
+		"benfowler/telescope-luasnip.nvim",
+		before = "telescope",
+		module = "telescope._extensions.luasnip", -- if you wish to lazy-load
+	})
+
+	-- VS Code snippets for various languages
 	use({
 		"rafamadriz/friendly-snippets",
 		config = function()
@@ -386,7 +428,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- Git integration
+	-- Local Git integration
 	use({
 		"lewis6991/gitsigns.nvim",
 		config = function()
@@ -394,21 +436,30 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-    use({ 'metakirby5/codi.vim' })
+	-- Show inline git messages
+	use({ "rhysd/git-messenger.vim", cmd = "GitMessenger" })
 
-    use({ 'rhysd/git-messenger.vim', cmd = 'GitMessenger' })
+	-- Github remote integration
+	use({
+		"pwntester/octo.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"kyazdani42/nvim-web-devicons",
+		},
+		config = require("configure.octo").config(),
+	})
 
-	-- File tree
+	-- File tree sidebar
 	use({
 		"kyazdani42/nvim-tree.lua",
-		requires = {
-			"kyazdani42/nvim-web-devicons", -- optional, for file icon
-		},
+		requires = { "kyazdani42/nvim-web-devicons" },
 		config = function()
-			require('configure.nvim-tree')
+			require("configure.nvim-tree")
 		end,
 	})
 
+	-- Status bar
 	use({
 		"nvim-lualine/lualine.nvim",
 		config = function()
@@ -416,6 +467,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- Buffer/tab bar
 	use({
 		"akinsho/bufferline.nvim",
 		config = function()
@@ -426,6 +478,7 @@ return require("packer").startup(function(use)
 	-- Better buffer closing
 	use({ "moll/vim-bbye", after = "bufferline.nvim" })
 
+	-- Colorizer hex colors
 	use({
 		"norcalli/nvim-colorizer.lua",
 		config = function()
@@ -457,6 +510,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- Pretty notification windows/popups
 	use({
 		"rcarriga/nvim-notify",
 		config = function()
@@ -464,32 +518,25 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- Super fast and simple netrw based file explorer
 	use({ "tpope/vim-vinegar" })
 
-	-- Splash Screen
+	-- Splash Screen/Dashboard
 	use({
 		"goolord/alpha-nvim",
-		requires = {
-			"kyazdani42/nvim-web-devicons",
-		},
+		requires = { "kyazdani42/nvim-web-devicons" },
 		config = function()
 			require("configure.dashboard")
 		end,
 	})
 
-	-- Tag and symbol sidebar
-	use({
-      "liuchengxu/vista.vim",
-      config = function()
-      end
-    })
-
 	-- FLoating command line
 	use({ "voldikss/vim-floaterm" })
 
+	-- Run commands in an instant
 	use({
 		"VonHeikemen/fine-cmdline.nvim",
-		requires = "MunifTanjim/nui.nvim",
+		requires = { "MunifTanjim/nui.nvim" },
 	})
 
 	-- Index search results
@@ -563,15 +610,17 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+    -- Find matching pairs
+	use({
+		"windwp/nvim-autopairs",
+		config = function()
+			require("nvim-autopairs").setup({})
+		end,
+	})
+
 	-- Wrapping/delimiters
 	use({
 		"machakann/vim-sandwich",
-		{
-			"windwp/nvim-autopairs",
-			config = function()
-				require("nvim-autopairs").setup({})
-			end,
-		},
 	})
 
 	-- Generate docs
@@ -595,12 +644,13 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- Markdown
+	-- Markdown support with live preview inside nvim
 	use({ "ellisonleao/glow.nvim" })
 
+    --
 	-- Themes
+    --
 	use({ "ellisonleao/gruvbox.nvim" })
-
 	use({ "luisiacc/gruvbox-baby", branch = "main" })
 	use({ "rebelot/kanagawa.nvim" })
 	use({ "folke/tokyonight.nvim", branch = "main" })
