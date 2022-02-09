@@ -1,59 +1,82 @@
 # Neovim IDE 
 
 *A dev tool suite built on Neovim for VS Code Apostates*
-
----
-## Contents 
-1. [Summary](#summary)
-2. [Warning](#warning)
-3. [Prerequisites](#prereqs)
-	1. [Neovim](#nvim)
-	2. [Fonts](#fonts)
-	3. [Tools](#tools)
-4. [Language Support](#langservers)
-5. [Plugin Directory](#pluglist)
-6. [Special Thanks](#thanks)
-
-
 ---
 
-<a name="summary"/>
+Table of Contents
+=================
+
+* [Neovim IDE](#neovim-ide)
+   * [What's Inside](#whats-inside)
+      * [VCS Integration](#vcs-integration)
+      * [Graphical Debugger](#graphical-debugger)
+      * [Large Language Support](#large-language-support)
+      * [Snippets](#snippets)
+      * [Fast Search and Navigation](#fast-search-and-navigation)
+      * [Beautiful Interface](#beautiful-interface)
+      * [Easily discoverable commands and documentation](#easily-discoverable-commands-and-documentation)
+   * [BEWARE](#beware)
+   * [Preparing Your Workstation](#preparing-your-workstation)
+      * [Neovim](#neovim)
+      * [Fonts](#fonts)
+      * [External Tools](#external-tools)
+   * [Language Support](#language-support)
+   * [Neovim Plugin Overview](#neovim-plugin-overview)
+      * [Completion](#completion)
+         * [nvim-cmp](#nvim-cmp)
+            * [Completion Plugins](#completion-plugins)
+      * [Debuggers](#debuggers)
+         * [Vimspector](#vimspector)
+         * [nvim-dap](#nvim-dap)
+      * [Debug Information](#debug-information)
+      * [Command Palette](#command-palette)
+         * [Telescope Dependencies](#telescope-dependencies)
+            * [Telescope Extensions](#telescope-extensions)
+      * [Tags, Symbols and File Tree](#tags-symbols-and-file-tree)
+      * [Parsing](#parsing)
+         * [Treesitter Extensions](#treesitter-extensions)
+      * [Auto-formatting](#auto-formatting)
+      * [Bookmarks](#bookmarks)
+      * [Editing Enhancements](#editing-enhancements)
+      * [Fancy-pants UI Enhancements](#fancy-pants-ui-enhancements)
+      * [Cheatsheets and Custom help](#cheatsheets-and-custom-help)
+   * [Special Thanks](#special-thanks)
+
+---
+
 ## What's Inside 
 
-
-- __Git Integration__
+### VCS Integration
+- Git and Github
 	- Changes in gutter and status bar
 	- Toggle in-line blame messages and commit messages
 	- Github integration including pull requests
 	- Stage, preview, diff, etc. selected hunks of code
+- Tree-style Undo (Cmd+z) History
 
-- __Tree-style Undo (Cmd+z) History__
+### Graphical Debugger
+- __Use VS Code's `launch.json` configuration files__ 
+- In-line virtual text and hover to inspect
+- Launch your code in a graphical, multi-pane interface with customizable layouts to view ...
+	- Variables
+	- Watch
+	- Debug Console
+	- Call Stack
+- Compatible with the most popular debug adapters found in VS Code (including Firefox and Chrome)
+- Task runner that is __fully compatible with VS Code's `tasks.json`__
+- Automatic unit test runner
+- Integrated Terminals, REPLs and a Hacker Scratch Pad
+- RESTful API and HTTP Client
 
-- __Define and Run Tasks__ using VS Code's `tasks.json` (supports all variables)
-
-- __Debug your code__ in a familiar layout like is found in VS Code
-	- Use VS Code's `launch.json` files to configure your debugger
-	- Compatible with many debug adapters found in VS Code extensions (including Firefox and Chrome)
-	- In-line virtual text and hover to inspect
-	- Debug in a graphical user interface with configurable layouts and panes for
-		- Variables
-		- Watch
-		- Debug Console
-		- Call Stack
-
-- __Unit Test Runner__
-- __Integrated Terminal__
-- __REPLs for most languages__
-- __Hacker Scratch Pad__
-- __RESTful API and HTTP Client__
-
+### Large Language Support
 - __Extensive filetype support__ and easy-to-define __custom filetypes__
-- __Easily add support for any language__ (Python, Rust, Javascript, Typescript, etc.)
-	- Intellicode (Syntax parsing)
-	- Auto Formatting and Linting (including docstrings)
+- Easily add support for new languages (Python, Rust, Javascript, Typescript, etc.)
+	- __Intellicode__ (Syntax parsing)
+	- Auto __Formatting and Linting__ (including docstrings)
 	- VS Code Language server functionality 
 		- Go To definition
 		- Callstack
+		- Code Outline
 		- Find All References
 		- Recommended Code Actions/Fixes
 		- Document Symbols and Outline
@@ -61,39 +84,36 @@
 		- Completion Entries
 		- And more...
 
+### Snippets
 - __Snippet engine__ that is fully programmable using Lua 
 	- Compatible with your existing VS Code snippets using `snippets.json` files
 	- Includes most snippets provided by VS Code and common extensions
 	- Use Tabnine AI completion source
 
-- __Fast project navigation and search__ 
-	- File Tree
-	- Super-fast Code Search
-	- Code Outline
-	- Advanced Find and REplace
-	- Bookmarks
+### Fast Search and Navigation
+- File Tree
+- Super-fast Code Search
+- Advanced Find and Replace
+- Powerful Bookmarks
+- Programmable macros and multi-register clipboard handling
 
-- __Programmable macros and multi-register clipboard handling__
+### Beautiful Interface
+- VS Code File Icons and Completion-Kind Symbols
+- Smooth Scrolling
+- Fancy TODOs, Warnings, Notes, etc. 
+- Color (hex value) highlighting 
+- Awesome included color schemes
 
-- __Beautiful user interface__ featuring
-	- VS Code File Icons and Completion-Kind Symbols
-	- Smooth Scrolling
-	- Fancy TODOs, Warnings, Notes, etc. 
-	- Color (hex value) highlighting 
-	- Awesome included color schemes
-
-- __Easily discoverable commands and documentation__
-	- All default and custom keybindings are automatically added to the command palette
-	- Customizable quick cheatsheet
-	- Integrated personal wiki 
-	- Integrated with Dash.app or devdocs.io documentation sources
-
-- __Easy user-level customizations__
+### Easily discoverable commands and documentation
+- All default and custom keybindings are automatically added to the command palette
+- Customizable quick cheatsheet
+- Integrated personal wiki 
+- Integrated with Dash.app or devdocs.io documentation sources
+- Easy user-level customizations
 
 ---
 
 ## BEWARE 
-<a href="warning"/>
 
 > __!! BE YE WARNED NOW LEST YE SUFFER MOST HORRIBLY !!__
 
@@ -109,7 +129,6 @@ environment and guide your through more advanced Neovim concepts.
 
 ---
 
-<a href="prereqs"/>
 ## Preparing Your Workstation 
 
 
@@ -117,7 +136,6 @@ Bootstrap scripts are provided for a good deal of the dependencies and rerequisi
 
 These instructions are for macOS but you can work out the details if you're on Linux. 
 
-<a href="nvim"/>
 ### Neovim 
 
 
@@ -131,7 +149,6 @@ Don't forget to upgrade often with:
 brew upgrade --fetch-HEAD neovim
 ```
 
-<a href="fonts"/>
 ### Fonts 
 You need a patched font in order to see the full range of icons and symbols. A Nerd Font is a good bet.  
 
@@ -143,7 +160,6 @@ brew tap homebrew/cask-fonts
 brew install --cask font-fira-code-nerd-font
 ```
 
-<a href="tools"/>
 ### External Tools 
 
 Many tools used here are created with Rust and available as cargo packages so we should install Rust
@@ -171,7 +187,6 @@ cargo install bat
 
 ---
 
-<a href="langservers"/>
 ## Language Support 
 
 Install language servers like so
@@ -181,7 +196,6 @@ Install language servers like so
 
 ---
 
-<a href="pluglist"/>
 ## Neovim Plugin Overview 
 
 This section will go over the comprehensive list of plugins used in this kit
@@ -318,7 +332,7 @@ using telescope. `:Cheatsheet!` will open in a popup window.
 
 ---
 
-## Special Thanks <a href="thanks"/>
+## Special Thanks 
 
 Users and repositories who taught or inspired me ...
 
