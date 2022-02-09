@@ -4,7 +4,6 @@
 local vim = vim
 local fn = vim.fn
 
-
 local packer_bootstrap = false
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -32,7 +31,13 @@ return require("packer").startup(function(use)
 		"nathom/filetype.nvim",
 	})
 
-	use({ "kyazdani42/nvim-web-devicons" })
+	use({
+      "antoinemadec/FixCursorHold.nvim" 
+    })
+
+	use({
+      "kyazdani42/nvim-web-devicons" 
+    })
 
 	-- Popup preview window for LSP
 	use({
@@ -42,13 +47,13 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({ 
-      "kevinhwang91/nvim-bqf",
-      ft = "qf",
-      config = function()
-        require('bqf').setup()
-      end
-    })
+	use({
+		"kevinhwang91/nvim-bqf",
+		ft = "qf",
+		config = function()
+			require("bqf").setup()
+		end,
+	})
 
 	-- optional
 	use({
@@ -305,6 +310,27 @@ return require("packer").startup(function(use)
 	use({
 		"L3MON4D3/LuaSnip",
 	})
+
+	use({
+		"tzachar/cmp-tabnine",
+		run = "./install.sh",
+		requires = "hrsh7th/nvim-cmp",
+		config = function()
+			local tabnine = require("cmp_tabnine.config")
+			tabnine:setup({
+				max_lines = 1000,
+				max_num_results = 20,
+				sort = true,
+				run_on_every_keystroke = true,
+				snippet_placeholder = "..",
+				ignored_file_types = { -- default is not to ignore
+					-- uncomment to ignore in lua:
+					-- lua = true
+				},
+			})
+		end,
+	})
+
 	-- Completion and Snippets
 	use({
 		"hrsh7th/nvim-cmp",
@@ -321,6 +347,7 @@ return require("packer").startup(function(use)
 			require("configure.completion")
 		end,
 	})
+
 	use({
 		"saadparwaiz1/cmp_luasnip",
 	})
