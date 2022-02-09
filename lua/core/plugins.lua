@@ -276,17 +276,16 @@ return require("packer").startup(function(use)
     config = function()
       require("configure.marks")
     end,
-  })
+  }) 
 
-  use({
-    "hrsh7th/vim-vsnip",
-    "rafamadriz/friendly-snippets",
+  use ({
+    "L3MON4D3/LuaSnip"
   })
   -- Completion and Snippets
   use({
     "hrsh7th/nvim-cmp",
     requires = {
-      "hrsh7th/cmp-vsnip",
+      --"hrsh7th/cmp-vsnip",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
@@ -297,6 +296,16 @@ return require("packer").startup(function(use)
     config = function()
       require("configure.completion")
     end,
+  })
+  use({
+    'saadparwaiz1/cmp_luasnip'
+  }) 
+
+  use({
+    "rafamadriz/friendly-snippets",
+    config = function()
+      require('luasnip.loaders.from_vscode').load()
+    end
   })
 
   -- Git integration

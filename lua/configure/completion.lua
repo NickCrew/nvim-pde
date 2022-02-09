@@ -3,11 +3,12 @@
 local cmp = require("cmp")
 cmp.setup({
 
-  -- snippet = {
-  --   expand = function(args)
-  --     vim.fn["vsnip#anonymous"](args.body)
-  --   end,
-  -- },
+   snippet = {
+     expand = function(args)
+       require('luasnip').lsp_expand(args.body)
+        -- vim.fn["vsnip#anonymous"](args.body)
+     end,
+   },
   mapping = {
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
@@ -21,7 +22,7 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    --{ name = "vsnip" },
+    { name = "luasnip" },
   }, {
     { name = "buffer" },
     { name = "nvim_lua" },
