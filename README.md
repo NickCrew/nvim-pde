@@ -1,88 +1,181 @@
-# Neovim IDE
+# Neovim IDE 
 
-Development environment for Python, Rust, Javascript/Typescript and Lua based on Neovim and macOS (or Linux).
+*A dev tool suite built on Neovim for VS Code Apostates*
 
-- Git Integration
-- VS Code compatible:
-	- Debug adapter and graphical debugger (`launch.json`)
-	- Task Runner (`tasks.json`)
-	- Language servers
-	- Completion
-	- Auto Formatting
+---
+
+## Contents <a name="outline"/>
+
+1. [Summary](#summary)
+2. [Warning](#warning)
+3. [Prerequisites](#prereqs)
+	1. [Neovim](#nvim)
+	2. [Fonts](#fonts)
+	3. [Tools](#tools)
+4. [Language Support](#langservers)
+5. [Plugin Directory](#pluglist)
+6. [Special Thanks](#thanks)
 
 
-## __BEWARE__
+---
+
+## What's Inside <a name="summary"/>
+
+- __Git Integration__
+	- Changes in gutter and status bar
+	- Toggle in-line blame messages and commit messages
+	- Github integration including pull requests
+	- Stage, preview, diff, etc. selected hunks of code
+
+- __Tree-style Undo (Cmd+z) History__
+
+- __Define and Run Tasks__ using VS Code's `tasks.json` (supports all variables)
+
+- __Debug your code__ in a familiar layout like is found in VS Code
+	- Use VS Code's `launch.json` files to configure your debugger
+	- Compatible with many debug adapters found in VS Code extensions (including Firefox and Chrome)
+	- In-line virtual text and hover to inspect
+	- Debug in a graphical user interface with configurable layouts and panes for
+		- Variables
+		- Watch
+		- Debug Console
+		- Call Stack
+
+- __Unit Test Runner__
+- __Integrated Terminal__
+- __REPLs for most languages__
+- __Hacker Scratch Pad__
+- __RESTful API and HTTP Client__
+
+- __Extensive filetype support__ and easy-to-define __custom filetypes__
+- __Easily add support for any language__ (Python, Rust, Javascript, Typescript, etc.)
+	- Intellicode (Syntax parsing)
+	- Auto Formatting and Linting (including docstrings)
+	- VS Code Language server functionality 
+		- Go To definition
+		- Callstack
+		- Find All References
+		- Recommended Code Actions/Fixes
+		- Document Symbols and Outline
+		- Preview Definition
+		- Completion Entries
+		- And more...
+
+- __Snippet engine__ that is fully programmable using Lua 
+	- Compatible with your existing VS Code snippets using `snippets.json` files
+	- Includes most snippets provided by VS Code and common extensions
+	- Use Tabnine AI completion source
+
+- __Fast project navigation and search__ 
+	- File Tree
+	- Super-fast Code Search
+	- Code Outline
+	- Advanced Find and REplace
+	- Bookmarks
+
+- __Programmable macros and multi-register clipboard handling__
+
+- __Beautiful user interface__ featuring
+	- VS Code File Icons and Completion-Kind Symbols
+	- Smooth Scrolling
+	- Fancy TODOs, Warnings, Notes, etc. 
+	- Color (hex value) highlighting 
+	- Awesome included color schemes
+
+- __Easily discoverable commands and documentation__
+	- All default and custom keybindings are automatically added to the command palette
+	- Customizable quick cheatsheet
+	- Integrated personal wiki 
+	- Integrated with Dash.app or devdocs.io documentation sources
+
+- __Easy user-level customizations__
+
+---
+
+## BEWARE <a href="warning"/>
+
+> __!! BE YE WARNED NOW LEST YE SUFFER MOST HORRIBLY !!__
+
 You will only find pain and despair if you attempt to blindly copy some nutjob's huge Vim configuration. Nevertheless,
 it is helpful to have a rough guide as to which plugin's do what and their compatibility or customization options.  
 
 Only a lunatic would go through this effort when you can have the cheap version in VS Code ready in 5 minutes. If you
 are one of those lunatics... read on...
 
-> This guide is a work in progress. I will try to add details over time.
+My hope is this will eventually get to the point that it can act as a framework to bootstrap you into a productive
+environment and guide your through more advanced Neovim concepts.
+
 
 ---
 
-## Building the IDE ...
+## Preparing Your Workstation <a href="prereqs"/>
 
-### Prerequisites
-Some must-haves before beginning.
+Bootstrap scripts are provided for a good deal of the dependencies and rerequisites but we will still go over them here.  
 
-#### Neovim (duh)
+These instructions are for macOS but you can work out the details if you're on Linux. 
 
-It is recommended that you install Neovim from `HEAD`.
+### Neovim <a href="nvim"/>
+
+It is recommended that you install Neovim from `HEAD` to get the latest and greatest.
 ```bash
 brew install --HEAD Neovim
 ```
-Upgrade with
+Don't forget to upgrade often with:
 
 ```bash
 brew upgrade --fetch-HEAD neovim
 ```
 
-#### Ripgrep
+### Fonts <a href="fonts"/>
+You need a patched font in order to see the full range of icons and symbols. A Nerd Font is a good bet.  
 
-Ripgrep is used in multiple spots for fast searching. Use `cargo` or brew to install.
+The [devicons](https://github.com/kyazdani42/nvim-web-devicons) are available as a Neovim extension but we'll need to
+install the Nerd Font(s) manually or using our package manager.
 
-```bash
-brew install Ripgrep
-```
-
-#### Fonts, DevIcons and Glyphs
-
-- [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
-
-A patched nerd font is recommended to properly display glyphs.
 ```bash
 brew tap homebrew/cask-fonts
 brew install --cask font-fira-code-nerd-font
 ```
 
+### External Tools <a href="tools"/>
+
+Many tools used here are created with Rust and available as cargo packages so we should install Rust
+````bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.cargo/env  # make sure this gets added your .zshrc or .bashrc
+````
+
+```bash
+# Ripgrep is used by many components spots for fast searching. Use `cargo` or brew to install.
+cargo install ripgrep
+
+# Zoxide is a fast directory switcher 
+cargo install zoxide
+
+# Fzf is a nice fuzzy finder
+cargo install fzf
+
+# fd is a faster replacement for the normal find command
+cargo install fd-find
+
+# bat is a cat alternative with better builtin syntax highlighting
+cargo install bat
+```
+
 ---
 
-### Language Servers
-We're using Neovim's new builtin language server support here because it is the future. _Coc.vim_ might get you off the
-ground faster but it's a bloated node project that will be abandonware one day.
+## Language Support <a href="langservers"/>
 
-- [nvim-lspconfig](https://github/com/neovim/nvim-lspconfig)
-
-#### LSP Plugins
-- [lsp-signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
-- [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer)
-- [nvim-lsp-ts-utils](https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils)
-- [lsp-colors.nvim](https://github.com/folke/lsp-colors.nvim)
-- [toggle-lsp-diagnostics.nvi](https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvi)
-
-#### Lua Support
-The `luarocks` package manager is useful.
-```bash
-brew install luarocks
-```
-A formating tool for Lua
-```bash
-luarocks install --server=https://luarocks.org/dev luaformatter
-```
+Install language servers like so
+````vim
+:LSPInstall pyright
+````
 
 ---
+
+## Neovim Plugin Overview <a href="pluglist"/>
+
+This section will go over the comprehensive list of plugins used in this kit
 
 ### Completion
 
@@ -120,8 +213,7 @@ for more info.
 - [Vimspector Configuration](https://puremourning.github.io/vimspector/configuration.html#)
 - [neovim-python/](https://quinoa42.github.io/en/oceanus/neovim-python/)
 
-To debug node.js code, you can install a config for vimspector to your project.
-
+> To debug node.js code, you can install a config for vimspector to your project.
 ```bash
 npm -g install vimspector-config
 ```
@@ -186,6 +278,7 @@ brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 ### Bookmarks
 
 - [chentau/marks.nvim](https://github.com/chentau/marks.nvim)
+- [ThePrimeagen/harpoon](https://github.com/ThePrimeagen/harpoon)
 
 ---
 
@@ -213,4 +306,22 @@ Store some of your notes here in the custom help docs: `doc/halp`. To update hel
 
 Add entries to the cheatsheet by editing `cheatsheet.txt`. The `:Cheatsheet` command will allow searching the cheatsheet
 using telescope. `:Cheatsheet!` will open in a popup window.
+
+---
+
+## Special Thanks <a href="thanks"/>
+
+Users and repositories who taught or inspired me ...
+
+- [mrjones2014/dotfiles](https://github.com/mrjones2014/dotfiles.git)
+- [kabinspace/AstroVim](https://github.com/kabinspace/AstroVim.git)
+- [jdhao/nvim-config](https://github.com/jdhao/nvim-config.git)
+- [VapourNvim/VapourNvim](https://github.com/VapourNvim/VapourNvim.git)
+- [SingularisArt/Death.Neovim](https://github.com/SingularisArt/Death.NeoVim.git)
+- [shMorganson/dot-files](https://github.com/shMorganson/dot-files.git)
+
+Valuable resources and communities ...
+- The [r/unixporn](https://reddit.com/r/unixporn) subreddit
+- The [Awesome-Neovim](https://github.com/rockerBOO/awesome-neovim#readme) List
+
 
