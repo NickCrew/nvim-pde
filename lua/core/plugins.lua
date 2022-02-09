@@ -64,6 +64,24 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+    use({
+      'ThePrimeagen/harpoon',
+      before = 'telescope.nvim',
+      config = function()
+        require('configure.harpoon')
+      end
+    })
+
+    use({
+      'EthanJWright/vs-tasks.nvim',
+      after = 'telescope.nvim',
+      config = function()
+        require('vstask').setup({
+          use_harpoon = true
+        })
+      end
+    })
+
 	---- Language Support
 	use({
 		"neovim/nvim-lspconfig",
@@ -92,7 +110,7 @@ return require("packer").startup(function(use)
 
 	use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
 
-	use({ "kosayoda/nvim-lightbulb" })
+	use({ "kosayoda/nvim-lightbulb", })
 
 	-- Syntax highlighting
 	use({
@@ -376,6 +394,10 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+    use({ 'metakirby5/codi.vim' })
+
+    use({ 'rhysd/git-messenger.vim', cmd = 'GitMessenger' })
+
 	-- File tree
 	use({
 		"kyazdani42/nvim-tree.lua",
@@ -456,7 +478,11 @@ return require("packer").startup(function(use)
 	})
 
 	-- Tag and symbol sidebar
-	use({ "liuchengxu/vista.vim" })
+	use({
+      "liuchengxu/vista.vim",
+      config = function()
+      end
+    })
 
 	-- FLoating command line
 	use({ "voldikss/vim-floaterm" })

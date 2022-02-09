@@ -287,9 +287,18 @@ Mapper.map(
 -- Telescope and Commands {{{
 Mapper.map(
 	"n",
+	"<C-e>h",
+	":Telescope harpoon marks<CR>",
+	opts,
+	"Telescope",
+	"tele_harpoon",
+	"Show Harpoon Marks"
+)
+Mapper.map(
+	"n",
 	"<leader>lgr",
 	':lua require("telescope").extensions.live_grep_raw.live_grep_raw()',
-    opts,
+	opts,
 	"Telescope",
 	"tele_livegrepraw",
 	"Live Grep Raw"
@@ -663,6 +672,104 @@ Mapper.map(
 -- }}}
 
 -- Misc. Plugins {{{
+Mapper.map(
+	"n",
+	"<leader>to",
+	'<cmd>lua require("telescope").extensions.vstask.tasks()<CR>',
+	opts,
+	"Tasks",
+	"tasks_tasks",
+	"Open Task List"
+)
+
+Mapper.map(
+	"n",
+	"<leader>tc",
+	'<cmd>lua require("telescope").extensions.vstask.close()<CR>',
+	opts,
+	"Tasks",
+	"tasks_close",
+	"Close Task List"
+)
+
+Mapper.map(
+	"n",
+	"<leader>ti",
+	'<cmd>lua require("telescope").extensions.vstask.inputs()<CR>',
+	opts,
+	"Tasks",
+	"tasks_inputs",
+	"Open Task Input List"
+)
+
+Mapper.map(
+	"n",
+	"<A-h>m",
+	"<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>",
+	opts,
+	"Navigation",
+	"nav_harpoonui",
+	"Show Harpoon UI"
+)
+
+Mapper.map(
+	"n",
+	"<A-h>c",
+	"<cmd>lua require('harpoon.cmd-ui').toggle_quick_menu()<CR>",
+	opts,
+	"Navigation",
+	"nav_harpooncmdui",
+	"Show Harpoon Command UI"
+)
+
+Mapper.map(
+	"n",
+	"<A-h>a",
+	"<cmd>lua require('harpoon.mark').add_file()<CR>",
+	opts,
+	"Navigation",
+	"nav_harpoonadd",
+	"Add File To Harpoon"
+)
+Mapper.map(
+	"n",
+	"<A-h>p",
+	"<cmd>lua require('harpoon.ui').nav_prev()<CR>",
+	opts,
+	"Navigation",
+	"nav_harpoonprev",
+	"Previous Harpoon Target"
+)
+
+Mapper.map(
+	"n",
+	"<A-h>t",
+	"<cmd>lua require('harpoon.term').gotoTerminal(1)<CR>",
+	opts,
+	"Navigation",
+	"nav_harpoonterm",
+	"Go To Harpoon Terminal"
+)
+
+Mapper.map(
+	"n",
+	"<A-h>n",
+	"<cmd>lua require('harpoon.ui').nav_next()<CR>",
+	opts,
+	"Navigation",
+	"nav_harpoonnext",
+	"Next Harpoon Target"
+)
+Mapper.map(
+	"n",
+	"<leader>Gm",
+	"<Plug>(git-messenger",
+	{ noremap = false, silent = false },
+	"Git",
+	"git_messenger",
+	"Show Git Messages"
+)
+
 Mapper.map(
 	"n",
 	"<leader>bm",

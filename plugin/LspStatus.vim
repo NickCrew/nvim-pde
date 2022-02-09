@@ -1,6 +1,3 @@
-" after/plugin/functions.vim
-"
-
 " LspStatus
 function! LspStatus() abort
   if luaeval('#vim.lsp.buf_get_clients() > 0')
@@ -8,12 +5,3 @@ function! LspStatus() abort
   endif
   return ''
 endfunction
-
-
-" Vista statusbar
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-
-
-
