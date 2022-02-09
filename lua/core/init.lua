@@ -2,8 +2,11 @@
 --
 local global = require('core.global')
 local utils = require('core.utils')
+
 local vim = vim
 local g = vim.g
+
+local is_iterm = os.getenv('TERM_PROGRAM') == 'iTerm.app'
 
 -- Create cache dir and subs dir
 local createdir = function()
@@ -24,28 +27,6 @@ local createdir = function()
       end
     end
   end
-end
-
-local load_plugin_global_vars = function()
-  g.move_key_modifier = "S" -- Shift
-
-  g.glow_binary_path = vim.env.HOME .. "/bin"
-
-  g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/vsnip"
-  g.tokyonight_style = "night"
-  g.tokyonight_italic_functions = true
-  g.tokyonight_italic_keywords = true
-  g.tokyonight_italic_comments = true
-  g.tokyonight_lualine_bold = true
-  g.tokyonight_terminal_colors = true
-  g.tokyonight_dark_float = true
-  g.tokyonight_hide_inactive_statusline = true
-  g.tokyonight_sidebars = {"qf", "terminal", "packer", "vista_kind"}
-  g.tokyonight_dark_sidebar = true
-  g.tokyonight_transparent = false
-  g.tokyonight_transparent_sidebar = false
-
-
 end
 
 -- Disable unneeded distribution plugins
@@ -73,13 +54,16 @@ local apply_leader_map = function()
   g.maplocalleader = " "
 end
 
-local apply_theme = function()
+local set_appearance = function()
+  require('configure.themes.tokyonight')
+
   vim.cmd([[colorscheme tokyonight]])
-  local term_program = os.getenv('TERM_PROGRAM')
-  if term_program == 'iTerm.app' then
-    utils.apply_transparency()
+
+  if is_iterm then 
+    utils.apply_transparency() 
   end
 end
+
 
 -- Load 'er up
 local load_core = function()
@@ -89,11 +73,12 @@ local load_core = function()
 
   require('core.options')
 
-  load_plugin_global_vars()
+  vim.g.move_key_modifier = "S" -- Shift
+  vim.g.glow_binary_path =  os.getenv("HOME").."/bin"
   require('core.plugins')
-
   require('core.mappings')
-  apply_theme()
+
+  set_appearance()
 
 end
 

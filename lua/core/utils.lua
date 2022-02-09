@@ -5,9 +5,6 @@ local M = {}
 
 local vim = vim
 
-function M.update_custom_help_tags()
-  vim.cmd([[:helptags ~/.config/nvim/doc/]])
-end
 
 function M.apply_transparency()
    vim.cmd([[highlight Normal guibg=none ctermbg=none]])

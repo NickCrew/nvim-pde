@@ -1,5 +1,6 @@
 -- lua/configure/completion.lua
 --
+local lspkind = require('lspkind')
 local cmp = require("cmp")
 cmp.setup({
 
@@ -9,6 +10,21 @@ cmp.setup({
         -- vim.fn["vsnip#anonymous"](args.body)
      end,
    },
+   formatting = {
+    format = lspkind.cmp_format({
+      -- mode options: 'text', 'text_symbol', 'symbol_text', 'symbol',
+      mode = 'symbol', 
+      -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      maxwidth = 50, 
+      -- preset options:
+      -- 'codicons' requires npm package @vscode/codicons
+      -- 'default' requires nerd fonts
+      preset = 'codicons',
+      -- customize the symbol map
+      symbol_map = require('lsp.symbols')
+    })
+  },
+
   mapping = {
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),

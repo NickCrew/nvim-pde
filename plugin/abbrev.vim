@@ -20,7 +20,6 @@ cnoreabbrev T Telescope
 cnoreabbrev Tr TroubleToggle
 cnoreabbrev PC PackerCompile
 cnoreabbrev PI PackerInstall
-
 cnoreabbrev TB ToggleBookmark
 cnoreabbrev TT ToggleTrouble
 cnoreabbrev Ng Neogen

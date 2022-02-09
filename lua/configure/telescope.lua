@@ -1,8 +1,8 @@
-require("trouble").setup()
 local trouble = require("trouble.providers.telescope")
 local actions = require("telescope.actions")
+local telescope = require('telescope')
 
-require("telescope").setup({
+telescope.setup({
   defaults = {
     vimgrep_arguments = {
       "rg",
@@ -67,11 +67,7 @@ require("telescope").setup({
     },
 
     dash = {
-      -- configure path to Dash.app if installed somewhere other than /Applications/Dash.app
-      --dash_app_path = '/Applications/Dash.app/Contents/Resources/dashAlfredWorkflow',
-      -- search engine to fall back to when Dash has no results, must be one of: 'ddg', 'duckduckgo', 'startpage', 'google'
-      search_engine = "ddg",
-      -- debounce while typing, in milliseconds
+      search_engine = "google",
       debounce = 0,
       -- map filetype strings to the keywords you've configured for docsets in Dash
       -- setting to false will disable filtering by filetype for that filetype
@@ -97,14 +93,15 @@ require("telescope").setup({
   },
 })
 
-require("telescope").load_extension("zoxide")
-require("telescope").load_extension("projects")
-require("telescope").load_extension("fzf")
-require("telescope").load_extension("ui-select")
-require("telescope").load_extension("cheatsheet")
-require("telescope").load_extension("frecency")
-require("telescope").load_extension("dash")
-require("telescope").load_extension("file_browser")
-require("telescope").load_extension("media_files")
-require("telescope").load_extension("dap")
-require("telescope").load_extension("mapper")
+telescope.load_extension("zoxide")
+telescope.load_extension("projects")
+telescope.load_extension("fzf")
+telescope.load_extension("ui-select")
+telescope.load_extension("cheatsheet")
+telescope.load_extension("frecency")
+telescope.load_extension("dash")
+telescope.load_extension("file_browser")
+telescope.load_extension("media_files")
+telescope.load_extension("dap")
+telescope.load_extension("mapper")
+telescope.load_extension('luasnip')

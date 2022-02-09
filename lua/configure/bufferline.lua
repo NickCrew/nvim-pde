@@ -1,12 +1,8 @@
 -- lua/configure/bufferline.lua
 --
 
-local status_ok, bufferline = pcall(require, "bufferline")
-if not status_ok then
-  return
-end
 
-bufferline.setup({
+require'bufferline'.setup({
   options = {
     offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
     buffer_close_icon = "",
