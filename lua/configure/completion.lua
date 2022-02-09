@@ -2,6 +2,7 @@
 --
 local lspkind = require('lspkind')
 local cmp = require("cmp")
+
 cmp.setup({
 
    snippet = {
@@ -13,15 +14,23 @@ cmp.setup({
    formatting = {
     format = lspkind.cmp_format({
       -- mode options: 'text', 'text_symbol', 'symbol_text', 'symbol',
-      mode = 'symbol', 
+      mode = 'symbol_text', 
+	  
       -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       maxwidth = 50, 
       -- preset options:
       -- 'codicons' requires npm package @vscode/codicons
       -- 'default' requires nerd fonts
-      preset = 'codicons',
+      preset = 'default',
       -- customize the symbol map
-      symbol_map = require('lsp.symbols')
+      --symbol_map = require('lsp.symbols')
+      before = function (entry, vim_item)
+          vim_item.menu = ({
+          nvim_lsp = '[LSP]',
+          buffer = '[Buf]',
+        })[entry.source.name]
+        return vim_item
+      end
     })
   },
 

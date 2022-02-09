@@ -4,6 +4,7 @@
 local vim = vim
 local fn = vim.fn
 
+
 local packer_bootstrap = false
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
