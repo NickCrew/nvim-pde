@@ -23,3 +23,4 @@ cnoreabbrev PI PackerInstall
 
 cnoreabbrev TB ToggleBookmark
 cnoreabbrev TT ToggleTrouble
+cnoreabbrev Ng Neogen

@@ -3,13 +3,13 @@
 
 local M = {}
 
+local vim = vim
+
 function M.update_custom_help_tags()
-  local custom_help = vim.fn.stdpath('config') .. '/doc/'
-  vim.cmd([[:helptags custom_help]])
+  vim.cmd([[:helptags ~/.config/nvim/doc/]])
 end
 
 function M.apply_transparency()
-  local vim = vim
    vim.cmd([[highlight Normal guibg=none ctermbg=none]])
    --vim.cmd([[highlight LineNr guibg=none ctermbg=none]])
    vim.cmd([[highlight Folded guibg=none ctermbg=none]])

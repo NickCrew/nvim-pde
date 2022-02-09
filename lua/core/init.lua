@@ -73,6 +73,14 @@ local apply_leader_map = function()
   g.maplocalleader = " "
 end
 
+local apply_theme = function()
+  vim.cmd([[colorscheme tokyonight]])
+  local term_program = os.getenv('TERM_PROGRAM')
+  if term_program == 'iTerm.app' then
+    utils.apply_transparency()
+  end
+end
+
 -- Load 'er up
 local load_core = function()
   createdir()
@@ -85,8 +93,7 @@ local load_core = function()
   require('core.plugins')
 
   require('core.mappings')
-
-  vim.cmd([[colorscheme tokyonight]])
+  apply_theme()
 
 end
 
