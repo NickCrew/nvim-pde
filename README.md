@@ -3,9 +3,7 @@
 *A dev tool suite built on Neovim for VS Code Apostates*
 
 ---
-
-## Contents <a name="outline"/>
-
+## Contents 
 1. [Summary](#summary)
 2. [Warning](#warning)
 3. [Prerequisites](#prereqs)
@@ -19,7 +17,9 @@
 
 ---
 
-## What's Inside <a name="summary"/>
+<a name="summary"/>
+## What's Inside 
+
 
 - __Git Integration__
 	- Changes in gutter and status bar
@@ -92,7 +92,8 @@
 
 ---
 
-## BEWARE <a href="warning"/>
+## BEWARE 
+<a href="warning"/>
 
 > __!! BE YE WARNED NOW LEST YE SUFFER MOST HORRIBLY !!__
 
@@ -108,13 +109,17 @@ environment and guide your through more advanced Neovim concepts.
 
 ---
 
-## Preparing Your Workstation <a href="prereqs"/>
+<a href="prereqs"/>
+## Preparing Your Workstation 
+
 
 Bootstrap scripts are provided for a good deal of the dependencies and rerequisites but we will still go over them here.  
 
 These instructions are for macOS but you can work out the details if you're on Linux. 
 
-### Neovim <a href="nvim"/>
+<a href="nvim"/>
+### Neovim 
+
 
 It is recommended that you install Neovim from `HEAD` to get the latest and greatest.
 ```bash
@@ -126,7 +131,8 @@ Don't forget to upgrade often with:
 brew upgrade --fetch-HEAD neovim
 ```
 
-### Fonts <a href="fonts"/>
+<a href="fonts"/>
+### Fonts 
 You need a patched font in order to see the full range of icons and symbols. A Nerd Font is a good bet.  
 
 The [devicons](https://github.com/kyazdani42/nvim-web-devicons) are available as a Neovim extension but we'll need to
@@ -137,7 +143,8 @@ brew tap homebrew/cask-fonts
 brew install --cask font-fira-code-nerd-font
 ```
 
-### External Tools <a href="tools"/>
+<a href="tools"/>
+### External Tools 
 
 Many tools used here are created with Rust and available as cargo packages so we should install Rust
 ````bash
@@ -164,7 +171,8 @@ cargo install bat
 
 ---
 
-## Language Support <a href="langservers"/>
+<a href="langservers"/>
+## Language Support 
 
 Install language servers like so
 ````vim
@@ -173,7 +181,8 @@ Install language servers like so
 
 ---
 
-## Neovim Plugin Overview <a href="pluglist"/>
+<a href="pluglist"/>
+## Neovim Plugin Overview 
 
 This section will go over the comprehensive list of plugins used in this kit
 
