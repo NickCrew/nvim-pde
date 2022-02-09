@@ -54,7 +54,7 @@ Mapper.map(
 Mapper.map(
 	"n",
 	"<C-h>",
-    -- "<C-w><C-h>",
+	-- "<C-w><C-h>",
 	"<CMD>lua require('Navigator').left()<CR>",
 	opts,
 	"Navigation",
@@ -65,7 +65,7 @@ Mapper.map(
 Mapper.map(
 	"n",
 	"<C-k>",
-    -- "<C-w><C-k>",
+	-- "<C-w><C-k>",
 	"<CMD>lua require('Navigator').up()<CR>",
 	opts,
 	"Navigation",
@@ -76,7 +76,7 @@ Mapper.map(
 Mapper.map(
 	"n",
 	"<C-l>",
-    -- "<C-w><C-l>",
+	-- "<C-w><C-l>",
 	"<CMD>lua require('Navigator').right()<CR>",
 	opts,
 	"Navigation",
@@ -87,7 +87,7 @@ Mapper.map(
 Mapper.map(
 	"n",
 	"<C-j>",
-    -- "<C-w><C-j>"
+	-- "<C-w><C-j>"
 	"<CMD>lua require('Navigator').down()<CR>",
 	opts,
 	"Navigation",
@@ -250,8 +250,6 @@ Mapper.map(
 	"Previous Buffer"
 )
 
-
-
 -- }}}
 
 -- Copy/Paste {{{
@@ -287,6 +285,16 @@ Mapper.map(
 -- }}}
 
 -- Telescope and Commands {{{
+Mapper.map(
+	"n",
+	"<leader>lgr",
+	':lua require("telescope").extensions.live_grep_raw.live_grep_raw()',
+    opts,
+	"Telescope",
+	"tele_livegrepraw",
+	"Live Grep Raw"
+)
+
 Mapper.map(
 	"n",
 	"<C-e>C",

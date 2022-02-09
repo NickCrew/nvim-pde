@@ -17,6 +17,7 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
+require("rust-tools").setup()
 require('toggle_lsp_diagnostics').init()
 local lsp = vim.lsp
 local handlers = lsp.handlers

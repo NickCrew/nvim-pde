@@ -31,20 +31,25 @@ end
 
 -- Disable unneeded distribution plugins
 local disable_distribution_plugins = function()
-  g.loaded_gzip = true
-  g.loaded_tar = true
-  g.loaded_tarPlugin = true
-  g.loaded_zip = true
-  g.loaded_zipPlugin = true
-  g.loaded_getscript = true
-  g.loaded_getscriptPlugin = true
-  g.loaded_vimball = true
-  g.loaded_vimballPlugin = true
-  g.loaded_matchit = true
-  g.loaded_matchparen = true
-  g.loaded_2html_plugin = true
-  g.loaded_logiPat = true
-  g.loaded_rrhelper = true
+  g.loaded_gzip = 1
+  g.loaded_tar = 1
+  g.loaded_tarPlugin = 1
+  g.loaded_zip = 1
+  g.loaded_zipPlugin = 1
+  g.loaded_getscript = 1
+  g.loaded_getscriptPlugin = 1
+  g.loaded_vimball = 1
+  g.loaded_vimballPlugin = 1
+  g.loaded_matchit = 1
+  g.loaded_matchparen = 1
+  g.loaded_2html_plugin = 1
+  g.loaded_logiPat = 1
+  g.loaded_rrhelper = 1
+  -- g.loaded_netrw = 1
+  -- g.loaded_netrwPlugin = 1
+  -- g.loaded_netrwSettings = 1
+  -- g.loaded_netrwFileHandlers = 1
+
 end
 
 -- Set leader key
@@ -54,34 +59,35 @@ local apply_leader_map = function()
   g.maplocalleader = " "
 end
 
-local set_appearance = function()
+-- Apply colorscheme and any aesthetic customizations
+local configure_look_and_feel = function()
   require('configure.themes.tokyonight')
-
   vim.cmd([[colorscheme tokyonight]])
-
-  if is_iterm then 
-    utils.apply_transparency() 
-  end
+  if is_iterm then utils.apply_transparency() end
 end
 
+-- Global variables and options for Plugins
+local apply_plugin_settings = function()
+  g.move_key_modifier = "S" -- Shift
+  g.glow_binary_path =  os.getenv("HOME").."/bin"
+  g.cursorhold_updatetime = 100
+end
+
+local M = {}
 
 -- Load 'er up
-local load_core = function()
+function M.load()
   createdir()
   disable_distribution_plugins()
   apply_leader_map()
+  apply_plugin_settings()
 
   require('core.options')
-
-  vim.g.move_key_modifier = "S" -- Shift
-  vim.g.glow_binary_path =  os.getenv("HOME").."/bin"
-  vim.g.cursorhold_updatetime = 100
-
   require('core.plugins')
   require('core.mappings')
 
-  set_appearance()
-
+  configure_look_and_feel()
 end
 
-load_core()
+return M
+

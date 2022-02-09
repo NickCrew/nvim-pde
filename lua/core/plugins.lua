@@ -32,12 +32,23 @@ return require("packer").startup(function(use)
 	})
 
 	use({
-      "antoinemadec/FixCursorHold.nvim" 
-    })
+		"antoinemadec/FixCursorHold.nvim",
+	})
 
 	use({
-      "kyazdani42/nvim-web-devicons" 
-    })
+		"kyazdani42/nvim-web-devicons",
+	})
+
+	use({
+		"andymass/vim-matchup",
+	})
+
+	use({
+		"luukvbaal/stabilize.nvim",
+		config = function()
+			require("stabilize").setup()
+		end,
+	}) -- stabilize buffer content on window open/close events
 
 	-- Popup preview window for LSP
 	use({
@@ -74,10 +85,19 @@ return require("packer").startup(function(use)
 			"williamboman/nvim-lsp-installer",
 			"jose-elias-alvarez/nvim-lsp-ts-utils",
 			"folke/lsp-colors.nvim",
+			"nvim-lua/lsp-status.nvim",
 			"WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+			"simrat39/rust-tools.nvim",
 		},
 		config = function()
 			require("lsp")
+		end,
+	})
+
+	use({
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup()
 		end,
 	})
 
@@ -139,6 +159,7 @@ return require("packer").startup(function(use)
 		"nvim-telescope/telescope-media-files.nvim",
 		"nvim-telescope/telescope-frecency.nvim",
 		"jvgrootveld/telescope-zoxide",
+		"nvim-telescope/telescope-live-grep-raw.nvim",
 		"nvim-telescope/telescope-github.nvim",
 		{
 			"nvim-telescope/telescope-dap.nvim",
@@ -147,6 +168,19 @@ return require("packer").startup(function(use)
 		before = "telescope.nvim",
 	})
 
+	use({
+		"puremourning/vimspector",
+		requires = {
+			"nvim-telescope/telescope-vimspector.nvim",
+			after = "telescope.nvim",
+			opt = true,
+			config = function()
+				require("telescope").load_extension("vimspector")
+			end,
+		},
+		opt = true,
+		disabled = true,
+	})
 	use({
 		"folke/trouble.nvim",
 		before = "telescope.nvim",

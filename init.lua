@@ -1,6 +1,6 @@
 -- init.lua 
 -- 
 
-require'core'
+require('core').load()
 
 
