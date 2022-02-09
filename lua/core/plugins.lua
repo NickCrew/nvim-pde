@@ -19,36 +19,26 @@ end
 
 return require("packer").startup(function(use)
 	-- Packer itself
-	use({
-		"wbthomason/packer.nvim",
-	})
+	use({ "wbthomason/packer.nvim" })
 
-	use({
-		"famiu/nvim-reload",
-	})
+	use({ "famiu/nvim-reload" })
 
-	use({
-		"nathom/filetype.nvim",
-	})
+	use({ "nathom/filetype.nvim" })
 
-	use({
-		"antoinemadec/FixCursorHold.nvim",
-	})
+	use({ "antoinemadec/FixCursorHold.nvim" })
 
-	use({
-		"kyazdani42/nvim-web-devicons",
-	})
+	use({ "kyazdani42/nvim-web-devicons" })
 
-	use({
-		"andymass/vim-matchup",
-	})
+	use({ "andymass/vim-matchup" })
+
+	use(require("configure.rest"))
 
 	use({
 		"luukvbaal/stabilize.nvim",
 		config = function()
 			require("stabilize").setup()
 		end,
-	}) -- stabilize buffer content on window open/close events
+	})
 
 	-- Popup preview window for LSP
 	use({
@@ -77,7 +67,6 @@ return require("packer").startup(function(use)
 	---- Language Support
 	use({
 		"neovim/nvim-lspconfig",
-		event = "BufRead",
 		requires = {
 			"RishabhRD/popfix",
 			"jubnzv/virtual-types.nvim",
@@ -98,17 +87,12 @@ return require("packer").startup(function(use)
 		"j-hui/fidget.nvim",
 		config = function()
 			require("fidget").setup()
-		end,
+		end
 	})
 
-	use({
-		"weilbith/nvim-code-action-menu",
-		cmd = "CodeActionMenu",
-	})
+	use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
 
-	use({
-		"kosayoda/nvim-lightbulb",
-	})
+	use({ "kosayoda/nvim-lightbulb" })
 
 	-- Syntax highlighting
 	use({
@@ -136,7 +120,7 @@ return require("packer").startup(function(use)
 		"akinsho/nvim-toggleterm.lua",
 		cmd = "ToggleTerm",
 		config = function()
-			require("configure.toggleterm").config()
+			require('configure.toggleterm')
 		end,
 	})
 
@@ -267,9 +251,7 @@ return require("packer").startup(function(use)
 	})
 
 	-- VSCode Debug Adapter Compatibility
-	use({
-		"mfussenegger/nvim-dap",
-	})
+	use({ "mfussenegger/nvim-dap" })
 
 	use({
 		"theHamsta/nvim-dap-virtual-text",
@@ -306,10 +288,7 @@ return require("packer").startup(function(use)
 	})
 
 	-- Gnu Debugger
-	use({
-		"sakhnik/nvim-gdb",
-		run = "bash ./install.sh",
-	})
+	use({ "sakhnik/nvim-gdb", run = "bash ./install.sh" })
 
 	-- Test Runner
 	use({
@@ -341,9 +320,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"L3MON4D3/LuaSnip",
-	})
+	use({ "L3MON4D3/LuaSnip" })
 
 	use({
 		"tzachar/cmp-tabnine",
@@ -382,9 +359,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"saadparwaiz1/cmp_luasnip",
-	})
+	use({ "saadparwaiz1/cmp_luasnip" })
 
 	use({
 		"rafamadriz/friendly-snippets",
@@ -404,9 +379,11 @@ return require("packer").startup(function(use)
 	-- File tree
 	use({
 		"kyazdani42/nvim-tree.lua",
-		cmd = "NvimTreeToggle",
+		requires = {
+			"kyazdani42/nvim-web-devicons", -- optional, for file icon
+		},
 		config = function()
-			require("configure.nvim-tree")
+			require('configure.nvim-tree')
 		end,
 	})
 
@@ -425,10 +402,7 @@ return require("packer").startup(function(use)
 	})
 
 	-- Better buffer closing
-	use({
-		"moll/vim-bbye",
-		after = "bufferline.nvim",
-	})
+	use({ "moll/vim-bbye", after = "bufferline.nvim" })
 
 	use({
 		"norcalli/nvim-colorizer.lua",
@@ -468,9 +442,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"tpope/vim-vinegar",
-	})
+	use({ "tpope/vim-vinegar" })
 
 	-- Splash Screen
 	use({
@@ -508,9 +480,7 @@ return require("packer").startup(function(use)
 	})
 
 	-- Move code easily
-	use({
-		"matze/vim-move",
-	})
+	use({ "matze/vim-move" })
 
 	-- Keybinding helper
 	use({
@@ -600,27 +570,14 @@ return require("packer").startup(function(use)
 	})
 
 	-- Markdown
-	use({
-		"ellisonleao/glow.nvim",
-	})
+	use({ "ellisonleao/glow.nvim" })
 
 	-- Themes
-	use({
-		"ellisonleao/gruvbox.nvim",
-	})
+	use({ "ellisonleao/gruvbox.nvim" })
 
-	use({
-		"luisiacc/gruvbox-baby",
-		branch = "main",
-	})
-
-	use({
-		"rebelot/kanagawa.nvim",
-	})
-	use({
-		"folke/tokyonight.nvim",
-		branch = "main",
-	})
+	use({ "luisiacc/gruvbox-baby", branch = "main" })
+	use({ "rebelot/kanagawa.nvim" })
+	use({ "folke/tokyonight.nvim", branch = "main" })
 
 	if packer_bootstrap then
 		require("packer").sync()
