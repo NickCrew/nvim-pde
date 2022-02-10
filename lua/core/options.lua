@@ -1,7 +1,6 @@
 -- lua/core/options.lua
 --
 
-local global = require("core.global")
 local o = vim.opt
 
 o.termguicolors = true
@@ -75,15 +74,14 @@ o.signcolumn = "yes"
 -- Backup/Undo/Swap
 o.backup = false
 o.swapfile = false
-o.undodir = global.cache_dir .. 'undo/'
 o.undofile = true
-
+o.backupdir = os.getenv('HOME') .. '/.cache/nvim/backup/'
+o.undodir = os.getenv('HOME') .. '/.cache/nvim/undo/'
 -- Wildmenu
 o.wildmenu = true
 o.wildmode = 'longest,list,full'
 o.wildignorecase = true
 o.wildignore = '.git/**,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**'
 
-vim.g.python3_host_prog = os.getenv('HOME')..'/.pyenv/versions/neovim/bin/python'
 
 

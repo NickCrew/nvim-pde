@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+cache_home=${XDG_CACHE_DIR:-${HOME}/.cache}
+nvim_cache="${cache_home}/nvim"
+
+cache_dirs=(tags undo backup swap sessions)
+
+for d in $cache_dirs; do
+	mkdir -p "${nvim_cache}/${d}"
+done

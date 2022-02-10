@@ -1,30 +1,15 @@
+-- vim:foldmethod=marker
 -- lua/core/global.lua
 --
 
-local global = {}
-local vim = vim
-local os_name = vim.loop.os_uname().sysname
 local g = vim.g
 
+g.python3_host_prog = os.getenv('HOME')..'/.pyenv/versions/neovim/bin/python'
 
-function global:load_variables()
-  self.is_mac = os_name == "Darwin"
-  self.is_linux = os_name == "Linux"
-  self.is_iterm = os.getenv('TERM_PROGRAM') == 'iTerm.app'
-
-  self.modules_dir = vim.fn.stdpath("config") .. '/modules'
-  self.data_dir = vim.fn.stdpath("data") .. "/site/"
-  self.cache_dir = os.getenv("HOME") .. "/.cache/nvim/"
-
-  self.snippets_dir = vim.fn.stdpath("config") .. "/snippets"
-  self.halp_dir = vim.fn.stdpath("config") .. "/doc/"
-  self.vscode_dir = os.getenv("HOME") .. "/.vscode"
-
-  self.log_path = self.cache_dir .. "/nvim_debug.log"
+-- Plugin Global Variables {{{
+g.move_key_modifier = "S" -- Shift
+g.glow_binary_path =  os.getenv("HOME").."/bin"
+g.cursorhold_updatetime = 100
+-- }}}
 
 
-end
-
-global:load_variables()
-
-return global 
