@@ -1,19 +1,12 @@
--- lua/lsp/handlers.lua
+-- lua/plugins/config/lsp-utils.lua
 --
 
+local vim = vim
 local lsp = vim.lsp
 local handlers = lsp.handlers
 
-handlers["textDocument/hover"] = lsp.with(
-  handlers.hover, { border = "rounded" }
-)
-
-handlers["textDocument/signatureHelp"] = lsp.with(
-  handlers.signature_help, { border = "rounded" }
-)
-
 local bufnr = vim.api.nvim_buf_get_number(0)
--- Requires lsputils
+
 handlers["textDocument/codeAction"] = function(_, _, actions)
   require("lsputil.codeAction").code_action_handler(nil, actions, nil, nil, nil)
 end

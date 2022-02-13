@@ -1,88 +1,10 @@
+
 local M = {}
 
-Map = require("mapstuff")
-
-function M.lsp_global_maps()
-	local opts = { noremap = false, silent = true }
-
-	Map.map(
-		"n",
-		"<leader>tlu",
-		"<Plug>(toggle-lsp-diag-underline)",
-		opts,
-		"Diagnostics",
-		"diag_togl_ul",
-		"Toggle Underline"
-	)
-	Map.map(
-		"n",
-		"<leader>tls",
-		"<Plug>(toggle-lsp-diag-signs)",
-		opts,
-		"Diagnostics",
-		"diag_togl_signs",
-		"Toggle Signs"
-	)
-	Map.map(
-		"n",
-		"<leader>tlv",
-		"<Plug>(toggle-lsp-diag-vtext)",
-		opts,
-		"Diagnostics",
-		"diag_togl_vtext",
-		"Toggle Virtual Text"
-	)
-	Map.map(
-		"n",
-		"<leader>tlp",
-		"<Plug>(toggle-lsp-diag-update_in_insert)",
-		opts,
-		"Diagnostics",
-		"diag_togl_upins",
-		"Toggle Update on Insert"
-	)
-	Map.map(
-		"n",
-		"<leader>tld",
-		"<Plug>(toggle-lsp-diag)",
-		opts,
-		"Diagnostics",
-		"diag_togl",
-		"Toggle Diagnostics"
-	)
-	Map.map(
-		"n",
-		"<leader>tldd",
-		"<Plug>(toggle-lsp-diag-default)",
-		opts,
-		"Diagnostics",
-		"diag_togl_default",
-		"Set All To Default"
-	)
-	Map.map(
-		"n",
-		"<leader>tldo",
-		"<Plug>(toggle-lsp-diag-off)",
-		opts,
-		"Diagnostics",
-		"diag_togl_off",
-		"Turn Off"
-	)
-	Map.map(
-		"n",
-		"<leader>tldf",
-		"<Plug>(toggle-lsp-diag-on)",
-		opts,
-		"Diagnostics",
-		"diag_togl_on",
-		"Turn On"
-	)
-end
-
-function M.lsp_buf_maps(bufnr)
+function M.load(bufnr)
 	local map_opts = { noremap = true, silent = true }
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"gD",
@@ -93,7 +15,7 @@ function M.lsp_buf_maps(bufnr)
 		"Go To Declaration"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"gd",
@@ -104,7 +26,7 @@ function M.lsp_buf_maps(bufnr)
 		"Go To Defintion"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"gr",
@@ -115,7 +37,7 @@ function M.lsp_buf_maps(bufnr)
 		"Show References"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"gs",
@@ -126,7 +48,7 @@ function M.lsp_buf_maps(bufnr)
 		"Signature Help"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"gi",
@@ -137,7 +59,7 @@ function M.lsp_buf_maps(bufnr)
 		"Go To Implementation"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"<leader>gt",
@@ -148,7 +70,7 @@ function M.lsp_buf_maps(bufnr)
 		"Go To Type Definition"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"<leader>gw",
@@ -159,7 +81,7 @@ function M.lsp_buf_maps(bufnr)
 		"Document Symbol"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"<leader>gW",
@@ -170,7 +92,7 @@ function M.lsp_buf_maps(bufnr)
 		"Workspace Symbol"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"<leader>ah",
@@ -181,7 +103,7 @@ function M.lsp_buf_maps(bufnr)
 		"Hover"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"<leader>ac",
@@ -192,7 +114,7 @@ function M.lsp_buf_maps(bufnr)
 		"Code Actions"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"<leader>ar",
@@ -203,7 +125,7 @@ function M.lsp_buf_maps(bufnr)
 		"Rename"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"<leader>qf",
@@ -214,7 +136,7 @@ function M.lsp_buf_maps(bufnr)
 		"Quick Fix"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"<leader>=",
@@ -225,7 +147,7 @@ function M.lsp_buf_maps(bufnr)
 		"Formatting"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"<leader>ai",
@@ -236,7 +158,7 @@ function M.lsp_buf_maps(bufnr)
 		"Incoming Calls"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"<leader>ao",
@@ -247,7 +169,7 @@ function M.lsp_buf_maps(bufnr)
 		"Outgoing Calls"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"<leader>ee",
@@ -258,7 +180,7 @@ function M.lsp_buf_maps(bufnr)
 		"Diagnostics for Line"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"[g",
@@ -269,7 +191,7 @@ function M.lsp_buf_maps(bufnr)
 		"Go To Next"
 	)
 
-	Map.map_buf(
+	Mapper.map_buf(
 		bufnr,
 		"n",
 		"]g",

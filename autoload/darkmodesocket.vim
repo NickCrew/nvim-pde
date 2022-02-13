@@ -1,14 +1,3 @@
-function! darkmodesocket#updateTheme()
-    let is_dark_mode = system("isdark")
-
-    if is_dark_mode == "true\n"
-        set background=dark
-        colorscheme rose-pine
-    else
-        set background=light
-        colorscheme rose-pine
-    endif
-endfunction
 
 function! darkmodesocket#listenForLights()
     let pid = string(getpid())

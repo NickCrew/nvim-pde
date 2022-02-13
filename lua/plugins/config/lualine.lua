@@ -4,8 +4,14 @@ if not status_ok then
 	return
 end
 
-local colors = require("core.extras.colors").lualine_astro
-local rosepine = require("core.extras.colors").rose_pine_moon
+local prefs = require('preferences')
+local colors = require("colors.lualine").astro
+local rosepine = require("colors.palettes").rose_pine_moon
+local theme = "auto"
+
+if prefs.appearance.theme.lualine ~= nil then
+  theme = prefs.appearance.theme.lualine
+end
 
 local conditions = {
 	buffer_not_empty = function()
@@ -26,7 +32,7 @@ local config = {
 		disabled_filetypes = { "NvimTree", "dashboard", "Outline" },
 		component_separators = "",
 		section_separators = "",
-		theme = "rose-pine",
+		theme = theme
 	},
 	sections = {
 		lualine_a = {},
@@ -98,7 +104,9 @@ ins_left({
 
 ins_left({
 	"diagnostics",
-	sources = { "nvim_diagnostic" },
+	sources = { 
+      "nvim_diagnostic" 
+    },
 	symbols = {
 		error = " ",
 		warn = " ",

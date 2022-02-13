@@ -2,45 +2,32 @@
 --
 
 local vim = vim
+local lsp = vim.lsp
 
-local signs =  require('lsp.icons')
+local signs = require('lsp.icons')
 for type, icon in pairs(signs) do
   local highlight = "DiagnosticSign" .. type
   vim.fn.sign_define(highlight, { text = icon, texthl = highlight, numhl = "" })
 end
 
-vim.diagnostic.config({
-  virtual_text = true,
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = true,
-})
-
-require("rust-tools").setup()
-require('toggle_lsp_diagnostics').init()
-local lsp = vim.lsp
-local handlers = lsp.handlers
-
-handlers["textDocument/hover"] = lsp.with(
-  handlers.hover, { border = "rounded" }
-)
-
-handlers["textDocument/signatureHelp"] = lsp.with(
-  handlers.signature_help, { border = "rounded" }
-)
-
+require('lsp.diagnostics')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 local on_attach = function(_, bufnr)
-  require('lsp.mappings').lsp_buf_maps(bufnr)
+  -- Keybindings
+  require('mappings.lsp').load(bufnr)
+
   -- show type info in virtual text 
   require('virtualtypes').on_attach()
+
+  -- Aerial plugin
   require('aerial').on_attach(_, bufnr)
+
   -- show diagnostics on hover
   vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})')
+
   -- LSP Signature
   require("lsp_signature").on_attach({
     bind = true,

@@ -1,9 +1,10 @@
 -- lua/core/utils.lua
 --
 
-local M = {}
-
+local prefs = require('preferences')
 local vim = vim
+
+local M = {}
 
 function M.transparency_highlights()
    vim.cmd([[highlight Normal guibg=none ctermbg=none]])
@@ -15,6 +16,29 @@ function M.transparency_highlights()
    vim.cmd([[highlight NvimTreeVertSplit guibg=none ctermbg=none]])
    vim.cmd([[highlight SignColumn guibg=none ctermbg=none]])
    vim.cmd([[highlight EndOfBuffer guibg=none ctermbg=none]])
+end
+
+
+
+function M.apply_style()
+  -- note this only works with iTerm. For other terminals, the fall-back theme is used
+  local theme = prefs.appearance.theme.default
+  local bg = prefs.appearance.default_style
+  -- check for iTerm profile
+  if os.getenv('ITERM_PROFILE') == 'Light' then
+    bg = 'light'
+    theme = prefs.appearance.theme.light
+  elseif os.getenv('ITERM_RPOFILE') == 'Dark' then
+    bg = 'dark'
+    theme = prefs.appearance.theme.dark
+  end
+  -- apply settings
+  vim.opt.background = bg
+  if prefs.appearance.enable_transparency then
+    M.transparency_highlights()
+  end
+  local theme_cmd = 'colorscheme ' .. theme
+  vim.cmd(theme_cmd)
 end
 
 

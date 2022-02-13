@@ -1,0 +1,26 @@
+return {
+	astro = {
+		red = "#d47d85",
+		red_1 = "#ec5f67",
+		grey = "#abb2bf",
+		grey_1 = "#787e87",
+		grey_2 = "#D3D3D3",
+		black = "#1e222a",
+		black_1 = "#252931",
+		black_2 = "#2c323c",
+		green = "#95be76",
+		none = "NONE",
+	},
+	gruvbox = {
+		red_1 = "#cc241d",
+		red = "#fb4934",
+		grey = "#fbf1c7",
+		grey_1 = "#ebdbb2",
+		grey_2 = "#d5c4a1",
+		black = "#1d2021",
+		black_1 = "#3c3836",
+		black_2 = "#504945",
+		green = "#b8bb26",
+		none = "NONE",
+	},
+}

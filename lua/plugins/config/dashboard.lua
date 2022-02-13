@@ -1,10 +1,26 @@
 -- lua/configure/dashboard.lua
 --
 
+local prefs = require('preferences')
+local default_header = {
+  "                                                     ",
+  "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
+  "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+  "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+  "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+  "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+  "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+  "                                                     ",
+}
 local dashboard = require("alpha.themes.dashboard")
 
 -- Set header choice
-dashboard.section.header.val = require('core.extras.ascii-art').tx_header_2
+if prefs.appearance.dashboard.header == nil then
+  dashboard.section.header.val = default_header
+else
+  dashboard.section.header.val = prefs.appearance.dashboard.header
+end
+
 -- Set menu
 dashboard.section.buttons.val = {
   dashboard.button("f f", "  > Find File", ":Telescope find_files<CR>"),
