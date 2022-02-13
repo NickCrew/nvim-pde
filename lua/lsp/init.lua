@@ -38,6 +38,7 @@ local on_attach = function(_, bufnr)
   require('lsp.mappings').lsp_buf_maps(bufnr)
   -- show type info in virtual text 
   require('virtualtypes').on_attach()
+  require('aerial').on_attach(_, bufnr)
   -- show diagnostics on hover
   vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})')
   -- LSP Signature

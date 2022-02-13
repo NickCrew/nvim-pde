@@ -5,6 +5,7 @@ if not status_ok then
 end
 
 local colors = require("core.extras.colors").lualine_astro
+local rosepine = require("core.extras.colors").rose_pine_moon
 
 local conditions = {
 	buffer_not_empty = function()
@@ -25,7 +26,7 @@ local config = {
 		disabled_filetypes = { "NvimTree", "dashboard", "Outline" },
 		component_separators = "",
 		section_separators = "",
-		theme = "tokyonight",
+		theme = "rose-pine",
 	},
 	sections = {
 		lualine_a = {},
@@ -43,6 +44,9 @@ local config = {
 		lualine_c = {},
 		lualine_x = {},
 	},
+	extensions = {
+		"quickfix", "fern"
+	}
 }
 
 local function ins_left(component)
@@ -57,21 +61,26 @@ ins_left({
 	function()
 		return "▊"
 	end,
-	color = { fg = colors.blue },
+	color = { fg = rosepine.overlay },
 	padding = { left = 0, right = 0 },
+})
+
+ins_left({
+  "mode",
+  color = { fg = rosepine.subtle }
 })
 
 ins_left({
 	"branch",
 	icon = "",
-	color = { fg = "#ab8ee3", gui = "bold" },
+	color = { fg = rosepine.love, gui = "bold" },
 	padding = { left = 2, right = 1 },
 })
 
 ins_left({
 	"filetype",
 	cond = conditions.buffer_not_empty,
-	color = { fg = colors.magenta, gui = "bold" },
+	color = { fg = rosepine.text, gui = "bold" },
 	padding = { left = 2, right = 1 },
 })
 
@@ -79,9 +88,9 @@ ins_left({
 	"diff",
 	symbols = { added = " ", modified = "柳", removed = " " },
 	diff_color = {
-		added = { fg = colors.green },
-		modified = { fg = colors.yellow_1 },
-		removed = { fg = colors.red },
+		added = { fg = rosepine.foam, },
+		modified = { fg = rosepine.iris },
+		removed = { fg = rosepine.love },
 	},
 	cond = conditions.hide_in_width,
 	padding = { left = 2, right = 1 },
@@ -98,8 +107,8 @@ ins_left({
 	},
 	diagnostics_color = {
 		color_error = { fg = colors.red },
-		color_warn = { fg = colors.yellow },
-		color_info = { fg = colors.cyan },
+		color_warn = { fg = colors.orange },
+		color_info = { fg = colors.green },
 	},
 	padding = { left = 2, right = 1 },
 })
@@ -111,6 +120,10 @@ ins_left({
 })
 
 ins_right({
+  "aerial"
+})
+
+ins_right({
 	function()
 		local b = vim.api.nvim_get_current_buf()
 		if next(vim.treesitter.highlighter.active[b]) then
@@ -118,7 +131,7 @@ ins_right({
 		end
 		return ""
 	end,
-	color = {},
+	color = { fg = rosepine.hi_high },
 	padding = { left = 1, right = 0 },
 	cond = conditions.hide_in_width,
 })
@@ -130,7 +143,7 @@ ins_right({
 
 ins_right({
 	"progress",
-	color = { fg = "#a4add3", gui = "none" },
+	color = { fg = rosepine.pine,  gui = "none" },
 	padding = { left = 0, right = 0 },
 })
 
@@ -154,7 +167,7 @@ ins_right({
 		return chars[index]
 	end,
 	padding = { left = 1, right = 1 },
-	color = { fg = "#6f92e0" },
+	color = { fg = rosepine.pine },
 	cond = nil,
 })
 
@@ -162,7 +175,7 @@ ins_right({
 	function()
 		return "▊"
 	end,
-	color = { fg = colors.blue },
+	color = { fg = rosepine.overlay },
 	padding = { left = 1, right = 0 },
 })
 

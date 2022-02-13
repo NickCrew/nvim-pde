@@ -40,12 +40,4 @@ let g:vista#renderer#icons = {
 \   "variable": "\uf71b",
 \  }
 
-" Vista statusbar
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-set statusline+=%{NearestMethodOrFunction()}
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-
-
 

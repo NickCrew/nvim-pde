@@ -19,6 +19,26 @@ Mapper.map(
 )
 
 Mapper.map(
+  "n",
+  "<C-e>A",
+  ":Telescope aerial<CR>",
+  opts,
+  "Telescope",
+  "tele_aerial",
+  "Search Aerial Symbols"
+)
+
+Mapper.map(
+  "n",
+  "<C-e>a",
+  ":AerialToggle<CR>",
+  opts,
+  "LSP",
+  "lsp_aerialtogl",
+  "Toggle Aerial Sidebar"
+)
+
+Mapper.map(
 	"n",
 	"gpd",
 	"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
@@ -59,15 +79,6 @@ Mapper.map(
 )
 
 -- LSP Diagnostics {{{
-Mapper.map(
-	"n",
-	"<C-e>a",
-	":CodeActionMenu<CR>",
-	opts,
-	"LSP",
-	"lsp_actionmenu",
-	"Show Code Action Menu"
-)
 
 Mapper.map(
 	"n",
@@ -156,6 +167,12 @@ Mapper.map(
 -- }}}
 
 -- Navigating Splits (Windows) {{{
+
+
+
+-- }}}
+
+-- {{{ Normal Navigation
 Mapper.map(
 	"n",
 	"<C-h>",
@@ -209,6 +226,57 @@ Mapper.map(
 	"nav_prev",
 	"Move To Previous Window"
 )
+
+Mapper.map(
+  "t",
+  "<C-[><C-[>",
+  "<C-\\><C-n>",
+  opts,
+  "Terminal",
+  "term_quickesc",
+  "Quickly Escape Terminal"
+)
+-- }}}
+
+-- Kitty Navigation {{{
+Mapper.map(
+  "n",
+  "<C-k>j",
+  ":KittyNavigateDown<CR>",
+  opts,
+  "Navigation",
+  "nav_kittydown",
+  "Navigate To Window Below"
+)
+Mapper.map(
+  "n",
+  "<C-k>k",
+  ":KittyNavigateUp<CR>",
+  opts,
+  "Navigation",
+  "nav_kittyup",
+  "Navigate To Window Above"
+)
+Mapper.map(
+  "n",
+  "<C-k>l",
+  ":KittyNavigateRight<CR>",
+  opts,
+  "Navigation",
+  "nav_kittyright",
+  "Navigate To Right Window"
+)
+Mapper.map(
+  "n",
+  "<C-k>h",
+  ":KittyNavigateLeft<CR>",
+  opts,
+  "Navigation",
+  "nav_kittyleft",
+  "Navigate To Left Window"
+)
+-- }}}
+
 -- }}}
 
 -- Manipulating Windows and Buffers {{{
@@ -264,6 +332,7 @@ Mapper.map(
 -- }}}
 
 -- {{{ Navigating Buffers
+
 Mapper.map(
 	"n",
 	"<C-e>t",

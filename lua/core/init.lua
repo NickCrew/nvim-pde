@@ -14,12 +14,8 @@ local apply_leader_map = function()
 end
 
 -- Apply colorscheme and any aesthetic customizations
-local configure_look_and_feel = function()
-  require('configure.themes.tokyonight')
-  vim.cmd([[colorscheme tokyonight]])
-  if os.getenv('TERM_PROGRAM') == 'iTerm.app' then
-    utils.apply_transparency()
-  end
+local configure_style = function()
+  utils.transparency_highlights()
 end
 
 
@@ -28,13 +24,14 @@ local M = {}
 -- Load 'er up
 function M.load()
   apply_leader_map()
+  configure_style()
 
   require('core.global')
   require('core.options')
-  require('core.plugins')
+  require('plugins')
   require('core.mappings')
+  vim.cmd([[call darkmodesocket#updateTheme()]])
 
-  configure_look_and_feel()
 end
 
 return M

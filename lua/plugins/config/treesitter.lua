@@ -50,6 +50,15 @@ require("nvim-treesitter.configs").setup({
 		extended_mode = true,
 		max_file_lines = 1500,
 	},
+    textsubjects = {
+        enable = true,
+        prev_selection = ',', -- (Optional) keymap to select the previous selection
+        keymaps = {
+            ['.'] = 'textsubjects-smart',
+            [';'] = 'textsubjects-container-outer',
+            ['i;'] = 'textsubjects-container-inner',
+        },
+    },
 	textobjects = {
 		move = {
 			enable = true,

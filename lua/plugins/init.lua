@@ -3,6 +3,7 @@
 
 local vim = vim
 local fn = vim.fn
+local plugin_settings = require('plugins.settings')
 
 local packer_bootstrap = false
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -21,37 +22,44 @@ return require("packer").startup(function(use)
 	-- Packer itself
 	use({ "wbthomason/packer.nvim" })
 
-    -- Reload Noevim
+	-- Reload Noevim
 	use({ "famiu/nvim-reload" })
 
-    -- Better filetype detection and definitions
+	-- Better filetype detection and definitions
 	use({ "nathom/filetype.nvim" })
 
-    -- Fix weirdness with cursor/hover delay
+	use({
+		"knubie/vim-kitty-navigator",
+		run = "cp ./*.py ~/.config/kitty/",
+	})
+
+	-- Fix weirdness with cursor/hover delay
 	use({ "antoinemadec/FixCursorHold.nvim" })
 
-    -- Cool icons
+	-- Cool icons
 	use({ "kyazdani42/nvim-web-devicons" })
 
-    -- Improve % movement
+	-- Improve % movement
 	use({ "andymass/vim-matchup" })
 
-    -- RESTful API and HTTP Client
-    use({
-      "NTBBloodbath/rest.nvim",
-      opt = true,
-      config = function()
-        require('configure.rest')
-      end
-    })
+	-- RESTful API and HTTP Client
+	use({
+		"NTBBloodbath/rest.nvim",
+		opt = true,
+		config = function()
+			require("plugins.config.rest")
+		end,
+	})
 
-    -- less jarring buffer open close 
+	-- less jarring buffer open close
 	use({
 		"luukvbaal/stabilize.nvim",
 		config = function()
 			require("stabilize").setup()
 		end,
 	})
+
+	use({ "gennaro-tedesco/nvim-peekup" })
 
 	-- Popup preview window for LSP
 	use({
@@ -61,7 +69,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-    -- Better quickfix window
+	-- Better quickfix window
 	use({
 		"kevinhwang91/nvim-bqf",
 		ft = "qf",
@@ -78,16 +86,16 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-    -- Better mark-based navigation
+	-- Better mark-based navigation
 	use({
 		"ThePrimeagen/harpoon",
 		before = "telescope.nvim",
 		config = function()
-			require("configure.harpoon")
+			require("plugins.config.harpoon")
 		end,
 	})
 
-    -- Task runner supporting VS Code's launch.json
+	-- Task runner supporting VS Code's launch.json
 	use({
 		"EthanJWright/vs-tasks.nvim",
 		after = "telescope.nvim",
@@ -99,7 +107,45 @@ return require("packer").startup(function(use)
 	})
 
 	-- Tag and symbol sidebar
-	use({ "liuchengxu/vista.vim" })
+	use({ 
+      "liuchengxu/vista.vim",
+      opt = true,
+      disable = true
+    })
+
+	use({
+		"stevearc/aerial.nvim",
+		after = "telescope.nvim",
+		config = function()
+			require("aerial").setup({
+				backends = { "lsp", "treesitter", "markdown" },
+				close_behavior = "auto",
+				default_direction = "prefer_right",
+				min_width = 30,
+				max_width = 50,
+				post_jump_cmd = "normal! zz",
+				lsp = {
+					-- Fetch document symbols when LSP diagnostics update.
+					-- If false, will update on buffer changes.
+					diagnostics_trigger_update = true,
+
+					-- Set to false to not update the symbols when there are LSP errors
+					update_when_errors = true,
+				},
+
+				treesitter = {
+					-- How long to wait (in ms) after a buffer change before updating
+					update_delay = 300,
+				},
+
+				markdown = {
+					-- How long to wait (in ms) after a buffer change before updating
+					update_delay = 300,
+				},
+			})
+			require("telescope").load_extension("aerial")
+		end,
+	})
 
 	---- Language Server Support
 	use({
@@ -120,7 +166,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-    -- Show status of language server loading in buffer
+	-- Show status of language server loading in buffer
 	use({
 		"j-hui/fidget.nvim",
 		config = function()
@@ -128,10 +174,10 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-    -- Popup menu with recommendations
+	-- Popup menu with recommendations
 	use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
 
-    -- Show a lightbulb in the signcolumn when code actions are available
+	-- Show a lightbulb in the signcolumn when code actions are available
 	use({ "kosayoda/nvim-lightbulb" })
 
 	-- Refactoring based on treesitter
@@ -146,6 +192,14 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	use({
+		"Shatur/neovim-session-manager",
+	})
+
+	use({ "andrewradev/switch.vim" })
+
+	use({ "wellle/targets.vim" })
+
 	-- Syntax highlighting and parsiging
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -153,6 +207,7 @@ return require("packer").startup(function(use)
 			"p00f/nvim-ts-rainbow",
 			"romgrk/nvim-treesitter-context",
 			"nvim-treesitter/playground",
+			"RRethy/nvim-treesitter-textsubjects",
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			{
 				"nvim-treesitter/playground",
@@ -164,16 +219,16 @@ return require("packer").startup(function(use)
 		},
 		run = ":TSUpdate",
 		config = function()
-			require("configure.treesitter")
+			require("plugins.config.treesitter")
 		end,
 	})
 
-    -- Better Terminal handling
+	-- Better Terminal handling
 	use({
 		"akinsho/nvim-toggleterm.lua",
 		cmd = "ToggleTerm",
 		config = function()
-			require("configure.toggleterm")
+			require("plugins.config.toggleterm")
 		end,
 	})
 
@@ -217,7 +272,7 @@ return require("packer").startup(function(use)
 			end,
 		},
 		opt = true,
-		disabled = true,
+		disable = not plugin_settings.features.status.alt_debugger
 	})
 
 	-- Enhance LSP Diagnostics
@@ -242,7 +297,7 @@ return require("packer").startup(function(use)
 			{ "mrjones2014/dash.nvim", run = "make install" },
 		},
 		config = function()
-			require("configure.telescope")
+			require("plugins.config.telescope")
 		end,
 	})
 
@@ -368,7 +423,7 @@ return require("packer").startup(function(use)
 	use({
 		"chentau/marks.nvim",
 		config = function()
-			require("configure.marks")
+			require("plugins.config.marks")
 		end,
 	})
 
@@ -406,7 +461,7 @@ return require("packer").startup(function(use)
 			"onsails/lspkind-nvim",
 		},
 		config = function()
-			require("configure.completion")
+			require("plugins.config.completion")
 		end,
 	})
 
@@ -428,11 +483,23 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	use({ "b0o/schemastore.nvim" })
+
+	use({ "mattn/vim-gist" })
+
+	use({
+		"ruifm/gitlinker.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("gitlinker").setup()
+		end,
+	})
+
 	-- Local Git integration
 	use({
 		"lewis6991/gitsigns.nvim",
 		config = function()
-			require("configure.gitsigns").config()
+			require("plugins.config.gitsigns").config()
 		end,
 	})
 
@@ -447,7 +514,7 @@ return require("packer").startup(function(use)
 			"nvim-telescope/telescope.nvim",
 			"kyazdani42/nvim-web-devicons",
 		},
-		config = require("configure.octo").config(),
+		config = require("plugins.config.octo").config(),
 	})
 
 	-- File tree sidebar
@@ -455,7 +522,7 @@ return require("packer").startup(function(use)
 		"kyazdani42/nvim-tree.lua",
 		requires = { "kyazdani42/nvim-web-devicons" },
 		config = function()
-			require("configure.nvim-tree")
+			require("plugins.config.nvim-tree")
 		end,
 	})
 
@@ -463,7 +530,7 @@ return require("packer").startup(function(use)
 	use({
 		"nvim-lualine/lualine.nvim",
 		config = function()
-			require("configure.lualine")
+			require("plugins.config.lualine")
 		end,
 	})
 
@@ -471,7 +538,7 @@ return require("packer").startup(function(use)
 	use({
 		"akinsho/bufferline.nvim",
 		config = function()
-			require("configure.bufferline")
+			require("plugins.config.bufferline")
 		end,
 	})
 
@@ -498,7 +565,7 @@ return require("packer").startup(function(use)
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()
-			require("configure.indent-blankline")
+			require("plugins.config.indent-blankline")
 		end,
 	})
 
@@ -506,7 +573,7 @@ return require("packer").startup(function(use)
 	use({
 		"folke/todo-comments.nvim",
 		config = function()
-			require("configure.todo-comments")
+			require("plugins.config.todo-comments")
 		end,
 	})
 
@@ -514,19 +581,29 @@ return require("packer").startup(function(use)
 	use({
 		"rcarriga/nvim-notify",
 		config = function()
-			require("configure.nvim-notify")
+			require("plugins.config.nvim-notify")
 		end,
 	})
 
-	-- Super fast and simple netrw based file explorer
-	use({ "tpope/vim-vinegar" })
+	-- Split file explorer
+	use({
+		"lambdalisue/fern.vim",
+		requires = {
+			"yuki-yano/fern-preview.vim",
+			"lambdalisue/fern-hijack.vim",
+			"lambdalisue/nerdfont.vim",
+			"lambdalisue/fern-renderer-nerdfont.vim",
+			"lambdalisue/fern-git-status.vim",
+			"lambdalisue/fern-bookmark.vim",
+		},
+	})
 
 	-- Splash Screen/Dashboard
 	use({
 		"goolord/alpha-nvim",
 		requires = { "kyazdani42/nvim-web-devicons" },
 		config = function()
-			require("configure.dashboard")
+			require("plugins.config.dashboard")
 		end,
 	})
 
@@ -559,7 +636,7 @@ return require("packer").startup(function(use)
 	use({
 		"folke/which-key.nvim",
 		config = function()
-			require("configure.which-key")
+			require("plugins.config.which-key")
 		end,
 	})
 
@@ -610,7 +687,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-    -- Find matching pairs
+	-- Find matching pairs
 	use({
 		"windwp/nvim-autopairs",
 		config = function()
@@ -647,12 +724,19 @@ return require("packer").startup(function(use)
 	-- Markdown support with live preview inside nvim
 	use({ "ellisonleao/glow.nvim" })
 
-    --
 	-- Themes
-    --
+	use({ "cormacrelf/dark-notify" })
+
+	use({ "rose-pine/neovim", as = "rose-pine" })
+
+	use({ "mhartington/oceanic-next" })
+
 	use({ "ellisonleao/gruvbox.nvim" })
+
 	use({ "luisiacc/gruvbox-baby", branch = "main" })
+
 	use({ "rebelot/kanagawa.nvim" })
+
 	use({ "folke/tokyonight.nvim", branch = "main" })
 
 	if packer_bootstrap then
