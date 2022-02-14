@@ -2,12 +2,10 @@
 --
 local fn = vim.fn
 
-require("plugins.config.global")
-
 -- Automatically install Packer
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP = fn.system({
+	packer_bootstrap = fn.system({
 		"git",
 		"clone",
 		"--depth",
@@ -15,8 +13,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
 		"https://github.com/'wbthomason/packer.nvim",
 		install_path,
 	})
-	print("Installing Packer close and reopen Neovim...")
-	vim.cmd([[packadd packer.nvim]])
 end
 
 -- Autocommand that reloads Neovim whenever the plugin.lua is saved.
@@ -33,16 +29,8 @@ if not status_ok then
 	return
 end
 
--- Have Packer use a popup window.
-packer.init({
-	display = {
-		open_fn = function()
-			return require("packer.util").float({ border = "rounded" })
-		end,
-	},
-})
 
-return require("packer").startup(function()
+return packer.startup({function(use)
 	-- Packer itself
 	use({ "wbthomason/packer.nvim" })
 
@@ -55,6 +43,7 @@ return require("packer").startup(function()
 	use({
 		"knubie/vim-kitty-navigator",
 		run = "cp ./*.py ~/.config/kitty/",
+        disable = true
 	})
 
 	-- Fix weirdness with cursor/hover delay
@@ -69,7 +58,6 @@ return require("packer").startup(function()
 	-- RESTful API and HTTP Client
 	use({
 		"NTBBloodbath/rest.nvim",
-		opt = true,
 		config = function()
 			require("plugins.config.rest")
 		end,
@@ -88,6 +76,7 @@ return require("packer").startup(function()
 	-- Popup preview window for LSP
 	use({
 		"rmagatti/goto-preview",
+        event = 'BufEnter',
 		config = function()
 			require("goto-preview").setup({})
 		end,
@@ -174,6 +163,7 @@ return require("packer").startup(function()
 	---- Language Server Support
 	use({
 		"neovim/nvim-lspconfig",
+        event = 'BufEnter',
 		requires = {
 			"RishabhRD/popfix",
 			"jubnzv/virtual-types.nvim",
@@ -193,13 +183,17 @@ return require("packer").startup(function()
 	-- Show status of language server loading in buffer
 	use({
 		"j-hui/fidget.nvim",
+        event = 'BufEnter',
 		config = function()
 			require("fidget").setup()
 		end,
 	})
 
 	-- Popup menu with recommendations
-	use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
+	use({
+      "weilbith/nvim-code-action-menu",
+      cmd = "CodeActionMenu"
+    })
 
 	-- Show a lightbulb in the signcolumn when code actions are available
 	use({ "kosayoda/nvim-lightbulb" })
@@ -635,7 +629,12 @@ return require("packer").startup(function()
 	})
 
 	-- FLoating command line
-	use({ "voldikss/vim-floaterm" })
+	use({
+      "numtostr/FTerm.nvim",
+      config = function()
+        require('plugins.config.fterm') 
+      end
+    })
 
 	-- Run commands in an instant
 	use({
@@ -701,8 +700,11 @@ return require("packer").startup(function()
 	-- Help Remember stuff
 	use({
 		"sudormrfbin/cheatsheet.nvim",
+        opt = true,
+        cmd = 'CheatSheet',
 		config = function()
 			require("cheatsheet").setup()
+            require('telescope').load_extension("cheatsheet")
 		end,
 	})
 
@@ -762,11 +764,17 @@ return require("packer").startup(function()
 
 	use({ "luisiacc/gruvbox-baby", branch = "main" })
 
-	use({ "rebelot/kanagawa.nvim" })
-
 	use({ "folke/tokyonight.nvim", branch = "main" })
 
-	if PACKER_BOOTSTRAP then
+	if packer_bootstrap then
 		require("packer").sync()
 	end
-end)
+end,
+config = {
+  display = {
+    open_fn = function()
+      return require('packer.util').float({ border = 'single'})
+    end
+  }
+}
+})

@@ -1,7 +1,6 @@
 -- lua/configure/dashboard.lua
 --
 
-local prefs = require('preferences')
 local default_header = {
   "                                                     ",
   "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
@@ -15,11 +14,7 @@ local default_header = {
 local dashboard = require("alpha.themes.dashboard")
 
 -- Set header choice
-if prefs.appearance.dashboard.header == nil then
-  dashboard.section.header.val = default_header
-else
-  dashboard.section.header.val = prefs.appearance.dashboard.header
-end
+dashboard.section.header.val = require('style.ascii-art').tx_header_2
 
 -- Set menu
 dashboard.section.buttons.val = {

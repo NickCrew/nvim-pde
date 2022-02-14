@@ -1,4 +1,3 @@
--- lua/plugins/global.lua
 
 local g = vim.g
 

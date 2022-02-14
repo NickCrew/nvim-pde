@@ -4,14 +4,10 @@ if not status_ok then
 	return
 end
 
-local prefs = require('preferences')
-local colors = require("colors.lualine").astro
-local rosepine = require("colors.palettes").rose_pine_moon
-local theme = "auto"
+local colors = require("style.colors.lualine").astro
+local rosepine = require("style.colors.palettes").rose_pine_moon
+local theme = "rose-pine"
 
-if prefs.appearance.theme.lualine ~= nil then
-  theme = prefs.appearance.theme.lualine
-end
 
 local conditions = {
 	buffer_not_empty = function()

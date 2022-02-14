@@ -9,50 +9,7 @@ function M.load()
 
   local opts = { noremap = true, silent = true }
 
--- {{{ 
 
-Mapper.map(
-"n",
-"<leader>Dt",
-"<cmd>lua require('dark_notify').toggle()<CR>",
-opts,
-"Style",
-"style_toggle",
-"Toggle Style"
-)
-
-Mapper.map(
-"n",
-"<leader>Ds",
-"<cmd>lua require('dark_notify').stop()<CR>",
-opts,
-"Style",
-"style_stop",
-"Stop Reacting To System Style"
-)
-
-Mapper.map(
-"n",
-"<leader>Du",
-"<cmd>lua require('dark_notify').update()<CR>",
-opts,
-"Style",
-"style_update",
-"Match System Style"
-)
-
-Mapper.map(
-"n",
-"<leader>Dr",
-"<cmd>lua require('dark_notify').run()<CR>",
-opts,
-"Style",
-"style_run",
-"Start Reacting To System Style"
-)
-
-
--- }}}
   -- LSP {{{
 
   Mapper.map(
@@ -440,15 +397,34 @@ opts,
   -- }}}
 
   -- {{{ Navigating Buffers
+  Mapper.map(
+      "t",
+      "<C-e>t",
+      "<C-\\><C-n><cmd>lua require('FTerm').toggle()<CR>",
+      opts,
+      "Terminal",
+      "term_togglefloatesc",
+      "Toggle Floating Terminal"
+  )
 
   Mapper.map(
       "n",
       "<C-e>t",
-      ":split term://zsh<CR>",
+      "<cmd>lua require('FTerm').toggle()<CR>",
       opts,
       "Terminal",
-      "term_newsplit",
-      "New Terminal In Split Window"
+      "term_togglefloat",
+      "Toggle Floating Terminal"
+  )
+
+  Mapper.map(
+    "n",
+    '<leader>"',
+    "<cmd>lua require('nvim-peekup').peekup_open()<CR>",
+    opts,
+    "Yank/Paste",
+    "clip_peekup",
+    "Open PeekUp"
   )
 
   Mapper.map(
@@ -463,7 +439,7 @@ opts,
 
   Mapper.map(
       "n",
-      "<M-right>",
+      "<A-]>",
       ":BufferLineCycleNext<CR>",
       opts,
       "Buffers",
@@ -473,7 +449,7 @@ opts,
 
   Mapper.map(
       "n",
-      "<M-left>",
+      "<A-[>",
       ":BufferLineCyclePrev<CR>",
       opts,
       "Buffers",
@@ -529,7 +505,7 @@ opts,
 
   Mapper.map(
       "n",
-      "<leader>b",
+      "<C-e>b",
       ":Telescope buffers<CR>",
       opts,
       "Telescope",
@@ -1125,6 +1101,52 @@ opts,
       "cheat_open",
       "Open Cheatsheet"
   )
+
+-- Dark Notify {{{ 
+
+Mapper.map(
+"n",
+"<leader>Dt",
+"<cmd>lua require('dark_notify').toggle()<CR>",
+opts,
+"Style",
+"style_toggle",
+"Toggle Style"
+)
+
+Mapper.map(
+"n",
+"<leader>Ds",
+"<cmd>lua require('dark_notify').stop()<CR>",
+opts,
+"Style",
+"style_stop",
+"Stop Reacting To System Style"
+)
+
+Mapper.map(
+"n",
+"<leader>Du",
+"<cmd>lua require('dark_notify').update()<CR>",
+opts,
+"Style",
+"style_update",
+"Match System Style"
+)
+
+Mapper.map(
+"n",
+"<leader>Dr",
+"<cmd>lua require('dark_notify').run()<CR>",
+opts,
+"Style",
+"style_run",
+"Start Reacting To System Style"
+)
+
+
+-- }}}
+
   -- }}}
 
 end

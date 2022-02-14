@@ -1,8 +1,10 @@
+-- vim: foldmethod=marker
 -- lua/core/options.lua
---
+
 
 local o = vim.opt
 
+-- Appearance
 o.termguicolors = true
 
 -- Encoding and Line Endings
@@ -82,6 +84,5 @@ o.wildmenu = true
 o.wildmode = 'longest,list,full'
 o.wildignorecase = true
 o.wildignore = '.git/**,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**'
-
 
 

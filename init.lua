@@ -1,6 +1,9 @@
 -- init.lua 
 -- 
 
-require('core').load()
+require('settings')
+require('plugins')
+require('mappings')
+require('style')
 
 
