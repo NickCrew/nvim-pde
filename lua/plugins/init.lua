@@ -2,51 +2,51 @@
 --
 local fn = vim.fn
 
-require('plugins.config.global')
+require("plugins.config.global")
 
 -- Automatically install Packer
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system {
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/'wbthomason/packer.nvim",
-    install_path,
-  }
-  print "Installing Packer close and reopen Neovim..."
-  vim.cmd [[packadd packer.nvim]]
+	PACKER_BOOTSTRAP = fn.system({
+		"git",
+		"clone",
+		"--depth",
+		"1",
+		"https://github.com/'wbthomason/packer.nvim",
+		install_path,
+	})
+	print("Installing Packer close and reopen Neovim...")
+	vim.cmd([[packadd packer.nvim]])
 end
 
 -- Autocommand that reloads Neovim whenever the plugin.lua is saved.
-vim.cmd [[
+vim.cmd([[
   augroup packer_user_config
     autocmd!
     autocmd BufWritePost packer.lua source <afile> | PackerSync
     augroup end
-]]
+]])
 
 -- Use a protected call so we don't error out on first use.
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-  return
+	return
 end
 
 -- Have Packer use a popup window.
-packer.init {
-  display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
-    end,
-  },
-}
+packer.init({
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ border = "rounded" })
+		end,
+	},
+})
 
 return require("packer").startup(function()
 	-- Packer itself
 	use({ "wbthomason/packer.nvim" })
 
-	-- Reload Noevim
+    -- Reload Noevim
 	use({ "famiu/nvim-reload" })
 
 	-- Better filetype detection and definitions
@@ -218,7 +218,10 @@ return require("packer").startup(function()
 
 	use({ "bfredl/nvim-luadev" })
 
-	use({ "Shatur/neovim-session-manager" })
+	use({ 
+      "Shatur/neovim-session-manager",
+      disable = true
+    })
 
 	use({ "andrewradev/switch.vim" })
 
@@ -749,7 +752,7 @@ return require("packer").startup(function()
 	use({ "ellisonleao/glow.nvim" })
 
 	-- Themes
-	use({ "cormacrelf/dark-notify" })
+	
 
 	use({ "rose-pine/neovim", as = "rose-pine" })
 
@@ -766,5 +769,4 @@ return require("packer").startup(function()
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end
-end
-)
+end)

@@ -9,6 +9,50 @@ function M.load()
 
   local opts = { noremap = true, silent = true }
 
+-- {{{ 
+
+Mapper.map(
+"n",
+"<leader>Dt",
+"<cmd>lua require('dark_notify').toggle()<CR>",
+opts,
+"Style",
+"style_toggle",
+"Toggle Style"
+)
+
+Mapper.map(
+"n",
+"<leader>Ds",
+"<cmd>lua require('dark_notify').stop()<CR>",
+opts,
+"Style",
+"style_stop",
+"Stop Reacting To System Style"
+)
+
+Mapper.map(
+"n",
+"<leader>Du",
+"<cmd>lua require('dark_notify').update()<CR>",
+opts,
+"Style",
+"style_update",
+"Match System Style"
+)
+
+Mapper.map(
+"n",
+"<leader>Dr",
+"<cmd>lua require('dark_notify').run()<CR>",
+opts,
+"Style",
+"style_run",
+"Start Reacting To System Style"
+)
+
+
+-- }}}
   -- LSP {{{
 
   Mapper.map(
@@ -355,7 +399,7 @@ function M.load()
   -- Manipulating Windows and Buffers {{{
   Mapper.map(
       "n",
-      "<A-down>",
+      "<M-down>",
       ":lua require('core.utils').resize_split('minus')<CR>",
       opts,
       "Navigation",
@@ -365,7 +409,7 @@ function M.load()
 
   Mapper.map(
       "n",
-      "<A-up>",
+      "<M-up>",
       ":lua require('core.utils').resize_split('plus')<CR>",
       opts,
       "Navigation",
@@ -419,7 +463,7 @@ function M.load()
 
   Mapper.map(
       "n",
-      "<A-]>",
+      "<M-right>",
       ":BufferLineCycleNext<CR>",
       opts,
       "Buffers",
@@ -429,7 +473,7 @@ function M.load()
 
   Mapper.map(
       "n",
-      "<A-[>",
+      "<M-left>",
       ":BufferLineCyclePrev<CR>",
       opts,
       "Buffers",
@@ -485,7 +529,7 @@ function M.load()
 
   Mapper.map(
       "n",
-      "<leader>bb",
+      "<leader>b",
       ":Telescope buffers<CR>",
       opts,
       "Telescope",

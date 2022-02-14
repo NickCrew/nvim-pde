@@ -3,6 +3,7 @@
 --
 
 local utils = require('core.utils')
+local prefs = require('preferences')
 local vim = vim
 local g = vim.g
 
@@ -18,6 +19,17 @@ local apply_leader_map = function()
   vim.g.maplocalleader = " "
 end
 
+local apply_styles = function()
+  if os.getenv('ITERM_PROFILE') == 'Light' then
+    vim.opt.background = 'light'
+  else
+    vim.opt.background = 'dark'
+  end
+
+  local theme_cmd = 'colorscheme ' .. prefs.appearance.theme.default
+  vim.cmd(theme_cmd)
+end
+
 
 local M = {}
 
@@ -30,7 +42,7 @@ function M.load()
   require('plugins')
   require('mappings')
 
-  utils.apply_style()
+  apply_styles()
 
 end
 
