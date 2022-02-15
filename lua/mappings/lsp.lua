@@ -1,6 +1,51 @@
 
 local M = {}
 
+function M.load_goto_mappings()
+  local opts = {noremap = true, silent = true}
+  Mapper.map(
+      "n",
+      "gpd",
+      "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+      opts,
+      "LSP",
+      "lsp_gpreviewdef",
+      "Preview Definition"
+  )
+
+  Mapper.map(
+      "n",
+      "gpr",
+      "<cmd>lua require('goto-preview').goto_preview_references()<CR>",
+      opts,
+      "LSP",
+      "lsp_gpreviewref",
+      "Preview References"
+  )
+
+  Mapper.map(
+      "n",
+      "gP",
+      "<cmd>lua require('goto-preview').close_all_win()<CR>",
+      opts,
+      "LSP",
+      "lsp_gpreviewclose",
+      "Close Preview Windows"
+  )
+
+  Mapper.map(
+      "n",
+      "gpi",
+      "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>",
+      opts,
+      "LSP",
+      "lsp_gpreviewimp",
+      "Preview Implementation"
+  )
+
+
+end
+
 function M.load(bufnr)
 	local map_opts = { noremap = true, silent = true }
 
