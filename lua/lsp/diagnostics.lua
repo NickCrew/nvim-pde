@@ -21,5 +21,5 @@ vim.diagnostic.config({
 
 -- Toggle
 require('toggle_lsp_diagnostics').init({
-  start_on = false
+  start_on = true
 })

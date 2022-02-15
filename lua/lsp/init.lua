@@ -11,6 +11,7 @@ for type, icon in pairs(signs) do
 end
 
 require('lsp.diagnostics')
+require('mappings.lsp').load_goto_mappings()
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
