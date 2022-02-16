@@ -35,6 +35,16 @@ Mapper.map(
 
 Mapper.map(
 	"n",
+	"<leader>L",
+	":HopLine<CR>",
+	opts,
+	"Movement",
+	"hop_line",
+	"Hop To Line"
+)
+
+Mapper.map(
+	"n",
 	"<leader>l",
 	":HopChar1CurrentLine<CR>",
 	opts,
@@ -288,7 +298,7 @@ Mapper.map(
 Mapper.map(
 	"n",
 	"<A-]>",
-	":BufferLineCycleNext<CR>",
+	":BufferNext<CR>",
 	opts,
 	"Buffers",
 	"buf_next",
@@ -298,11 +308,47 @@ Mapper.map(
 Mapper.map(
 	"n",
 	"<A-[>",
-	":BufferLineCyclePrev<CR>",
+	":BufferPrevious<CR>",
 	opts,
 	"Buffers",
 	"buf_prev",
 	"Previous Buffer"
+)
+Mapper.map(
+"n",
+"<leader><leader>d",
+":BufferDelete<CR>",
+opts,
+"Buffers",
+"buf_del",
+"Delete Buffer"
+)
+Mapper.map(
+"n",
+"<C-e>b",
+":BufferPick<CR>",
+opts,
+"Buffers",
+"buf_pick",
+"Pick Buffer"
+)
+Mapper.map(
+"n",
+"<A->>",
+":BufferMoveNext<CR>",
+opts,
+"Buffers",
+"buf_movenext",
+"Re-order Buffer Next"
+)
+Mapper.map(
+"n",
+"<A-<>",
+":BufferMovePrevious<CR>",
+opts,
+"Buffers",
+"buf_moveprev",
+"Re-order Buffer Previous"
 )
 
 -- }}}

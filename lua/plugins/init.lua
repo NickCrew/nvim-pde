@@ -110,7 +110,6 @@ return packer.startup({
 		})
 
 		-- Tag and symbol sidebar
-		use({ "liuchengxu/vista.vim", opt = true, disable = true })
 		use({
 			"stevearc/aerial.nvim",
 			after = "telescope.nvim",
@@ -470,7 +469,6 @@ return packer.startup({
 
 		use({ "b0o/schemastore.nvim" })
 
-		use({ "mattn/vim-gist" })
 
 		use({
 			"ruifm/gitlinker.nvim",
@@ -492,15 +490,6 @@ return packer.startup({
 		use({ "rhysd/git-messenger.vim", cmd = "GitMessenger" })
 
 		-- Github remote integration
-		use({
-			"pwntester/octo.nvim",
-			requires = {
-				"nvim-lua/plenary.nvim",
-				"nvim-telescope/telescope.nvim",
-				"kyazdani42/nvim-web-devicons",
-			},
-			config = require("plugins.config.octo").config(),
-		})
 
 		-- File tree sidebar
 		use({
@@ -519,12 +508,9 @@ return packer.startup({
 			end,
 		})
 
-		-- Buffer/tab bar
 		use({
-			"akinsho/bufferline.nvim",
-			config = function()
-				require("plugins.config.bufferline")
-			end,
+			"romgrk/barbar.nvim",
+			requires = { "kyazdani42/nvim-web-devicons" },
 		})
 
 		-- Colorizer hex colors
@@ -663,7 +649,21 @@ return packer.startup({
 		use({
 			"ahmedkhalf/project.nvim",
 			config = function()
-				require("project_nvim").setup()
+				require("project_nvim").setup({
+					manual_mode = false,
+					update_cwd = true,
+					update_focused_file = {
+						enable = true,
+						update_cwd = true,
+					},
+					patterns = {
+						".git",
+					},
+					exclude_dirs = {
+						"~/.config/*",
+						"~/.local/*",
+					},
+				})
 			end,
 		})
 

@@ -4,6 +4,15 @@ local opts = { noremap = true, silent = true }
 -- Builtin {{{
 Mapper.map(
 	"n",
+	"<C-e>f",
+	":Telescope find_files<CR>",
+	opts,
+	"Telescope",
+	"tele_findfiles",
+	"Find Files"
+)
+Mapper.map(
+	"n",
 	"<leader>ff",
 	":Telescope find_files<CR>",
 	opts,
@@ -23,7 +32,7 @@ Mapper.map(
 
 Mapper.map(
 	"n",
-	"<C-e>b",
+	"<C-p>",
 	":Telescope buffers<CR>",
 	opts,
 	"Telescope",
@@ -144,7 +153,7 @@ Mapper.map(
 
 Mapper.map(
 	"n",
-	"<C-e>p",
+	"<leader><leader>p",
 	":Telescope projects<CR>",
 	opts,
 	"Telescope",
