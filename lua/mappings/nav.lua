@@ -133,6 +133,24 @@ Mapper.map(
 --}}}
 
 -- Windows {{{
+Mapper.map(
+"n",
+"<C-e>q",
+"<cmd>lua require('utils').toggle_qf()<CR>",
+opts,
+"QuickFix",
+"qf_toggle2",
+"Toggle QuickFix Window"
+)
+Mapper.map(
+"n",
+"cq",
+"<cmd>lua require('utils').toggle_qf()<CR>",
+opts,
+"QuickFix",
+"qf_toggle",
+"Toggle QuickFix Window"
+)
 
 Mapper.map(
 	"n",
@@ -155,22 +173,42 @@ Mapper.map(
 )
 
 Mapper.map(
+  "n",
+  "<M-right>",
+  "<C-w>l<C-w>|",
+  opts,
+  "Windows",
+  "win_resizewidthright",
+  "Increase Horizontal Width"
+)
+
+Mapper.map(
+  "n",
+  "<M-left>",
+  "<C-w>h<C-w>|",
+  opts,
+  "Windows",
+  "win_resizewidthleft",
+  "Descrease Horizontal Width"
+)
+
+Mapper.map(
 	"n",
 	"<M-down>",
-	":lua require('utils').resize_split('minus')<CR>",
+	"<C-w>j<C-w>_",
 	opts,
-	"Navigation",
-	"nav_resizesplitmin",
+	"Windows",
+	"win_resizesplitmin",
 	"Decrease Split Size"
 )
 
 Mapper.map(
 	"n",
 	"<M-up>",
-	":lua require('utils').resize_split('plus')<CR>",
+	"<C-w>k<C-w>_",
 	opts,
-	"Navigation",
-	"nav_resizesplitpos",
+	"Windows",
+	"win_resizesplitpos",
 	"Increase Split Size"
 )
 
@@ -179,19 +217,9 @@ Mapper.map(
 	"<C-_>",
 	"<C-w>_",
 	opts,
-	"Navigation",
-	"nav_maxwin",
+	"Windows",
+	"win_maxwin",
 	"Maximize Window"
-)
-
-Mapper.map(
-	"n",
-	"<C-e>f",
-	":FloatermToggle<CR>",
-	opts,
-	"Terminal",
-	"term_floattoggl",
-	"Toggle Floating Terminal"
 )
 
 Mapper.map(

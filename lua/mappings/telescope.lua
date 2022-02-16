@@ -11,6 +11,15 @@ local opts = { noremap = true, silent = true }
       "tele_ff",
       "Find Files"
   )
+  Mapper.map(
+      "n",
+      "<leader>b",
+      ":Telescope buffers<CR>",
+      opts,
+      "Telescope",
+      "tele_leadbuf",
+      "Find Buffers"
+  )
 
   Mapper.map(
       "n",

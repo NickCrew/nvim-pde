@@ -1,6 +1,6 @@
 
 local vim = vim
-local theme_name = 'tokyonight'
+local theme_name = require('preferences').theme
 
 vim.g.tokyonight_italic_functions = true
 vim.g.tokyonight_italic_keywords = true

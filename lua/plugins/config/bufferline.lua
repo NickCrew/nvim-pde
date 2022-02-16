@@ -3,7 +3,11 @@
 
 
 require'bufferline'.setup({
+  -- For ⁸·₂
   options = {
+  numbers = function(opts)
+    return string.format('%s', opts.raise(opts.id))
+  end,
     offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
     buffer_close_icon = "",
     modified_icon = "",

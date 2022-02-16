@@ -3,9 +3,20 @@
 local opts = { noremap = true, silent = true }
 
 Mapper.map(
+"n",
+"<leader>dui",
+"<cmd>lua require'dapui'.open()<CR>",
+opts,
+"Debugging",
+"dap_openui",
+"Open DAP UI"
+)
+
+
+Mapper.map(
 	"v",
 	"<C-e>k",
-	"<cmd>lua require('dapui').eval()",
+	"<cmd>lua require('dapui').eval()<CR>",
 	opts,
 	"Debugging",
 	"dap_evalv",
@@ -15,7 +26,7 @@ Mapper.map(
 Mapper.map(
 	"n",
 	"<C-e>k",
-	"<cmd>lua require('dapui').eval()",
+	"<cmd>lua require('dapui').eval()<CR>",
 	opts,
 	"Debugging",
 	"dap_eval",
@@ -65,7 +76,7 @@ Mapper.map(
 Mapper.map(
 	"n",
 	"<F11>",
-	":lua require('dap').step_in()<CR>",
+	":lua require('dap').step_into()<CR>",
 	opts,
 	"Debugging",
 	"dap_stepin",

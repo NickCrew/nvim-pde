@@ -12,6 +12,7 @@ o.encoding = 'utf-8'
 o.fileformats = 'unix,dos,mac'  -- line endings to try
 
 -- Quality of Life
+o.timeoutlen = 500
 o.errorbells = false    -- shut up
 o.autochdir = false     -- automatically cd to current directory of open file
 o.magic = true          -- give certain characters special meaning with backslash

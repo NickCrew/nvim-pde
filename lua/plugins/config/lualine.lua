@@ -5,7 +5,7 @@ if not status_ok then
 end
 
 local colors = require("style.colors.lualine").astro
-local theme = "tokyonight"
+local theme = require('preferences').theme
 
 
 local conditions = {
