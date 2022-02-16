@@ -5,7 +5,7 @@ local fn = vim.fn
 -- Automatically install Packer
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({
+    Packer_bootstrap = fn.system({
         "git", "clone", "--depth", "1",
         "https://github.com/'wbthomason/packer.nvim", install_path
     })
@@ -597,18 +597,11 @@ return packer.startup({
         use({"ellisonleao/glow.nvim"})
 
         -- Themes
-
         use({"rose-pine/neovim", as = "rose-pine"})
-
-        use({"mhartington/oceanic-next"})
-
         use({"ellisonleao/gruvbox.nvim"})
-
-        use({"luisiacc/gruvbox-baby", branch = "main"})
-
         use({"folke/tokyonight.nvim", branch = "main"})
 
-        if packer_bootstrap then require("packer").sync() end
+        if Packer_bootstrap then require("packer").sync() end
     end,
     config = {
         display = {

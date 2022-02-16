@@ -2,6 +2,7 @@
 --
 
 local vim = vim
+local prefs = require('preferences')
 
 local M = {}
 
@@ -39,6 +40,5 @@ function M.resize_split(plus_or_minus)
       end
     end
 end
-
 
 return M
