@@ -55,11 +55,16 @@ for _, server_name in pairs(servers) do
       -- When this particular server is ready (i.e. when installation is finished or the server is already installed),
       -- this function will be invoked. Make sure not to use the "catch-all" lsp_installer.on_server_ready()
       -- function to set up servers, to avoid doing setting up a server twice.
-      local opts = {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
-      server:setup(opts)
+      if server.name == "sumneko_lua" then
+        local luadev = require("lua-dev").setup({})
+        server:setup(luadev) 
+      else
+        local opts = {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }
+        server:setup(opts)
+      end
     end)
     if not server:is_installed() then
       -- Queue the server to be installed.

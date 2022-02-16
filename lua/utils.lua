@@ -2,7 +2,6 @@
 --
 
 local vim = vim
-local prefs = require('preferences')
 
 local M = {}
 
