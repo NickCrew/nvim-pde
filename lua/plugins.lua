@@ -51,7 +51,7 @@ return packer.startup({
 		use({
 			"NTBBloodbath/rest.nvim",
 			config = function()
-				require("plugins.config.rest")
+				require("config.rest")
 			end,
 		})
 
@@ -96,7 +96,7 @@ return packer.startup({
 			"ThePrimeagen/harpoon",
 			before = "telescope.nvim",
 			config = function()
-				require("plugins.config.harpoon")
+				require("config.harpoon-nvim")
 			end,
 		})
 
@@ -114,7 +114,7 @@ return packer.startup({
 			"stevearc/aerial.nvim",
 			after = "telescope.nvim",
 			config = function()
-				require("plugins.config.aerial")
+				require("config.aerial")
 			end,
 		})
 
@@ -209,7 +209,7 @@ return packer.startup({
 			},
 			run = ":TSUpdate",
 			config = function()
-				require("plugins.config.treesitter")
+				require("config.treesitter")
 			end,
 		})
 
@@ -218,7 +218,7 @@ return packer.startup({
 			"akinsho/nvim-toggleterm.lua",
 			cmd = "ToggleTerm",
 			config = function()
-				require("plugins.config.toggleterm")
+				require("config.toggleterm")
 			end,
 		})
 
@@ -259,7 +259,7 @@ return packer.startup({
 			"puremourning/vimspector",
 			requires = { "nvim-telescope/telescope-vimspector.nvim" },
 			config = function()
-				require("plugins.config.vimspector")
+				require("config.vimspector")
 			end,
 			opt = true,
 			disable = false,
@@ -286,7 +286,7 @@ return packer.startup({
 				{ "mrjones2014/dash.nvim", run = "make install" },
 			},
 			config = function()
-				require("plugins.config.telescope")
+				require("config.telescope")
 			end,
 		})
 
@@ -365,7 +365,7 @@ return packer.startup({
 			requires = { "mfussenegger/nvim-dap" },
 			config = function()
 				require("dapui").setup()
-				-- -- -- Dap UI will open automatically
+				-- -- Dap UI will open automatically
 				-- local dap, dapui = require("dap"), require("dapui")
 				-- dap.listeners.after.event_initialized["dapui_config"] =
 				--     function() dapui.open() end
@@ -407,7 +407,7 @@ return packer.startup({
 		use({
 			"chentau/marks.nvim",
 			config = function()
-				require("plugins.config.marks")
+				require("config.marks")
 			end,
 		})
 
@@ -445,7 +445,7 @@ return packer.startup({
 				"onsails/lspkind-nvim",
 			},
 			config = function()
-				require("plugins.config.completion")
+				require("config.completion")
 			end,
 		})
 
@@ -469,6 +469,17 @@ return packer.startup({
 
 		use({ "b0o/schemastore.nvim" })
 
+		use({
+			"pwntester/octo.nvim",
+			requires = {
+				"nvim-lua/plenary.nvim",
+				"nvim-telescope/telescope.nvim",
+				"kyazdani42/nvim-web-devicons",
+			},
+			config = function()
+				require("config.octo-nvim")
+			end,
+		})
 
 		use({
 			"ruifm/gitlinker.nvim",
@@ -482,7 +493,7 @@ return packer.startup({
 		use({
 			"lewis6991/gitsigns.nvim",
 			config = function()
-				require("plugins.config.gitsigns").config()
+				require("config.gitsigns").config()
 			end,
 		})
 
@@ -496,7 +507,7 @@ return packer.startup({
 			"kyazdani42/nvim-tree.lua",
 			requires = { "kyazdani42/nvim-web-devicons" },
 			config = function()
-				require("plugins.config.nvim-tree")
+				require("config.nvim-tree")
 			end,
 		})
 
@@ -504,7 +515,7 @@ return packer.startup({
 		use({
 			"nvim-lualine/lualine.nvim",
 			config = function()
-				require("plugins.config.lualine")
+				require("config.lualine")
 			end,
 		})
 
@@ -533,7 +544,7 @@ return packer.startup({
 		use({
 			"lukas-reineke/indent-blankline.nvim",
 			config = function()
-				require("plugins.config.indent-blankline")
+				require("config.indent-blankline")
 			end,
 		})
 
@@ -541,7 +552,7 @@ return packer.startup({
 		use({
 			"folke/todo-comments.nvim",
 			config = function()
-				require("plugins.config.todo-comments")
+				require("config.todo-comments")
 			end,
 		})
 
@@ -549,7 +560,7 @@ return packer.startup({
 		use({
 			"rcarriga/nvim-notify",
 			config = function()
-				require("plugins.config.nvim-notify")
+				require("config.nvim-notify")
 			end,
 		})
 
@@ -571,7 +582,7 @@ return packer.startup({
 			"goolord/alpha-nvim",
 			requires = { "kyazdani42/nvim-web-devicons" },
 			config = function()
-				require("plugins.config.dashboard")
+				require("config.dashboard")
 			end,
 		})
 
@@ -579,7 +590,7 @@ return packer.startup({
 		use({
 			"numtostr/FTerm.nvim",
 			config = function()
-				require("plugins.config.fterm")
+				require("config.fterm")
 			end,
 		})
 
@@ -590,7 +601,7 @@ return packer.startup({
 		})
 
 		-- Index search results
-		use(require("plugins.config.hslens"))
+		use(require("config.hslens"))
 
 		-- Move code easily
 		use({ "matze/vim-move" })
@@ -599,7 +610,7 @@ return packer.startup({
 		use({
 			"folke/which-key.nvim",
 			config = function()
-				require("plugins.config.which-key")
+				require("config.which-key")
 			end,
 		})
 
@@ -698,6 +709,8 @@ return packer.startup({
 		-- Markdown support with live preview inside nvim
 		use({ "ellisonleao/glow.nvim" })
 
+        -- Theme builder
+        use({ 'rktjmp/lush.nvim' })
 		-- Themes
 		use({ "rose-pine/neovim", as = "rose-pine" })
 		use({ "ellisonleao/gruvbox.nvim" })
