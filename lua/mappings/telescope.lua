@@ -62,6 +62,16 @@ Mapper.map(
 
 Mapper.map(
 	"n",
+	"<leader><leader>dd",
+	":Telescope diagnostics<CR>",
+	opts,
+	"Telescope",
+	"tele_diag",
+	"Diagnostics"
+)
+
+Mapper.map(
+	"n",
 	"<leader>r",
 	":Telescope registers<CR>",
 	opts,
@@ -209,5 +219,14 @@ Mapper.map(
 	"Diagnostics",
 	"tele_todo",
 	"Open TODOs in QuickFix Window"
+)
+Mapper.map(
+"n",
+"<leader><leader>d",
+":DashWord<CR>",
+opts,
+"Telescope",
+"tele_dashword",
+"Search Dash for Word Under Cursor"
 )
 -- }}}

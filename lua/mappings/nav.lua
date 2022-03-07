@@ -145,6 +145,16 @@ Mapper.map(
 -- Windows {{{
 Mapper.map(
 "n",
+"<C-e>r",
+"<cmd>:resize 10<CR>",
+opts,
+"Quick Window Resize",
+"win_quickresize",
+"Resize a window to size 10"
+)
+
+Mapper.map(
+"n",
 "<C-e>q",
 "<cmd>lua require('utils').toggle_qf()<CR>",
 opts,
@@ -234,7 +244,7 @@ Mapper.map(
 
 Mapper.map(
 	"t",
-	"<C-e>t",
+	"<C-\\>",
 	"<C-\\><C-n><cmd>lua require('FTerm').toggle()<CR>",
 	opts,
 	"Terminal",
@@ -244,7 +254,7 @@ Mapper.map(
 
 Mapper.map(
 	"n",
-	"<C-e>t",
+	"<C-\\>",
 	"<cmd>lua require('FTerm').toggle()<CR>",
 	opts,
 	"Terminal",
@@ -316,7 +326,7 @@ Mapper.map(
 )
 Mapper.map(
 "n",
-"<leader><leader>d",
+"<leader><leader>db",
 ":BufferDelete<CR>",
 opts,
 "Buffers",

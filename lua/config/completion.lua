@@ -1,54 +1,58 @@
 -- lua/configure/completion.lua
 --
 
+
+
 local kind_symbols = {
-        Text = "",
-        Method = "",
-        Function = "",
-        Constructor = "",
-        Field = "ﰠ",
-        --Variable = "",
-        Class = "ﴯ",
-        Interface = "",
-        Module = "",
-        Property = "ﰠ",
-        Unit = "塞",
-        Value = "",
-        Enum = "",
-        Keyword = "",
-        Snippet = "",
-        Color = "",
-        File = "",
-        Reference = "",
-        Folder = "",
-        EnumMember = "",
-        Constant = "",
-        Struct = "פּ",
-        Event = "",
-        Operator = "",
-        TypeParameter = ""
+	Text = "",
+	Method = "",
+	Function = "",
+	Constructor = "",
+	Field = "ﰠ",
+	Variable = "",
+	Class = "ﴯ",
+	Interface = "",
+	Module = "",
+	Property = "ﰠ",
+	Unit = "塞",
+	Value = "",
+	Enum = "",
+	Keyword = "",
+	Snippet = "",
+	Color = "",
+	File = "",
+	Reference = "",
+	Folder = "",
+	EnumMember = "",
+	Constant = "",
+	Struct = "פּ",
+	Event = "",
+	Operator = "",
+	TypeParameter = "",
 }
+
 local lspkind = require("lspkind")
+
 local source_mapping = {
-  buffer      = "  ◉ BUFF",
-  nvim_lsp    = " 👐  LSP",
-  nvim_lua    = " 🌙  LUA",
-  cmp_tabnine = " 💡 TAB9",
-  path        = " 🚧 PATH",
-  luasnip     = " 🌜 SNIP"
+	buffer = "  ◉ BUFF",
+	nvim_lsp = " 👐  LSP",
+	nvim_lua = " 🌙  LUA",
+	cmp_tabnine = " 💡 TAB9",
+	path = " 🚧 PATH",
+	luasnip = " 🌜 SNIP",
+    treesitter = "🌲 TS",
+    rg = " 🔍 RG"
 }
 
 local cmp = require("cmp")
 
 cmp.setup({
-
 	snippet = {
 		expand = function(args)
 			require("luasnip").lsp_expand(args.body)
 			-- vim.fn["vsnip#anonymous"](args.body)
 		end,
 	},
-
 	formatting = {
 		format = lspkind.cmp_format({
 			-- mode options: 'text', 'text_symbol', 'symbol_text', 'symbol',
@@ -58,7 +62,7 @@ cmp.setup({
 			-- preset options:
 			-- 'codicons' requires npm package @vscode/codicons
 			-- 'default' requires nerd fonts
-			preset = "default",
+			preset = "codicons",
 			symbol_map = kind_symbols,
 			before = function(entry, vim_item)
 				vim_item.kind = lspkind.presets.default[vim_item.kind]
@@ -90,24 +94,27 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	},
 	sources = cmp.config.sources({
+        { name = 'nvim_lsp_signature_help' },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "cmp_tabnine" },
 		{ name = "buffer" },
+        { name = "path" },
 		{ name = "nvim_lua" },
-		--{ name = 'tags' },
-		--{ name = 'treesitter' },
-		-- { name = "rg" },
+		{ name = 'treesitter' },
+        { name = "rg", max_item_count = 10},
 	}),
 	experimental = {
 		ghost_text = true,
 	},
 })
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline("/", {
-	sources = {
-		{ name = "buffer" },
-	},
+cmp.setup.cmdline('/', {
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp_document_symbol' }
+  }, {
+    { name = 'buffer' }
+  })
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).

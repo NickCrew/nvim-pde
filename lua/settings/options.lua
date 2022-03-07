@@ -76,8 +76,9 @@ o.signcolumn = "yes"
 
 -- Backup/Undo/Swap
 o.backup = false
-o.swapfile = false
+o.swapfile = true
 o.undofile = true
+o.directory = os.getenv('HOME') .. '/.cache/nvim/swap'
 o.backupdir = os.getenv('HOME') .. '/.cache/nvim/backup/'
 o.undodir = os.getenv('HOME') .. '/.cache/nvim/undo/'
 -- Wildmenu

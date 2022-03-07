@@ -3,10 +3,10 @@ function! darkmodesocket#updateTheme()
 
     if is_dark_mode == "true\n"
         set background=dark
-        colorscheme rose-pine
+        colorscheme tokyonight
     else
         set background=light
-        colorscheme rose-pine
+        colorscheme tokyonight
     endif
 endfunction
 

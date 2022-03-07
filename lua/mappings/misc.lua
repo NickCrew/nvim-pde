@@ -1,5 +1,62 @@
 local opts = { noremap = true, silent = true }
 -- restore the session for the current directory
+
+Mapper.map(
+	"n",
+	"<C-e>u",
+	":MundoToggle<CR>",
+	opts,
+	"Sidebars",
+	"undo_mundotoggl",
+	"Toggle Mundo"
+)
+Mapper.map(
+	"n",
+	"<C-e>S",
+	"<cmd>lua require('spectre').open()<CR>",
+	opts,
+	"Spectre",
+	"search_openspectre",
+	"Open Spectre"
+)
+Mapper.map(
+	"n",
+	"<leader><leader>sw",
+	"<cmd>lua require('spectre').open_visual({select_word=true})<CR>",
+	opts,
+	"Spectre",
+	"search_openspectrevissel",
+	"Current Word Search"
+)
+Mapper.map(
+	"n",
+	"<C-e>s",
+	"<cmd>lua require('spectre').open_visual()<CR>",
+	opts,
+	"Spectre",
+	"search_openspectrevis",
+	"Current Word Search"
+)
+Mapper.map(
+	"n",
+	"<leader><leader>sp",
+	"viw:lua require('spectre').open_file_search()<cr>",
+	opts,
+	"Spectre",
+	"search_openfilespectre",
+	"File Search"
+)
+
+Mapper.map(
+	"n",
+	"<leader>,",
+	":noh<CR>",
+	opts,
+	"Search",
+	"search_nohighlights",
+	"Turn Off Search Highlights"
+)
+
 Mapper.map(
 	"n",
 	"<leader>qs",

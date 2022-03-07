@@ -186,42 +186,22 @@ cargo install bat
 ```
 
 ---
+## Feature Overview
 
-## Language Support 
+### Installing Language Support 
 
-Install language servers like so
+> Most language servers implementing the [Language Server Protocol (LSP)](https://microsoft.github.io/language-server-protocol/) will work with the support built in to Neovim and the plugin [lsp-config](https://github.com/neovim/nvim-lspconfig).
+
 ````vim
 :LSPInstall pyright
 ````
 
 ---
 
-## Neovim Plugin Overview 
+### Debugging
 
-This section will go over the comprehensive list of plugins used in this kit
-
-### Completion
-
-#### nvim-cmp
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
-
-##### Completion Plugins
-- [lspkind-nvim](https://github.com/onsails/lspkind-nvim)
-- [vim-vsnip](https://github.com/hrsh7th/vim-vsnip)
-- [cmp-vsnip](https://github.com/hrsh7th/cmp-vsnip)
-- [vim-vsnip-integ](https://github.com/hrsh7th/vim-vsnip-integ)
-- [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
-- [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
-- [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
-- [cmp-path](https://github.com/hrsh7th/cmp-path)
-- [cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)
-
----
-
-### Debuggers
-
-#### Vimspector
-- [vimspector/](https://puremourning.github.io/vimspector/)
+> Most debuggers implementing the [Debug Adapter Protocol (DAP)](https://microsoft.github.io/debug-adapter-protocol/) are
+supported via [nvim-dap](https://github.com/mfussenegger/nvim-dap).
 
 #### nvim-dap
 - [nvim-dap](https://github.com/mfussenegger/nvim-dap)
@@ -241,9 +221,32 @@ for more info.
 npm -g install vimspector-config
 ```
 
+> __Alternative:__ Vimspector is an alternative, however it was written for Vim and is not optimized for Neovim.
+- [vimspector/](https://puremourning.github.io/vimspector/)
+
 ---
 
-### Command Palette
+### Completion and Snippets
+
+#### nvim-cmp
+- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+
+- [lspkind-nvim](https://github.com/onsails/lspkind-nvim)
+- [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
+- [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
+- [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
+- [cmp-path](https://github.com/hrsh7th/cmp-path)
+- [cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)
+
+#### LuaSnip
+Snippets fully programmable using Lua and VS Code snippets for various languages. Completion via `nvim-cmp`.
+- [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
+- [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
+- [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
+
+---
+
+### Command Palette and Fuzzy Search
 Telescope acts as command palette and highly extensible interface to Neovim
 
 - [telescope.nvim/](https://github.com/nvim-telescope/telescope.nvim/)
@@ -267,21 +270,17 @@ Telescope acts as command palette and highly extensible interface to Neovim
 
 ---
 
-### Tags, Symbols and File Tree
+### Workbench
 
-- [vista.vim](https://github.com/liuchengxu/vista.vim)
-- [vim-gutentags](https://github.com/ludovicchabant/vim-gutentags)
+#### LSP Symbols
+- [aerial.nvim](https://github.com/stevearc/aerial.nvim)
+
+#### File Drawer
 - [nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
-
-The `vim-gutentags` plugin can automatically manage tags. `ctags` is recommended.  
-For macOS:
-```bash
-brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-```
 
 ---
 
-### Parsing
+### Syntax Parsing (Treesitter)
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 
 #### Treesitter Extensions

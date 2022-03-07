@@ -5,6 +5,7 @@ local vim = vim
 
 local M = {}
 
+
 function M.toggle_qf()
   local qf_exists = false
   for _, win in pairs(vim.fn.getwininfo()) do

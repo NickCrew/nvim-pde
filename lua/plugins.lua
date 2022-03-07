@@ -1,4 +1,4 @@
--- lua/core/plugins.lua
+-- lua/plugins.lua
 --
 local fn = vim.fn
 
@@ -24,13 +24,14 @@ end
 return packer.startup({
 	function(use)
 		-- Packer itself
-		use({ "wbthomason/packer.nvim" })
+		use({
+          "wbthomason/packer.nvim"
+        })
 
 		-- Reload Noevim
-		use({ "famiu/nvim-reload" })
-
-		-- Better filetype detection and definitions
-		use({ "nathom/filetype.nvim" })
+		use({
+          "famiu/nvim-reload"
+        })
 
 		use({
 			"knubie/vim-kitty-navigator",
@@ -39,19 +40,33 @@ return packer.startup({
 		})
 
 		-- Fix weirdness with cursor/hover delay
-		use({ "antoinemadec/FixCursorHold.nvim" })
+		use({
+          "antoinemadec/FixCursorHold.nvim"
+        })
 
 		-- Cool icons
-		use({ "kyazdani42/nvim-web-devicons" })
+		use({
+          "kyazdani42/nvim-web-devicons"
+        })
 
 		-- Improve % movement
-		use({ "andymass/vim-matchup" })
+		use({
+          "andymass/vim-matchup"
+        })
 
 		-- RESTful API and HTTP Client
 		use({
 			"NTBBloodbath/rest.nvim",
 			config = function()
 				require("config.rest")
+			end,
+		})
+
+		use({
+			"windwp/nvim-spectre",
+			requires = "nvim-lua/plenary.nvim",
+			config = function()
+				require("spectre").setup()
 			end,
 		})
 
@@ -159,10 +174,15 @@ return packer.startup({
 		})
 
 		-- Popup menu with recommendations
-		use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
+		use({
+          "weilbith/nvim-code-action-menu",
+          cmd = "CodeActionMenu"
+        })
 
 		-- Show a lightbulb in the signcolumn when code actions are available
-		use({ "kosayoda/nvim-lightbulb" })
+		use({
+          "kosayoda/nvim-lightbulb"
+        })
 
 		-- Refactoring based on treesitter
 		use({
@@ -176,7 +196,10 @@ return packer.startup({
 			end,
 		})
 
-		use({ "folke/lua-dev.nvim" })
+		use({
+          "folke/lua-dev.nvim"
+        })
+
 		use({
 			"folke/persistence.nvim",
 			event = "BufReadPre", -- this will only start session saving when an actual file was opened
@@ -186,9 +209,13 @@ return packer.startup({
 			end,
 		})
 
-		use({ "andrewradev/switch.vim" })
+		use({
+          "andrewradev/switch.vim"
+        })
 
-		use({ "wellle/targets.vim" })
+		use({
+          "wellle/targets.vim"
+        })
 
 		-- Syntax highlighting and parsiging
 		use({
@@ -213,16 +240,16 @@ return packer.startup({
 			end,
 		})
 
-		-- Better Terminal handling
-		use({
-			"akinsho/nvim-toggleterm.lua",
-			cmd = "ToggleTerm",
-			config = function()
-				require("config.toggleterm")
-			end,
-		})
+        use({
+          "nikvdp/neomux",
+          config = function()
+            require("config.neomux-nvim")
+          end
+        })
 
-		use({ "famiu/bufdelete.nvim" })
+		use({
+          "famiu/bufdelete.nvim"
+        })
 
 		-- Search and command palette
 		use({
@@ -234,21 +261,6 @@ return packer.startup({
 					action_on_enter = "definition",
 				})
 			end,
-			before = "telescope.nvim",
-		})
-
-		-- Telescope plugins
-		use({
-			"nvim-telescope/telescope-file-browser.nvim",
-			"nvim-telescope/telescope-media-files.nvim",
-			"nvim-telescope/telescope-frecency.nvim",
-			"jvgrootveld/telescope-zoxide",
-			"nvim-telescope/telescope-live-grep-raw.nvim",
-			"nvim-telescope/telescope-github.nvim",
-			{
-				"nvim-telescope/telescope-dap.nvim",
-				requires = "mfussenegger/nvim-dap",
-			},
 			before = "telescope.nvim",
 		})
 
@@ -280,6 +292,18 @@ return packer.startup({
 				"nvim-lua/plenary.nvim",
 				"nvim-lua/popup.nvim",
 				"tami5/sqlite.lua",
+				"LinArcX/telescope-env.nvim",
+				"nvim-telescope/telescope-file-browser.nvim",
+				"nvim-telescope/telescope-media-files.nvim",
+				"nvim-telescope/telescope-frecency.nvim",
+				"jvgrootveld/telescope-zoxide",
+				"nvim-telescope/telescope-github.nvim",
+				{
+					"nvim-telescope/telescope-dap.nvim",
+					requires = "mfussenegger/nvim-dap",
+				},
+				"nvim-telescope/telescope-live-grep-raw.nvim",
+				"nvim-telescope/telescope-node-modules.nvim",
 				{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
 				"nvim-telescope/telescope-symbols.nvim",
 				"nvim-telescope/telescope-ui-select.nvim",
@@ -290,95 +314,25 @@ return packer.startup({
 			end,
 		})
 
-		-- Python plugin for nvim-dap debugger
-		use({
-			"mfussenegger/nvim-dap-python",
-			ft = "python",
-			requires = { "mfussenegger/nvim-dap" },
-			config = function()
-				require("dap-python").setup(
-					"~/.pyenv/versions/debugpy/bin/python"
-				)
-			end,
-		})
-
-		-- Easy installation of debug adapters and configurations
-		use({
-			"Pocco81/DAPInstall",
-			config = function()
-				local di = require("dap-install")
-				di.config("jsnode", {}, "python", "codelldb")
-			end,
-		})
-
-		-- Debug Neovim Lua
-		use({
-			"jbyuki/one-small-step-for-vimkind",
-			after = "nvim-dap",
-			config = function()
-				local dap = require("dap")
-				dap.configurations.lua = {
-					{
-						type = "nlua",
-						request = "attach",
-						name = "Attach to running Neovim instance",
-						host = function()
-							local value = vim.fn.input("Host [127.0.0.1]: ")
-							if value ~= "" then
-								return value
-							end
-							return "127.0.0.1"
-						end,
-						port = function()
-							local val = tonumber(vim.fn.input("Port: "))
-							assert(val, "Please provide a port number")
-							return val
-						end,
-					},
-				}
-
-				dap.adapters.nlua = function(callback, config)
-					callback({
-						type = "server",
-						host = config.host,
-						port = config.port,
-					})
-				end
-			end,
-		})
-
 		-- Graphical debugger compatible with VS Code
-		use({ "mfussenegger/nvim-dap" })
-
-		-- Show debug values as virtual text in the buffer
 		use({
-			"theHamsta/nvim-dap-virtual-text",
-			requires = { "mfussenegger/nvim-dap" },
+			"mfussenegger/nvim-dap",
+			requires = {
+				"rcarriga/nvim-dap-ui",
+				"theHamsta/nvim-dap-virtual-text",
+				"mfussenegger/nvim-dap-python",
+				"Pocco81/DAPInstall",
+			},
 			config = function()
-				require("nvim-dap-virtual-text").setup()
-			end,
-		})
-
-		-- User interface for DAP (auto-launch)
-		use({
-			"rcarriga/nvim-dap-ui",
-			requires = { "mfussenegger/nvim-dap" },
-			config = function()
-				require("dapui").setup()
-				-- -- Dap UI will open automatically
-				-- local dap, dapui = require("dap"), require("dapui")
-				-- dap.listeners.after.event_initialized["dapui_config"] =
-				--     function() dapui.open() end
-				-- dap.listeners.before.event_terminated["dapui_config"] =
-				--     function() dapui.close() end
-				-- dap.listeners.before.event_exited["dapui_config"] = function()
-				--     dapui.close()
-				-- end
+				require("config.nvim-dap")
 			end,
 		})
 
 		-- Gnu Debugger
-		use({ "sakhnik/nvim-gdb", run = "bash ./install.sh" })
+		use({
+          "sakhnik/nvim-gdb",
+          run = "bash ./install.sh"
+        })
 
 		-- Test Runner
 		use({
@@ -401,7 +355,9 @@ return packer.startup({
 		})
 
 		-- Interactive scratchpad
-		use({ "metakirby5/codi.vim" })
+		use({
+          "metakirby5/codi.vim"
+        })
 
 		-- Marks and Bookmarks
 		use({
@@ -442,7 +398,11 @@ return packer.startup({
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-path",
 				"hrsh7th/cmp-nvim-lua",
+                "hrsh7th/cmp-nvim-lsp-signature-help",
+                "hrsh7th/cmp-nvim-lsp-document-symbol",
+                "ray-x/cmp-treesitter",
 				"onsails/lspkind-nvim",
+                "lukas-reineke/cmp-rg"
 			},
 			config = function()
 				require("config.completion")
@@ -450,7 +410,10 @@ return packer.startup({
 		})
 
 		-- Lua-based snippet engine
-		use({ "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" })
+		use({
+          "L3MON4D3/LuaSnip",
+          "saadparwaiz1/cmp_luasnip"
+        })
 
 		-- Telescope extension for LuaSnip
 		use({
@@ -467,7 +430,9 @@ return packer.startup({
 			end,
 		})
 
-		use({ "b0o/schemastore.nvim" })
+		use({
+          "b0o/schemastore.nvim"
+        })
 
 		use({
 			"pwntester/octo.nvim",
@@ -546,6 +511,7 @@ return packer.startup({
 			config = function()
 				require("config.indent-blankline")
 			end,
+            disable = true
 		})
 
 		-- Enhanced comments
@@ -591,7 +557,7 @@ return packer.startup({
 			"numtostr/FTerm.nvim",
 			config = function()
 				require("config.fterm")
-			end,
+			end
 		})
 
 		-- Run commands in an instant
@@ -610,7 +576,7 @@ return packer.startup({
 		use({
 			"folke/which-key.nvim",
 			config = function()
-				require("config.which-key")
+				require("config.which-key-nvim")
 			end,
 		})
 
@@ -626,16 +592,24 @@ return packer.startup({
 		})
 
 		-- Movement
-		use({ "chaoren/vim-wordmotion" })
+		use({
+          "chaoren/vim-wordmotion"
+        })
 
 		-- Formatting
-		use({ "sbdchd/neoformat" })
+		use({
+          "sbdchd/neoformat"
+        })
 
 		-- Easy commenting
-		use({ "tpope/vim-commentary" })
+		use({
+          "tpope/vim-commentary"
+        })
 
 		-- Improved history with tree-style viewer
-		use({ "simnalamburt/vim-mundo" })
+		use({
+          "simnalamburt/vim-mundo"
+        })
 
 		-- Better pane navigation
 		use({
@@ -709,12 +683,34 @@ return packer.startup({
 		-- Markdown support with live preview inside nvim
 		use({ "ellisonleao/glow.nvim" })
 
-        -- Theme builder
-        use({ 'rktjmp/lush.nvim' })
+		-- Theme builder
+		use({
+          "rktjmp/lush.nvim"
+        })
+
+        -------------------------------
 		-- Themes
-		use({ "rose-pine/neovim", as = "rose-pine" })
-		use({ "ellisonleao/gruvbox.nvim" })
-		use({ "folke/tokyonight.nvim", branch = "main" })
+        -------------------------------
+		use({
+          "rose-pine/neovim",
+          as = "rose-pine"
+        })
+
+		use({
+          "ellisonleao/gruvbox.nvim"
+        })
+
+		use({
+          "EdenEast/nightfox.nvim"
+        })
+
+		use({
+          "folke/tokyonight.nvim",
+          branch = "main" })
+
+        use({
+          "shaunsingh/nord.nvim"
+        })
 
 		if Packer_bootstrap then
 			require("packer").sync()

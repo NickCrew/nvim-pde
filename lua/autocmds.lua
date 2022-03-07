@@ -1,6 +1,13 @@
 --
 local cmd = vim.cmd
 
+cmd([[
+  augroup terms
+  autocmd!
+    autocmd TermOpen * lua print('hello')
+  augroup END
+]])
+
 -- Autocommand that reloads Neovim whenever the plugin.lua is saved.
 cmd([[
   augroup packer_user_config

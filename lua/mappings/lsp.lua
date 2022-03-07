@@ -108,7 +108,7 @@ function M.load(bufnr)
 		bufnr,
 		"n",
 		"<leader>gt",
-		"<cmd>lua vim.lsp.buf.type_definition{}<CR>",
+		"<cmd>lua vim.lsp.buf.type_definition()<CR>",
 		map_opts,
 		"LSP",
 		"lsp_gotypedef",

@@ -10,7 +10,19 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(highlight, { text = icon, texthl = highlight, numhl = "" })
 end
 
-require('lsp.diagnostics')
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
+-- Toggle
+require('toggle_lsp_diagnostics').init({
+  start_on = true
+})
+
 require('mappings.lsp').load_goto_mappings()
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
