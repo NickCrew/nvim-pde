@@ -3,7 +3,6 @@ local vim = vim
 
 
 
-
 if os.getenv('ITERM_PROFILE') == 'Hotkey' then
   local fox = require('style.themes.fox').fox_setup('duskfox', true)
   fox.load()
@@ -14,5 +13,6 @@ else
   local fox = require('style.themes.fox').fox_setup()
   fox.load()
 end
+
 require('style.highlights')
 

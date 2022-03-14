@@ -25,13 +25,27 @@ return packer.startup({
 	function(use)
 		-- Packer itself
 		use({
-          "wbthomason/packer.nvim"
-        })
+			"wbthomason/packer.nvim",
+		})
 
 		-- Reload Noevim
 		use({
-          "famiu/nvim-reload"
-        })
+			"famiu/nvim-reload",
+		})
+
+		use({
+			"chipsenkbeil/distant.nvim",
+			config = function()
+				require("distant").setup({
+					-- Applies Chip's personal settings to every machine you connect to
+					--
+					-- 1. Ensures that distant servers terminate with no connections
+					-- 2. Provides navigation bindings for remote directories
+					-- 3. Provides keybinding to jump into a remote file's parent directory
+					["*"] = require("distant.settings").chip_default(),
+				})
+			end,
+		})
 
 		use({
 			"knubie/vim-kitty-navigator",
@@ -41,18 +55,18 @@ return packer.startup({
 
 		-- Fix weirdness with cursor/hover delay
 		use({
-          "antoinemadec/FixCursorHold.nvim"
-        })
+			"antoinemadec/FixCursorHold.nvim",
+		})
 
 		-- Cool icons
 		use({
-          "kyazdani42/nvim-web-devicons"
-        })
+			"kyazdani42/nvim-web-devicons",
+		})
 
 		-- Improve % movement
 		use({
-          "andymass/vim-matchup"
-        })
+			"andymass/vim-matchup",
+		})
 
 		-- RESTful API and HTTP Client
 		use({
@@ -175,14 +189,14 @@ return packer.startup({
 
 		-- Popup menu with recommendations
 		use({
-          "weilbith/nvim-code-action-menu",
-          cmd = "CodeActionMenu"
-        })
+			"weilbith/nvim-code-action-menu",
+			cmd = "CodeActionMenu",
+		})
 
 		-- Show a lightbulb in the signcolumn when code actions are available
 		use({
-          "kosayoda/nvim-lightbulb"
-        })
+			"kosayoda/nvim-lightbulb",
+		})
 
 		-- Refactoring based on treesitter
 		use({
@@ -197,8 +211,8 @@ return packer.startup({
 		})
 
 		use({
-          "folke/lua-dev.nvim"
-        })
+			"folke/lua-dev.nvim",
+		})
 
 		use({
 			"folke/persistence.nvim",
@@ -210,12 +224,12 @@ return packer.startup({
 		})
 
 		use({
-          "andrewradev/switch.vim"
-        })
+			"andrewradev/switch.vim",
+		})
 
 		use({
-          "wellle/targets.vim"
-        })
+			"wellle/targets.vim",
+		})
 
 		-- Syntax highlighting and parsiging
 		use({
@@ -240,16 +254,9 @@ return packer.startup({
 			end,
 		})
 
-        use({
-          "nikvdp/neomux",
-          config = function()
-            require("config.neomux-nvim")
-          end
-        })
-
 		use({
-          "famiu/bufdelete.nvim"
-        })
+			"famiu/bufdelete.nvim",
+		})
 
 		-- Search and command palette
 		use({
@@ -330,9 +337,9 @@ return packer.startup({
 
 		-- Gnu Debugger
 		use({
-          "sakhnik/nvim-gdb",
-          run = "bash ./install.sh"
-        })
+			"sakhnik/nvim-gdb",
+			run = "bash ./install.sh",
+		})
 
 		-- Test Runner
 		use({
@@ -356,8 +363,8 @@ return packer.startup({
 
 		-- Interactive scratchpad
 		use({
-          "metakirby5/codi.vim"
-        })
+			"metakirby5/codi.vim",
+		})
 
 		-- Marks and Bookmarks
 		use({
@@ -398,11 +405,11 @@ return packer.startup({
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-path",
 				"hrsh7th/cmp-nvim-lua",
-                "hrsh7th/cmp-nvim-lsp-signature-help",
-                "hrsh7th/cmp-nvim-lsp-document-symbol",
-                "ray-x/cmp-treesitter",
+				"hrsh7th/cmp-nvim-lsp-signature-help",
+				"hrsh7th/cmp-nvim-lsp-document-symbol",
+				"ray-x/cmp-treesitter",
 				"onsails/lspkind-nvim",
-                "lukas-reineke/cmp-rg"
+				"lukas-reineke/cmp-rg",
 			},
 			config = function()
 				require("config.completion")
@@ -411,9 +418,9 @@ return packer.startup({
 
 		-- Lua-based snippet engine
 		use({
-          "L3MON4D3/LuaSnip",
-          "saadparwaiz1/cmp_luasnip"
-        })
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+		})
 
 		-- Telescope extension for LuaSnip
 		use({
@@ -431,8 +438,8 @@ return packer.startup({
 		})
 
 		use({
-          "b0o/schemastore.nvim"
-        })
+			"b0o/schemastore.nvim",
+		})
 
 		use({
 			"pwntester/octo.nvim",
@@ -511,7 +518,7 @@ return packer.startup({
 			config = function()
 				require("config.indent-blankline")
 			end,
-            disable = true
+			disable = true,
 		})
 
 		-- Enhanced comments
@@ -557,7 +564,7 @@ return packer.startup({
 			"numtostr/FTerm.nvim",
 			config = function()
 				require("config.fterm")
-			end
+			end,
 		})
 
 		-- Run commands in an instant
@@ -593,23 +600,23 @@ return packer.startup({
 
 		-- Movement
 		use({
-          "chaoren/vim-wordmotion"
-        })
+			"chaoren/vim-wordmotion",
+		})
 
 		-- Formatting
 		use({
-          "sbdchd/neoformat"
-        })
+			"sbdchd/neoformat",
+		})
 
 		-- Easy commenting
 		use({
-          "tpope/vim-commentary"
-        })
+			"tpope/vim-commentary",
+		})
 
 		-- Improved history with tree-style viewer
 		use({
-          "simnalamburt/vim-mundo"
-        })
+			"simnalamburt/vim-mundo",
+		})
 
 		-- Better pane navigation
 		use({
@@ -668,7 +675,7 @@ return packer.startup({
 			"danymat/neogen",
 			requires = "nvim-treesitter/nvim-treesitter",
 			config = function()
-				require("neogen").setup({ enabled = true })
+				require("config.neogen-nvim")
 			end,
 		})
 
@@ -685,32 +692,33 @@ return packer.startup({
 
 		-- Theme builder
 		use({
-          "rktjmp/lush.nvim"
-        })
+			"rktjmp/lush.nvim",
+		})
 
-        -------------------------------
+		-------------------------------
 		-- Themes
-        -------------------------------
+		-------------------------------
 		use({
-          "rose-pine/neovim",
-          as = "rose-pine"
-        })
+			"rose-pine/neovim",
+			as = "rose-pine",
+		})
 
 		use({
-          "ellisonleao/gruvbox.nvim"
-        })
+			"ellisonleao/gruvbox.nvim",
+		})
 
 		use({
-          "EdenEast/nightfox.nvim"
-        })
+			"EdenEast/nightfox.nvim",
+		})
 
 		use({
-          "folke/tokyonight.nvim",
-          branch = "main" })
+			"folke/tokyonight.nvim",
+			branch = "main",
+		})
 
-        use({
-          "shaunsingh/nord.nvim"
-        })
+		use({
+			"shaunsingh/nord.nvim",
+		})
 
 		if Packer_bootstrap then
 			require("packer").sync()

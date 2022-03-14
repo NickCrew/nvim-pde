@@ -4,7 +4,7 @@ local cmd = vim.cmd
 cmd([[
   augroup terms
   autocmd!
-    autocmd TermOpen * lua print('hello')
+    autocmd TermOpen * resize 10
   augroup END
 ]])
 

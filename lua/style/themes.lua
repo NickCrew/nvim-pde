@@ -27,4 +27,13 @@ function M.configure_tokyonight()
 
 end
 
+function M.update_theme()
+  local iterm = os.getenv('ITERM_PROFILE')
+
+    local fox = require('style.themes.fox').fox_setup('dawnfox', false)
+    fox.load()
+
+
+end
+
 return M

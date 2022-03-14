@@ -89,27 +89,27 @@ di.config("jsnode", {})
 -- DAP Python Configuration
 
 require("dap-python").setup("~/.pyenv/versions/debugpy/bin/python")
-table.insert(dap.configurations.python, {
-  {
-    name = "Launch file";
-    type = 'python';
-    request = 'launch';
-    program = "${file}";
-    pythonPath = os.getenv('HOME')..'/.pyenv/shims/python',
-    console = 'integratedTerminal';
-  },
-  {
-    name = "Launch file w/ Input Args";
-    type = 'python';
-    request = 'launch';
-    program = "${file}";
-    pythonPath = os.getenv('HOME')..'/.pyenv/shims/python',
-    console = 'integratedTerminal';
-    args = function()
-      return vim.fn.input('Arguments:')
-    end
-  },
-})
+-- table.insert(dap.configurations.python, {
+--   {
+--     name = "Launch file";
+--     type = 'python';
+--     request = 'launch';
+--     program = "${file}";
+--     pythonPath = os.getenv('HOME')..'/.pyenv/shims/python',
+--     console = 'integratedTerminal';
+--   },
+--   {
+--     name = "Launch file w/ Input Args";
+--     type = 'python';
+--     request = 'launch';
+--     program = "${file}";
+--     pythonPath = os.getenv('HOME')..'/.pyenv/shims/python',
+--     console = 'integratedTerminal';
+--     args = function()
+--       return vim.fn.input('Arguments:')
+--     end
+--   },
+-- })
 
 -- }}}
 
