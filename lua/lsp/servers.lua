@@ -4,6 +4,7 @@
 return {
     --"ansiblels",
     "cssls",
+    "bashls",
     "diagnosticls",
     "dockerls",
     "html",

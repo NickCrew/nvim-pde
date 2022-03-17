@@ -116,6 +116,15 @@ Mapper.map(
 	"git_toggle_blame",
 	"Toggle Git Blame"
 )
+Mapper.map(
+	"n",
+	"<leader>gb",
+	":Gitsigns toggle_current_line_blame<CR>",
+	opts,
+	"Git",
+	"git_toggle_blame",
+	"Toggle Git Blame"
+)
 
 Mapper.map(
 	"n",

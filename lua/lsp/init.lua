@@ -59,6 +59,7 @@ local lsp_installer_servers = require("nvim-lsp-installer.servers")
 -- Desired servers
 local servers = require("lsp.servers")
 
+
 -- Loop through the servers listed above.
 for _, server_name in pairs(servers) do
   local server_available, server = lsp_installer_servers.get_server(server_name)
