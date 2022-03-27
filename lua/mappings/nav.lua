@@ -171,11 +171,19 @@ opts,
 "qf_toggle",
 "Toggle QuickFix Window"
 )
-
+Mapper.map(
+	"n",
+	"\\",
+	":NeoTreeFloatToggle<CR>",
+	opts,
+	"Project",
+	"filedrawer_reveal",
+	"Toggle File Tree"
+)
 Mapper.map(
 	"n",
 	"<C-e>n",
-	":NvimTreeToggle<CR>",
+	":NeoTreeShowToggle<CR>",
 	opts,
 	"Project",
 	"proj_filetree",

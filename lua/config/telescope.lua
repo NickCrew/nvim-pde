@@ -8,6 +8,9 @@ local telescope = require("telescope")
 telescope.setup({
 	defaults = {
 		layout_strategy = "center",
+        layout_config = {
+          center = { width = 0.8 }
+        },
 		vimgrep_arguments = {
 			"rg",
 			"--hidden",

@@ -472,16 +472,17 @@ return packer.startup({
 		-- Show inline git messages
 		use({ "rhysd/git-messenger.vim", cmd = "GitMessenger" })
 
-		-- Github remote integration
 
-		-- File tree sidebar
-		use({
-			"kyazdani42/nvim-tree.lua",
-			requires = { "kyazdani42/nvim-web-devicons" },
-			config = function()
-				require("config.nvim-tree")
-			end,
-		})
+        use({
+          "nvim-neo-tree/neo-tree.nvim",
+          branch = "v2.x",
+          requires = {
+            "nvim-lua/plenary.nvim",
+            "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim"
+          },
+          config = require('config.neo-tree-nvim')
+        })
 
 		-- Status bar
 		use({
