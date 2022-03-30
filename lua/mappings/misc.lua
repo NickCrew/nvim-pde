@@ -1,6 +1,36 @@
 local opts = { noremap = true, silent = true }
--- restore the session for the current directory
 
+-- Delete to Void Register
+Mapper.map(
+    "n",
+    "<leader>dx",
+    '"_dd',
+    opts,
+    "Copy & Paste",
+    "clip_yanktovoid",
+    "Delete to Void Register"
+)
+-- Yank to System Clipboard
+Mapper.map(
+    "v",
+    "<leader>y",
+    '"*y',
+    opts,
+    "Copy & Paste",
+    "clip_yanktosys",
+    "Yank to System Clipboard"
+)
+-- Paste from buffer 0
+Mapper.map(
+    "n",
+    "<leader>P",
+    "0p",
+    opts,
+    "Copy & Paste",
+    "clip_paste0buf",
+    "Paste from buffer 0"
+)
+-- Toggle Mundo
 Mapper.map(
 	"n",
 	"<C-e>u",
@@ -10,6 +40,7 @@ Mapper.map(
 	"undo_mundotoggl",
 	"Toggle Mundo"
 )
+-- Open Spectre
 Mapper.map(
 	"n",
 	"<C-e>S",
@@ -19,6 +50,7 @@ Mapper.map(
 	"search_openspectre",
 	"Open Spectre"
 )
+-- Current Word Search
 Mapper.map(
 	"n",
 	"<leader><leader>sw",
@@ -37,6 +69,7 @@ Mapper.map(
 	"search_openspectrevis",
 	"Current Word Search"
 )
+-- File Search
 Mapper.map(
 	"n",
 	"<leader><leader>sp",
@@ -46,7 +79,7 @@ Mapper.map(
 	"search_openfilespectre",
 	"File Search"
 )
-
+-- Turn Off Search Highlights
 Mapper.map(
 	"n",
 	"<leader>,",
@@ -56,7 +89,7 @@ Mapper.map(
 	"search_nohighlights",
 	"Turn Off Search Highlights"
 )
-
+-- Load Persistence
 Mapper.map(
 	"n",
 	"<leader>qs",
@@ -66,7 +99,6 @@ Mapper.map(
 	"sesh_loadpersist",
 	"Load Persistence"
 )
-
 -- restore the last session
 Mapper.map(
 	"n",
@@ -87,7 +119,7 @@ Mapper.map(
 	"sesh_stoppersist",
 	"Stop Persistence"
 )
-
+-- Toggle Twilight
 Mapper.map(
 	"n",
 	"<C-e><C-t>",
@@ -97,7 +129,7 @@ Mapper.map(
 	"ui_twilighttoggl",
 	"Toggle Twilight"
 )
-
+-- Show Git Messages
 Mapper.map(
 	"n",
 	"<leader>Gm",
@@ -107,6 +139,7 @@ Mapper.map(
 	"git_messenger",
 	"Show Git Messages"
 )
+-- Toggle Git Blame
 Mapper.map(
 	"n",
 	"<leader>gb",
@@ -116,6 +149,7 @@ Mapper.map(
 	"git_toggle_blame",
 	"Toggle Git Blame"
 )
+-- Toggle Git Blame
 Mapper.map(
 	"n",
 	"<leader>gb",
@@ -125,7 +159,7 @@ Mapper.map(
 	"git_toggle_blame",
 	"Toggle Git Blame"
 )
-
+-- Open Cheatsheet
 Mapper.map(
 	"n",
 	"<C-e>C",
@@ -134,44 +168,4 @@ Mapper.map(
 	"Cheatsheets",
 	"cheat_open",
 	"Open Cheatsheet"
-)
-
-Mapper.map(
-	"n",
-	"<leader>Dt",
-	"<cmd>lua require('dark_notify').toggle()<CR>",
-	opts,
-	"Style",
-	"style_toggle",
-	"Toggle Style"
-)
-
-Mapper.map(
-	"n",
-	"<leader>Ds",
-	"<cmd>lua require('dark_notify').stop()<CR>",
-	opts,
-	"Style",
-	"style_stop",
-	"Stop Reacting To System Style"
-)
-
-Mapper.map(
-	"n",
-	"<leader>Du",
-	"<cmd>lua require('dark_notify').update()<CR>",
-	opts,
-	"Style",
-	"style_update",
-	"Match System Style"
-)
-
-Mapper.map(
-	"n",
-	"<leader>Dr",
-	"<cmd>lua require('dark_notify').run()<CR>",
-	opts,
-	"Style",
-	"style_run",
-	"Start Reacting To System Style"
 )

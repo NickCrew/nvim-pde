@@ -344,8 +344,7 @@ return packer.startup({
 		-- Test Runner
 		use({
 			"rcarriga/vim-ultest",
-			ft = { "python" },
-			requires = { "vim-test/vim-test", ft = { "python" } },
+			requires = { "vim-test/vim-test" },
 			run = ":UpdateRemotePlugins",
 		})
 
@@ -664,7 +663,7 @@ return packer.startup({
 		use({
 			"windwp/nvim-autopairs",
 			config = function()
-				require("nvim-autopairs").setup({})
+				require('config.autopairs')
 			end,
 		})
 

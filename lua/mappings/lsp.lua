@@ -3,6 +3,7 @@ local M = {}
 
 function M.load_goto_mappings()
   local opts = {noremap = true, silent = true}
+  -- Preview Definition
   Mapper.map(
       "n",
       "gpd",
@@ -12,7 +13,7 @@ function M.load_goto_mappings()
       "lsp_gpreviewdef",
       "Preview Definition"
   )
-
+  -- Preview References
   Mapper.map(
       "n",
       "gpr",
@@ -22,7 +23,7 @@ function M.load_goto_mappings()
       "lsp_gpreviewref",
       "Preview References"
   )
-
+  -- Close Preview Windows
   Mapper.map(
       "n",
       "gP",
@@ -32,7 +33,7 @@ function M.load_goto_mappings()
       "lsp_gpreviewclose",
       "Close Preview Windows"
   )
-
+  -- Preview Implementation
   Mapper.map(
       "n",
       "gpi",
@@ -42,13 +43,11 @@ function M.load_goto_mappings()
       "lsp_gpreviewimp",
       "Preview Implementation"
   )
-
-
 end
 
 function M.load(bufnr)
 	local map_opts = { noremap = true, silent = true }
-
+    -- Go To Declaration
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -59,7 +58,7 @@ function M.load(bufnr)
 		"lsp_godecl",
 		"Go To Declaration"
 	)
-
+    -- Go To Defintion
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -70,7 +69,7 @@ function M.load(bufnr)
 		"lsp_godef",
 		"Go To Defintion"
 	)
-
+    -- Show References
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -81,8 +80,8 @@ function M.load(bufnr)
 		"lsp_showrefs",
 		"Show References"
 	)
-
-	Mapper.map_buf(
+    Mapper.map_buf(
+    -- Signature Help
 		bufnr,
 		"n",
 		"gs",
@@ -92,7 +91,7 @@ function M.load(bufnr)
 		"lsp_sighelp",
 		"Signature Help"
 	)
-
+    -- Go To Implementation
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -103,7 +102,7 @@ function M.load(bufnr)
 		"lsp_goimpl",
 		"Go To Implementation"
 	)
-
+    -- Go To Type Definition
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -114,7 +113,7 @@ function M.load(bufnr)
 		"lsp_gotypedef",
 		"Go To Type Definition"
 	)
-
+    -- Document Symbol
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -125,7 +124,7 @@ function M.load(bufnr)
 		"lsp_docsym",
 		"Document Symbol"
 	)
-
+    -- Workspace Symbol
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -136,7 +135,7 @@ function M.load(bufnr)
 		"lsp_wksym",
 		"Workspace Symbol"
 	)
-
+    -- Hover
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -147,7 +146,7 @@ function M.load(bufnr)
 		"lsp_hover",
 		"Hover"
 	)
-
+    -- Code Actions
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -158,7 +157,7 @@ function M.load(bufnr)
 		"lsp_action",
 		"Code Actions"
 	)
-
+    -- Rename
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -169,7 +168,7 @@ function M.load(bufnr)
 		"lsp_ren",
 		"Rename"
 	)
-
+    -- Quick Fix
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -180,7 +179,7 @@ function M.load(bufnr)
 		"lsp_qikfix",
 		"Quick Fix"
 	)
-
+    -- Formatting
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -191,7 +190,7 @@ function M.load(bufnr)
 		"lsp_fmting",
 		"Formatting"
 	)
-
+    -- Incoming Calls
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -202,7 +201,7 @@ function M.load(bufnr)
 		"lsp_incoming",
 		"Incoming Calls"
 	)
-
+    -- Outgoing Calls
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -213,7 +212,7 @@ function M.load(bufnr)
 		"lsp_outgoing",
 		"Outgoing Calls"
 	)
-
+    -- Diagnostics for Line
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -224,7 +223,7 @@ function M.load(bufnr)
 		"lsp_lndiag",
 		"Diagnostics for Line"
 	)
-
+    -- Go To Next
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -235,7 +234,7 @@ function M.load(bufnr)
 		"lsp_gonext",
 		"Go To Next"
 	)
-
+    -- Go To Previous
 	Mapper.map_buf(
 		bufnr,
 		"n",

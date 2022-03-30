@@ -2,13 +2,13 @@
 require('harpoon').setup({
   global_settings = {
   -- sets the marks upon calling `toggle` on the ui, instead of require `:w`.
-    save_on_toggle = false,
+    save_on_toggle = true,
 
     -- saves the harpoon file upon every change. disabling is unrecommended.
     save_on_change = true,
 
     -- sets harpoon to run the command immediately as it's passed to the terminal when calling `sendCommand`.
-    enter_on_sendcmd = false,
+    enter_on_sendcmd = true,
 
     -- closes any tmux windows harpoon that harpoon creates when you close Neovim.
     tmux_autoclose_windows = false,
@@ -19,16 +19,17 @@ require('harpoon').setup({
   projects = {
     ["$HOME/Code/threatx-infra"] = {
       term = {
-        cmds = {
-          "[[ -z $VIRTUAL_ENV ]] && pyenv activate txscripts"
-        }
+        cmds = {}
       }
     },
     ["$HOME/Code/platform-deploy"] = {
       term = {
-        cmds = {
-          "[[ -z $VIRTUAL_ENV ]] && pyenv activate txscripts"
-        }
+        cmds = {}
+      }
+    },
+    ["$HOME/Code/threatx-sensorops/TxSensorOps/modules/TxSensorOps"] = {
+      term = {
+        cmds = {}
       }
     }
   }

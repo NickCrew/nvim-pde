@@ -1,5 +1,6 @@
 local opts = { noremap = false, silent = true }
 
+-- Open TODOs in QuickFix Window
 Mapper.map(
 	"n",
 	"<leader>2d",
@@ -9,7 +10,7 @@ Mapper.map(
 	"todo_qf",
 	"Open TODOs in QuickFix Window"
 )
-
+-- Toggle Underline
 Mapper.map(
 	"n",
 	"<leader>tlu",
@@ -19,6 +20,7 @@ Mapper.map(
 	"diag_togl_ul",
 	"Toggle Underline"
 )
+-- Toggle Signs
 Mapper.map(
 	"n",
 	"<leader>tls",
@@ -28,6 +30,7 @@ Mapper.map(
 	"diag_togl_signs",
 	"Toggle Signs"
 )
+-- Toggle Virtual Text
 Mapper.map(
 	"n",
 	"<leader>tlv",
@@ -37,6 +40,7 @@ Mapper.map(
 	"diag_togl_vtext",
 	"Toggle Virtual Text"
 )
+-- Toggle Update on Insert
 Mapper.map(
 	"n",
 	"<leader>tlp",
@@ -46,6 +50,7 @@ Mapper.map(
 	"diag_togl_upins",
 	"Toggle Update on Insert"
 )
+-- Toggle Diagnostics
 Mapper.map(
 	"n",
 	"<leader>tld",
@@ -55,6 +60,7 @@ Mapper.map(
 	"diag_togl",
 	"Toggle Diagnostics"
 )
+-- Set All To Default
 Mapper.map(
 	"n",
 	"<leader>tldd",
@@ -64,6 +70,7 @@ Mapper.map(
 	"diag_togl_default",
 	"Set All To Default"
 )
+-- Turn Off
 Mapper.map(
 	"n",
 	"<leader>tldo",
@@ -73,6 +80,7 @@ Mapper.map(
 	"diag_togl_off",
 	"Turn Off"
 )
+-- Turn On
 Mapper.map(
 	"n",
 	"<leader>tldf",
@@ -82,9 +90,7 @@ Mapper.map(
 	"diag_togl_on",
 	"Turn On"
 )
--- }}}
-
--- {{{ Trouble
+-- Toggle Trouble
 Mapper.map(
 	"n",
 	"<leader>xx",
@@ -94,7 +100,7 @@ Mapper.map(
 	"trbl_toggle",
 	"Toggle Trouble"
 )
-
+-- Workspace Diagnostics
 Mapper.map(
 	"n",
 	"<leader>xw",
@@ -104,7 +110,7 @@ Mapper.map(
 	"trbl__wkspace",
 	"Workspace Diagnostics"
 )
-
+-- Document Diagnostics
 Mapper.map(
 	"n",
 	"<leader>xd",
@@ -114,7 +120,7 @@ Mapper.map(
 	"trbl_doc",
 	"Document Diagnostics"
 )
-
+-- Open Diagnostics in QuickFix
 Mapper.map(
 	"n",
 	"<leader>xq",
@@ -124,7 +130,7 @@ Mapper.map(
 	"trbl_qfx",
 	"Open Diagnostics in QuickFix"
 )
-
+-- Open Diagnostics in Location List
 Mapper.map(
 	"n",
 	"<leader>xl",
@@ -134,7 +140,7 @@ Mapper.map(
 	"trbl_loc",
 	"Open Diagnostics in Location List"
 )
-
+-- Diagnostics References
 Mapper.map(
 	"n",
 	"<leader>gR",
@@ -144,4 +150,3 @@ Mapper.map(
 	"trbl_ref",
 	"Diagnostics References"
 )
--- }}}

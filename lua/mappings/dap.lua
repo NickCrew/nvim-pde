@@ -1,9 +1,6 @@
--- vim:foldmethod=marker
 -- Mappings for nvim-dap
 
 local opts = { noremap = true, silent = true }
-
--- {{{ DAP UI
 
 -- Open UI
 Mapper.map(
@@ -45,9 +42,6 @@ Mapper.map(
 	"dap_eval",
 	"Evaluate Word Under Cursor"
 )
--- }}}
-
--- {{{ DAP
 -- Open REPL
 Mapper.map(
 	"n",
@@ -168,10 +162,6 @@ Mapper.map(
 	"dap_runtocurs",
 	"Run to Cursor"
 )
--- }}}
-
--- {{{ Virtual Text
-
 -- Toggle Virtual Text
 Mapper.map(
 	"n",
@@ -192,10 +182,6 @@ Mapper.map(
 	"dap_textrefresh",
 	"Refresh Virtual Text"
 )
--- }}}
-
--- {{{ Python
-
 -- Debug Python Method
 Mapper.map(
 	"n",
@@ -226,4 +212,3 @@ Mapper.map(
 	"dap_pydebugsel",
 	"Debug Py Selection"
 )
---}}}
