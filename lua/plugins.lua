@@ -47,6 +47,10 @@ return packer.startup({
 			end,
 		})
 
+        use({
+          "jamestthompson3/nvim-remote-containers"
+        })
+
 		use({
 			"knubie/vim-kitty-navigator",
 			run = "cp ./*.py ~/.config/kitty/",
@@ -83,6 +87,13 @@ return packer.startup({
 				require("spectre").setup()
 			end,
 		})
+
+        use({
+          "windwp/nvim-autopairs",
+          config = function()
+            require('config.autopairs')
+          end
+        })
 
 		-- less jarring buffer open close
 		use({
@@ -419,6 +430,10 @@ return packer.startup({
 		use({
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
+			"rafamadriz/friendly-snippets",
+			config = function()
+              require('config.luasnip')
+			end,
 		})
 
 		-- Telescope extension for LuaSnip
@@ -428,13 +443,6 @@ return packer.startup({
 			module = "telescope._extensions.luasnip", -- if you wish to lazy-load
 		})
 
-		-- VS Code snippets for various languages
-		use({
-			"rafamadriz/friendly-snippets",
-			config = function()
-				require("luasnip.loaders.from_vscode").load()
-			end,
-		})
 
 		use({
 			"b0o/schemastore.nvim",
@@ -659,14 +667,6 @@ return packer.startup({
 			end,
 		})
 
-		-- Find matching pairs
-		use({
-			"windwp/nvim-autopairs",
-			config = function()
-				require('config.autopairs')
-			end,
-		})
-
 		-- Wrapping/delimiters
 		use({ "machakann/vim-sandwich" })
 
@@ -707,6 +707,10 @@ return packer.startup({
 			"ellisonleao/gruvbox.nvim",
 		})
 
+        use({
+            "rebelot/kanagawa.nvim"
+        })
+
 		use({
 			"EdenEast/nightfox.nvim",
 		})
@@ -715,6 +719,11 @@ return packer.startup({
 			"folke/tokyonight.nvim",
 			branch = "main",
 		})
+
+        use {
+            "mcchrish/zenbones.nvim",
+            requires = "rktjmp/lush.nvim"
+        }
 
 		use({
 			"shaunsingh/nord.nvim",

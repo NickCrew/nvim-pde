@@ -88,7 +88,7 @@ Mapper.map(
 -- Toggle File Tree
 Mapper.map(
 	"n",
-	"\\",
+	"<C-e>\\",
 	":NeoTreeFloatToggle<CR>",
 	opts,
 	"Project",
@@ -102,8 +102,28 @@ Mapper.map(
 	":NeoTreeShowToggle<CR>",
 	opts,
 	"Project",
-	"proj_filetree",
+	"toggl_drawer_files",
 	"Toggle File Tree"
+)
+-- Toggle Git Status Float
+Mapper.map(
+	"n",
+	"<C-e>g",
+	":Neotree float git_status<CR>",
+	opts,
+	"Project",
+	"toggle_float_gitstatus",
+	"Toggle Buffer Tree"
+)
+-- Toggle Buffer Tree
+Mapper.map(
+	"n",
+	"<C-e>b",
+	":Neotree buffers<CR>",
+	opts,
+	"Project",
+	"toggle_drawer_buffers",
+	"Toggle Buffer Tree"
 )
 -- Quickly Escape Terminal
 Mapper.map(

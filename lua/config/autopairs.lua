@@ -1,8 +1,14 @@
 require('nvim-autopairs').setup({
-  disable_in_macro = true,
-  disable_in_visualblock = true,
   check_ts = true,
-  disable_filetype = {"TelescopePrompt", "spectre_panel"},
-  ts_config = {lua = {"string", "source"}, javascript = {"string","template_string"}}
-
+  ts_config = {
+    lua = { 'string', 'source' },
+    javascript = { 'string', 'template_string' },
+    java = false,
+  },
+  disable_filetype = { 'TelescopePrompt', 'vim' },
+  fast_wrap = {},
 })
+
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local cmp = require('cmp')
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))

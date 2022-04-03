@@ -13,11 +13,10 @@ function! darkmodesocket#updateTheme()
 
     if is_dark_mode == "true\n"
         set background=dark
-        colorscheme duskfox
     else
         set background=light
-        colorscheme dawnfox
     endif
+    colorscheme rosebones
 endfunction
 
 function! darkmodesocket#listenForLights()

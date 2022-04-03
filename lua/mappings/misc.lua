@@ -169,3 +169,13 @@ Mapper.map(
 	"cheat_open",
 	"Open Cheatsheet"
 )
+-- Run Tests
+Mapper.map(
+	"n",
+	"<leader><leader>t",
+	":Ultest<CR>",
+	opts,
+	"Tests",
+	"ultest_run",
+	"Run Tests"
+)
