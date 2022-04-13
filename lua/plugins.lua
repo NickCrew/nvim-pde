@@ -261,18 +261,6 @@ return packer.startup({
 			before = "telescope.nvim",
 		})
 
-		-- Alternative Graphical Debugger
-
-		use({ "nvim-telescope/telescope-vimspector.nvim" })
-		use({
-			"puremourning/vimspector",
-			requires = { "nvim-telescope/telescope-vimspector.nvim" },
-			config = function()
-				require("config.vimspector")
-			end,
-			opt = true,
-			disable = false,
-		})
 
 		-- Enhance LSP Diagnostics
 		use({
@@ -538,6 +526,19 @@ return packer.startup({
 
 		-- Index search results
 		use(require("config.hslens"))
+        use({
+            "kevinhwang91/nvim-hlslens",
+            branch = "main",
+            keys = {
+                { "n", "*" },
+                { "n", "#" },
+                { "n", "n" },
+                { "n", "N" },
+            },
+            config = function()
+              require('config.hslens')
+            end
+        })
 
 		-- Move code easily
 		use({ "matze/vim-move" })
