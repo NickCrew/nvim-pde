@@ -33,30 +33,6 @@ return packer.startup({
 			"famiu/nvim-reload",
 		})
 
-		use({
-			"chipsenkbeil/distant.nvim",
-			config = function()
-				require("distant").setup({
-					-- Applies Chip's personal settings to every machine you connect to
-					--
-					-- 1. Ensures that distant servers terminate with no connections
-					-- 2. Provides navigation bindings for remote directories
-					-- 3. Provides keybinding to jump into a remote file's parent directory
-					["*"] = require("distant.settings").chip_default(),
-				})
-			end,
-		})
-
-        use({
-          "jamestthompson3/nvim-remote-containers"
-        })
-
-		use({
-			"knubie/vim-kitty-navigator",
-			run = "cp ./*.py ~/.config/kitty/",
-			disable = true,
-		})
-
 		-- Fix weirdness with cursor/hover delay
 		use({
 			"antoinemadec/FixCursorHold.nvim",
@@ -102,8 +78,6 @@ return packer.startup({
 				require("stabilize").setup()
 			end,
 		})
-
-		use({ "gennaro-tedesco/nvim-peekup" })
 
 		-- Popup preview window for LSP
 		use({
@@ -164,6 +138,7 @@ return packer.startup({
 			event = "BufEnter",
 			requires = {
 				"RishabhRD/popfix",
+                "lukas-reineke/lsp-format.nvim",
 				"jubnzv/virtual-types.nvim",
 				"ray-x/lsp_signature.nvim",
 				"williamboman/nvim-lsp-installer",
@@ -203,6 +178,10 @@ return packer.startup({
 			"weilbith/nvim-code-action-menu",
 			cmd = "CodeActionMenu",
 		})
+
+        use({ 
+          "bfredl/nvim-ipy"
+        })
 
 		-- Show a lightbulb in the signcolumn when code actions are available
 		use({
@@ -384,27 +363,6 @@ return packer.startup({
 			end,
 		})
 
-		-- AI completion source
-		use({
-			"tzachar/cmp-tabnine",
-			run = "./install.sh",
-			requires = "hrsh7th/nvim-cmp",
-			config = function()
-				local tabnine = require("cmp_tabnine.config")
-				tabnine:setup({
-					max_lines = 1000,
-					max_num_results = 20,
-					sort = true,
-					run_on_every_keystroke = true,
-					snippet_placeholder = "..",
-					ignored_file_types = { -- default is not to ignore
-						-- uncomment to ignore in lua:
-						-- lua = true
-					},
-				})
-			end,
-		})
-
 		-- Completion and Snippets
 		use({
 			"hrsh7th/nvim-cmp",
@@ -429,11 +387,13 @@ return packer.startup({
 		-- Lua-based snippet engine
 		use({
 			"L3MON4D3/LuaSnip",
+            before = "nvim-cmp"
+          })
+          use ({
+
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
-			config = function()
-              require('config.luasnip')
-			end,
+            after = "nvim-cmp"
 		})
 
 		-- Telescope extension for LuaSnip
@@ -479,19 +439,7 @@ return packer.startup({
 		-- Show inline git messages
 		use({ "rhysd/git-messenger.vim", cmd = "GitMessenger" })
 
-
-        use({
-          "nvim-neo-tree/neo-tree.nvim",
-          branch = "v2.x",
-          requires = {
-            "nvim-lua/plenary.nvim",
-            "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim"
-          },
-          config = require('config.neo-tree-nvim')
-        })
-
-		-- Status bar
+        -- Status bar
 		use({
 			"nvim-lualine/lualine.nvim",
 			config = function()
@@ -551,6 +499,8 @@ return packer.startup({
 			requires = {
 				"yuki-yano/fern-preview.vim",
 				"lambdalisue/fern-hijack.vim",
+                "lambdalisue/fern-mapping-quickfix.vim",
+                "lambdalisue/fern-renderer-devicons.vim",
 				"lambdalisue/nerdfont.vim",
 				"lambdalisue/fern-renderer-nerdfont.vim",
 				"lambdalisue/fern-git-status.vim",
@@ -574,6 +524,11 @@ return packer.startup({
 				require("config.fterm")
 			end,
 		})
+
+        use({ 
+          "nikvdp/neomux", 
+          cmd = "Neomux"
+        })
 
 		-- Run commands in an instant
 		use({
@@ -614,7 +569,7 @@ return packer.startup({
 		-- Formatting
 		use({
 			"sbdchd/neoformat",
-		})
+		}) 
 
 		-- Easy commenting
 		use({

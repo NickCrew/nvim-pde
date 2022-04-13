@@ -5,6 +5,7 @@ local cmd = vim.cmd
 
 -- Command Abbreviations{{{ 
 
+cmd([[cnoreabbrev F Fern]])
 cmd([[cnoreabbrev T Telescope]])
 cmd([[cnoreabbrev Tr TroubleToggle]])
 cmd([[cnoreabbrev PC PackerCompile]])

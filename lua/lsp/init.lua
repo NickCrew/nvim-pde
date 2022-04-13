@@ -2,7 +2,6 @@
 --
 
 local vim = vim
-local lsp = vim.lsp
 
 local signs = require('lsp.icons')
 for type, icon in pairs(signs) do
@@ -24,6 +23,7 @@ require('toggle_lsp_diagnostics').init({
 })
 
 require('mappings.lsp').load_goto_mappings()
+require('lsp-format').setup()
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
@@ -32,11 +32,10 @@ local on_attach = function(_, bufnr)
   -- Keybindings
   require('mappings.lsp').load(bufnr)
 
-  -- show type info in virtual text 
-  require('virtualtypes').on_attach()
-
   -- Aerial plugin
   require('aerial').on_attach(_, bufnr)
+
+  require('lsp-format').on_attach(_)
 
   -- show diagnostics on hover
   vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})')
@@ -70,7 +69,7 @@ for _, server_name in pairs(servers) do
       -- function to set up servers, to avoid doing setting up a server twice.
       if server.name == "sumneko_lua" then
         local luadev = require("lua-dev").setup({})
-        server:setup(luadev) 
+        server:setup(luadev)
       else
         local opts = {
           on_attach = on_attach,

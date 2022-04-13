@@ -16,7 +16,7 @@ function! darkmodesocket#updateTheme()
     else
         set background=light
     endif
-    colorscheme rosebones
+    colorscheme rose-pine
 endfunction
 
 function! darkmodesocket#listenForLights()

@@ -30,13 +30,4 @@ for _, plugin in pairs(disabled_built_ins) do
     vim.g["loaded_" .. plugin] = 1
 end
 
--- nvim-tree
-g.nvim_tree_indent_markers = true
--- vim-move
-g.move_key_modifier = "S" -- Shift
--- peekup
-g.peekup_open = '<leader>"'
--- glow
-g.glow_binary_path = os.getenv("HOME") .. "/bin"
--- project.nvim
-g.nvim_tree_respect_buf_cwd = true
+

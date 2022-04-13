@@ -1,12 +1,12 @@
 --
 local cmd = vim.cmd
 
-cmd([[
-  augroup terms
-  autocmd!
-    autocmd TermOpen * resize 10
-  augroup END
-]])
+-- cmd([[
+--   augroup terms
+--   autocmd!
+--     autocmd Open * resize 10
+--   augroup END
+-- ]])
 
 -- Autocommand that reloads Neovim whenever the plugin.lua is saved.
 cmd([[
