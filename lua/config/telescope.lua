@@ -1,7 +1,6 @@
   -- Configure Telescope
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
-local themes = require("telescope.themes")
 
 local telescope = require("telescope")
 

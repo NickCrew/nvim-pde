@@ -1,13 +1,25 @@
+-- lualine
+
 local vim = vim
 local status_ok, lualine = pcall(require, "lualine")
 if not status_ok then
 	return
 end
-
-local colors = require("style.colors.lualine").astro
-local theme = "auto"
-
-
+local colors = {
+		yellow = "#ecbe7b",
+		yellow_1 = "#ff9640",
+		grey = "#2c323c",
+		white = "#bbc2cf",
+		cyan = "#008080",
+		blue = "#081633",
+		green = "#98be65",
+		orange = "#FF8800",
+		violet = "#a9a1e1",
+		magenta = "#c678dd",
+		darkblue = "#51afef",
+		red = "#ec5f67",
+}
+local theme = "catppuccin"
 local conditions = {
 	buffer_not_empty = function()
 		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1

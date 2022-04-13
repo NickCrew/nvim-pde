@@ -1,7 +1,8 @@
 -- lua/configure/dashboard.lua
 --
 
-local default_header = {
+
+local neovim_header_1 = {
   "                                                     ",
   "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
   "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
@@ -11,12 +12,41 @@ local default_header = {
   "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
   "                                                     ",
 }
+
+local tx_header_1 = {
+  "   ________                    __ _  __",
+  " /_  __/ /_  ________  ____ _/ /| |/ /",
+  "  / / / __ \\/ ___/ _ \\/ __ `/ __/   / ",
+  " / / / / / / /  /  __/ /_/ / /_/   |  ",
+  "/_/ /_/ /_/_/   \\___/\\__,_/\\__/_/|_|"
+}
+
+
+local tx_header_2 = {
+"                                                           ",
+" ████████╗██╗  ██╗██████╗ ███████╗ █████╗ ████████╗██╗  ██╗",
+" ╚══██╔══╝██║  ██║██╔══██╗██╔════╝██╔══██╗╚══██╔══╝╚██╗██╔╝",
+"    ██║   ███████║██████╔╝█████╗  ███████║   ██║    ╚███╔╝ ",
+"    ██║   ██╔══██║██╔══██╗██╔══╝  ██╔══██║   ██║    ██╔██╗ ",
+"    ██║   ██║  ██║██║  ██║███████╗██║  ██║   ██║   ██╔╝ ██╗",
+"    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝",
+"                                                           "
+}
+
+local tx_header_3 = {
+"  _______ _                    _  __   __      ",
+" |__   __| |                  | | \\ \\ / /    ",
+"    | |  | |__  _ __ ___  __ _| |_ \\ V /      ",
+"    | |  | '_ \\| '__/ _ \\/ _` | __| > <      ",
+"    | |  | | | | | |  __/ (_| | |_ / . \\      ",
+"    |_|  |_| |_|_|  \\___|\\__,_|\\__/_/ \\_\\ ",
+"                                               "
+}
+
+
+
 local dashboard = require("alpha.themes.dashboard")
-
--- Set header choice
-dashboard.section.header.val = require('style.ascii-art').tx_header_2
-
--- Set menu
+dashboard.section.header.val = neovim_header_1
 dashboard.section.buttons.val = {
   dashboard.button("f f", "  > Find File", ":Telescope find_files<CR>"),
   dashboard.button("f p", "  > Find Project", ":Telescope projects<CR>"),
@@ -25,6 +55,5 @@ dashboard.section.buttons.val = {
   dashboard.button("e", "  > New file", ":enew <CR>"),
   dashboard.button("q", "  > Quit NVIM", ":qa<CR>"),
 }
--- Set footer
 dashboard.section.footer.val = require('alpha.fortune')
 require('alpha').setup(dashboard.opts)

@@ -24,38 +24,45 @@ end
 return packer.startup({
 	function(use)
 		-- Packer itself
-		use({
-			"wbthomason/packer.nvim",
-		})
+		use({ "wbthomason/packer.nvim" })
 
 		-- Reload Noevim
-		use({
-			"famiu/nvim-reload",
-		})
+		use({ "famiu/nvim-reload" })
 
 		-- Fix weirdness with cursor/hover delay
-		use({
-			"antoinemadec/FixCursorHold.nvim",
-		})
+		use({ "antoinemadec/FixCursorHold.nvim" })
 
 		-- Cool icons
-		use({
-			"kyazdani42/nvim-web-devicons",
-		})
+		use({ "kyazdani42/nvim-web-devicons" })
 
 		-- Improve % movement
-		use({
-			"andymass/vim-matchup",
-		})
+		use({ "andymass/vim-matchup" })
 
 		-- RESTful API and HTTP Client
 		use({
 			"NTBBloodbath/rest.nvim",
 			config = function()
-				require("config.rest")
+				require("rest-nvim").setup({
+					result_split_horizontal = false, -- Open request results in a horizontal split
+					skip_ssl_verification = false, -- Skip SSL verification, useful for unknown certificates
+					highlight = { -- Highlight request on run
+						enabled = true,
+						timeout = 150,
+					},
+					result = { -- toggle showing URL, HTTP info, headers at top the of result window
+						show_url = true,
+						show_http_info = true,
+						show_headers = true,
+					},
+					jump_to_request = false, -- Jump to request line on run
+					env_file = ".envrc",
+					custom_dynamic_variables = {},
+					yank_dry_run = true,
+				})
 			end,
 		})
 
+		-- Powerful find and replace
 		use({
 			"windwp/nvim-spectre",
 			requires = "nvim-lua/plenary.nvim",
@@ -64,19 +71,39 @@ return packer.startup({
 			end,
 		})
 
-        use({
-          "windwp/nvim-autopairs",
-          config = function()
-            require('config.autopairs')
-          end
-        })
+		-- Smart delimiters and pairs
+		use({
+			"windwp/nvim-autopairs",
+			config = function()
+				require("nvim-autopairs").setup({
+					check_ts = true,
+					ts_config = {
+						lua = { "string", "source" },
+						javascript = { "string", "template_string" },
+						java = false,
+					},
+					disable_filetype = { "TelescopePrompt", "vim" },
+					fast_wrap = {},
+				})
+			end,
+		})
 
 		-- less jarring buffer open close
 		use({
 			"luukvbaal/stabilize.nvim",
 			config = function()
-				require("stabilize").setup()
+				require("nvim-autopairs").setup({
+					check_ts = true,
+					ts_config = {
+						lua = { "string", "source" },
+						javascript = { "string", "template_string" },
+						java = false,
+					},
+					disable_filetype = { "TelescopePrompt", "vim" },
+					fast_wrap = {},
+				})
 			end,
+			before = "nvim-cmp",
 		})
 
 		-- Popup preview window for LSP
@@ -84,7 +111,35 @@ return packer.startup({
 			"rmagatti/goto-preview",
 			event = "BufEnter",
 			config = function()
-				require("goto-preview").setup({})
+				local themes = require("telescope.themes")
+				require("goto-preview").setup({
+					width = 120, -- Width of the floating window
+					height = 20, -- Height of the floating window
+					border = {
+						"↖",
+						"─",
+						"┐",
+						"│",
+						"┘",
+						"─",
+						"└",
+						"│",
+					}, -- Border characters of the floating window
+					default_mappings = false, -- Bind default mappings
+					debug = false, -- Print debug information
+					opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
+					resizing_mappings = false, -- Binds arrow keys to resizing the floating window.
+					post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
+					references = { -- Configure the telescope UI for slowing the references cycling window.
+						telescope = themes.get_dropdown({
+							hide_preview = false,
+						}),
+					},
+					focus_on_open = true, -- Focus the floating window when opening it.
+					dismiss_on_move = false, -- Dismiss the floating window when moving the cursor.
+					force_close = true, -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
+					bufhidden = "wipe", -- the bufhidden option to set on the floating window. See :h bufhidden
+				})
 			end,
 		})
 
@@ -110,7 +165,16 @@ return packer.startup({
 			"ThePrimeagen/harpoon",
 			before = "telescope.nvim",
 			config = function()
-				require("config.harpoon-nvim")
+				require("harpoon").setup({
+					global_settings = {
+						save_on_toggle = true,
+						save_on_change = true,
+						enter_on_sendcmd = true,
+						tmux_autoclose_windows = false,
+						excluded_filetypes = { "harpoon" },
+					},
+					projects = require("config.projects"),
+				})
 			end,
 		})
 
@@ -128,7 +192,25 @@ return packer.startup({
 			"stevearc/aerial.nvim",
 			after = "telescope.nvim",
 			config = function()
-				require("config.aerial")
+				require("aerial").setup({
+					backends = { "lsp", "treesitter", "markdown" },
+					close_behavior = "auto",
+					default_direction = "prefer_right",
+					min_width = 30,
+					max_width = 50,
+					post_jump_cmd = "normal! zz",
+					lsp = {
+						diagnostics_trigger_update = true,
+						update_when_errors = true,
+					},
+					treesitter = {
+						update_delay = 300,
+					},
+					markdown = {
+						update_delay = 300,
+					},
+				})
+				require("telescope").load_extension("aerial")
 			end,
 		})
 
@@ -138,7 +220,7 @@ return packer.startup({
 			event = "BufEnter",
 			requires = {
 				"RishabhRD/popfix",
-                "lukas-reineke/lsp-format.nvim",
+				"lukas-reineke/lsp-format.nvim",
 				"jubnzv/virtual-types.nvim",
 				"ray-x/lsp_signature.nvim",
 				"williamboman/nvim-lsp-installer",
@@ -153,14 +235,11 @@ return packer.startup({
 			end,
 		})
 
+		-- Dim parts of your code you're not workingon
 		use({
 			"folke/twilight.nvim",
 			config = function()
-				require("twilight").setup({
-					-- your configuration comes here
-					-- or leave it empty to use the default settings
-					-- refer to the configuration section below
-				})
+				require("twilight").setup({})
 			end,
 		})
 
@@ -179,14 +258,8 @@ return packer.startup({
 			cmd = "CodeActionMenu",
 		})
 
-        use({ 
-          "bfredl/nvim-ipy"
-        })
-
 		-- Show a lightbulb in the signcolumn when code actions are available
-		use({
-			"kosayoda/nvim-lightbulb",
-		})
+		use({ "kosayoda/nvim-lightbulb" })
 
 		-- Refactoring based on treesitter
 		use({
@@ -200,10 +273,10 @@ return packer.startup({
 			end,
 		})
 
-		use({
-			"folke/lua-dev.nvim",
-		})
+		-- Lua/neovim development tools
+		use({ "folke/lua-dev.nvim" })
 
+		-- Smart Session Management
 		use({
 			"folke/persistence.nvim",
 			event = "BufReadPre", -- this will only start session saving when an actual file was opened
@@ -213,13 +286,8 @@ return packer.startup({
 			end,
 		})
 
-		use({
-			"andrewradev/switch.vim",
-		})
-
-		use({
-			"wellle/targets.vim",
-		})
+		-- switch things (e.g. true => false)
+		use({ "andrewradev/switch.vim" })
 
 		-- Syntax highlighting and parsiging
 		use({
@@ -244,9 +312,8 @@ return packer.startup({
 			end,
 		})
 
-		use({
-			"famiu/bufdelete.nvim",
-		})
+		-- Easily delete buffer
+		use({ "famiu/bufdelete.nvim" })
 
 		-- Search and command palette
 		use({
@@ -261,7 +328,6 @@ return packer.startup({
 			before = "telescope.nvim",
 		})
 
-
 		-- Enhance LSP Diagnostics
 		use({
 			"folke/trouble.nvim",
@@ -270,6 +336,9 @@ return packer.startup({
 				require("trouble").setup()
 			end,
 		})
+
+		-- IPython
+		use({ "bfredl/nvim-ipy" })
 
 		use({
 			"nvim-telescope/telescope.nvim",
@@ -339,15 +408,33 @@ return packer.startup({
 		})
 
 		-- Interactive scratchpad
-		use({
-			"metakirby5/codi.vim",
-		})
+		use({ "metakirby5/codi.vim" })
 
 		-- Marks and Bookmarks
 		use({
 			"chentau/marks.nvim",
 			config = function()
-				require("config.marks")
+				require("marks").setup({
+					default_mappings = true,
+					builtin_marks = { ".", "<", ">", "^" },
+					cyclic = true,
+					force_write_shada = false,
+					refresh_interval = 250,
+					sign_priority = {
+						lower = 10,
+						upper = 15,
+						builtin = 8,
+						bookmark = 20,
+					},
+					excluded_filetypes = {},
+					bookmark_0 = {
+						sign = "⚑",
+						virt_text = "hello world",
+					},
+					mappings = {
+						annotate = "<leader>ab",
+					},
+				})
 			end,
 		})
 
@@ -365,7 +452,9 @@ return packer.startup({
 				"hrsh7th/cmp-nvim-lsp-document-symbol",
 				"ray-x/cmp-treesitter",
 				"onsails/lspkind-nvim",
+				"f3fora/cmp-spell",
 				"lukas-reineke/cmp-rg",
+				"petertriho/cmp-git",
 			},
 			config = function()
 				require("config.completion")
@@ -375,13 +464,22 @@ return packer.startup({
 		-- Lua-based snippet engine
 		use({
 			"L3MON4D3/LuaSnip",
-            before = "nvim-cmp"
-          })
-          use ({
+			before = "nvim-cmp",
+			config = function()
+				local luasnip = require("luasnip")
+				luasnip.config.set_config({
+					history = true,
+					updateevents = "TextChanged,TextChangedI",
+				})
+				require("luasnip.loaders.from_vscode").lazy_load()
+			end,
+		})
 
+		-- Completion extension for Luasnip and VSCode snippets
+		use({
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
-            after = "nvim-cmp"
+			after = "nvim-cmp",
 		})
 
 		-- Telescope extension for LuaSnip
@@ -391,11 +489,10 @@ return packer.startup({
 			module = "telescope._extensions.luasnip", -- if you wish to lazy-load
 		})
 
+		-- Store schema as json
+		use({ "b0o/schemastore.nvim" })
 
-		use({
-			"b0o/schemastore.nvim",
-		})
-
+		-- Use Github Command line
 		use({
 			"pwntester/octo.nvim",
 			requires = {
@@ -408,6 +505,7 @@ return packer.startup({
 			end,
 		})
 
+		-- Generate shareable file links
 		use({
 			"ruifm/gitlinker.nvim",
 			requires = "nvim-lua/plenary.nvim",
@@ -425,9 +523,12 @@ return packer.startup({
 		})
 
 		-- Show inline git messages
-		use({ "rhysd/git-messenger.vim", cmd = "GitMessenger" })
+		use({
+			"rhysd/git-messenger.vim",
+			cmd = "GitMessenger",
+		})
 
-        -- Status bar
+		----Status bar
 		use({
 			"nvim-lualine/lualine.nvim",
 			config = function()
@@ -435,6 +536,8 @@ return packer.startup({
 			end,
 		})
 
+
+		-- Tab bar
 		use({
 			"romgrk/barbar.nvim",
 			requires = { "kyazdani42/nvim-web-devicons" },
@@ -469,7 +572,20 @@ return packer.startup({
 		use({
 			"folke/todo-comments.nvim",
 			config = function()
-				require("config.todo-comments")
+				require("todo-comments").setup({
+					merge_keywords = true,
+					keywords = {
+						WARNING = { icon = " ", color = "warning" },
+					},
+					highlight = {
+						pattern = [[.*<(KEYWORDS)\s*]],
+						keyword = "bg",
+						comments_only = true,
+					},
+					search = {
+						pattern = [[\b(KEYWORDS)\b]],
+					},
+				})
 			end,
 		})
 
@@ -477,7 +593,18 @@ return packer.startup({
 		use({
 			"rcarriga/nvim-notify",
 			config = function()
-				require("config.nvim-notify")
+				require("notify").setup({
+					stages = "fade_in_slide_out",
+					timeout = 1500,
+					background_colour = "#2E3440",
+					icons = {
+						ERROR = "",
+						WARN = "",
+						INFO = "",
+						DEBUG = "",
+						TRACE = "✎",
+					},
+				})
 			end,
 		})
 
@@ -487,8 +614,7 @@ return packer.startup({
 			requires = {
 				"yuki-yano/fern-preview.vim",
 				"lambdalisue/fern-hijack.vim",
-                "lambdalisue/fern-mapping-quickfix.vim",
-                "lambdalisue/fern-renderer-devicons.vim",
+				"lambdalisue/fern-mapping-quickfix.vim",
 				"lambdalisue/nerdfont.vim",
 				"lambdalisue/fern-renderer-nerdfont.vim",
 				"lambdalisue/fern-git-status.vim",
@@ -509,36 +635,26 @@ return packer.startup({
 		use({
 			"numtostr/FTerm.nvim",
 			config = function()
-				require("config.fterm")
+				require("FTerm").setup({
+					border = "double",
+					dimensions = {
+						height = 0.5,
+						width = 0.8,
+					},
+					blend = 20,
+					auto_close = true,
+				})
 			end,
 		})
 
-        use({ 
-          "nikvdp/neomux", 
-          cmd = "Neomux"
-        })
+		-- Nvim Terminal Multiplexer
+		use({ "nikvdp/neomux" })
 
 		-- Run commands in an instant
 		use({
 			"VonHeikemen/fine-cmdline.nvim",
 			requires = { "MunifTanjim/nui.nvim" },
 		})
-
-		-- Index search results
-		use(require("config.hslens"))
-        use({
-            "kevinhwang91/nvim-hlslens",
-            branch = "main",
-            keys = {
-                { "n", "*" },
-                { "n", "#" },
-                { "n", "n" },
-                { "n", "N" },
-            },
-            config = function()
-              require('config.hslens')
-            end
-        })
 
 		-- Move code easily
 		use({ "matze/vim-move" })
@@ -563,24 +679,16 @@ return packer.startup({
 		})
 
 		-- Movement
-		use({
-			"chaoren/vim-wordmotion",
-		})
+		use({ "chaoren/vim-wordmotion" })
 
 		-- Formatting
-		use({
-			"sbdchd/neoformat",
-		}) 
+		use({ "sbdchd/neoformat" })
 
 		-- Easy commenting
-		use({
-			"tpope/vim-commentary",
-		})
+		use({ "tpope/vim-commentary" })
 
 		-- Improved history with tree-style viewer
-		use({
-			"simnalamburt/vim-mundo",
-		})
+		use({ "simnalamburt/vim-mundo" })
 
 		-- Better pane navigation
 		use({
@@ -631,7 +739,16 @@ return packer.startup({
 			"danymat/neogen",
 			requires = "nvim-treesitter/nvim-treesitter",
 			config = function()
-				require("config.neogen-nvim")
+				require("neogen").setup({
+					enabled = true,
+					languages = {
+						python = {
+							template = {
+								annotation_convention = "google_docstrings",
+							},
+						},
+					},
+				})
 			end,
 		})
 
@@ -646,43 +763,24 @@ return packer.startup({
 		-- Markdown support with live preview inside nvim
 		use({ "ellisonleao/glow.nvim" })
 
-		-- Theme builder
-		use({
-			"rktjmp/lush.nvim",
-		})
-
 		-------------------------------
 		-- Themes
 		-------------------------------
+		use({ "rktjmp/lush.nvim" })
 		use({
-			"rose-pine/neovim",
-			as = "rose-pine",
+			"mcchrish/zenbones.nvim",
+			requires = "rktjmp/lush.nvim",
 		})
-
+		use({ "rebelot/kanagawa.nvim" })
+		use({ "EdenEast/nightfox.nvim" })
+		use({ "rose-pine/neovim", as = "rose-pine" })
+		use({ "folke/tokyonight.nvim", branch = "main" })
 		use({
-			"ellisonleao/gruvbox.nvim",
-		})
-
-        use({
-            "rebelot/kanagawa.nvim"
-        })
-
-		use({
-			"EdenEast/nightfox.nvim",
-		})
-
-		use({
-			"folke/tokyonight.nvim",
-			branch = "main",
-		})
-
-        use {
-            "mcchrish/zenbones.nvim",
-            requires = "rktjmp/lush.nvim"
-        }
-
-		use({
-			"shaunsingh/nord.nvim",
+			"catppuccin/nvim",
+			as = "catppuccin",
+            config = function()
+              require('config.themes.catppuccin')
+          end
 		})
 
 		if Packer_bootstrap then

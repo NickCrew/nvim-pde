@@ -21,7 +21,10 @@ o.startofline = false   -- place cursor at start of line for certain commands e.
 o.backspace = 'indent,eol,start'  -- traditional backspace behavior
 
 -- Completion
-o.completeopt = { "menuone", "noselect" }
+o.completeopt = { "menu", "menuone", "noselect" }
+
+o.spell = false
+o.spelllang = { 'en_us' }
 
 -- File reading/writing
 o.autoread = true     -- automatically read changed files

@@ -1,4 +1,8 @@
+-- Plugin Mappings
+--
+
 local opts = { noremap = false, silent = true }
+local kopts = {noremap = true, silent = true}
 
 -- Open TODOs in QuickFix Window
 Mapper.map(
@@ -1042,3 +1046,5 @@ Mapper.map(
 	"search_openfilespectre",
 	"File Search"
 )
+
+

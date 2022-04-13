@@ -123,5 +123,23 @@ Mapper.map(
 	"search_nohighlights",
 	"Turn Off Search Highlights"
 )
+Mapper.map( 
+  "n",
+  "N",
+  "Nzz",
+  opts,
+  "Search",
+  "search_backwardcenter",
+  "Search backward and Center"
+)
+Mapper.map( 
+  "n",
+  "n",
+  "nzz",
+  opts,
+  "Search",
+  "search_forwardcenter",
+  "Search Forward and Center"
+)
 
 
