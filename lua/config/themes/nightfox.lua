@@ -22,4 +22,5 @@ nightfox.setup({
     colors = {}, -- Override default colors
     hlgroups = {}, -- Override highlight groups
 })
-nightfox.load()
+
+return nightfox

@@ -1,4 +1,5 @@
-require("catppuccin").setup({
+local cat = require("catppuccin")
+cat.setup({
   transparent_background = false,
   term_colors = false,
   styles = {

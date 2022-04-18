@@ -1,8 +1,7 @@
 -- vim: foldmethod=marker
 -- lua/core/options.lua
 
-
-local o = vim.opt
+local o = vim.o
 
 -- Appearance
 o.termguicolors = true
@@ -21,10 +20,11 @@ o.startofline = false   -- place cursor at start of line for certain commands e.
 o.backspace = 'indent,eol,start'  -- traditional backspace behavior
 
 -- Completion
-o.completeopt = { "menu", "menuone", "noselect" }
+
+o.completeopt = 'menuone,noselect,preview'
 
 o.spell = false
-o.spelllang = { 'en_us' }
+o.spelllang =  'en_us' 
 
 -- File reading/writing
 o.autoread = true     -- automatically read changed files
@@ -89,5 +89,6 @@ o.wildmenu = true
 o.wildmode = 'longest,list,full'
 o.wildignorecase = true
 o.wildignore = '.git/**,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**'
+
 
 

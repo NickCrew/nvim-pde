@@ -1,21 +1,15 @@
---
+
 local cmd = vim.cmd
 
--- cmd([[
---   augroup terms
---   autocmd!
---     autocmd Open * resize 10
---   augroup END
--- ]])
-
--- Autocommand that reloads Neovim whenever the plugin.lua is saved.
-cmd([[
+-- packer user config
+cmd([[ 
   augroup packer_user_config
     autocmd!
     autocmd BufWritePost packer.lua source <afile> | PackerSync
     augroup end
 ]])
 
+-- startUp
 cmd([[
   augroup startUp
       autocmd!
@@ -23,6 +17,7 @@ cmd([[
   augroup END
 ]])
 
+-- cursorHold
 cmd([[
   augroup cursorHold
     autocmd!

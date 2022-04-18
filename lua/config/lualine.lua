@@ -19,7 +19,7 @@ local colors = {
 		darkblue = "#51afef",
 		red = "#ec5f67",
 }
-local theme = "catppuccin"
+local theme = "auto"
 local conditions = {
 	buffer_not_empty = function()
 		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1

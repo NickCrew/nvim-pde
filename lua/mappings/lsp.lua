@@ -3,6 +3,15 @@ local M = {}
 
 function M.load_goto_mappings()
   local opts = {noremap = true, silent = true}
+  Mapper.map( 
+    "n",
+    "<C-e><C-r>",
+    "<Cmd>LspRestart<CR>",
+    opts,
+    "LSP",
+    "lsp_restart",
+    "Restart Language Server"
+  )
   -- Preview Definition
   Mapper.map(
       "n",

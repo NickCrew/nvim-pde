@@ -4,7 +4,16 @@
 local opts = { noremap = false, silent = true }
 local kopts = {noremap = true, silent = true}
 
--- Open TODOs in QuickFix Window
+-- Invoke completion
+Mapper.map(
+  'i',
+  '<C-x><C-o>',
+  "<Cmd>lua require('cmp').complete()<CR>",
+  opts,
+  "Completion",
+  "cmp_invokecomplete",
+  "Invoke Completion"
+)
 Mapper.map(
 	"n",
 	"<leader>2d",
@@ -516,7 +525,7 @@ Mapper.map(
 -- Load launch.json
 Mapper.map(
 	"n",
-	"<leader><leader>l",
+	"<leader><leader>L",
 	"<cmd>lua require('dap.ext.vscode').load_launchjs()<CR>",
 	opts,
 	"DAP",
@@ -795,7 +804,7 @@ Mapper.map(
 -- Delete Buffer
 Mapper.map(
 	"n",
-	"<leader><leader>db",
+	"<leader><leader>xb",
 	":BufferDelete<CR>",
 	opts,
 	"Buffers",
@@ -864,6 +873,15 @@ Mapper.map(
 	"Hop To Word Before Cursor"
 )
 -- Hop To Line
+Mapper.map(
+	"n",
+	"<leader><leader>l",
+	":HopLine<CR>",
+	opts,
+	"Movement",
+	"hop_line2",
+	"Hop To Line"
+)
 Mapper.map(
 	"n",
 	"<leader>L",

@@ -103,7 +103,15 @@ cmp.setup({
 		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
 		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-		["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+        -- invoke completion with only snippets
+        ["<C-x>s"] = cmp.mapping(cmp.mapping.complete({
+          config = {
+            sources = {
+            {
+              name = 'luasnip' }
+            }
+          }
+        }), { "i", "c" }),
 		["<C-q>"] = cmp.mapping({
 			i = cmp.mapping.abort(),
 			c = cmp.mapping.close(),
@@ -113,13 +121,13 @@ cmp.setup({
 
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp_signature_help" },
-		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp", max_item_count = 20 },
 		{ name = "luasnip" },
         { name = "nvim_lsp_document_symbol" },
 		{ name = "buffer" },
 		{ name = "path" },
 		{ name = "nvim_lua" },
-		{ name = "treesitter" },
+		{ name = "treesitter", max_item_count = 10 },
         { name = "cmp_git" },
 		{ name = "rg", max_item_count = 10 },
         -- { name = "spell" }
