@@ -9,54 +9,37 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(highlight, { text = icon, texthl = highlight, numhl = "" })
 end
 
-vim.diagnostic.config({
-  virtual_text = true,
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = true,
-})
 
 -- Toggle
 require('toggle_lsp_diagnostics').init({
-  start_on = true
+  start_on = true,
+  underline = true,
+  signs = true,
+  virtual_text = false
 })
 
-require('mappings.lsp').load_goto_mappings()
-require('lsp-format').setup()
+
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 local on_attach = function(_, bufnr)
-  -- Keybindings
   require('mappings.lsp').load(bufnr)
-
-  -- Aerial plugin
   require('aerial').on_attach(_, bufnr)
-
-  require('lsp-format').on_attach(_)
-
-  -- show diagnostics on hover
-  vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})')
-
-  -- LSP Signature
-  require("lsp_signature").on_attach({
+  require('lsp_signature').on_attach({
     bind = true,
-    handler_opts = {
-      border = "single",
-    },
+    handler_opts = { border = "single" },
     fix_pos = true,
     hint_enable = true,
     hint_prefix = "",
     padding = "",
-  })
-end
+  }, bufnr)
+  end
 
 -- currently installed servers
 local lsp_installer_servers = require("nvim-lsp-installer.servers")
 -- Desired servers
-local servers = require("lsp.servers")
+local servers = require('lsp.servers')
 
 
 -- Loop through the servers listed above.

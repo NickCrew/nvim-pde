@@ -1,9 +1,7 @@
 -- init.lua
 --
 
-require('settings')
+require('core')
 require('plugins')
 require('mappings')
-
-
 

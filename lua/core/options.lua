@@ -21,10 +21,10 @@ o.backspace = 'indent,eol,start'  -- traditional backspace behavior
 
 -- Completion
 
-o.completeopt = 'menuone,noselect,preview'
+o.completeopt = 'menu,menuone,noselect'
 
 o.spell = false
-o.spelllang =  'en_us' 
+o.spelllang =  'en_us'
 
 -- File reading/writing
 o.autoread = true     -- automatically read changed files
@@ -56,7 +56,7 @@ o.linebreak = true
 o.textwidth = 0
 
 -- Folding
-o.foldenable = true
+o.foldenable = false
 o.foldmarker = '{{{,}}}'
 o.foldmethod = 'marker'
 
@@ -89,6 +89,5 @@ o.wildmenu = true
 o.wildmode = 'longest,list,full'
 o.wildignorecase = true
 o.wildignore = '.git/**,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**'
-
 
 

@@ -1,14 +1,10 @@
 
 
-Mapper = require('mappings.mapper')
+Mapper = require('core.utils.mapper')
 
-require('mappings.native')
-require('mappings.plugins')
-require('mappings.telescope')
-
-
-
-
+require('mappings.core')
+require('mappings.dap')
+require('mappings.which-key')
 
 
 

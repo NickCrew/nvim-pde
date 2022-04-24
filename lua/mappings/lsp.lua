@@ -1,61 +1,64 @@
 
 local M = {}
 
-function M.load_goto_mappings()
-  local opts = {noremap = true, silent = true}
-  Mapper.map( 
+
+function M.load(bufnr)
+	local map_opts = { noremap = true, silent = true }
+  Mapper.map_buf( 
+    bufnr,
     "n",
     "<C-e><C-r>",
     "<Cmd>LspRestart<CR>",
-    opts,
+    map_opts,
     "LSP",
     "lsp_restart",
     "Restart Language Server"
   )
   -- Preview Definition
-  Mapper.map(
+  Mapper.map_buf(
+    bufnr,
       "n",
       "gpd",
       "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
-      opts,
+      map_opts,
       "LSP",
       "lsp_gpreviewdef",
       "Preview Definition"
   )
   -- Preview References
-  Mapper.map(
+  Mapper.map_buf(
+    bufnr,
       "n",
       "gpr",
       "<cmd>lua require('goto-preview').goto_preview_references()<CR>",
-      opts,
+      map_opts,
       "LSP",
       "lsp_gpreviewref",
       "Preview References"
   )
   -- Close Preview Windows
-  Mapper.map(
-      "n",
+  Mapper.map_buf(
+     bufnr,
+    "n",
       "gP",
       "<cmd>lua require('goto-preview').close_all_win()<CR>",
-      opts,
+      map_opts,
       "LSP",
       "lsp_gpreviewclose",
       "Close Preview Windows"
   )
   -- Preview Implementation
-  Mapper.map(
-      "n",
+  Mapper.map_buf(
+     bufnr,
+  "n",
       "gpi",
       "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>",
-      opts,
+      map_opts,
       "LSP",
       "lsp_gpreviewimp",
       "Preview Implementation"
   )
-end
 
-function M.load(bufnr)
-	local map_opts = { noremap = true, silent = true }
     -- Go To Declaration
 	Mapper.map_buf(
 		bufnr,
@@ -67,7 +70,7 @@ function M.load(bufnr)
 		"lsp_godecl",
 		"Go To Declaration"
 	)
-    -- Go To Defintion
+--    Go To Defintion
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -78,7 +81,7 @@ function M.load(bufnr)
 		"lsp_godef",
 		"Go To Defintion"
 	)
-    -- Show References
+    --Show References
 	Mapper.map_buf(
 		bufnr,
 		"n",
@@ -155,17 +158,17 @@ function M.load(bufnr)
 		"lsp_hover",
 		"Hover"
 	)
-    -- Code Actions
-	Mapper.map_buf(
-		bufnr,
-		"n",
-		"<leader>ac",
-		"<cmd>lua vim.lsp.buf.code_action()<CR>",
-		map_opts,
-		"LSP",
-		"lsp_action",
-		"Code Actions"
-	)
+    -- -- Code Actions
+	-- Mapper.map_buf(
+		-- bufnr,
+		-- "n",
+		-- "<leader>ac",
+		-- "<cmd>lua vim.lsp.buf.code_action()<CR>",
+		-- map_opts,
+		-- "LSP",
+		-- "lsp_action",
+		-- "Code Actions"
+	-- )
     -- Rename
 	Mapper.map_buf(
 		bufnr,

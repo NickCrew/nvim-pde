@@ -1,7 +1,6 @@
 -- lua/configure/dashboard.lua
 --
 
-
 local neovim_header_1 = {
   "                                                     ",
   "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",

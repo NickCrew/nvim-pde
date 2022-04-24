@@ -1,4 +1,45 @@
 local opts = { noremap = true, silent = true }
+-- Move To Window Left
+
+Mapper.map(
+	"n",
+	"<C-h>",
+	"<C-w><C-h>",
+	opts,
+	"Navigation",
+	"nav_left",
+	"Move To Window Left"
+)
+-- Move To Window Above
+Mapper.map(
+	"n",
+	"<C-k>",
+	"<C-w><C-k>",
+	opts,
+	"Navigation",
+	"nav_up",
+	"Move To Window Above"
+)
+-- Move To Window Right
+Mapper.map(
+	"n",
+	"<C-l>",
+	"<C-w><C-l>",
+	opts,
+	"Navigation",
+	"nav_right",
+	"Move To Window Right"
+)
+-- Move To Window Below
+Mapper.map(
+	"n",
+	"<C-j>",
+	"<C-w><C-j>",
+	opts,
+	"Navigation",
+	"nav_down",
+	"Move To Window Below"
+)
 -- Go To Last Buffer
 Mapper.map(
 	"n",
@@ -142,4 +183,34 @@ Mapper.map(
   "Search Forward and Center"
 )
 
-
+--------------
+-- Plugins
+--------------
+Mapper.map(
+	"n",
+	"<M-]>",
+	":BufferLineCycleNext<CR>",
+	opts,
+	"Buffers",
+	"buf_next",
+	"Next Buffer"
+)
+-- Previous Buffer
+Mapper.map(
+	"n",
+	"<M-[>",
+	":BufferLineCyclePrev<CR>",
+	opts,
+	"Buffers",
+	"buf_prev",
+	"Previous Buffer"
+)
+Mapper.map(
+	"n",
+	"<leader>L",
+	":HopLine<CR>",
+	opts,
+	"Movement",
+	"hop_line",
+	"Hop To Line"
+)

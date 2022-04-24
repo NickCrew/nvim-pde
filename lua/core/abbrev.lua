@@ -1,10 +1,13 @@
 
+
 vim.cmd([[
   cnoreabbrev F Fern
+  cnoreabbrev C Telescope neoclip
   cnoreabbrev T Telescope
   cnoreabbrev Tr TroubleToggle
   cnoreabbrev PC PackerCompile
   cnoreabbrev PI PackerInstall
+  cnoreabbrev Pj Telescope projects
   cnoreabbrev TB ToggleBookmark
   cnoreabbrev TT TroubleToggle
   cnoreabbrev TTw TroubleToggle workspace_diagnostics
@@ -15,3 +18,4 @@ vim.cmd([[
   cnoreabbrev NF Neoformat
   cnoreabbrev Rs resize
 ]])
+
