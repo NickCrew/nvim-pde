@@ -476,13 +476,7 @@ return packer.startup({
 
 		use({  -- Run code snippets
 			"michaelb/sniprun",
-			run = "bash ./install.sh",
-			config = function()
-				require("sniprun").setup({
-					selected_interpreters = { "Python" },
-					repl_enable = { "Python" },
-				})
-			end,
+			run = "bash ./install.sh"
 		})
 
 		use({  -- Marks and Bookmarks
@@ -639,6 +633,7 @@ return packer.startup({
 
         use({  -- Keybinding helper
           "mrjones2014/legendary.nvim",
+          before = "which-key.nvim",
           config = function()
             require('legendary').setup()
           end
