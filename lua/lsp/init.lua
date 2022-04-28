@@ -25,7 +25,6 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 local on_attach = function(_, bufnr)
   require('mappings.lsp').load(bufnr)
-  require('mappings.dap').load(bufnr)
   require('aerial').on_attach(_, bufnr)
   require('lsp_signature').on_attach({
     bind = true,

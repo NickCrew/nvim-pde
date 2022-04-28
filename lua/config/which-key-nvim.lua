@@ -5,7 +5,7 @@ return {
       require("which-key").setup({
         plugins = {
           marks = true, -- shows a list of your marks on ' and `
-          registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+          registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
           spelling = {
             enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
             suggestions = 9, -- how many suggestions should be shown in the list?
@@ -18,7 +18,6 @@ return {
             text_objects = true, -- help for text objects triggered after entering an operator
             windows = true, -- default bindings on <c-w>
             nav = true, -- misc bindings to work with windows
-            z = true, -- bindings for folds, spelling and others prefixed with z
             g = true, -- bindings for prefixed with g
           },
         },
@@ -28,9 +27,9 @@ return {
         key_labels = {
           -- override the label used to display some keys. It doesn't effect WK in any other way.
           -- For example:
-          -- ["<space>"] = "SPC",
-          -- ["<cr>"] = "RET",
-          -- ["<tab>"] = "TAB",
+           ["<space>"] = "SPC",
+           ["<cr>"] = "RET",
+           ["<tab>"] = "TAB",
         },
         icons = {
           breadcrumb = "»", -- symbol used in the command line area that shows your active key combo

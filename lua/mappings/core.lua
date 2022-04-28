@@ -1,6 +1,7 @@
 local opts = { noremap = true, silent = true }
 -- Move To Window Left
 
+
 Mapper.map(
   "n",
   "<C-h>",
@@ -164,25 +165,3 @@ Mapper.map(
   "Search Forward and Center"
 )
 
---------------
--- Plugins
---------------
-Mapper.map(
-  "n",
-  "<M-]>",
-  ":BufferLineCycleNext<CR>",
-  opts,
-  "Buffers",
-  "buf_next",
-  "Next Buffer"
-)
--- Previous Buffer
-Mapper.map(
-  "n",
-  "<M-[>",
-  ":BufferLineCyclePrev<CR>",
-  opts,
-  "Buffers",
-  "buf_prev",
-  "Previous Buffer"
-)

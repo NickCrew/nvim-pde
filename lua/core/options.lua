@@ -67,6 +67,8 @@ o.inccommand = "nosplit"
 o.smartcase = true
 
 -- Look and feel
+o.winminheight=0
+o.winminwidth=0
 o.ruler = true
 o.laststatus = 2
 o.showcmd = true

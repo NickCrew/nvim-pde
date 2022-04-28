@@ -54,9 +54,9 @@ telescope.setup({
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
                 ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-                ["<c-e>t"] = trouble.open_with_trouble,
+                ["<C-t>"] = trouble.open_with_trouble,
                 ["<esc>"] = actions.close,
-                ["<C-h"] = function(prompt_bufnr)
+                ["<C-h>"] = function(prompt_bufnr)
                     local opts = {
                         callback = actions.toggle_selection,
                         loop_callback = actions.send_selected_to_qflist,
@@ -68,7 +68,8 @@ telescope.setup({
                 end,
             },
             n = {
-                ["<c-e>t"] = trouble.open_with_trouble,
+
+                ["<C-t>"] = trouble.open_with_trouble,
                 ["<esc>"] = actions.close,
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,

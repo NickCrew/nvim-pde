@@ -320,9 +320,7 @@ return packer.startup({
 			"folke/trouble.nvim",
 			before = "telescope.nvim",
 			config = function()
-				require("trouble").setup({
-
-				})
+              require('config.trouble')
 			end,
 		})
 
