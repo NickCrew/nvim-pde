@@ -24,3 +24,6 @@ function _G.set_terminal_keymaps()
   vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
 end
 
+
+g.gruvbox_contrast_dark = 'medium'
+g.gruvbox_contrast_light = 'medium'

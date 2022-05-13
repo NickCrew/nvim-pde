@@ -58,6 +58,16 @@
           },
       },
       textobjects = {
+        swap = {
+              enable = true,
+              swap_next = {
+                ["<leader>as"] = "@parameter.inner",
+              },
+              swap_previous = {
+                ["<leader>aS"] = "@parameter.inner",
+              },
+            },
+
           move = {
               enable = true,
               set_jumps = true, -- whether to set jumps in the jumplist
@@ -80,10 +90,10 @@
           },
           lsp_interop = {
               enable = true,
-              border = "none",
+              border = "shadow",
               peek_definition_code = {
-                  ["<leader>df"] = "@function.outer",
-                  ["<leader>dF"] = "@class.outer",
+                  ["<leader><leader>d"] = "@function.outer",
+                  ["<leader><leader>D"] = "@class.outer",
               },
           },
           select = {

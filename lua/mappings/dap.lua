@@ -11,6 +11,15 @@ Mapper.map(
     "dap_openui",
     "Open DAP UI"
 )
+Mapper.map(
+    "n",
+    "<leader>duc",
+    "<cmd>lua require'dapui'.close()<CR>",
+    opts,
+    "DAP",
+    "dap_closeui",
+    "Close DAP UI"
+)
 -- Evaluate under cursor
 Mapper.map(
     "v",

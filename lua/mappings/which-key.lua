@@ -8,6 +8,29 @@ wk.register({
     b = { "<cmd>Telescope buffers<cr>", "Find Buffer" },
     s = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search Buffer"}
   },
+  -- d = {
+  --   name = "+dash",
+  --   d = {"<cmd>Dash<cr>", "Dash Search"},
+  --   D = {"<cmd>Dash!<cr>", "Dash Search (No keyword)"},
+  --   w = {"<cmd>DashWord<cr>", "Dash Search Word Under Cursor"},
+  --   W = {"<cmd>DashWord!<cr>", "Dash Search Word Under Cursor (No keyword)"},
+  -- },
+  f = {
+    name = "+files", -- optional group name
+    b = { "<cmd>Telescope file_browser<cr>", "Browse Files" },
+    f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
+    g = { "<cmd>Telescope live_grep<cr>", "Search Files" },
+    o = { "<cmd>Telescope oldfiles<cr>", "Find Old File" }, -- additional options for creating the keymap
+  },
+  h = {
+    name = "+harpoon",
+      h = {"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Harpoon Quick Menu"},
+      a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add Harpoon Mark" },
+  },
+  p = {
+    name = "+paste",
+    p = {"<cmd>:"}
+  },
   x = {
     name = "+diagnostics",
     d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
@@ -16,26 +39,6 @@ wk.register({
     r = { "<cmd>TroubleToggle lsp_references<cr>", "Show References" },
     n = { "<cmd>lua require('trouble').next({skip_groups = true, jump = true})<cr>", "Next Diagnostic Item"},
     p = { "<cmd>lua require('trouble').previous({skip_groups = true, jump = true})<cr>", "Previous Diagnostic Item"},
-  },
-  f = {
-    name = "+files", -- optional group name
-    b = { "<cmd>Telescope file_browser<cr>", "Browse Files" },
-    f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
-    g = { "<cmd>Telescope live_grep<cr>", "Search Files" },
-    o = { "<cmd>Telescope oldfiles<cr>", "Find Old File" }, -- additional options for creating the keymap
-  },
-  p = {
-    name = "+paste",
-    p = {"<cmd>:"}
-  },
-  t = {
-    name = "telescope",
-    e = {"<cmd>Telescope env<cr>", "Environment"},
-    p = {"<cmd>Telescope projects<cr>", "Projects"},
-    d = {"<cmd>Dash<cr>", "Dash Search"},
-    D = {"<cmd>Dash!<cr>", "Dash Search (No keyword)"},
-    dw = {"<cmd>DashWord<cr>", "Dash Search Word Under Cursor"},
-    dW = {"<cmd>DashWord!<cr>", "Dash Search Word Under Cursor (No keyword)"},
   },
   y = {
     name = "+yank",
@@ -46,23 +49,23 @@ wk.register({
 )
 
 wk.register({
-  [";"] = {"<cmd>Legendary<CR>", "Command Palette"},
+  ["["] = { "<cmd>BufferLineCyclePrev<cr>", "Previous Buffer" },
+  ["]"] = { "<cmd>BufferLineCycleNext<cr>", "Next Buffer"},
   ac = { "<cmd>CodeActionMenu<cr>", "Code Actions" },
-  H = { "<cmd>Telescope harpoon marks<cr>", "Find Harpoon'd File"},
-  aa = {"<cmd>Telescope aerial<cr>", "Document Symbols"},
-  hh = { "<cmd>HopWordCurrentLine<CR>", "Hop to Word in Current Line" },
+  gb = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Blame Line" },
+  aa = {"<cmd>Telescope aerial<cr>", "Search Aerial Symbols"},
+  lh = { "<cmd>HopWordCurrentLine<CR>", "Hop to Word in Current Line" },
   ll = {"<cmd>HopLine<cr>", "Hop To Line"},
 }, {
   prefix = "<leader>"
 })
 
 wk.register({
-  name = "DAP",
+  name = "+debugger",
   C = {"<cmd>lua require('dap').continue()<cr>", "Continue"},
   R = {"<cmd>lua require('dap').repl.toggle()<CR>", "Toggle REPL" },
   bp = {"<cmd>lua require('dap').toggle_breakpoint()<cr>", "Toggle Breakpoint"},
   cbp = {"<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", "Conditional Breakpoint"},
-  dd = { "<cmd>Telescope dap commands<cr>", "Find DAP Command" },
   e = {"<cmd>lua require('dap').eval()<cr>", "Evaluate"},
   fbp = {"<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", "Function Breakpoint"},
   p = {"<cmd>lua require('dap').pause()<cr>", "Pause"},
@@ -74,51 +77,44 @@ wk.register({
   so = {"<cmd>lua require('dap').step_over()<cr>", "Step Over"},
   vt = {"<cmd>DapVirtualTextToggle<cr>", "Toggle Virtual Text"},
 }, {
-  prefix = "\\"
+  prefix = "<C-n>"
 })
 
 wk.register({
   ["<C-a>"] = {
     name = "+workbench",
-    ["<C-a>"] = { "<cmd>AerialToggle<cr>", "Toggle Aerial" },
-    f = { "<cmd>Fern . -drawer -toggle<cr>", "Toggle File Tree" },
-    h = {"<C-w>h<C-w>_", "Move and Maximize Window Left"},
-    j = {"<C-w>j<C-w>_", "Move and Maximize Window Below"},
-    k = {"<C-w>k<C-w>_", "Move and Maximize Window Above"},
-    l = {"<C-w>l<C-w>_", "Move and Maximize Window Right"},
-    r = { "<cmd>Telescope neoclip<cr>", "Registers" },
-    u = { "<cmd>MundoToggle<cr>", "Toggle Undo Tree" },
+      a = { "<cmd>AerialToggle<cr>", "Toggle Aerial" },
+      p = {"<cmd>Legendary<CR>", "Command Palette"},
+      r = { "<cmd>Telescope neoclip<cr>", "Registers" },
+      b = { "<cmd>Telescope buffers<cr>", "Find Buffer" },
+      f = { "<cmd>Fern . -drawer -toggle<cr>", "Toggle File Tree" },
+      d = { "<cmd>Telescope dap commands<cr>", "Find DAP Command" },
+      u = { "<cmd>MundoToggle<cr>", "Toggle Undo Tree" },
+      h = { "<cmd>lua require('spectre').open()<cr>", "Find and Replace" },
   },
-  ["<C-e>"] = {
-    f = { "<cmd>Format<cr>", "Format Buffer" },
-    h = { "<cmd>lua require('spectre').open()<cr>", "Find and Replace" },
-  },
+  ["<M-j>"] = {"<C-w>j<C-w>_", "Move and Maximize Window Below"},
+  ["<M-h>"] = {"<C-w>h<C-w>|", "Move and Maximize Window Left"},
+  ["<M-k>"] = {"<C-w>k<C-w>_", "Move and Maximize Window Above"},
+  ["<M-l>"] = {"<C-w>l<C-w>|", "Move and Maximize Window Right"},
+  ["<M-=>"] = {"<C-w>=", "Restore Window Sizes"},
+
 })
 
 wk.register({
-  name = "+git",
-  s = {"<cmd>Telescope git_status<cr>", "Git Status"},
-  B  = {"<cmd>Telescope git_branches<cr>", "Git Branches"},
-  b = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Blame Line" },
-},{
-prefix = "<leader>g" })
-
-
-wk.register({
   name = "+nav",
-  ["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "Harpoon 1" },
-  ["2"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "Harpoon 2" },
-  ["3"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "Harpoon 3" },
-  ["4"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "Harpoon 4" },
-  ["5"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", "Harpoon 5" },
-  ha = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add Harpoon Mark" },
-  J = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "Next Harpoon Mark" },
-  F = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "Previous Harpoon Mark" },
-  f = { "<cmd>BufferLineCyclePrev<cr>", "Previous Buffer" },
-  j = { "<cmd>BufferLineCycleNext<cr>", "Next Buffer"},
+  ["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "Harpoon Mark 1" },
+  ["2"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "Harpoon Mark 2" },
+  ["3"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "Harpoon Mark 3" },
+  ["4"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "Harpoon Mark 4" },
+  ["5"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", "Harpoon Mark 5" },
+  ["6"] = { "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", "Harpoon Mark 6" },
+  ["7"] = { "<cmd>lua require('harpoon.ui').nav_file(7)<cr>", "Harpoon Mark 7" },
+  ["8"] = { "<cmd>lua require('harpoon.ui').nav_file(8)<cr>", "Harpoon Mark 8" },
+  ["9"] = { "<cmd>lua require('harpoon.ui').nav_file(9)<cr>", "Harpoon Mark 9" },
+  ["["] = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "Next Harpoon Mark" },
+  ["]"] = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "Previous Harpoon Mark" },
   q = { "<cmd>quitall<cr>", "Quit All"},
   Q = {"<cmd>quitall!<cr>", "Quit All (No Save)"}
-
 }, { prefix = "<leader><leader>" })
 
 

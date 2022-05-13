@@ -74,6 +74,10 @@ return packer.startup({
 
 		use({ "EthanJWright/vs-tasks.nvim" })  -- launch.json support
 
+        use({
+          "github/copilot.vim",
+        })
+
 		use({  -- LSP Symbol Drawer
 			"stevearc/aerial.nvim",
 			after = "telescope.nvim",
@@ -455,7 +459,6 @@ return packer.startup({
 			end,
 		})
 
-		use({ "bfredl/nvim-ipy" }) -- ipython integration
 
 		use({ "metakirby5/codi.vim" }) -- code scratchpad
 
@@ -490,6 +493,7 @@ return packer.startup({
 				-- "hrsh7th/cmp-vsnip",
 				"hrsh7th/cmp-cmdline",
 				"hrsh7th/cmp-buffer",
+                "hrsh7th/cmp-copilot",
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-path",
 				"hrsh7th/cmp-nvim-lua",
@@ -686,6 +690,14 @@ return packer.startup({
 				require("config.rose-pine-theme")
 			end,
 		})
+
+        use({ "Shatur/neovim-ayu" })
+        use({ "sainnhe/everforest" })
+        use({ "shaunsingh/moonlight.nvim" })
+        use({ "gruvbox-community/gruvbox" })
+        use({"shaunsingh/nord.nvim"})
+        use({ "sainnhe/sonokai"})
+        use({"shaunsingh/seoul256.nvim"})
 
 		if Packer_bootstrap then
 			require("packer").sync()

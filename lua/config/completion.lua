@@ -27,6 +27,7 @@ local kind_symbols = {
 }
 local source_mapping = {
     buffer = "  ◉  BUF",
+    copilot = "🚀 GHC",
     nvim_lsp = " 👐  LSP",
     nvim_lua = " 🌙  LUA",
     path = " 🚧 PTH",
@@ -114,6 +115,7 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = "nvim_lsp_signature_help" },
         { name = "nvim_lsp", max_item_count = 20 },
+        { name = 'copilot' },
         { name = "luasnip" },
         { name = "nvim_lsp_document_symbol" },
         { name = "buffer" },

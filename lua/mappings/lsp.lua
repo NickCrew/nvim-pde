@@ -16,7 +16,7 @@ function M.load(bufnr)
 		d = {"<cmd>lua vim.lsp.buf.definition()<CR>", "Go To Defintion"},
 		i = {"<cmd>lua vim.lsp.buf.implementation()<CR>", "Go To Implementation"},
 		r = { "<cmd>lua vim.lsp.buf.references()<CR>", "Show References" },
-		s = { "<cmd>lua vim.lsp.buf.sinature_help()<CR>", "Signature Help" },
+		s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
 		t = {"<cmd>lua vim.lsp.buf.type_definition()<CR>", "Go To Type Definition"},
         W = {"<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "Workspace Symbol"},
         w = {"<cmd>lua vim.lsp.buf.document_symbol()<CR>", "Document Symbol"},
