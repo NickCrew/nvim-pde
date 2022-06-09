@@ -1,4 +1,5 @@
-
+--
+-- lua/core/cmds/abbrev.lua
 
 vim.cmd([[
   cnoreabbrev F Fern

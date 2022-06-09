@@ -1,47 +1,52 @@
-local cmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
-local create_command = vim.api.nvim_create_user_command
+-- lua/core/cmds/auto.lua
+--
+-- Auto-Commands
+-------------------------------------------------------------
 
-augroup("packer_user_config", {})
-cmd("BufWritePost", {
-  desc = "Auto Compile plugins.lua file",
-  group = "packer_user_config",
-  command = "source <afile> | PackerCompile",
-  pattern = "plugins.lua",
-})
+local a = vim.api
+local autocmd = a.nvim_create_autocmd
+local augroup = a.nvim_create_augroup
 
-augroup('hover', {})
-cmd('CursorHold', 
+
+-- stylua: ignore start
+
+
+---------------------
+-- grp: hover
+---------------------
+augroup("hover", {})
+
+autocmd('CursorHold',
 {
   group = 'hover',
   pattern = '*',
   command = "lua require('nvim-lightbulb').update_lightbulb()"
 })
-cmd('CursorHoldI',
+
+autocmd('CursorHoldI',
 {
   group = 'hover',
   pattern = '*',
   command = "lua require('nvim-lightbulb').update_lightbulb()"
 })
-cmd('CursorHold',
-{
+
+
+autocmd('CursorHold',   
+{ -- Diagnostic pop-up on hover
   group = 'hover',
   pattern = '*',
   command = 'lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})'
 })
 
--- -- Auto switch light/dark theme
--- augroup('startUp', {})
--- cmd('VimEnter', {
---     group = 'startUp',
---     pattern = '*',
---     command = "call darkmodesocket#updateTheme()"
--- })
+---------------------
+-- grp: terms
+---------------------
+augroup("terms", {})
 
--- Terminal settings
-augroup('terms', {})
-cmd('TermOpen', {
-  group = 'terms',
-  pattern = 'term://*',
-  command = "lua set_terminal_keymaps()"
+autocmd("termopen", {
+  group = "terms",
+  pattern = "term://*",
+  command = "lua set_terminal_keymaps()",
 })
+
+-- stylua: ignore end

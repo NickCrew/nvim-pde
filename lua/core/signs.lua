@@ -22,5 +22,3 @@ function M.set_dap_signs()
       { text = "⭕", texthl = "", linehl = "", numhl = "" }
   )
 end
-
-return M

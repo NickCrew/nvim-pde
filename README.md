@@ -1,13 +1,13 @@
 # Neovim IDE 
 
-*A dev tool suite built on Neovim for VS Code Apostates*
+_A PDE (Personal Development Environment) built on Neovim and customized with Lua._
 ---
 
 Table of Contents
 =================
 
 * [Neovim IDE](#neovim-ide)
-   * [What's Inside](#whats-inside)
+   * [Features](#whats-inside)
       * [VCS Integration](#vcs-integration)
       * [Graphical Debugger](#graphical-debugger)
       * [Large Language Support](#large-language-support)
@@ -44,66 +44,106 @@ Table of Contents
 
 ---
 
-## What's Inside 
+## Features
 
-### VCS Integration
-- Git and Github
-	- Changes in gutter and status bar
-	- Toggle in-line blame messages and commit messages
-	- Github integration including pull requests
-	- Stage, preview, diff, etc. selected hunks of code
-- Tree-style Undo (Cmd+z) History
+---
+### VS Code Compatibility
 
-### Graphical Debugger
-- __Use VS Code's `launch.json` configuration files__ 
-- In-line virtual text and hover to inspect
-- Launch your code in a graphical, multi-pane interface with customizable layouts to view ...
-	- Variables
-	- Watch
-	- Debug Console
-	- Call Stack
-- Compatible with the most popular debug adapters found in VS Code (including Firefox and Chrome)
-- Task runner that is __fully compatible with VS Code's `tasks.json`__
-- Automatic unit test runner
-- Integrated Terminals, REPLs and a Hacker Scratch Pad
-- RESTful API and HTTP Client
+These features are directly compatible with components used with VS Code.  
 
-### Large Language Support
-- __Extensive filetype support__ and easy-to-define __custom filetypes__
-- Easily add support for new languages (Python, Rust, Javascript, Typescript, etc.)
-	- __Intellicode__ (Syntax parsing)
-	- Auto __Formatting and Linting__ (including docstrings)
-	- VS Code Language server functionality 
-		- Go To definition
-		- Callstack
-		- Code Outline
-		- Find All References
-		- Recommended Code Actions/Fixes
-		- Document Symbols and Outline
-		- Preview Definition
-		- Completion Entries
-		- And more...
+- __Graphical Debugger__
+	- Implements VS Code's Debug Adapter Protocol (DAP)
+	- Evaluate under cursor (or hover) and virtual text display
+	- Compatible with `launch.json`
+	- Easily install debug adapters using `DAPInstall`
+- __Task Automation__ compatible with `tasks.json`
+- __Snippets__ 
+	- Compatible with `snippets.json`
+	- Includes snippets from several VS Code snippet extensions by defaults
+- __Icons__ (from VS Code)
+	- File Icons 
+	- Language-specific LSP signs in menus and tab bar
+- __Command Palette__ - most functionality is available through an extensible command palletekkkkkkkkkkkk
 
-### Snippets
-- __Snippet engine__ that is fully programmable using Lua 
-	- Compatible with your existing VS Code snippets using `snippets.json` files
-	- Includes most snippets provided by VS Code and common extensions
-	- Use Tabnine AI completion source
+---
+### Keybindings
 
-### Fast Search and Navigation
-- File Tree
-- Super-fast Code Search
-- Advanced Find and Replace
-- Powerful Bookmarks
-- Programmable macros and multi-register clipboard handling
+- Easy and logical method for assigning keybindings
+- Inline (zero overhead) help remembering or discovering keybindings
+- Complete (including native keybindings) and searchable legend
 
-### Beautiful Interface
-- VS Code File Icons and Completion-Kind Symbols
-- Smooth Scrolling
-- Fancy TODOs, Warnings, Notes, etc. 
-- Color (hex value) highlighting 
-- Awesome included color schemes
+---
+### Auto-Completion
 
+Includes __Path intellisense__ and __command-mode__ (`:`) completion.  
+
+Auto-complete is highly configurable and supports many sources:  
+
+- Language server
+- Current Buffer
+- Git 
+- Ripgrep
+- Github Copilot
+- Treesitter
+
+---
+### Source Control Management
+
+- Show changes in the sign column (gutter)
+- Local git repo integrations including _Stage/Unstage_ chunk
+- Github integration (PRs, issues)
+- Blame and commit messages for current line
+
+---
+### Language Support
+
+There are several language servers installed by default. You can easily add/remove additonal
+language servers using `:LSPInstall`. 
+
+_Enable/Disable_ installed language servers using the config at `lua/lsp/servers.lua`.  
+
+- Ansible
+- Bash
+- CSS
+- Dockerfile
+- Javascript
+- Lua
+- Markdown
+- Python
+- Rust
+- TOML
+- Terraform
+- Typescript
+- Vimscript
+- YAML
+- HTML
+
+
+> __LSP Capabilities__
+>
+> - Auto-completion Source
+> - (Automatic) Formatting and Linting
+> - Go To definition (preview available)
+> - Find All References (preview available)
+> - Callstack
+> - Code Outline
+> - Symbol Outline
+> - Signature Help
+> - Preview Definition
+> - Recommended Code Actions/Fixes
+
+---
+### Convenience Features
+
+- Color highlight (by hex value)
+- Integrated personal wiki and cheatsheet editor
+- Intergation with Dash.app (API documentation app for macOS)
+- Powerful find and replace tool
+- Extremely fast code search tool
+- Innovative fast navigation tool based on the idea that in most cases for a given project, we are frequently returning
+  the same set of 4-5 files
+
+---
 ### Easily discoverable commands and documentation
 - All default and custom keybindings are automatically added to the command palette
 - Customizable quick cheatsheet
@@ -112,7 +152,6 @@ Table of Contents
 - Easy user-level customizations
 
 ---
-
 ## BEWARE 
 
 > __!! BE YE WARNED NOW LEST YE SUFFER MOST HORRIBLY !!__
