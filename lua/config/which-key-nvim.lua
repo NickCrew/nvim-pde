@@ -59,8 +59,8 @@ require("which-key").setup({
     "^ ",
   }, -- hide mapping boilerplate
   show_help = true, -- show help message on the command line when the popup is visible
-  -- triggers = "auto", -- automatically setup triggers
-  triggers = { "<leader>" }, -- or specify a list manually
+  triggers = "auto", -- automatically setup triggers
+  -- triggers = { "<leader>" }, -- or specify a list manually
 
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey

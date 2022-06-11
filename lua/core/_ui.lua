@@ -1,5 +1,7 @@
+-- lua/core/ui.lua
+-- 
 
-
+-- Apply Highlights
 vim.cmd([[
   highlight Container guifg=#BADA55 guibg=Black
   highlight FloatBorder guibg=none ctermbg=none

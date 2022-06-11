@@ -1,10 +1,10 @@
 
 
-Mapper = require('core.utils.mapper')
+Mapper = require('mappings._mapper')
 
-require('mappings.core')
-require('mappings.dap')
-require('mappings.wk')
+require('mappings._core')
+require('mappings._dap')
+require('mappings._wk')
 
 
 

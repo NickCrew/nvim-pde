@@ -115,15 +115,15 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = "nvim_lsp_signature_help" },
         { name = "nvim_lsp", max_item_count = 20 },
-        --{ name = 'copilot' },
+        { name = 'copilot',  },
         { name = "luasnip" },
         { name = "nvim_lsp_document_symbol" },
-        { name = "buffer" },
+        { name = "buffer", max_item_count = 10},
         { name = "path" },
         { name = "nvim_lua" },
-        { name = "treesitter", max_item_count = 10 },
+        { name = "treesitter", max_item_count = 5},
         { name = "cmp_git" },
-        { name = "rg", max_item_count = 10},
+        { name = "rg", max_item_count = 5},
         -- { name = "spell" }
     }),
     experimental = {

@@ -4,7 +4,15 @@
 local vim = vim
 local lspconfig = require('lspconfig')
 
-local signs = require("lsp.icons")
+local signs = {
+  Error = ' ',
+  Warning = ' ',
+  Warn = ' ',
+  Hint = ' ',
+  Information = ' ',
+  Info = ' ',
+}
+
 for type, icon in pairs(signs) do
   local highlight = "DiagnosticSign" .. type
   vim.fn.sign_define(

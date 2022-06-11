@@ -13,5 +13,5 @@ null_ls.setup({
         -- code actions
         null_ls.builtins.code_actions.refactoring,
 
-    },
+    }
 })

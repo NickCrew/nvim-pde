@@ -1,6 +1,7 @@
 local M = {}
 
 local function is_module_available(name)
+local utils = require('core.utils')
     if package.loaded[name] then
         return true
     else

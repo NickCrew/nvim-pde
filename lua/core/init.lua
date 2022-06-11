@@ -3,16 +3,18 @@
 --
 -- Initliazie core configuration
 
+local utils = require('core.utils')
+
 require('core.autocmds')
 
-local utils = require('core.utils')
 utils.disable_builtins()
 utils.load_usercmds()
 
 require('core.global')
 require('core.options')
-require('core.abbrev')
-require('core.highlights')
+
+require('core._abbrev')
+require('core._ui')
 
  vim.cmd([[call darkmodesocket#updateTheme()]])
 
