@@ -59,15 +59,6 @@ return packer.startup({
 			end,
 		})
 
-		use({
-			"iamcco/markdown-preview.nvim",
-			run = "cd app && npm install",
-			setup = function()
-				vim.g.mkdp_filetypes = { "markdown" }
-			end,
-			ft = { "markdown" },
-		})
-
 		use({ "shaunsingh/seoul256.nvim" })
 
 		use({ "famiu/nvim-reload" })
@@ -273,7 +264,7 @@ return packer.startup({
 				{ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" },
 			},
 			config = function()
-				require("config.lsp")
+				require("lsp")
 			end,
 		})
 

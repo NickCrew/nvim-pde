@@ -13,8 +13,8 @@ function! darkmodesocket#updateTheme()
 
     if is_dark_mode == "true\n"
         set background=dark
-        lua require('nightfox')
-        colorschem duskfox
+        " lua require('nightfox')
+        colorschem catppuccin
     else
         set background=light
         lua require('nightfox')
