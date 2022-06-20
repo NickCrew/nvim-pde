@@ -309,10 +309,11 @@ return packer.startup({
         "weilbith/nvim-code-action-menu",
         cmd = "CodeActionMenu",
       },
-
+      {
+        "williamboman/nvim-lsp-installer"
+      },
       {
         "neovim/nvim-lspconfig",
-        requires = { "williamboman/nvim-lsp-installer" },
         event = "BufEnter",
         config = function()
           require("config.lsp")
@@ -511,13 +512,6 @@ return packer.startup({
       run = "bash ./install.sh",
     })
 
-    use({ -- Test runner
-      "rcarriga/vim-ultest",
-      requires = "vim-test/vim-test",
-      ft = "python",
-      run = ":UpdateRemotePlugins",
-    })
-
     use({ -- Run code snippets
       "michaelb/sniprun",
       run = "bash ./install.sh",
@@ -560,7 +554,7 @@ return packer.startup({
       "L3MON4D3/LuaSnip",
       before = "nvim-cmp",
       config = function()
-        require('config.luasnip')
+        require("config.luasnip")
       end,
     })
 

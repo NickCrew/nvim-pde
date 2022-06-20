@@ -9,6 +9,8 @@ local vim = vim
 
 ------[ INITIALIZE DEFAULT CONFIGURATION ] {{{
 
+require("nvim-lsp-installer").setup {}
+
 local lsp_defaults = {
   flags = {
     debounce_text_changes = 150,
@@ -46,6 +48,7 @@ require("toggle_lsp_diagnostics").init({
   virtual_text = false,
 })
 -- }}}
+
 
 -----[ SETUP LANGUAGE SERVER CLIENTS ] {{{
 lspconfig.ansiblels.setup({})
