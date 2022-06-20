@@ -6,6 +6,8 @@ wk.register(
 	{
 		["["] = { "<cmd>BufferLineCyclePrev<cr>", "Focus Left Buffer" },
 		["]"] = { "<cmd>BufferLineCycleNext<cr>", "Focus Right Buffer" },
+        [","] = { "<cmd>noh<CR>", "Turn off search highlighting"},
+        ["<tab>"] = {"<cmd>b#<CR>", "Last Focused Buffer"},
 		a = {
 			r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
 			o = {

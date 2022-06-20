@@ -7,24 +7,19 @@ local a = vim.api
 local autocmd = a.nvim_create_autocmd
 local augroup = a.nvim_create_augroup
 
+-- Groups
+augroup("packer_user_config", {})
+augroup("hover", {})
+augroup("windows", {})
+augroup("terms", {})
 
 -- stylua: ignore start
-
----------------------
--- grp: packer_user_config
----------------------
-augroup("packer_user_config", {})
 autocmd("BufWritePost", {
   desc = "Auto Compile plugins.lua file",
   group = "packer_user_config",
   command = "source <afile> | PackerCompile",
   pattern = "plugins.lua",
 })
-
----------------------
--- grp: hover
----------------------
-augroup("hover", {})
 
 autocmd('CursorHold',
 {
@@ -40,7 +35,6 @@ autocmd('CursorHoldI',
   command = "lua require('nvim-lightbulb').update_lightbulb()"
 })
 
-
 autocmd('CursorHold',
 { -- Diagnostic pop-up on hover
   group = 'hover',
@@ -48,10 +42,12 @@ autocmd('CursorHold',
   command = 'lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})'
 })
 
----------------------
--- grp: terms
----------------------
-augroup("terms", {})
+autocmd("VimEnter",
+{ -- basic window navigation keymaps
+  group="windows",
+  pattern = '*',
+  command = "lua set_nav_keymaps()"
+})
 
 autocmd("termopen", {
   group = "terms",

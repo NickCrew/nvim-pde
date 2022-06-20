@@ -1,5 +1,6 @@
 -- lua/mappings/init.lua
 
-require("mappings.mapper")  -- Mappings created using 'Mapper'
-require("mappings.wk")      -- Mappings created using Which Key
 
+
+require("mappings.functions")
+require("mappings.wk") -- Mappings registered with WhichKey

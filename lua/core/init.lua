@@ -4,11 +4,9 @@
 -- Initliazie core configuration
 
 
-require('core.autocmds')
-require('core.usercmds')
+require('core.commands')
 require('core.global')
 require('core.options')
-require('core.abbrev')
 
 
 

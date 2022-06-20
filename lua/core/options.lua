@@ -75,7 +75,7 @@ o.showmode = false
 o.splitbelow = true
 o.splitright = true
 o.number = true
-o.signcolumn = "yes"
+o.signcolumn = true
 
 -- Wildmenu
 o.wildmenu = true
