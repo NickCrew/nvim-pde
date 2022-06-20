@@ -1,7 +1,9 @@
+
+Mapper = require("mappings.mapper._mapper")
+
 local opts = { noremap = true, silent = true }
+
 -- Move To Window Left
-
-
 Mapper.map(
   "n",
   "<C-h>",

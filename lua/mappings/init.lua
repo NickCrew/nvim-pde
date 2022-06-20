@@ -1,11 +1,5 @@
+-- lua/mappings/init.lua
 
-
-Mapper = require('mappings._mapper')
-
-require('mappings._core')
-require('mappings._dap')
-require('mappings._wk')
-
-
-
+require("mappings.mapper")  -- Mappings created using 'Mapper'
+require("mappings.wk")      -- Mappings created using Which Key
 

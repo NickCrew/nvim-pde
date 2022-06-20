@@ -1,3 +1,7 @@
+--
+-- config/completion.lua
+--
+
 local kind_symbols = {
       Text = "",
       Method = "",
@@ -25,10 +29,13 @@ local kind_symbols = {
       Operator = "",
       TypeParameter = "",
 }
+
+
 local source_mapping = {
-    buffer = "  ◉  BUF",
-    copilot = "🚀 GHC",
+    buffer = " ◉  BUF",
+    -- copilot = "🚀 GHC",
     nvim_lsp = " 👐  LSP",
+    cmp_tabnine = "🚀 TAB",
     nvim_lua = " 🌙  LUA",
     path = " 🚧 PTH",
     luasnip = " 🌜 SNP",
@@ -113,9 +120,10 @@ cmp.setup({
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
     },
     sources = cmp.config.sources({
-        { name = "nvim_lsp_signature_help" },
+        --{ name = "nvim_lsp_signature_help" },
         { name = "nvim_lsp", max_item_count = 20 },
-        { name = 'copilot',  },
+        -- { name = 'copilot',  },
+        { name = "cmp_tabnine"},
         { name = "luasnip" },
         { name = "nvim_lsp_document_symbol" },
         { name = "buffer", max_item_count = 10},

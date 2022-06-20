@@ -10,6 +10,16 @@ local augroup = a.nvim_create_augroup
 
 -- stylua: ignore start
 
+---------------------
+-- grp: packer_user_config
+---------------------
+augroup("packer_user_config", {})
+autocmd("BufWritePost", {
+  desc = "Auto Compile plugins.lua file",
+  group = "packer_user_config",
+  command = "source <afile> | PackerCompile",
+  pattern = "plugins.lua",
+})
 
 ---------------------
 -- grp: hover
@@ -31,7 +41,7 @@ autocmd('CursorHoldI',
 })
 
 
-autocmd('CursorHold',   
+autocmd('CursorHold',
 { -- Diagnostic pop-up on hover
   group = 'hover',
   pattern = '*',
