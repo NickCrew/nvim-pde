@@ -182,16 +182,8 @@ return packer.startup({
       "ThePrimeagen/harpoon",
       before = "telescope.nvim",
       config = function()
-        require("harpoon").setup({
-          global_settings = {
-            save_on_toggle = true,
-            save_on_change = true,
-            enter_on_sendcmd = true,
-            tmux_autoclose_windows = false,
-            excluded_filetypes = { "harpoon" },
-          },
-        })
-      end,
+        require('config.harpoon')
+      end
     })
 
     use({
@@ -290,6 +282,7 @@ return packer.startup({
             null_ls.builtins.formatting.stylua,
             -- code actions
             null_ls.builtins.code_actions.refactoring,
+            null_ls.builtins.code_actions.gitsigns,
           },
         })
       end,
@@ -652,34 +645,7 @@ return packer.startup({
       "goolord/alpha-nvim",
       requires = { "kyazdani42/nvim-web-devicons" },
       config = function()
-        local dashboard = require("alpha.themes.dashboard")
-        dashboard.section.header.val = require("ui.misc").dashboard_title
-        dashboard.section.buttons.val = {
-          dashboard.button(
-            "f f",
-            "  > Find File",
-            ":Telescope find_files<CR>"
-          ),
-          dashboard.button(
-            "f p",
-            "  > Find Project",
-            ":Telescope projects<CR>"
-          ),
-          dashboard.button(
-            "z d",
-            "  > Go To Folder",
-            ":Telescope zoxide list<CR>"
-          ),
-          dashboard.button(
-            "u",
-            "  > Update plugins",
-            ":PackerSync<CR>"
-          ),
-          dashboard.button("e", "  > New file", ":enew <CR>"),
-          dashboard.button("q", "  > Quit NVIM", ":qa<CR>"),
-        }
-        dashboard.section.footer.val = require("alpha.fortune")
-        require("alpha").setup(dashboard.opts)
+       require('config.dashboard') 
       end,
     })
 

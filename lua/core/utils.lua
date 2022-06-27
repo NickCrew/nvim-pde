@@ -1,6 +1,3 @@
--- lua/core/utils.lua
---
-
 local vim = vim
 
 local M = {}
@@ -79,14 +76,12 @@ function M.update_theme()
 
   if is_dark then
     vim.opt.background = 'dark'
-    vim.cmd("colorscheme duskfox")
+    vim.cmd("colorscheme catppuccin")
   else
-    vim.cmd("colorscheme dawnfox")
     vim.opt.background = 'light'
+    vim.cmd("colorscheme dawnfox")
   end
 
-
-  require('ui.highlights')
 
 end
 
