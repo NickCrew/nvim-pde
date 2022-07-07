@@ -66,7 +66,7 @@ return packer.startup({
 
     use({ "EthanJWright/vs-tasks.nvim" }) -- launch.json support
 
-    -- use({ "github/copilot.vim" })
+    use({ "github/copilot.vim" })
 
     use({ "kyazdani42/nvim-web-devicons" })
 
@@ -251,6 +251,7 @@ return packer.startup({
         "lambdalisue/fern-hijack.vim",
         "lambdalisue/fern-mapping-quickfix.vim",
         "lambdalisue/nerdfont.vim",
+        "lambdalisue/glyph-palette.vim",
         "lambdalisue/fern-renderer-nerdfont.vim",
         "lambdalisue/fern-git-status.vim",
         "lambdalisue/fern-bookmark.vim",
@@ -274,7 +275,6 @@ return packer.startup({
           sources = {
             -- diagnostics
             null_ls.builtins.diagnostics.eslint,
-            null_ls.builtins.diagnostics.pylint,
             null_ls.builtins.diagnostics.yamllint,
             -- formatting
             null_ls.builtins.formatting.yapf,
@@ -453,19 +453,7 @@ return packer.startup({
       "rcarriga/nvim-dap-ui",
       requires = { "mfussenegger/nvim-dap" },
       config = function()
-        local dapui = require("dapui")
-        local dap = require("dap")
-        dapui.setup()
-
-        dap.listeners.after.event_initialized["dapui_config"] = function()
-          dapui.open()
-        end
-        dap.listeners.before.event_terminated["dapui_config"] = function()
-          dapui.close()
-        end
-        dap.listeners.before.event_exited["dapui_config"] = function()
-          dapui.close()
-        end
+        require('config.dap_utils')
       end,
     })
 
@@ -521,7 +509,7 @@ return packer.startup({
         },
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-buffer",
-        -- "hrsh7th/cmp-copilot",
+        "hrsh7th/cmp-copilot",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-nvim-lua",
@@ -690,9 +678,9 @@ return packer.startup({
     use({
       "catppuccin/nvim",
       as = "catppuccin",
-      config = function()
-        require("config.catppuccin-theme")
-      end,
+      -- config = function()
+        -- require("config.catppuccin-theme")
+      -- end,
     })
 
     use({ "mcchrish/zenbones.nvim" })

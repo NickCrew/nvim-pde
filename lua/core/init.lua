@@ -4,12 +4,12 @@
 -- Initliazie core configuration
 
 
+local utils = require('core.utils')
 
-require('core.utils').disable_builtins()
+utils.disable_builtins()
 require('core.autocmds')
-require('core.usercmds')
+require('core.cmds')
 require('core.global')
 require('core.options')
-require('core.signs')
 
 
