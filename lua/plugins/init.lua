@@ -66,8 +66,6 @@ return packer.startup({
 
     use({ "EthanJWright/vs-tasks.nvim" }) -- launch.json support
 
-    use({ "github/copilot.vim" })
-
     use({ "kyazdani42/nvim-web-devicons" })
 
     use({ "tpope/vim-commentary" })
@@ -509,7 +507,6 @@ return packer.startup({
         },
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-copilot",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-nvim-lua",

@@ -10,6 +10,7 @@ g.maplocalleader = " "
 
 -- Global Variables
 g.python3_host_prog = user_settings.python_path
+g.fern_disable_startup_warnings = true
 
 -- Plugin Global Variables
 g.cursorhold_updatetime = 100 -- plugin: fix-cursorhold

@@ -79,7 +79,7 @@ lspconfig.remark_ls.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.tflint.setup({})
 lspconfig.tsserver.setup({})
-lspconfig.yamlls.setup({})
+-- lspconfig.yamlls.setup({})
 lspconfig.vimls.setup({})
 -- }}}
 

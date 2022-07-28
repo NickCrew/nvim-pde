@@ -32,9 +32,8 @@ local kind_symbols = {
 
 local source_mapping = {
     buffer = " ◉  BUF",
-    copilot = "🚀 GHC",
     nvim_lsp = " 👐  LSP",
-    -- cmp_tabnine = "🚀 TAB",
+    cmp_tabnine = "🚀 TAB",
     nvim_lua = " 🌙  LUA",
     path = " 🚧 PTH",
     luasnip = " 🌜 SNP",
@@ -121,8 +120,7 @@ cmp.setup({
         { name = "nvim_lsp_signature_help" },
         { name = "nvim_lsp" },
         { name = "luasnip" },
-        { name = 'copilot',  },
-        -- { name = "cmp_tabnine"},
+        { name = "cmp_tabnine", max_item_count = 1},
         { name = "nvim_lsp_document_symbol" },
         { name = "nvim_lua" },
         { name = "path" },
