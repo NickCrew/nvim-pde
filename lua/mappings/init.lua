@@ -1,6 +1,4 @@
--- lua/mappings/init.lua
+-- Keymappings
 
-
-
-require("mappings.functions")
-require("mappings.wk") -- Mappings registered with WhichKey
+require('mappings.qol')  -- Basic Quality of Life Mappings
+require("mappings.wk")   -- Register mappings with WhichKey

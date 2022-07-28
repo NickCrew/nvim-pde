@@ -66,8 +66,6 @@ return packer.startup({
 
     use({ "EthanJWright/vs-tasks.nvim" }) -- launch.json support
 
-    -- use({ "github/copilot.vim" })
-
     use({ "kyazdani42/nvim-web-devicons" })
 
     use({ "tpope/vim-commentary" })
@@ -182,16 +180,8 @@ return packer.startup({
       "ThePrimeagen/harpoon",
       before = "telescope.nvim",
       config = function()
-        require("harpoon").setup({
-          global_settings = {
-            save_on_toggle = true,
-            save_on_change = true,
-            enter_on_sendcmd = true,
-            tmux_autoclose_windows = false,
-            excluded_filetypes = { "harpoon" },
-          },
-        })
-      end,
+        require('config.harpoon')
+      end
     })
 
     use({
@@ -259,6 +249,7 @@ return packer.startup({
         "lambdalisue/fern-hijack.vim",
         "lambdalisue/fern-mapping-quickfix.vim",
         "lambdalisue/nerdfont.vim",
+        "lambdalisue/glyph-palette.vim",
         "lambdalisue/fern-renderer-nerdfont.vim",
         "lambdalisue/fern-git-status.vim",
         "lambdalisue/fern-bookmark.vim",
@@ -282,7 +273,6 @@ return packer.startup({
           sources = {
             -- diagnostics
             null_ls.builtins.diagnostics.eslint,
-            null_ls.builtins.diagnostics.pylint,
             null_ls.builtins.diagnostics.yamllint,
             -- formatting
             null_ls.builtins.formatting.yapf,
@@ -290,6 +280,7 @@ return packer.startup({
             null_ls.builtins.formatting.stylua,
             -- code actions
             null_ls.builtins.code_actions.refactoring,
+            null_ls.builtins.code_actions.gitsigns,
           },
         })
       end,
@@ -460,19 +451,7 @@ return packer.startup({
       "rcarriga/nvim-dap-ui",
       requires = { "mfussenegger/nvim-dap" },
       config = function()
-        local dapui = require("dapui")
-        local dap = require("dap")
-        dapui.setup()
-
-        dap.listeners.after.event_initialized["dapui_config"] = function()
-          dapui.open()
-        end
-        dap.listeners.before.event_terminated["dapui_config"] = function()
-          dapui.close()
-        end
-        dap.listeners.before.event_exited["dapui_config"] = function()
-          dapui.close()
-        end
+        require('config.dap_utils')
       end,
     })
 
@@ -528,7 +507,6 @@ return packer.startup({
         },
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-buffer",
-        -- "hrsh7th/cmp-copilot",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-nvim-lua",
@@ -652,34 +630,7 @@ return packer.startup({
       "goolord/alpha-nvim",
       requires = { "kyazdani42/nvim-web-devicons" },
       config = function()
-        local dashboard = require("alpha.themes.dashboard")
-        dashboard.section.header.val = require("ui.misc").dashboard_title
-        dashboard.section.buttons.val = {
-          dashboard.button(
-            "f f",
-            "  > Find File",
-            ":Telescope find_files<CR>"
-          ),
-          dashboard.button(
-            "f p",
-            "  > Find Project",
-            ":Telescope projects<CR>"
-          ),
-          dashboard.button(
-            "z d",
-            "  > Go To Folder",
-            ":Telescope zoxide list<CR>"
-          ),
-          dashboard.button(
-            "u",
-            "  > Update plugins",
-            ":PackerSync<CR>"
-          ),
-          dashboard.button("e", "  > New file", ":enew <CR>"),
-          dashboard.button("q", "  > Quit NVIM", ":qa<CR>"),
-        }
-        dashboard.section.footer.val = require("alpha.fortune")
-        require("alpha").setup(dashboard.opts)
+       require('config.dashboard') 
       end,
     })
 
@@ -724,9 +675,9 @@ return packer.startup({
     use({
       "catppuccin/nvim",
       as = "catppuccin",
-      config = function()
-        require("config.catppuccin-theme")
-      end,
+      -- config = function()
+        -- require("config.catppuccin-theme")
+      -- end,
     })
 
     use({ "mcchrish/zenbones.nvim" })

@@ -7,6 +7,26 @@
 
 local vim = vim
 
+------[ DEFINE DIAGNOSTIC SIGNS ] {{{
+local fn = vim.fn
+
+-- Diagnostic Signs
+for type, icon in pairs({
+  Error = " ",
+  Warning = " ",
+  Warn = " ",
+  Hint = " ",
+  Information = " ",
+  Info = " ",
+}) do
+  local highlight = "DiagnosticSign" .. type
+  fn.sign_define(highlight, { text = icon, texthl = highlight, numhl = "" })
+end
+
+
+
+-- }}}
+
 ------[ INITIALIZE DEFAULT CONFIGURATION ] {{{
 
 require("nvim-lsp-installer").setup {}
@@ -54,12 +74,13 @@ require("toggle_lsp_diagnostics").init({
 lspconfig.ansiblels.setup({})
 lspconfig.cssls.setup({})
 lspconfig.diagnosticls.setup({})
-lspconfig.dockerls.setup({})
+--lspconfig.dockerls.setup({})
 lspconfig.remark_ls.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.tflint.setup({})
 lspconfig.tsserver.setup({})
-lspconfig.yamlls.setup({})
+-- lspconfig.yamlls.setup({})
+lspconfig.vimls.setup({})
 -- }}}
 
 -----[ Clients with custom setup configurations ] {{{

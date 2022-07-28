@@ -30,10 +30,8 @@ local kind_symbols = {
       TypeParameter = "",
 }
 
-
 local source_mapping = {
     buffer = " ◉  BUF",
-    -- copilot = "🚀 GHC",
     nvim_lsp = " 👐  LSP",
     cmp_tabnine = "🚀 TAB",
     nvim_lua = " 🌙  LUA",
@@ -42,7 +40,6 @@ local source_mapping = {
     treesitter = "🌲 TSi",
     rg = " 🔍 RGr",
 }
-
 local lspkind = require("lspkind")
 local luasnip = require("luasnip")
 local cmp = require("cmp")
@@ -120,18 +117,17 @@ cmp.setup({
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
     },
     sources = cmp.config.sources({
-        --{ name = "nvim_lsp_signature_help" },
-        { name = "nvim_lsp", max_item_count = 20 },
-        -- { name = 'copilot',  },
-        { name = "cmp_tabnine"},
+        { name = "nvim_lsp_signature_help" },
+        { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "cmp_tabnine", max_item_count = 1},
         { name = "nvim_lsp_document_symbol" },
-        { name = "buffer", max_item_count = 10},
-        { name = "path" },
         { name = "nvim_lua" },
-        { name = "treesitter", max_item_count = 5},
+        { name = "path" },
+        { name = "buffer" },
         { name = "cmp_git" },
-        { name = "rg", max_item_count = 5},
+        { name = "treesitter", max_item_count = 1},
+        { name = "rg", max_item_count = 1},
         -- { name = "spell" }
     }),
     experimental = {
