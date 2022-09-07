@@ -20,5 +20,7 @@ usercmd("Fmt",
 usercmd("Halp",
   "help halp<cr>", {})
 
+usercmd("Launchjs", "lua require('dap.ext.vscode').load_launchjs()", {})
+
 -- stylua: ignore end
 

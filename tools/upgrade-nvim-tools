@@ -1,4 +1,4 @@
 #!/usr/bin/env zsh
 
-brew upgrade neovim --fetch-head
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+brew upgrade neovim --fetch-head

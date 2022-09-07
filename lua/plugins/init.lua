@@ -225,6 +225,7 @@ return packer.startup({
       config = function()
         require("spectre").setup()
       end,
+      disabled = true,
     })
 
     use({ -- Smart delimiters and pairs
@@ -266,6 +267,7 @@ return packer.startup({
 
     use({
       "jose-elias-alvarez/null-ls.nvim",
+      ft = { "python", "javascript", "javascriptreact", "typescript", "typescriptreact" },
       config = function()
         local null_ls = require("null-ls")
 
@@ -273,14 +275,11 @@ return packer.startup({
           sources = {
             -- diagnostics
             null_ls.builtins.diagnostics.eslint,
-            null_ls.builtins.diagnostics.yamllint,
             -- formatting
             null_ls.builtins.formatting.yapf,
             null_ls.builtins.formatting.isort,
             null_ls.builtins.formatting.stylua,
             -- code actions
-            null_ls.builtins.code_actions.refactoring,
-            null_ls.builtins.code_actions.gitsigns,
           },
         })
       end,
@@ -454,37 +453,38 @@ return packer.startup({
         require('config.dap_utils')
       end,
     })
-
     use({
       "theHamsta/nvim-dap-virtual-text",
       requires = { "mfussenegger/nvim-dap" },
       config = function()
         require("nvim-dap-virtual-text").setup({
-          enabled = true, -- enable this plugin (the default)
-          enabled_commands = true, -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
-          highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
-          highlight_new_as_changed = false, -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
-          show_stop_reason = true, -- show stop reason when stopped for exceptions
-          commented = false, -- prefix virtual text with comment string
-          -- experimental features:
-          virt_text_pos = "eol", -- position of virtual text, see `:h nvim_buf_set_extmark()`
-          all_frames = false, -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
-          virt_lines = false, -- show virtual lines instead of virtual text (will flicker!)
-          virt_text_win_col = nil, -- position the virtual text at a fixed window column (starting from the first text column) ,
-          -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
+          enabled = true,
+          enabled_commands = true,
+          highlight_changed_variables = true,
+          highlight_new_as_changed = false,
+          show_stop_reason = true,
+          commented = false,
+          virt_text_pos = "eol",
+          all_frames = false,
+          virt_lines = false,
+          virt_text_win_col = nil,
         })
-      end,
+      end
     })
 
+
     use({
+
       "mfussenegger/nvim-dap-python",
       requires = { "mfussenegger/nvim-dap" },
       config = function()
-        require("dap-python").setup(
-          "~/.pyenv/versions/debugpy/bin/python"
-        )
-      end,
+        local dap_py = require("dap-python")
+        local py_path = os.getenv("HOME") .. "/.pyenv/versions/debugpy/bin/python"
+        dap_py.setup(py_path)
+        dap_py.test_runner = 'pytest'
+      end
     })
+
 
     use({ -- GDB
       "sakhnik/nvim-gdb",
@@ -494,17 +494,13 @@ return packer.startup({
     use({ -- Run code snippets
       "michaelb/sniprun",
       run = "bash ./install.sh",
+      disabled = true
     })
 
     use({ -- Completion and Snippets
       "hrsh7th/nvim-cmp",
 
       requires = {
-        {
-          "tzachar/cmp-tabnine",
-          run = "./install.sh",
-          requires = "hrsh7th/nvim-cmp",
-        },
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
@@ -630,7 +626,7 @@ return packer.startup({
       "goolord/alpha-nvim",
       requires = { "kyazdani42/nvim-web-devicons" },
       config = function()
-       require('config.dashboard') 
+        require('config.dashboard')
       end,
     })
 
@@ -676,7 +672,7 @@ return packer.startup({
       "catppuccin/nvim",
       as = "catppuccin",
       -- config = function()
-        -- require("config.catppuccin-theme")
+      -- require("config.catppuccin-theme")
       -- end,
     })
 

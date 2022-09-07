@@ -129,6 +129,11 @@ wk.register(
 			name = "+search",
 			g = { "<cmd>Telescope live_grep<cr>", "Search Files" },
 		},
+        t = {
+          name = "+test",
+          n = {"<cmd>lua require('dap-python').test_method()<CR>", "Test Method"},
+          f = {"<cmd>lua require('dap-python').test_class()<CR>", "Test Class"},
+        },
 		--
 		-- Diagnostics (Trouble)
 		x = {
@@ -167,6 +172,17 @@ wk.register(
 	}
 )
 -- }}}
+
+wk.register({
+  name = "+test",
+  t = {
+    s = {"<ESC>:lua require('dap-python').debug_selection()<CR>", "Debug Selection"},
+  }
+
+}, {
+  prefix = "<leader>",
+  mode = "v"
+})
 
 -- N +lsp {{{
 wk.register({

@@ -71,7 +71,6 @@ require("toggle_lsp_diagnostics").init({
 
 
 -----[ SETUP LANGUAGE SERVER CLIENTS ] {{{
-lspconfig.ansiblels.setup({})
 lspconfig.cssls.setup({})
 lspconfig.diagnosticls.setup({})
 --lspconfig.dockerls.setup({})
@@ -124,6 +123,25 @@ lspconfig.pyright.setup({
       typeCheckingMode = "off",
     },
   },
+})
+-- }}}
+
+
+-- Ansible {{{
+local python_bin_dir = vim.env.HOME .. ".pyenv.versions/neovim/bin"
+lspconfig.ansiblels.setup({
+  settings = {
+    ansible = {
+      path = python_bin_dir .. "ansible"
+    },
+    ansibleLint = {
+      enabled = true,
+      path = python_bin_dir .. "ansible-lint"
+    },
+    python = {
+      interpreterPath = python_bin_dir .. "python"
+    }
+  }
 })
 -- }}}
 

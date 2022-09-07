@@ -5,6 +5,7 @@ local wk = require('which-key')
 -- Description: Shortcuts to control the debugger (nvim-dap)
 wk.register({
 	name = "+debugger",
+    h = {"<cmd>lua require('dap.ui.widgets').hover()<cr>", "Hover"},
 	C = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
 	R = { "<cmd>lua require('dap').repl.toggle()<CR>", "Toggle REPL" },
 	bp = {

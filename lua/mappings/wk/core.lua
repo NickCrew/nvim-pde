@@ -135,8 +135,7 @@ wk.register(
 		},
 		-- Search
 		s = {
-			name = "+search",
-			g = { "<cmd>Telescope live_grep<cr>", "Search Files" },
+          "<Cmd>Hop"
 		},
 		--
 		-- Diagnostics (Trouble)
