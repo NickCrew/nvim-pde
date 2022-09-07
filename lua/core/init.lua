@@ -1,15 +1,10 @@
+-- Core Configuration Initialization
 --
--- lua/core/init.lua
---
--- Initliazie core configuration
 
 
-local utils = require('core.utils')
-
-utils.disable_builtins()
-require('core.autocmds')
-require('core.cmds')
-require('core.global')
-require('core.options')
+require('core.autocmds')  -- Autocommands
+require('core.cmds')      -- User Commands
+require('core.global')    -- Global variables and functions
+require('core.options')   -- Settings/Options
 
 

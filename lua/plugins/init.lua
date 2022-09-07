@@ -288,7 +288,7 @@ return packer.startup({
     use({
       {
         "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
-        "ray-x/lsp_signature.nvim",
+         "ray-x/lsp_signature.nvim",
         "simrat39/rust-tools.nvim",
         "jose-elias-alvarez/nvim-lsp-ts-utils",
         "folke/lsp-colors.nvim",

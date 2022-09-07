@@ -1,4 +1,7 @@
 -- vim: set foldmethod=marker foldmarker={{{,}}}
+-- WhichKey Configuration
+--
+
 local wk = require("which-key")
 
 -- N:SPC {{{

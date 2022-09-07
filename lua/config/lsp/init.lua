@@ -128,7 +128,8 @@ lspconfig.pyright.setup({
 
 
 -- Ansible {{{
-local python_bin_dir = vim.env.HOME .. ".pyenv.versions/neovim/bin"
+local python_bin_dir = vim.env.HOME .. "/.pyenv/versions/neovim/bin"
+
 lspconfig.ansiblels.setup({
   settings = {
     ansible = {

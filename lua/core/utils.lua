@@ -1,5 +1,4 @@
 local vim = vim
-local user_settings = require('user.settings')
 
 local M = {}
 
@@ -39,7 +38,26 @@ function M.resize_split(plus_or_minus)
 end
 
 function M.disable_builtins()
-  local disabled_built_ins = user_settings.disabled_builtin_plugins
+  local disabled_built_ins = {
+    "netrw",
+    "netrwPlugin",
+    "netrwSettings",
+    "netrwFileHandlers",
+    "gzip",
+    "zip",
+    "zipPlugin",
+    "tar",
+    "tarPlugin",
+    "getscript",
+    "getscriptPlugin",
+    "vimball",
+    "vimballPlugin",
+    "2html_plugin",
+    "logipat",
+    "rrhelper",
+    "spellfile_plugin",
+    "matchit",
+  }
   for _, plugin in pairs(disabled_built_ins) do
     vim.g["loaded_" .. plugin] = 1
   end

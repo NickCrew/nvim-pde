@@ -1,4 +1,8 @@
--- Keymappings
+-- Keymappings Configuration Initialization
+--
 
-require('mappings.qol')  -- Basic Quality of Life Mappings
-require("mappings.wk")   -- Register mappings with WhichKey
+--
+-- Create and Register mappings with WhichKey
+--
+require("mappings.vim")
+require("mappings.wk")
