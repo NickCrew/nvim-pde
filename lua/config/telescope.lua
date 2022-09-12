@@ -95,6 +95,9 @@ telescope.setup({
         },
     },
     extensions = {
+        aerial = {
+          show_nesting = true
+        },
         file_browser = {},
         fzf = {
             fuzzy = true,

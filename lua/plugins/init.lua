@@ -137,8 +137,16 @@ return packer.startup({
       after = "telescope.nvim",
       config = function()
         require("aerial").setup({
-          backends = { "lsp", "treesitter", "markdown" },
-          close_behavior = "auto",
+          backends = {
+            "lsp",
+            "treesitter",
+            "markdown"
+          },
+          attach_mode = "window",
+          close_automatic_events = {
+            "unsupported", "switch_buffer", "unfocus"
+          },
+          default_bindings = true,
           default_direction = "prefer_right",
           min_width = 30,
           max_width = 50,
