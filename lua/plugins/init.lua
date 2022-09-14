@@ -555,7 +555,7 @@ return packer.startup({
     use({ -- git changes in sign column
       "lewis6991/gitsigns.nvim",
       config = function()
-        require("config.gitsigns")
+        require('gitsigns').setup()
       end,
     })
 
