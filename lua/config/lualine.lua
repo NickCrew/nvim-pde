@@ -128,6 +128,8 @@ ins_left({
 	end,
 })
 
+ins_left({"lsp_progress"})
+
 ins_right({
   "aerial"
 })

@@ -192,18 +192,6 @@ return packer.startup({
       end
     })
 
-    use({
-      "lazytanuki/nvim-mapper",
-      config = function()
-        require("nvim-mapper").setup({
-          no_map = false,
-          search_path = os.getenv("HOME") .. "/.config/nvim/lua",
-          action_on_enter = "definition",
-        })
-      end,
-      before = "telescope.nvim",
-    })
-
     use({ -- RESTful API and HTTP Client
       "NTBBloodbath/rest.nvim",
       config = function()
@@ -326,19 +314,6 @@ return packer.startup({
       end,
     })
 
-    use({ -- Show status of language server loading in buffer
-      "j-hui/fidget.nvim",
-      event = "BufEnter",
-      config = function()
-        require("fidget").setup({
-          sources = {
-            code_action = {
-              ignore = true,
-            },
-          },
-        })
-      end,
-    })
 
     use({ -- Smart Session Management
       "folke/persistence.nvim",
@@ -567,6 +542,11 @@ return packer.startup({
       config = function()
         require("config.buffline")
       end,
+    })
+
+    use({
+      "arkav/lualine-lsp-progress",
+      before = "lualine.nvim"
     })
 
     use({
