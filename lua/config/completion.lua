@@ -124,10 +124,10 @@ cmp.setup({
         { name = "nvim_lsp_document_symbol" },
         { name = "nvim_lua" },
         { name = "path" },
-        { name = "buffer" },
+        --{ name = "buffer" },
         { name = "cmp_git" },
-        { name = "treesitter", max_item_count = 1},
-        { name = "rg", max_item_count = 1},
+        --{ name = "treesitter", max_item_count = 1},
+        --{ name = "rg", max_item_count = 1},
         -- { name = "spell" }
     }),
     experimental = {
