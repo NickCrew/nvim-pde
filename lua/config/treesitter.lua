@@ -53,7 +53,7 @@
           prev_selection = ',', -- (Optional) keymap to select the previous selection
           keymaps = {
               ['.'] = 'textsubjects-smart',
-              [';'] = 'textsubjects-container-outer',
+              ['I;'] = 'textsubjects-container-outer',
               ['i;'] = 'textsubjects-container-inner',
           },
       },
@@ -102,10 +102,10 @@
               lookahead = true,
               keymaps = {
                   -- You can use the capture groups defined in textobjects.scm
-                  ["af"] = "@function.outer",
-                  ["if"] = "@function.inner",
-                  ["ac"] = "@class.outer",
-                  ["ic"] = "@class.inner",
+                  ["<leader>if"] = "@function.outer",
+                  ["<leader>of"] = "@function.inner",
+                  ["<leader>oc"] = "@class.outer",
+                  ["<leader>ic"] = "@class.inner",
               },
           },
       },

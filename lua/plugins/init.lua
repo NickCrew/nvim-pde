@@ -140,26 +140,23 @@ return packer.startup({
           backends = {
             "lsp",
             "treesitter",
-            "markdown"
+            "markdown",
+            "man"
           },
           attach_mode = "window",
           close_automatic_events = {
             "unsupported", "switch_buffer", "unfocus"
           },
           default_bindings = true,
-          default_direction = "prefer_right",
-          min_width = 30,
-          max_width = 50,
+          layout = {
+            default_direction = "prefer_right",
+            min_width = 30,
+            max_width = 50,
+          },
           post_jump_cmd = "normal! zz",
           lsp = {
             diagnostics_trigger_update = true,
             update_when_errors = true,
-          },
-          treesitter = {
-            update_delay = 300,
-          },
-          markdown = {
-            update_delay = 300,
           },
         })
         require("telescope").load_extension("aerial")
@@ -487,6 +484,7 @@ return packer.startup({
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
+        "rcarriga/cmp-dap",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp-signature-help",

@@ -38,7 +38,6 @@ local lsp_defaults = {
   capabilities = require('cmp_nvim_lsp').default_capabilities(
     vim.lsp.protocol.make_client_capabilities()
   ),
-  on_attach =  require("aerial").on_attach
 }
 
 local lspconfig = require("lspconfig")
