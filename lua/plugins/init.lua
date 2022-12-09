@@ -477,6 +477,21 @@ return packer.startup({
       disabled = true
     })
 
+    use({"zbirenbaum/copilot.lua",
+      event = "VimEnter",
+      config = function()
+        require('config.copilot')
+      end
+    })
+
+    use({
+      "zbirenbaum/copilot-cmp",
+      after = { "copilot.lua" },
+      config = function()
+        require('copilot_cmp').setup()
+      end
+    })
+
     use({ -- Completion and Snippets
       "hrsh7th/nvim-cmp",
 

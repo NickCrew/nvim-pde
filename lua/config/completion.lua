@@ -4,6 +4,7 @@
 
 local kind_symbols = {
       Text = "",
+      Copilot = "",
       Method = "",
       Function = "",
       Constructor = "",
@@ -33,7 +34,7 @@ local kind_symbols = {
 local source_mapping = {
     buffer = " ◉  BUF",
     nvim_lsp = " 👐  LSP",
-    -- cmp_tabnine = "🚀 TAB",
+    copilot = " 🚀 GHC",
     nvim_lua = " 🌙  LUA",
     path = " 🚧 PTH",
     luasnip = " 🌜 SNP",
@@ -52,6 +53,7 @@ local has_words_before = function()
                 :match("%s")
             == nil
 end
+
 cmp.event:on(
     "confirm_done",
     cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
@@ -121,18 +123,16 @@ cmp.setup({
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
     },
     sources = cmp.config.sources({
-        { name = "nvim_lsp_signature_help" },
+      {
+        { name = "copilot" },
         { name = "nvim_lsp" },
         { name = "luasnip" },
-        -- { name = "cmp_tabnine", max_item_count = 1},
-        { name = "nvim_lsp_document_symbol" },
-        { name = "nvim_lua" },
         { name = "path" },
-        --{ name = "buffer" },
-        { name = "cmp_git" },
-        --{ name = "treesitter", max_item_count = 1},
-        --{ name = "rg", max_item_count = 1},
-        -- { name = "spell" }
+      },{
+          { name = "nvim_lsp_document_symbol" },
+          { name = "nvim_lua" },
+          { name = "cmp_git" },
+      }
     }),
     experimental = {
         ghost_text = true,

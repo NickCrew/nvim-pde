@@ -128,10 +128,7 @@ wk.register(
 			},
 		},
 		-- Search
-		s = {
-			name = "+search",
-			g = { "<cmd>Telescope live_grep<cr>", "Search Files" },
-		},
+		s = {},
         t = {
           name = "+test",
           n = {"<cmd>lua require('dap-python').test_method()<CR>", "Test Method"},
@@ -168,6 +165,19 @@ wk.register(
 		},
 		--
 		-- Miscellaneous
+  L = {
+    name = "+lsp",
+    r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
+    o = {
+      "<cmd>lua vim.lsp.buf.outgoing_calls()<CR>",
+      "Outgoing Calls",
+    },
+    i = {
+      "<cmd>lua vim.lsp.buf.incoming_calls()<CR>",
+      "Incoming Calls",
+    },
+    a = { "<cmd>lua vim.diagnostic.open_float()<CR>", "View Diagnostic" },
+  }
 	},
 	-- Options
 	{
@@ -279,10 +289,10 @@ wk.register({
 
 -- SPC+SPC +dap {{{ 
 wk.register({
-
-}, {
-  prefix = "<leader><leader>",
-})
+["<C-S-p>"] = {
+    "<cmd>Legendary<CR>", "Legendary"
+  },
+}, {})
 -- }}}
 
 -- CTRL+A +nav {{{
@@ -290,7 +300,6 @@ wk.register({
   name = "+nav",
   a = { "<cmd>AerialToggle<cr>", "Toggle Aerial" },
   f = { "<cmd>Fern . -drawer -toggle<cr>", "Toggle File Tree" },
-  ["<C-h>"] = { "<cmd>lua require('spectre').open()<cr>", "Find and Replace" },
   h = {
     "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
     "Harpoon Quick Menu",
@@ -300,11 +309,11 @@ wk.register({
     "<cmd>lua require('harpoon.mark').add_file()<cr>",
     "Add Harpoon Mark",
   },
-  ["<C-j>"] = {
+  j = {
     "<cmd>lua require('harpoon.ui').nav_next()<cr>",
     "Next Harpoon Mark",
   },
-  ["<C-k>"] = {
+  k = {
     "<cmd>lua require('harpoon.ui').nav_prev()<cr>",
     "Previous Harpoon Mark",
   },
@@ -330,7 +339,7 @@ wk.register({
     "Harpoon Mark 4",
   },
 }, {
-  prefix = "<C-a>",
+  prefix = "<leader><leader>",
 })
 -- }}}
 
@@ -347,7 +356,7 @@ wk.register({
   m = { "<cmd>Telescope marks", "Marks<cr>"}
 
 }, {
-  prefix = "<C-k>"
+  prefix = "<C-a>"
 })
 
 -- }}}
@@ -374,26 +383,6 @@ wk.register({
 }, {
 	prefix = "<leader>",
 	mode = "v",
-})
--- }}}
-
--- SPC +lsp {{{
-wk.register({
-  name = "+lsp",
-  l = {
-    r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-    o = {
-      "<cmd>lua vim.lsp.buf.outgoing_calls()<CR>",
-      "Outgoing Calls",
-    },
-    i = {
-      "<cmd>lua vim.lsp.buf.incoming_calls()<CR>",
-      "Incoming Calls",
-    },
-    a = { "<cmd>lua vim.diagnostic.open_float()<CR>", "View Diagnostic" },
-  },
-}, {
-  prefix = "<leader>",
 })
 -- }}}
 

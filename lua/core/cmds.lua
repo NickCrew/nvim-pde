@@ -18,6 +18,7 @@ usercmd("Halp", "help halp<cr>", {})
 
 -- Abbreviations
 vim.cmd([[
+  cnoreabbrev WK WhichKey
   cnoreabbrev F Fern
   cnoreabbrev U MundoToggle
   cnoreabbrev T Telescope
