@@ -85,6 +85,17 @@ return packer.startup({
     use({ "folke/lua-dev.nvim" }) -- lua/nvim developer tools
 
     use({ "metakirby5/codi.vim" }) -- code scratchpad
+    
+    use({ "jackMort/ChatGPT.nvim",
+    config = function()
+      require('chatgpt').setup({})
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    } 
+  })
 
     use({
       "chipsenkbeil/distant.nvim",
@@ -102,6 +113,12 @@ return packer.startup({
 
     use({ "mfussenegger/nvim-dap" })
 
+    use({
+      'https://gitlab.com/HiPhish/debugpy.nvim',
+      as = 'debugpy.nvim',
+      requires = { 'mfussenegger/nvim-dap' },
+    })
+
     use({ -- clipboard history
       "AckslD/nvim-neoclip.lua",
       requires = {
@@ -109,6 +126,7 @@ return packer.startup({
         { "nvim-telescope/telescope.nvim" },
       },
       config = function()
+
         require("neoclip").setup({
           history = 1000,
           enable_persistent_history = true,
@@ -194,7 +212,7 @@ return packer.startup({
       config = function()
         require("rest-nvim").setup({
           result_split_horizontal = false, -- Open request results in a horizontal split
-          skip_ssl_verification = false, -- Skip SSL verification, useful for unknown certificates
+          skip_ssl_verification = true, -- Skip SSL verification, useful for unknown certificates
           highlight = { -- Highlight request on run
             enabled = true,
             timeout = 150,
@@ -212,14 +230,14 @@ return packer.startup({
       end,
     })
 
-    use({ -- Powerful find and replace
-      "windwp/nvim-spectre",
-      requires = "nvim-lua/plenary.nvim",
-      config = function()
-        require("spectre").setup()
-      end,
-      disabled = true,
-    })
+    -- use({ -- Powerful find and replace
+    --   "windwp/nvim-spectre",
+    --   requires = "nvim-lua/plenary.nvim",
+    --   config = function()
+    --     require("spectre").setup()
+    --   end,
+    --   disabled = true,
+    -- })
 
     use({ -- Smart delimiters and pairs
       "windwp/nvim-autopairs",
@@ -268,11 +286,16 @@ return packer.startup({
           sources = {
             -- diagnostics
             null_ls.builtins.diagnostics.eslint,
+            null_ls.builtins.diagnostics.cfn_lint,
+            null_ls.builtins.diagnostics.jsonlint,
             -- formatting
             null_ls.builtins.formatting.yapf,
             null_ls.builtins.formatting.isort,
             null_ls.builtins.formatting.stylua,
             -- code actions
+            null_ls.builtins.code_actions.gitsigns,
+            -- hover
+            null_ls.builtins.hover.printenv,
           },
         })
       end,
@@ -471,11 +494,11 @@ return packer.startup({
       run = "bash ./install.sh",
     })
 
-    use({ -- Run code snippets
-      "michaelb/sniprun",
-      run = "bash ./install.sh",
-      disabled = true
-    })
+    -- use({ -- Run code snippets
+    --   "michaelb/sniprun",
+    --   run = "bash ./install.sh",
+    --   disabled = true
+    -- })
 
     use({"zbirenbaum/copilot.lua",
       event = "VimEnter",
@@ -547,7 +570,12 @@ return packer.startup({
       end,
     })
 
-    use({ "ruifm/gitlinker.nvim" })
+    use({ 
+      "ruifm/gitlinker.nvim",
+      config = function()
+        require('gitlinker').setup()
+      end
+    })
 
     use({ ---Status bars
       "akinsho/bufferline.nvim",
@@ -645,18 +673,23 @@ return packer.startup({
       end,
     })
 
-    use({ -- Keybinding helper
+    use({ 
       "mrjones2014/legendary.nvim",
       before = "which-key.nvim",
       config = function()
-        require("legendary").setup()
-      end,
+        require('legendary').setup({
+          which_key = {
+            auto_register = true
+          }
+        })
+      end
     })
 
     use({
       "folke/which-key.nvim",
       config = function()
         require("config.which-key-nvim")
+        require('mappings.wk')
       end,
     })
 
@@ -688,10 +721,10 @@ return packer.startup({
       end,
     })
 
-    use({
-      "folke/tokyonight.nvim",
-      branch = "main",
-    })
+    -- use({
+    --   "folke/tokyonight.nvim",
+    --   branch = "main",
+    -- })
 
     use({
       "rose-pine/neovim",

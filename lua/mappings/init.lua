@@ -5,4 +5,4 @@
 -- Create and Register mappings with WhichKey
 --
 require("mappings.vim")
-require("mappings.wk")
+-- require("mappings.wk")

@@ -1,5 +1,5 @@
 --
--- config/completion.lua
+-- confi/cmompletion.lua
 --
 
 local kind_symbols = {
@@ -31,7 +31,7 @@ local kind_symbols = {
       TypeParameter = "",
 }
 
-local source_mapping = {
+local source_symbols = {
     buffer = " ◉  BUF",
     nvim_lsp = " 👐  LSP",
     copilot = " 🚀 GHC",
@@ -41,10 +41,12 @@ local source_mapping = {
     treesitter = "🌲 TSi",
     rg = " 🔍 RGr",
 }
+
 local lspkind = require("lspkind")
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0
@@ -77,7 +79,7 @@ cmp.setup({
             symbol_map = kind_symbols,
             before = function(entry, vim_item)
                 vim_item.kind = lspkind.presets.default[vim_item.kind]
-                local menu = source_mapping[entry.source.name]
+                local menu = source_symbols[entry.source.name]
                 vim_item.menu = menu
                 return vim_item
             end,
@@ -108,7 +110,7 @@ cmp.setup({
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
         ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         -- invoke completion with only snippets
-        ["<C-x>s"] = cmp.mapping(cmp.mapping.complete({
+        ["<C-S-s>"] = cmp.mapping(cmp.mapping.complete({
           config = {
             sources = {
             {
@@ -123,16 +125,12 @@ cmp.setup({
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
     },
     sources = cmp.config.sources({
-      {
-        { name = "copilot" },
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "path" },
-      },{
-          { name = "nvim_lsp_document_symbol" },
-          { name = "nvim_lua" },
-          { name = "cmp_git" },
-      }
+        { name = "copilot"},
+        { name = "nvim_lsp"},
+        { name = "luasnip"},
+        { name = "path"}
+    }, {
+
     }),
     experimental = {
         ghost_text = true,
@@ -163,4 +161,3 @@ cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover"}, {
   },
 })
 
-require("cmp_git").setup()

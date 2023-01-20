@@ -162,7 +162,7 @@ wk.register(
 			name = "+yank",
 			x = { "_dd", "Yank to Void Buffer" },
 			y = { '"*y"', "Yank to System Clipboard" },
-		},
+		}, 
 		--
 		-- Miscellaneous
   L = {
@@ -177,7 +177,10 @@ wk.register(
       "Incoming Calls",
     },
     a = { "<cmd>lua vim.diagnostic.open_float()<CR>", "View Diagnostic" },
-  }
+  },
+  R = {
+          "<Plug>RestNvim","Run HTTP request",
+        }
 	},
 	-- Options
 	{
@@ -289,10 +292,10 @@ wk.register({
 
 -- SPC+SPC +dap {{{ 
 wk.register({
-["<C-S-p>"] = {
-    "<cmd>Legendary<CR>", "Legendary"
-  },
-}, {})
+  ["<C-p>"] = {
+      "<cmd>Legendary<CR>", "Legendary"
+    },
+  })
 -- }}}
 
 -- CTRL+A +nav {{{
@@ -339,7 +342,7 @@ wk.register({
     "Harpoon Mark 4",
   },
 }, {
-  prefix = "<leader><leader>",
+  prefix = "<C-a>",
 })
 -- }}}
 
@@ -356,7 +359,7 @@ wk.register({
   m = { "<cmd>Telescope marks", "Marks<cr>"}
 
 }, {
-  prefix = "<C-a>"
+  prefix = "<leader><leader>"
 })
 
 -- }}}

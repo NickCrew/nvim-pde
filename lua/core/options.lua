@@ -85,6 +85,7 @@ o.wildignorecase = true
 o.wildignore = '.git/**,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**'
 
 -- File Reading/Writing
+o.hidden = true
 o.autowriteall = true
 o.autoread = true
 o.backup = false
