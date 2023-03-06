@@ -1,21 +1,20 @@
--- lua/core/cmds/auto.lua
---
--- Auto-Commands
--------------------------------------------------------------
+-- Autocommands
+local api = vim.api
+local augroup = api.nvim_create_augroup
 
-local autocmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
-
--- AutoCommand Groups
 augroup("packer_user_config", {})
 augroup("hover", {})
 augroup("windows", {})
 augroup("terms", {})
 
 
+--
+-- AutoCommands
+--
+local autocmd = api.nvim_create_autocmd
+
 autocmd("BufWritePost", {
   desc = "Auto Compile plugins.lua file",
-  group = "packer_user_config",
   command = "source <afile> | PackerCompile",
   pattern = "plugins.lua",
 })
@@ -43,3 +42,6 @@ autocmd("termopen", {
   pattern = "term://*",
   command = "lua set_terminal_keymaps()",
 })
+
+
+

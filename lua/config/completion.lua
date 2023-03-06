@@ -2,6 +2,8 @@
 -- confi/cmompletion.lua
 --
 
+local vim = vim
+
 local kind_symbols = {
       Text = "",
       Copilot = "",
@@ -68,7 +70,7 @@ cmp.setup({
   end,
     snippet = {
         expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
     formatting = {

@@ -70,6 +70,7 @@ require("toggle_lsp_diagnostics").init({
 
 
 -----[ SETUP LANGUAGE SERVER CLIENTS ] {{{
+lspconfig.lua_ls.setup({ })
 lspconfig.cssls.setup({})
 lspconfig.diagnosticls.setup({})
 --lspconfig.dockerls.setup({})
@@ -85,33 +86,7 @@ lspconfig.vimls.setup({})
 
 -- Lua {{{ 
 --
-local sumneko_root_path = vim.env.HOME .. "/.local/share/nvim/lsp_servers/sumneko_lua/extension/server"
-local sumneko_binary_path = sumneko_root_path .. "/bin/lua-language-server"
 
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-lspconfig.sumneko_lua.setup {
-    cmd = {sumneko_binary_path, "-E", sumneko_root_path .. "/main.lua"};
-    settings = {
-        Lua = {
-        runtime = {
-            version = 'LuaJIT',  -- Tell the language server which version of Lua you're using
-            path = runtime_path,  -- Setup your lua path
-        },
-        diagnostics = {
-            globals = {'vim'},  -- Get the language server to recognize the `vim` global
-        },
-        workspace = {
-            library = vim.api.nvim_get_runtime_file("", true), -- Make the server aware of Neovim runtime files
-        },
-        telemetry = { -- Do not send telemetry data containing a randomized but unique identifier
-            enable = false,
-        },
-        },
-    },
-}
 -- }}}
 
 -- Pyright {{{

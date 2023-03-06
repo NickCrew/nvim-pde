@@ -1,11 +1,5 @@
--- lua/core/cmds/user.lua
---
--- User-Defined Commands
--------------------------------------------------------------
-
+-- User defined commands
 local usercmd = vim.api.nvim_create_user_command
-
--- User Commands
 usercmd("TestFunc", "lua require('dap-python').test_method()", {})
 usercmd("TestClass", "lua require('dap-python').test_class()", {})
 usercmd("DebugSelection", "lua require('dap-python').debug_selection()", {})
@@ -15,17 +9,9 @@ usercmd("DapREPL", "lua require('dap').repl.open()", {})
 usercmd("UpdateTheme", "lua require('core.utils').update_theme()", {})
 usercmd("Fmt", "lua vim.lsp.buf.format({async = true})", {})
 usercmd("Halp", "help halp<cr>", {})
+usercmd("NewGwt", ":lua require('telescope').extensions.git_worktree.create_git_worktree()", {})
+usercmd("Gwt", ":lua require('telescope').extensions.git_worktree.git_worktrees()", {})
+usercmd("DAPCommands", ":lua require('telescope').extensions.dap.commands()", {})
+usercmd("ReloadLuafile", ":luafile %%", {})
 
--- Abbreviations
-vim.cmd([[
-  cnoreabbrev WK WhichKey
-  cnoreabbrev F Fern
-  cnoreabbrev U MundoToggle
-  cnoreabbrev T Telescope
-  cnoreabbrev L Legendary
-  cnoreabbrev N Neogen
-  cnoreabbrev PC PackerCompile
-  cnoreabbrev PI PackerInstall
-  cnoreabbrev G Gitsigns
-]])
 

@@ -1,1 +1,7 @@
 Open Custom Help | :h halp
+; | Hop To Line | <C-k>;
+j | Hop To CharAfter | <C-k>j
+k | Hop To CharBefore | <C-k>k
+l | Hop to Word in Current Line | <C-k>l
+
+
