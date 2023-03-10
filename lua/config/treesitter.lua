@@ -105,8 +105,8 @@
               lookahead = true,
               keymaps = {
                   -- You can use the capture groups defined in textobjects.scm
-                  ["<leader>if"] = "@function.outer",
-                  ["<leader>of"] = "@function.inner",
+                  ["<leader>of"] = "@function.outer",
+                  ["<leader>if"] = "@function.inner",
                   ["<leader>oc"] = "@class.outer",
                   ["<leader>ic"] = "@class.inner",
               },

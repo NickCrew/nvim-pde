@@ -41,8 +41,8 @@ dapui.setup({
     },
     {
       elements = {
-        { id = "repl", size = 0.20 },
-        { id = "console", size = 0.80},
+        { id = "repl", size = 0.50 },
+        { id = "console", size = 0.50},
       },
       size = 0.25, -- 25% of total lines
       position = "bottom",
@@ -98,6 +98,7 @@ end
 --
 -- Signs
 --
+
 local fn = vim.fn
 fn.sign_define("DapBreakpoint", { text = "🟠", texthl = "", linehl = "", numhl = "" })
 fn.sign_define("DapBreakpointCondition", { text = "🔵", texthl = "", linehl = "", numhl = "" })
@@ -110,7 +111,6 @@ fn.sign_define("DapStopped", { text = "🛑", texthl = "", linehl = "", numhl = 
 -- Defaults
 --
 dap.defaults.fallback.exception_breakpoints = {'raised','uncaught'}
-
 
 
 --

@@ -240,6 +240,15 @@ return packer.startup({
       end,
     })
 
+    use ({
+      "ggandor/flit.nvim",
+      config = function()
+        require('flit').setup({
+          multiline = false
+        })
+      end
+    })
+
     use({
           -- Sneak/quick movements
       "ggandor/leap.nvim",
@@ -511,9 +520,17 @@ return packer.startup({
     use({
           -- AI code completion
       "zbirenbaum/copilot.lua",
-      event = "VimEnter",
+      event = "InsertEnter",
+      cmd = "Copilot",
       config = function()
-        require('config.copilot')
+        require('copilot').setup({
+          suggestion = { enabled = false},
+          panel = { enabled = false },
+          filetpyes = {
+            python = true,
+            ["*"] = false
+          }
+        })
       end
     })
 
@@ -696,17 +713,18 @@ return packer.startup({
       end,
     })
 
-    --     use({
-    --       "mrjones2014/legendary.nvim",
-    --       before = "which-key.nvim",
-    --       config = function()
-    --         require('legendary').setup({
-    --           which_key = {
-    --             auto_register = false
-    --           }
-    --         })
-    --       end
-    --     })
+        use({
+          "mrjones2014/legendary.nvim",
+          before = "which-key.nvim",
+          config = function()
+          require('legendary').setup({
+          which_key = {
+            auto_register = true
+          }
+        })
+
+          end
+        })
 
     use({
       "folke/which-key.nvim",
