@@ -240,7 +240,7 @@ return packer.startup({
       end,
     })
 
-    use ({
+    use({
       "ggandor/flit.nvim",
       config = function()
         require('flit').setup({
@@ -250,7 +250,7 @@ return packer.startup({
     })
 
     use({
-          -- Sneak/quick movements
+      -- Sneak/quick movements
       "ggandor/leap.nvim",
       requires = "tpope/vim-repeat",
       config = function()
@@ -259,7 +259,7 @@ return packer.startup({
     })
 
     use({
-          -- Hyperfast project navigation
+      -- Hyperfast project navigation
       "ThePrimeagen/harpoon",
       before = "telescope.nvim",
       config = function()
@@ -268,7 +268,7 @@ return packer.startup({
     })
 
     use({
-          -- RESTful API and HTTP Client
+      -- RESTful API and HTTP Client
       "NTBBloodbath/rest.nvim",
       config = function()
         require("rest-nvim").setup({
@@ -294,7 +294,7 @@ return packer.startup({
     })
 
     use({
-          -- Smart delimiters and pairs
+      -- Smart delimiters and pairs
       "windwp/nvim-autopairs",
       config = function()
         require("config.autopairs")
@@ -302,7 +302,7 @@ return packer.startup({
     })
 
     use({
-          -- Popup preview window for LSP
+      -- Popup preview window for LSP
       "rmagatti/goto-preview",
       event = "BufEnter",
       config = function()
@@ -311,7 +311,7 @@ return packer.startup({
     })
 
     use({
-          -- Project Drawer
+      -- Project Drawer
       "lambdalisue/fern.vim",
       requires = {
         "yuki-yano/fern-preview.vim",
@@ -326,7 +326,7 @@ return packer.startup({
     })
 
     use({
-          -- Better quickfix window
+      -- Better quickfix window
       "kevinhwang91/nvim-bqf",
       ft = "qf",
       config = function()
@@ -387,7 +387,7 @@ return packer.startup({
     })
 
     use({
-          -- Dim parts of your code you're not workingon
+      -- Dim parts of your code you're not workingon
       "folke/twilight.nvim",
       config = function()
         require("twilight").setup({})
@@ -396,7 +396,7 @@ return packer.startup({
 
 
     use({
-                            -- Smart Session Management
+      -- Smart Session Management
       "folke/persistence.nvim",
       event = "BufReadPre", -- this will only start session saving when an actual file was opened
       module = "persistence",
@@ -406,7 +406,7 @@ return packer.startup({
     })
 
     use({
-          -- Syntax highlighting and parsiging
+      -- Syntax highlighting and parsiging
       "nvim-treesitter/nvim-treesitter",
       requires = {
         "p00f/nvim-ts-rainbow",
@@ -429,7 +429,7 @@ return packer.startup({
     })
 
     use({
-          -- Docstring generator
+      -- Docstring generator
       "danymat/neogen",
       config = function()
         require("neogen").setup({
@@ -446,7 +446,7 @@ return packer.startup({
     })
 
     use({
-          -- Code refactoring
+      -- Code refactoring
       "ThePrimeagen/refactoring.nvim",
       requires = "telescope.nvim",
       config = function()
@@ -456,7 +456,7 @@ return packer.startup({
     })
 
     use({
-          -- treesitter based colorizing
+      -- treesitter based colorizing
       "norcalli/nvim-colorizer.lua",
       config = function()
         require("colorizer").setup({
@@ -472,7 +472,7 @@ return packer.startup({
     })
 
     use({
-          -- Enhance LSP Diagnostics
+      -- Enhance LSP Diagnostics
       "folke/trouble.nvim",
       before = "telescope.nvim",
       config = function()
@@ -481,7 +481,7 @@ return packer.startup({
     })
 
     use({
-          -- FUzzy finder
+      -- FUzzy finder
       "junegunn/fzf",
       run = function()
         vim.fn["fzf#install"]()
@@ -489,7 +489,7 @@ return packer.startup({
     })
 
     use({
-          -- Telescope
+      -- Telescope
       "nvim-telescope/telescope.nvim",
       requires = {
         "nvim-lua/plenary.nvim",
@@ -518,13 +518,13 @@ return packer.startup({
     })
 
     use({
-          -- AI code completion
+      -- AI code completion
       "zbirenbaum/copilot.lua",
       event = "InsertEnter",
       cmd = "Copilot",
       config = function()
         require('copilot').setup({
-          suggestion = { enabled = false},
+          suggestion = { enabled = false },
           panel = { enabled = false },
           filetpyes = {
             python = true,
@@ -713,18 +713,17 @@ return packer.startup({
       end,
     })
 
-        use({
-          "mrjones2014/legendary.nvim",
-          before = "which-key.nvim",
-          config = function()
-          require('legendary').setup({
+    use({
+      "mrjones2014/legendary.nvim",
+      before = "which-key.nvim",
+      config = function()
+        require('legendary').setup({
           which_key = {
             auto_register = true
           }
         })
-
-          end
-        })
+      end
+    })
 
     use({
       "folke/which-key.nvim",

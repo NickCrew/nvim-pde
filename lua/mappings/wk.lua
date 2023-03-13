@@ -7,25 +7,25 @@ local wk = require("which-key")
 -- N:SPC {{{
 wk.register(
   {
-        ["["] = { "<cmd>BufferLineCyclePrev<cr>", "Focus Left Buffer" },
-        ["]"] = { "<cmd>BufferLineCycleNext<cr>", "Focus Right Buffer" },
-        [","] = { "<cmd>noh<CR>", "Turn off search highlighting" },
-        ["<tab>"] = { "<cmd>b#<CR>", "Last Focused Buffer" },
+    ["["] = { "<cmd>BufferLineCyclePrev<cr>", "Focus Left Buffer" },
+    ["]"] = { "<cmd>BufferLineCycleNext<cr>", "Focus Right Buffer" },
+    [","] = { "<cmd>noh<CR>", "Turn off search highlighting" },
+    ["<tab>"] = { "<cmd>b#<CR>", "Last Focused Buffer" },
     a = {
-      r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-      o = {
-        "<cmd>lua vim.lsp.buf.outgoing_calls()<CR>",
-        "Outgoing Calls",
-      },
       a = {
         "<cmd>lua vim.lsp.buf.incoming_calls()<CR>",
         "Incoming Calls",
       },
-      h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
       e = {
         "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>",
         "Diagnostics for Line",
       },
+      h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
+      o = {
+        "<cmd>lua vim.lsp.buf.outgoing_calls()<CR>",
+        "Outgoing Calls",
+      },
+      r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
     },
     --
     -- Buffer
@@ -44,58 +44,28 @@ wk.register(
     -- Documentation
     d = {
       name = "+docs",
-      d = { "<cmd>Dash<cr>", "Dash Search" },
-      D = { "<cmd>Dash!<cr>", "Dash Search (No keyword)" },
+      D = { "<cm>Dash!<cr>", "Dash Search (No keyword)" },
+      u = {
+        "<cmd>lua require'dapui'.toggle()<CR>",
+        "Open DAP UI",
+      },
       w = { "<cmd>DashWord<cr>", "Dash Search Word Under Cursor" },
+      d = { "<cm>Dash<cr>", "Dash Search" },
       W = {
         "<cmd>DashWord!<cr>",
         "Dash Search Word Under Cursor (No keyword)",
       },
     },
-    dut = {
-      "<cmd>lua require'dapui'.toggle()<CR>",
-      "Open DAP UI",
-    },
-    --
-    -- Find
-    f = {
-      name = "+find", -- optional group name
-      b = { "<cmd>Telescope file_browser<cr>", "Browse Files" },
-      B = { "<cmd>Telescope buffers<cr>", "Find Buffer" },
-      f = { "<cmd>Telescope find_files<cr>", "Find File" },   -- create a binding with label
-      g = { "<cmd>Telescope live_grep<cr>", "Find String in Files" },
-      o = { "<cmd>Telescope oldfiles<cr>", "Find Old File" }, -- additional options for creating the keymap
-      a = { "<cmd>Telescope aerial<cr>", "Find Aerial Symbol" },
-      z = { "<cmd>Telescope current_buffer_fuzzy_find<cr>",
-        "Find in Buffer",
-      },
-      m = { "<cmd>Telescope marks<cr>", "Find in Marks" },
-      r = { "<cmd>Telescope registers<cr>", "Find in Registers" },
-    },
     g = {
       name = "+git",
-      c = {
-        "<cmd>Gitsigns blame_line<cr>",
-        "Show commit message in floating window"
-      },
       b = {
         "<cmd>Gitsigns toggle_current_line_blame<cr>",
         "Toggle Blame Line",
-
-      wt = {
-        "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>",
-        "Create Git Worktree",
       },
-    },
-    w = {
-      t = {
-       "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>",
-        "Switch to Git Worktree",
-      },
-    },
-    k = {
-      "<cmd>Telescope keymaps<cr>",
-      "Keymap Search"
+      c = {
+        "<cmd>Gitsigns blame_line<cr>",
+        "Show commit message in floating window"
+      }
     },
     --
     -- Current Line
@@ -105,24 +75,26 @@ wk.register(
         "<cmd>HopWordCurrentLine<CR>",
         "Hop to Word in Current Line",
       },
-
+      l = {
+        "<cmd>HopLine<CR>",
+        "Hop To Line"
+      }
     },
     --
     -- Paste
     p = {
       name = "+paste",
-      p = { "<cmd>:" },
     },
     --
     -- Remaps for the refactoring operations currently offered by the plugin
     r = {
-      name = "Refactoring",
+      name = "refactoring",
       -- Extract block doesn't need visual mode
       b = {
         " <Cmd>lua require('refactoring').refactor('Extract Block')<CR>",
         "Extract Block",
       },
-      bf = {
+      f = {
         " <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>",
         "Extract Block To File",
       },
@@ -151,20 +123,20 @@ wk.register(
         "<cmd>TroubleToggle document_diagnostics<cr>",
         "Document Diagnostics",
       },
-      x = { "<cmd>TroubleToggle<cr>", "All Diagnostics" },
+      p = {
+        "<cmd>lua require('trouble').previous({skip_groups = true, jump = true})<cr>",
+        "Previous Diagnostic Item",
+      },
+      n = {
+        "<cmd>lua require('trouble').next({skip_groups = true, jump = true})<cr>",
+        "Next Diagnostic Item",
+      },
       q = {
         "<cmd>TroubleToggle quickfix<cr>",
         "Open Diagnostics in QuickFix",
       },
       r = { "<cmd>TroubleToggle lsp_references<cr>", "Show References" },
-      n = {
-        "<cmd>lua require('trouble').next({skip_groups = true, jump = true})<cr>",
-        "Next Diagnostic Item",
-      },
-      p = {
-        "<cmd>lua require('trouble').previous({skip_groups = true, jump = true})<cr>",
-        "Previous Diagnostic Item",
-      },
+      x = { "<cmd>TroubleToggle<cr>", "All Diagnostics" },
     },
     --
     y = {
@@ -191,13 +163,13 @@ wk.register(
       "<Plug>RestNvim", "Run HTTP request",
     }
   },
-},
   -- Options
   {
     prefix = "<leader>",
   }
 )
 -- }}}
+
 
 wk.register({
   name = "+test",
@@ -212,7 +184,6 @@ wk.register({
 -- N +lsp {{{
 wk.register({
   name = "+lsp",
-  K = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
   g = {
     D = {
       "<cmd>lua vim.lsp.buf.declaration()<CR>",
@@ -242,15 +213,16 @@ wk.register({
       "<cmd>lua vim.lsp.buf.document_symbol()<CR>",
       "Document Symbol",
     },
-        ["]"] = {
+    ["]"] = {
       "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>",
       "Go To Previous",
     },
-        ["["] = {
+    ["["] = {
       "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
       "Go To Next",
     },
   },
+  K = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
 }, {
   mode = "n",
 })
@@ -282,25 +254,20 @@ wk.register({
 
 -- F-Keys +dap {{{
 wk.register({
-      ["<F3>"] = { "<cmd>DapVirtualTextForceRefresh<cr>", "Refresh Virtual Text" },
-      ["<F4>"] = { "<cmd>lua require('dap').run_last()<cr>", "Run Last" },
-      ["<F5>"] = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
-      ["<F6>"] = { "<cmd>lua require('dap').run_to_cursor()<cr>", "Run To Cursor" },
-      ["<F7>"] = { "<cmd>lua require('dap').pause()<cr>", "Pause" },
-      ["<F8>"] = {
+  ["<F3>"] = { "<cmd>DapVirtualTextForceRefresh<cr>", "Refresh Virtual Text" },
+  ["<F4>"] = { "<cmd>lua require('dap').run_last()<cr>", "Run Last" },
+  ["<F5>"] = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
+  ["<F6>"] = { "<cmd>lua require('dap').run_to_cursor()<cr>", "Run To Cursor" },
+  ["<F7>"] = { "<cmd>lua require('dap').pause()<cr>", "Pause" },
+  ["<F8>"] = {
     "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
     "Conditional Breakpoint",
   },
-      ["<F9>"] = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Toggle Breakpoint" },
-      ["<F10>"] = { "<cmd>lua require('dap').step_out()<cr>", "Step Out" },
-      ["<F11>"] = { "<cmd>lua require('dap').step_into()<cr>", "Step In" },
-      ["<F12>"] = { "<cmd>lua require('dap').step_over()<cr>", "Step Over" },
+  ["<F9>"] = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+  ["<F10>"] = { "<cmd>lua require('dap').step_out()<cr>", "Step Out" },
+  ["<F11>"] = { "<cmd>lua require('dap').step_into()<cr>", "Step In" },
+  ["<F12>"] = { "<cmd>lua require('dap').step_over()<cr>", "Step Over" },
 })
--- }}}
-
--- SPC+SPC +dap {{{
-wk.register({
-}, {})
 -- }}}
 
 -- CTRL+A +nav {{{
@@ -308,17 +275,9 @@ wk.register({
   name = "+nav",
   a = { "<cmd>AerialToggle<cr>", "Toggle Aerial" },
   f = { "<cmd>Fern . -drawer -toggle<cr>", "Toggle File Tree" },
-      ["<C-h>"] = {
-    "<cmd>Telescope harpoon marks<cr>", "Find Harpoon Using Telescope"
-  },
   h = {
     "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
     "Harpoon Quick Menu",
-  },
-  m = { "<cmd>Telescope harpoon marks<cr>", "Find Harpoon Marks (Telescope)" },
-      ["<C-a>"] = {
-    "<cmd>lua require('harpoon.mark').add_file()<cr>",
-    "Add Harpoon Mark",
   },
   j = {
     "<cmd>lua require('harpoon.ui').nav_next()<cr>",
@@ -328,23 +287,35 @@ wk.register({
     "<cmd>lua require('harpoon.ui').nav_prev()<cr>",
     "Previous Harpoon Mark",
   },
-      ["1"] = {
+  m = { "<cmd>Telescope harpoon marks<cr>", "Find Harpoon Marks (Telescope)" },
+  t = {
+    "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>",
+    "Switch to Git Worktree",
+  },
+  ["<C-a>"] = {
+    "<cmd>lua require('harpoon.mark').add_file()<cr>",
+    "Add Harpoon Mark",
+  },
+  ["<C-h>"] = {
+    "<cmd>Telescope harpoon marks<cr>", "Find Harpoon Using Telescope"
+  },
+  ["1"] = {
     "<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
     "Harpoon Mark 1",
   },
-      ["2"] = {
+  ["2"] = {
     "<cmd>lua require('harpoon.ui').nav_file(2)<cr>",
     "Harpoon Mark 2",
   },
-      ["3"] = {
+  ["3"] = {
     "<cmd>lua require('harpoon.ui').nav_file(3)<cr>",
     "Harpoon Mark 3",
   },
-      ["4"] = {
+  ["4"] = {
     "<cmd>lua require('harpoon.ui').nav_file(4)<cr>",
     "Harpoon Mark 4",
   },
-      ["5"] = {
+  ["5"] = {
     "<cmd>lua require('harpoon.ui').nav_file(5)<cr>",
     "Harpoon Mark 4",
   },
@@ -358,12 +329,17 @@ wk.register({
   name = "+telescope",
   a = { "<cmd>Telescope aerial<cr>", "Find Aerial Symbol" },
   b = { "<cmd>Telescope buffers<cr>", "Find Buffer" },
+  c = { "<cmd>Telescope neoclip<cr>", "Find Clipboard" },
   d = { "<cmd>Telescope dap commands<cr>", "Find DAP Command" },
-  D = { "<cmd>Telescope dap breakpoints<cr>", "Find DAP Breakpoint" },
+  f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
+  g = { "<cmd>Telescope live_grep<cr>", "Find String in Files" },
+  k = { "<cmd>Telescope keymaps<cr>", "Find Keymap" },
   l = { "<cmd>Telescope luasnip<cr>", "Find Snippet" },
-  c = { "<cmd>Telescope neoclip<cr>", "Clipboard" },
-  r = { "<cmd>Telescope refactoring<cr>", "Refactoring" },
-  m = { "<cmd>Telescope marks", "Marks<cr>" }
+  m = { "<cmd>Telescope marks<cr>", "Find in Marks" },
+  r = { "<cmd>Telescope registers<cr>", "Find in Registers" },
+  B = { "<cmd>Telescope file_browser<cr>", "Browse Files" },
+  D = { "<cmd>Telescope dap breakpoints<cr>", "Find DAP Breakpoint" },
+  R = { "<cmd>Telescope refactoring<cr>", "Refactoring" },
 }, {
   prefix = "<leader><leader>"
 })
@@ -397,6 +373,6 @@ wk.register({
 
 -- MISC {{{
 wk.register({
-      ["<C-e><C-r>"] = { "<cmd>LspRestart<cr>", "Restart LSP" },
+  ["<C-e><C-r>"] = { "<cmd>LspRestart<cr>", "Restart LSP" },
 })
 -- }}}
