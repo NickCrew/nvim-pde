@@ -34,11 +34,26 @@ local conditions = {
 	end,
 }
 
+local function diff_source()
+  local gitsigns = vim.b.gitsigns_status_dict
+  if gitsigns then
+    return {
+      added = gitsigns.added,
+      modified = gitsigns.changed,
+      removed = gitsigns.removed
+    }
+  end
+end
+
+local function window()
+  return vim.api.nvim_win_get_number(0)
+end
+
 local config = {
 	options = {
 		disabled_filetypes = { "NvimTree", "dashboard", "Outline" },
-		component_separators = "",
-		section_separators = "",
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
 		theme = theme
 	},
 	sections = {
@@ -58,9 +73,11 @@ local config = {
 		lualine_x = {},
 	},
 	extensions = {
-		"quickfix", "fern"
+		"quickfix", "fern", "aerial", "toggleterm", "nvim-dap-ui", "mundo"
 	}
 }
+
+
 
 local function ins_left(component)
 	table.insert(config.sections.lualine_c, component)
@@ -70,6 +87,7 @@ local function ins_right(component)
 	table.insert(config.sections.lualine_x, component)
 end
 
+
 ins_left({
 	function()
 		return "▊"
@@ -78,6 +96,8 @@ ins_left({
 	padding = { left = 0, right = 0 },
 })
 
+ins_left({window})
+
 ins_left({
   "mode",
 })
@@ -85,17 +105,12 @@ ins_left({
 ins_left({
 	"branch",
 	icon = "",
-	padding = { left = 2, right = 1 },
-})
-
-ins_left({
-	"filetype",
-	cond = conditions.buffer_not_empty,
-	padding = { left = 2, right = 1 },
+	padding = { left = 1, right = 1 },
 })
 
 ins_left({
 	"diff",
+    source = diff_source,
 	symbols = { added = " ", modified = "柳", removed = " " },
 	diff_color = {
 	},
@@ -122,38 +137,49 @@ ins_left({
 	padding = { left = 2, right = 1 },
 })
 
+
+
 ins_left({
 	function()
 		return "%="
 	end,
 })
 
-ins_left({"lsp_progress"})
+-- ins_left({"lsp_progress"})
+
 
 ins_right({
   "aerial"
 })
 
 ins_right({
-	function()
-		local b = vim.api.nvim_get_current_buf()
-		if next(vim.treesitter.highlighter.active[b]) then
-			return " 綠TS"
-		end
-		return ""
-	end,
-	padding = { left = 1, right = 0 },
-	cond = conditions.hide_in_width,
+	"filetype",
+	cond = conditions.buffer_not_empty,
+	padding = { left = 2, right = 1 },
 })
 
 ins_right({
-	"location",
+  "encoding",
+  cond = conditions.buffer_not_empty,
 	padding = { left = 1, right = 1 },
 })
 
 ins_right({
+	function()
+		local b = vim.api.nvim_get_current_buf()
+		if next(vim.treesitter.highlighter.active[b]) then
+			return "綠TS"
+		end
+		return ""
+	end,
+	padding = { left = 1, right = 1 },
+	cond = conditions.hide_in_width,
+})
+
+
+ins_right({
 	"progress",
-	padding = { left = 0, right = 0 },
+	padding = { left = 1, right = 1 },
 })
 
 ins_right({
@@ -179,11 +205,17 @@ ins_right({
 	cond = nil,
 })
 
+
+ins_right({
+	"location",
+	padding = { left = 1, right = 1 },
+})
+
 ins_right({
 	function()
 		return "▊"
 	end,
-	padding = { left = 1, right = 0 },
+	padding = { left = 1, right = 1 },
 })
 
 lualine.setup(config)

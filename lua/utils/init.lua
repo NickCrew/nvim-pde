@@ -72,14 +72,13 @@ end
 
 function M.update_theme()
   local is_dark = vim._system('isdark')
-  require('config.nightfox')
 
   if is_dark then
     vim.opt.background = 'dark'
     vim.cmd("colorscheme catppuccin")
   else
     vim.opt.background = 'light'
-    vim.cmd("colorscheme dawnfox")
+    vim.cmd("colorscheme catpuccin-latte")
   end
 
 
