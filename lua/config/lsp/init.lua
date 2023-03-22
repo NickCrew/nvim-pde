@@ -72,7 +72,7 @@ require("toggle_lsp_diagnostics").init({
 -----[ SETUP LANGUAGE SERVER CLIENTS ] {{{
 lspconfig.lua_ls.setup({ })
 lspconfig.cssls.setup({})
-lspconfig.diagnosticls.setup({})
+-- lspconfig.diagnosticls.setup({})
 --lspconfig.dockerls.setup({})
 lspconfig.remark_ls.setup({})
 lspconfig.jsonls.setup({})

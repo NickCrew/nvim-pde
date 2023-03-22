@@ -1,18 +1,20 @@
-
-cmd = vim.cmd
-
-cmd([[
-  cnoreabbrev T Telescope
-  cnoreabbrev Dd DapCommands
-  cnoreabbrev Rlf ReloadLuafile
-  cnoreabbrev Bp BreakpointToggle
-  cnoreabbrev Cs CheatSheet
-  cnoreabbrev Cse CheatSheetEdit
-  cnoreabbrev Ff Fern
-  cnoreabbrev N Neogen
-  cnoreabbrev Mt MundoToggle
-  cnoreabbrev Gs Gitsigns
-  cnoreabbrev Wk WhichKey
-  cnoreabbrev Pc PackerCompile
-  cnoreabbrev Pi PackerInstall
-]])
+return {
+  {"Bpt", "BreakpointToggle"},
+  {"Cgwt", "CreateWorktree"},
+  {"Dap", "Debug"},
+  {"Dc", "DapCmds"},
+  {"Ds", "DebugSelection"},
+  {"Ff", "Fern"},
+  {"Fmt", "Format"},
+  {"Gs", "Gitsigns"},
+  {"Lgwt", "ListWorktrees"},
+  {"Mt", "MundoToggle"},
+  {"N", "Neogen"},
+  {"Pc", "PackerCompile"},
+  {"Pi", "PackerInstall"},
+  {"Ps", "PackerSync"},
+  {"Pu", "PackerUpdate"},
+  {"Rlf", "ReloadLuafile"},
+  {"T", "Telescope"},
+  {"Wk", "WhichKey"},
+}

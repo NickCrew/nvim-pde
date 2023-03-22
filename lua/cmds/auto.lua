@@ -1,18 +1,16 @@
 -- Autocommands
-local api = vim.api
-local augroup = api.nvim_create_augroup
+--
+local vim = vim
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
 
+-- Groups
 augroup("packer_user_config", {})
 augroup("hover", {})
 augroup("windows", {})
 augroup("terms", {})
 
-
---
--- AutoCommands
---
-local autocmd = api.nvim_create_autocmd
-
+-- Commands
 autocmd("BufWritePost", {
   desc = "Auto Compile plugins.lua file",
   command = "source <afile> | PackerCompile",

@@ -33,6 +33,8 @@ return packer.startup({
     -- Packer itself
     use({ "wbthomason/packer.nvim" })
 
+    use ({ "xiyaowong/transparent.nvim" })
+
     use({ "Shatur/neovim-ayu" })
 
     use({ "machakann/vim-sandwich" })
@@ -342,17 +344,18 @@ return packer.startup({
 
         null_ls.setup({
           sources = {
-            -- diagnostics
-            -- null_ls.builtins.diagnostics.eslint,
-            -- null_ls.builtins.diagnostics.cfn_lint,
-            -- null_ls.builtins.diagnostics.jsonlint,
-            -- null_ls.builtins.diagnostics.shellcheck,
-            -- formatting
-            -- null_ls.builtins.formatting.yapf,
-            -- null_ls.builtins.formatting.isort,
-            -- code actions
+            -- JSON
+            null_ls.builtins.diagnostics.cfn_lint,
+            null_ls.builtins.diagnostics.jsonlint,
+            -- Python
+            null_ls.builtins.formatting.yapf,
+            null_ls.builtins.formatting.isort,
+            null_ls.builtints.formatting.autopep8,
+            -- Markdown 
+            null_ls.buitins.formatting.markdown_toc,
+            -- Git
             null_ls.builtins.code_actions.gitsigns,
-            -- hover
+            -- Env
             null_ls.builtins.hover.printenv,
 
           },
@@ -586,6 +589,8 @@ return packer.startup({
         require("config.octo-nvim")
       end,
     })
+
+    use ({ "tpope/vim-fugitive"})
 
     use({
       -- git changes in sign column
