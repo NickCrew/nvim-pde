@@ -6,50 +6,26 @@
 -------------------------------------------------------------------------------
 
 local vim = vim
-
-------[ DEFINE DIAGNOSTIC SIGNS ] {{{
 local fn = vim.fn
 
--- Diagnostic Signs
-for type, icon in pairs({
-  Error = " ",
-  Warning = " ",
-  Warn = " ",
-  Hint = " ",
-  Information = " ",
-  Info = " ",
-}) do
-  local highlight = "DiagnosticSign" .. type
-  fn.sign_define(highlight, { text = icon, texthl = highlight, numhl = "" })
-end
+------[ DEFAULT CONFIGURATION ] {{{
 
 
-
--- }}}
-
-------[ INITIALIZE DEFAULT CONFIGURATION ] {{{
+require("config.lsp.highlights")
 
 require("nvim-lsp-installer").setup {}
-
-local lsp_defaults = {
-  flags = {
-    debounce_text_changes = 150,
-  },
-  capabilities = require('cmp_nvim_lsp').default_capabilities(
-    vim.lsp.protocol.make_client_capabilities()
-  ),
-}
 
 local lspconfig = require("lspconfig")
 
 lspconfig.util.default_config = vim.tbl_deep_extend(
   'force',
   lspconfig.util.default_config,
-  lsp_defaults
+  require("config.lsp.defaults")
 )
+
 -- }}}
 
------[ SETUP PLUGINS TO EXTEND LSP FUNCTIONALITY ] {{{
+-----[ PLUGIN CONFIGURATION ] {{{
 
 require("lsp_signature").setup({
     bind = true,
@@ -68,42 +44,29 @@ require("toggle_lsp_diagnostics").init({
 })
 -- }}}
 
-
------[ SETUP LANGUAGE SERVER CLIENTS ] {{{
+-----[ LSP CLIENT CONFIGURATION ] {{{
 lspconfig.lua_ls.setup({ })
 lspconfig.cssls.setup({})
--- lspconfig.diagnosticls.setup({})
---lspconfig.dockerls.setup({})
 lspconfig.remark_ls.setup({})
 lspconfig.jsonls.setup({})
-lspconfig.tflint.setup({})
 lspconfig.tsserver.setup({})
--- lspconfig.yamlls.setup({})
 lspconfig.vimls.setup({})
--- }}}
+lspconfig.terraformls.setup({})
 
------[ Clients with custom setup configurations ] {{{
-
--- Lua {{{ 
 --
-
--- }}}
-
--- Pyright {{{
---
+-- PYTHON
 lspconfig.pyright.setup({
   python = {
     analysis = {
       typeCheckingMode = "off",
+
     },
   },
 })
--- }}}
 
-
--- Ansible {{{
+--
+-- ANSIBLE
 local python_bin_dir = vim.env.HOME .. "/.pyenv/versions/neovim/bin"
-
 lspconfig.ansiblels.setup({
   settings = {
     ansible = {
@@ -118,10 +81,9 @@ lspconfig.ansiblels.setup({
     }
   }
 })
--- }}}
 
--- Rust {{{
 --
+-- RUST
 local extension_path = vim.env.HOME .. '/.vscode/extensions/vadimcn.vscode-lldb-1.6.7/'
 local codelldb_path = extension_path .. 'adapter/codelldb'
 local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
@@ -131,6 +93,6 @@ require('rust-tools').setup({
             codelldb_path, liblldb_path)
     }
 })
--- }}}
+
 
 -- }}}

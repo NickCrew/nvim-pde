@@ -171,6 +171,29 @@ return packer.startup({
 		})
 
 		use({
+			"danielfalk/smart-open.nvim",
+			branch = "0.1.x",
+			config = function()
+				require("telescope").load_extension("smart_open")
+			end,
+			requires = { "kkharji/sqlite.lua" },
+		})
+
+		use({
+			"https://git.sr.ht/~havi/telescope-toggleterm.nvim",
+			event = "TermOpen",
+			requires = {
+				"akinsho/nvim-toggleterm.lua",
+				"nvim-telescope/telescope.nvim",
+				"nvim-lua/popup.nvim",
+				"nvim-lua/plenary.nvim",
+			},
+			config = function()
+				require("telescope").load_extension("toggleterm")
+			end,
+		})
+
+		use({
 			-- clipboard history
 			"AckslD/nvim-neoclip.lua",
 			requires = {
@@ -343,7 +366,6 @@ return packer.startup({
 		use({
 			"jose-elias-alvarez/null-ls.nvim",
 			ft = {
-				"python",
 				"javascript",
 				"javascriptreact",
 				"typescript",
@@ -354,26 +376,28 @@ return packer.startup({
 			},
 			config = function()
 				local null_ls = require("null-ls")
-				local bi = null_ls.builtins
-				local fm, ca, hv, di =
-					bi.formatting, bi.code_actions, bi.hover, bi.diagnostics
+				local formatting, code_actions, hover, diagnostics =
+					null_ls.builtins.formatting,
+					null_ls.builtins.code_actions,
+					null_ls.builtins.hover,
+					null_ls.builtins.diagnostics
 
 				null_ls.setup({
 					sources = {
 						-- Hover
-						hv.printenv,
+						hover.printenv,
 						-- Code Actions
-						ca.gitsigns,
-						ca.refactoring,
+						code_actions.gitsigns,
+						code_actions.refactoring,
 						-- Diagnostics
-						di.cfn_lint,
-						di.jsonlint,
+						diagnostics.cfn_lint,
+						diagnostics.jsonlint,
 						-- Formatting
-						fm.stylua,
-						fm.yapf,
-						fm.isort,
-						fm.autopep8,
-						fm.markdown_toc,
+						formatting.stylua,
+						formatting.yapf,
+						formatting.isort,
+						formatting.autopep8,
+						formatting.markdown_toc,
 					},
 				})
 			end,
@@ -386,7 +410,7 @@ return packer.startup({
 				"simrat39/rust-tools.nvim",
 				"jose-elias-alvarez/nvim-lsp-ts-utils",
 				"folke/lsp-colors.nvim",
-				-- "nvim-lua/lsp-status.nvim",
+				"nvim-lua/lsp-status.nvim",
 				"kosayoda/nvim-lightbulb",
 			},
 			{
@@ -516,7 +540,6 @@ return packer.startup({
 				"LinArcX/telescope-env.nvim",
 				"nvim-telescope/telescope-file-browser.nvim",
 				"nvim-telescope/telescope-media-files.nvim",
-				"nvim-telescope/telescope-frecency.nvim",
 				"jvgrootveld/telescope-zoxide",
 				"nvim-telescope/telescope-github.nvim",
 				"nvim-telescope/telescope-live-grep-raw.nvim",
@@ -644,20 +667,30 @@ return packer.startup({
 			config = function()
 				require("config.buffline")
 			end,
+            disabled = true
 		})
 
 		use({
 			"arkav/lualine-lsp-progress",
 			before = "lualine.nvim",
 		})
+  use {
+      "chrisgrieser/nvim-recorder",
+      config = function() require("recorder").setup() end,
+  }
 
 		use({
 			"folke/noice.nvim",
+			after = "telescope.nvim",
 			config = function()
 				require("noice").setup({
-                  cmdline = {enabled = true,
-                  view = "cmdline"
-                },
+                    -- routes = {
+                    --     view = "cmdline",
+                    --     filter = { event = "msg_showmode"}
+                    -- },
+					cmdline = {
+						enabled = true,
+					},
 					lsp = {
 						-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 						override = {
@@ -665,19 +698,25 @@ return packer.startup({
 							["vim.lsp.util.stylize_markdown"] = true,
 							["cmp.entry.get_documentation"] = true,
 						},
-                        signature = {
-                          enabled = false
-                        }
+						progress = {
+							enabled = true,
+                            throttle = 1000 / 100
+						},
+						signature = {
+							enabled = false,
+						},
 					},
 					-- you can enable a preset for easier configuration
 					presets = {
 						bottom_search = true, -- use a classic bottom cmdline for search
 						command_palette = true, -- position the cmdline and popupmenu together
 						long_message_to_split = true, -- long messages will be sent to a split
-						inc_rename = false, -- enables an input dialog for inc-rename.nvim
-						lsp_doc_border = false, -- add a border to hover docs and signature help
+						inc_rename = true, -- enables an input dialog for inc-rename.nvim
+						lsp_doc_border = true, -- add a border to hover docs and signature help
 					},
 				})
+
+				require("telescope").load_extension("noice")
 			end,
 			requires = {
 				-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
