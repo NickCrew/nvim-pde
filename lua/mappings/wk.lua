@@ -5,14 +5,33 @@
 local wk = require("which-key")
 
 wk.register({
-	["["] = { "<cmd>bp<cr>", "Focus Left Buffer" },
-	["]"] = { "<cmd>bn<cr>", "Focus Right Buffer" },
-	["<tab>"] = { "<cmd>b#<CR>", "Last Focused Buffer" },
-	[","] = { "<cmd>noh<CR>", "Turn off search highlighting" },
-	b = { "<cmd>BufferLinePick<cr>", "Pick Buffer" },
+	["["] = {
+		"<cmd>bp<cr>",
+		"Focus Left Buffer",
+	},
+	["]"] = {
+		"<cmd>bn<cr>",
+		"Focus Right Buffer",
+	},
+	["<tab>"] = {
+		"<cmd>b#<CR>",
+		"Last Focused Buffer",
+	},
+	[","] = {
+		"<cmd>noh<CR>",
+		"Turn off search highlighting",
+	},
+	b = {
+		"<cmd>BufferLinePick<cr>",
+		"Pick Buffer",
+	},
+	
 	l = {
 		name = "+line",
-		a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Show Code Actions" },
+		a = {
+			"<cmd>lua vim.lsp.buf.code_action()<CR>",
+			"Show Code Actions",
+		},
 		b = {
 			"<cmd>Gitsigns toggle_current_line_blame<cr>",
 			"Toggle In-Line Blame Text",
@@ -30,93 +49,200 @@ wk.register({
 			"Hop To Word",
 		},
 	},
-	r = {
-		name = "+refactor",
-		-- Extract block doesn't need visual mode
+	v = {
+		v = {
+			"<cmd>HopVertical<CR>",
+			"Hop Vertical",
+		},
+		a = {
+			"<cmd>HopVerticalAC<CR>",
+			"Hop Vertical AC",
+		},
 		b = {
-			" <Cmd>lua require('refactoring').refactor('Extract Block')<CR>",
-			"Extract Block",
-		},
-		f = {
-			" <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>",
-			"Extract Block To File",
-		},
-		-- Inline variable can also pick up the identifier currently under the cursor without visual mode
-		i = {
-			" <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>",
-			"Inline Variable",
+			"<cmd>HopVerticalBC<CR>",
+			"Hop Vertical BC",
 		},
 	},
+	[";"] = { "zz", "Center WIndow" },
 }, {
 	prefix = "<leader>",
 })
 
-wk.register({
-	name = "+telescope",
-	a = { "<cmd>Telescope aerial<cr>", "Aerial Symbol" },
-	b = { "<cmd>Telescope buffers<cr>", "Buffer" },
-	c = { "<cmd>Telescope neoclip<cr>", "Clipboard" },
-	d = {
-		name = "+dap",
-		c = { "<cmd>Telescope dap commands<cr>", "DAP Commands" },
-		b = { "<cmd>Telescope dap list_breakpoints<cr>", "DAP Breakpoints" },
-		v = { "<cmd>Telescope dap variables<cr>", "DAP Variables" },
-		f = { "<cmd>Telescope dap frames<cr>", "DAP Frames" },
-		C = { "<cmd>Telescope dap configurations<cr>", "DAP Configs" },
-	},
-	f = { "<cmd>Telescope find_files<cr>", "Find File" },
-	g = { "<cmd>Telescope live_grep<cr>", "Find String in Files" },
-	h = {
-		"<cmd>Telescope harpoon marks<cr>",
-		"Find Harpoon Using Telescope",
-	},
-	k = { "<cmd>Telescope keymaps<cr>", "Find Keymap" },
-	l = { "<cmd>Telescope luasnip<cr>", "Find Snippet" },
-	m = { "<cmd>Telescope marks<cr>", "Find in Marks" },
-	o = { "<cmd>Telescope smart_open<cr>", "Smart Open" },
-	r = { "<cmd>Telescope registers<cr>", "Find in Registers" },
-	t = { "<cmd>Telescope toggleterm<cr>", "Find Terminal" },
-	w = {
-		"<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>",
-		"Switch to Git Worktree",
-	},
-	B = { "<cmd>Telescope file_browser<cr>", "Browse Files" },
-	R = { "<cmd>Telescope refactoring<cr>", "Refactoring" },
-}, {
-	prefix = ";",
+wk.register({}, {
+	prefix = "<leader><leader>",
 })
 
 wk.register({
 	name = "+telescope",
-	a = { "<cmd>Telescope aerial<cr>", "Aerial Symbol" },
 	b = { "<cmd>Telescope buffers<cr>", "Buffer" },
-	c = { "<cmd>Telescope neoclip<cr>", "Clipboard" },
+	c = {
+		"<cmd>Telescope neoclip<cr>",
+		"Clipboard",
+	},
 	d = {
 		name = "+dap",
-		c = { "<cmd>Telescope dap commands<cr>", "DAP Commands" },
-		b = { "<cmd>Telescope dap list_breakpoints<cr>", "DAP Breakpoints" },
-		v = { "<cmd>Telescope dap variables<cr>", "DAP Variables" },
-		f = { "<cmd>Telescope dap frames<cr>", "DAP Frames" },
-		C = { "<cmd>Telescope dap configurations<cr>", "DAP Configs" },
+		b = {
+			"<cmd>Telescope dap list_breakpoints<cr>",
+			"DAP Breakpoints",
+		},
+		c = {
+			"<cmd>Telescope dap commands<cr>",
+			"DAP Commands",
+		},
+		f = {
+			"<cmd>Telescope dap frames<cr>",
+			"DAP Frames",
+		},
+		v = {
+			"<cmd>Telescope dap variables<cr>",
+			"DAP Variables",
+		},
+		C = {
+			"<cmd>Telescope dap configurations<cr>",
+			"DAP Configs",
+		},
 	},
-	f = { "<cmd>Telescope find_files<cr>", "Find File" },
-	g = { "<cmd>Telescope live_grep<cr>", "Find String in Files" },
+	f = {
+		"<cmd>Telescope find_files<cr>",
+		"Find File",
+	},
+	g = {
+		"<cmd>Telescope live_grep<cr>",
+		"Find String in Files",
+	},
+	h = {
+		"<cmd>Telescope harpoon marks<cr>",
+		"Harpoon'd Files",
+	},
+	k = {
+		"<cmd>Telescope keymaps<cr>",
+		"Find Keymap",
+	},
+	l = {
+		"<cmd>Telescope luasnip<cr>",
+		"Find Snippet",
+	},
+	m = {
+		"<cmd>Telescope marks<cr>",
+		"Find in Marks",
+	},
+	o = {
+		"<cmd>Telescope smart_open<cr>",
+		"Smart Open",
+	},
+	r = {
+		"<cmd>Telescope registers<cr>",
+		"Find in Registers",
+	},
+	t = {
+		"<cmd>Telescope toggleterm<cr>",
+		"Find Terminal",
+	},
+	s = {
+		"<cmd>Telescope aerial<cr>",
+		"Find Symbols",
+	},
+	w = {
+		"<cmd>ListGitWorktrees<cr>",
+		"Git Worktrees",
+	},
+	B = {
+		"<cmd>Telescope file_browser<cr>",
+		"Browse Files",
+	},
+	R = {
+		"<cmd>Telescope refactoring<cr>",
+		"Refactoring",
+	},
+}, {
+	prefix = "<C-t>",
+})
+
+wk.register({
+	name = "+telescope",
+	a = {
+		"<cmd>Telescope aerial<cr>",
+		"Aerial Symbol",
+	},
+	b = {
+		"<cmd>Telescope buffers<cr>",
+		"Buffer",
+	},
+	c = {
+		"<cmd>Telescope neoclip<cr>",
+		"Clipboard",
+	},
+	d = {
+		name = "+dap",
+		c = {
+			"<cmd>Telescope dap commands<cr>",
+			"DAP Commands",
+		},
+		b = {
+			"<cmd>Telescope dap list_breakpoints<cr>",
+			"DAP Breakpoints",
+		},
+		v = {
+			"<cmd>Telescope dap variables<cr>",
+			"DAP Variables",
+		},
+		f = {
+			"<cmd>Telescope dap frames<cr>",
+			"DAP Frames",
+		},
+		C = {
+			"<cmd>Telescope dap configurations<cr>",
+			"DAP Configs",
+		},
+	},
+	f = {
+		"<cmd>Telescope find_files<cr>",
+		"Find File",
+	},
+	g = {
+		"<cmd>Telescope live_grep<cr>",
+		"Find String in Files",
+	},
 	h = {
 		"<cmd>Telescope harpoon marks<cr>",
 		"Find Harpoon Using Telescope",
 	},
-	k = { "<cmd>Telescope keymaps<cr>", "Find Keymap" },
-	l = { "<cmd>Telescope luasnip<cr>", "Find Snippet" },
-	m = { "<cmd>Telescope marks<cr>", "Find in Marks" },
-	o = { "<cmd>Telescope smart_open<cr>", "Smart Open" },
-	r = { "<cmd>Telescope registers<cr>", "Find in Registers" },
-	t = { "<cmd>Telescope toggleterm<cr>", "Find Terminal" },
+	k = {
+		"<cmd>Telescope keymaps<cr>",
+		"Find Keymap",
+	},
+	l = {
+		"<cmd>Telescope luasnip<cr>",
+		"Find Snippet",
+	},
+	m = {
+		"<cmd>Telescope marks<cr>",
+		"Find in Marks",
+	},
+	o = {
+		"<cmd>Telescope smart_open<cr>",
+		"Smart Open",
+	},
+	r = {
+		"<cmd>Telescope registers<cr>",
+		"Find in Registers",
+	},
+	t = {
+		"<cmd>Telescope toggleterm<cr>",
+		"Find Terminal",
+	},
 	w = {
 		"<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>",
 		"Switch to Git Worktree",
 	},
-	B = { "<cmd>Telescope file_browser<cr>", "Browse Files" },
-	R = { "<cmd>Telescope refactoring<cr>", "Refactoring" },
+	B = {
+		"<cmd>Telescope file_browser<cr>",
+		"Browse Files",
+	},
+	R = {
+		"<cmd>Telescope refactoring<cr>",
+		"Refactoring",
+	},
 }, {
 	prefix = "<leader><leader>",
 })
@@ -124,10 +250,22 @@ wk.register({
 wk.register({
 	g = {
 		name = "+lsp",
-		R = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-		o = { "<cmd>lua vim.lsp.buf.outgoing_calls()<CR>", "Outgoing Calls" },
-		i = { "<cmd>lua vim.lsp.buf.incoming_calls()<CR>", "Incoming Calls" },
-		d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go To Defintion" },
+		R = {
+			"<cmd>lua vim.lsp.buf.rename()<CR>",
+			"Rename",
+		},
+		o = {
+			"<cmd>lua vim.lsp.buf.outgoing_calls()<CR>",
+			"Outgoing Calls",
+		},
+		i = {
+			"<cmd>lua vim.lsp.buf.incoming_calls()<CR>",
+			"Incoming Calls",
+		},
+		d = {
+			"<cmd>lua vim.lsp.buf.definition()<CR>",
+			"Go To Defintion",
+		},
 		I = {
 			"<cmd>lua vim.lsp.buf.implementation()<CR>",
 			"Go To Implementation",
@@ -191,13 +329,22 @@ wk.register({
 		"<cmd>DapVirtualTextForceRefresh<cr>",
 		"Refresh Virtual Text",
 	},
-	["<F4>"] = { "<cmd>lua require('dap').run_last()<cr>", "Run Last" },
-	["<F5>"] = { "<cmd>lua require('dap').continue()<cr>", "Continue" },
+	["<F4>"] = {
+		"<cmd>lua require('dap').run_last()<cr>",
+		"Run Last",
+	},
+	["<F5>"] = {
+		"<cmd>lua require('dap').continue()<cr>",
+		"Continue",
+	},
 	["<F6>"] = {
 		"<cmd>lua require('dap').run_to_cursor()<cr>",
 		"Run To Cursor",
 	},
-	["<F7>"] = { "<cmd>lua require('dap').pause()<cr>", "Pause" },
+	["<F7>"] = {
+		"<cmd>lua require('dap').pause()<cr>",
+		"Pause",
+	},
 	["<F8>"] = {
 		"<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
 		"Conditional Breakpoint",
@@ -206,9 +353,18 @@ wk.register({
 		"<cmd>lua require('dap').toggle_breakpoint()<cr>",
 		"Toggle Breakpoint",
 	},
-	["<F10>"] = { "<cmd>lua require('dap').step_out()<cr>", "Step Out" },
-	["<F11>"] = { "<cmd>lua require('dap').step_into()<cr>", "Step In" },
-	["<F12>"] = { "<cmd>lua require('dap').step_over()<cr>", "Step Over" },
+	["<F10>"] = {
+		"<cmd>lua require('dap').step_out()<cr>",
+		"Step Out",
+	},
+	["<F11>"] = {
+		"<cmd>lua require('dap').step_into()<cr>",
+		"Step In",
+	},
+	["<F12>"] = {
+		"<cmd>lua require('dap').step_over()<cr>",
+		"Step Over",
+	},
 })
 
 -- Actions
@@ -218,8 +374,18 @@ wk.register({
 		"<cmd>lua require('harpoon.mark').add_file()<cr>",
 		"Add Harpoon Mark",
 	},
-	b = { "<cmd>Fern . -drawer -toggle<cr>", "Toggle File Tree" },
-    d = { "<cmd>TroubleToggle document_diagnostics", "Toggle Document Diagnostics"},
+	b = {
+		"<cmd>Fern . -drawer -toggle<cr>",
+		"Toggle File Tree",
+	},
+      d = {
+          "<cmd>TroubleToggle document_diagnostics<cr>",
+          "Toggle Document Diagnostics",
+      },
+      w = {
+          "<cmd>TroubleToggle workspace_diagnostics<cr>",
+          "Toggle Workspace Diagnostics",
+      },
 	e = {
 		"<cmd>lua require('harpoon.ui').nav_file(3)<cr>",
 		"Harpoon Mark 3",
@@ -245,8 +411,14 @@ wk.register({
 		"Harpoon Mark 4",
 	},
 	s = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
-	u = { "<cmd>MundoToggle<cr>", "Toggle Undo Tree" },
-    x = { "<cmd>TroubleToggle<cr>", "Toggle All Diagnostics" },
+	u = {
+		"<cmd>MundoToggle<cr>",
+		"Toggle Undo Tree",
+	},
+	x = {
+		"<cmd>TroubleToggle<cr>",
+		"Toggle All Diagnostics",
+	},
 	w = {
 		"<cmd>lua require('harpoon.ui').nav_file(2)<cr>",
 		"Harpoon Mark 2",
@@ -267,7 +439,10 @@ wk.register({
 		"<cmd>lua require('harpoon.ui').nav_file(5)<cr>",
 		"Harpoon Mark 4",
 	},
-	["<C-d>"] = { "<cmd>lua require'dapui'.toggle()<CR>", "Open DAP UI" },
+	["<C-d>"] = {
+		"<cmd>lua require'dapui'.toggle()<CR>",
+		"Open DAP UI",
+	},
 }, {
 	prefix = "<C-a>",
 })

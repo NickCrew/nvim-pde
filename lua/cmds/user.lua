@@ -17,5 +17,7 @@ user_cmd("ReloadLuaFile", ":luafile %", {})
 -- Git
 user_cmd("CreateWorktree", ":lua require('telescope').extensions.git_worktree.create_git_worktree()", {})
 user_cmd("ListWorktrees", ":lua require('telescope').extensions.git_worktree.git_worktrees()", {})
-
+user_cmd("RefactorExtractBlock", " <Cmd>lua require('refactoring').refactor('Extract Block')<CR>", {})
+user_cmd("RefactorExtractBlockToFile", "<Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>",{})
+user_cmd("RefactorInlineVariable", "<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>", {})
 

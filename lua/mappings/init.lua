@@ -7,6 +7,9 @@
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
+require('mappings.wk')
+
+
 -- Basic sanity preservation
 map("n", "N", "Nzz", opts)
 map("n", "n", "nzz", opts)

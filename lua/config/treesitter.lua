@@ -13,7 +13,6 @@
           "hcl",
           "html",
           "gitignore",
-          "gitcommit",
           "http",
           "javascript",
           "json",

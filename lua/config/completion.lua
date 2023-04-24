@@ -35,7 +35,7 @@ local kind_symbols = {
 
 local source_symbols = {
   buffer = " ◉  BUF",
-  nvim_lsp = " 👐  LSP",
+  nvim_lsp = " 👐 LSP",
   copilot = " 🚀 GHC",
   nvim_lua = " 🌙  LUA",
   path = " 🚧 PTH",
@@ -131,14 +131,15 @@ cmp.setup({
     { name = "copilot" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
+    { name = "treesitter" },
+    { name = "buffer" },
     { name = "path" }
-  }, {
-
-  }),
+  }, {}),
   experimental = {
     ghost_text = true,
   },
 })
+
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline("/", {
   mapping = cmp.mapping.preset.cmdline(),
