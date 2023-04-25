@@ -1,6 +1,13 @@
 local vim = vim
+local execute = vim.api.nvim_cmd
 
 local M = {}
+
+function M.mk_abbrev(abbrev, command)
+  execute({ cmd = "cnoreabbrev",
+  args = {abbrev, command}},
+  {})
+end
 
 function M.toggle_qf()
   local qf_exists = false

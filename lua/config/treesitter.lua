@@ -5,28 +5,6 @@
   parser_configs.markdown.filetype_to_parsername = "octo"
   -- Treesitter Config
   require("nvim-treesitter.configs").setup({
-      ensure_installed = {
-          "cpp",
-          "dockerfile",
-          "fennel",
-          "go",
-          "hcl",
-          "html",
-          "gitignore",
-          "http",
-          "javascript",
-          "json",
-          "lua",
-          "markdown",
-          "python",
-          "rust",
-          "scss",
-          "toml",
-          "tsx",
-          "typescript",
-          "vim",
-          "yaml",
-      },
       highlight = {
           enable = true,
       },

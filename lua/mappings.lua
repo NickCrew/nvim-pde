@@ -1,8 +1,20 @@
--- vim: set  foldmarker={{{,}}}
--- WhichKey Configuration
---
+-- Mappings
 
+local vim = vim
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
 local wk = require("which-key")
+
+map("n", "N", "Nzz", opts)
+map("n", "n", "nzz", opts)
+map("n", "<M-left>", "<C-w>h<C-w>|", opts)
+map("n", "<M-right>", "<C-w>l<C-w>|", opts)
+map("n", "<M-down>", "<C-w>j<C-w>_", opts)
+map("n", "<M-up>", "<C-w>k<C-w>_", opts)
+map("n", "<C-d>", "<C-d>zz", opts)
+map("n", "<C-u>", "<C-u>zz", opts)
+map("n", "q:", "<nop>", opts)
+map("n", "Q", "<nop>", opts)
 
 wk.register({
 	["["] = {
@@ -21,11 +33,22 @@ wk.register({
 		"<cmd>noh<CR>",
 		"Turn off search highlighting",
 	},
+	[";"] = { "zz", "Center Window" },
 	b = {
 		"<cmd>BufferLinePick<cr>",
 		"Pick Buffer",
 	},
-	
+	d = {
+		"<cmd>lua require'dapui'.toggle()<CR>",
+		"Open DAP UI",
+	},
+	f = {
+		name = "+files",
+		f = {
+			"<cmd>Fern . -drawer -toggle<cr>",
+			"Toggle File Tree",
+		},
+	},
 	l = {
 		name = "+line",
 		a = {
@@ -49,6 +72,10 @@ wk.register({
 			"Hop To Word",
 		},
 	},
+	u = {
+		"<cmd>MundoToggle<cr>",
+		"Toggle Undo Tree",
+	},
 	v = {
 		v = {
 			"<cmd>HopVertical<CR>",
@@ -63,13 +90,27 @@ wk.register({
 			"Hop Vertical BC",
 		},
 	},
-	[";"] = { "zz", "Center WIndow" },
+	w = {
+		"<cmd>WhichKey<cr>",
+		"Toggle WhichKey",
+	},
+	x = {
+		name = "+diagnostics",
+		d = {
+			"<cmd>TroubleToggle document_diagnostics<cr>",
+			"Toggle Document Diagnostics",
+		},
+		w = {
+			"<cmd>TroubleToggle workspace_diagnostics<cr>",
+			"Toggle Workspace Diagnostics",
+		},
+		x = {
+			"<cmd>TroubleToggle<cr>",
+			"Toggle All Diagnostics",
+		},
+	},
 }, {
 	prefix = "<leader>",
-})
-
-wk.register({}, {
-	prefix = "<leader><leader>",
 })
 
 wk.register({
@@ -145,95 +186,6 @@ wk.register({
 	w = {
 		"<cmd>ListGitWorktrees<cr>",
 		"Git Worktrees",
-	},
-	B = {
-		"<cmd>Telescope file_browser<cr>",
-		"Browse Files",
-	},
-	R = {
-		"<cmd>Telescope refactoring<cr>",
-		"Refactoring",
-	},
-}, {
-	prefix = "<C-t>",
-})
-
-wk.register({
-	name = "+telescope",
-	a = {
-		"<cmd>Telescope aerial<cr>",
-		"Aerial Symbol",
-	},
-	b = {
-		"<cmd>Telescope buffers<cr>",
-		"Buffer",
-	},
-	c = {
-		"<cmd>Telescope neoclip<cr>",
-		"Clipboard",
-	},
-	d = {
-		name = "+dap",
-		c = {
-			"<cmd>Telescope dap commands<cr>",
-			"DAP Commands",
-		},
-		b = {
-			"<cmd>Telescope dap list_breakpoints<cr>",
-			"DAP Breakpoints",
-		},
-		v = {
-			"<cmd>Telescope dap variables<cr>",
-			"DAP Variables",
-		},
-		f = {
-			"<cmd>Telescope dap frames<cr>",
-			"DAP Frames",
-		},
-		C = {
-			"<cmd>Telescope dap configurations<cr>",
-			"DAP Configs",
-		},
-	},
-	f = {
-		"<cmd>Telescope find_files<cr>",
-		"Find File",
-	},
-	g = {
-		"<cmd>Telescope live_grep<cr>",
-		"Find String in Files",
-	},
-	h = {
-		"<cmd>Telescope harpoon marks<cr>",
-		"Find Harpoon Using Telescope",
-	},
-	k = {
-		"<cmd>Telescope keymaps<cr>",
-		"Find Keymap",
-	},
-	l = {
-		"<cmd>Telescope luasnip<cr>",
-		"Find Snippet",
-	},
-	m = {
-		"<cmd>Telescope marks<cr>",
-		"Find in Marks",
-	},
-	o = {
-		"<cmd>Telescope smart_open<cr>",
-		"Smart Open",
-	},
-	r = {
-		"<cmd>Telescope registers<cr>",
-		"Find in Registers",
-	},
-	t = {
-		"<cmd>Telescope toggleterm<cr>",
-		"Find Terminal",
-	},
-	w = {
-		"<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>",
-		"Switch to Git Worktree",
 	},
 	B = {
 		"<cmd>Telescope file_browser<cr>",
@@ -367,89 +319,39 @@ wk.register({
 	},
 })
 
--- Actions
+wk.register({}, {
+	prefix = ";",
+})
+
+wk.register({}, {
+	prefix = "\\",
+})
+
 wk.register({
-	name = "+actions",
+	name = "+fastnav",
+	["["] = {
+		"<cmd>lua require('harpoon.ui').nav_prev()<cr>",
+		"Previous Harpoon Mark",
+	},
+	["]"] = {
+		"<cmd>lua require('harpoon.ui').nav_next()<cr>",
+		"Next Harpoon Mark",
+	},
 	a = {
 		"<cmd>lua require('harpoon.mark').add_file()<cr>",
 		"Add Harpoon Mark",
 	},
-	b = {
-		"<cmd>Fern . -drawer -toggle<cr>",
-		"Toggle File Tree",
-	},
-      d = {
-          "<cmd>TroubleToggle document_diagnostics<cr>",
-          "Toggle Document Diagnostics",
-      },
-      w = {
-          "<cmd>TroubleToggle workspace_diagnostics<cr>",
-          "Toggle Workspace Diagnostics",
-      },
-	e = {
-		"<cmd>lua require('harpoon.ui').nav_file(3)<cr>",
-		"Harpoon Mark 3",
-	},
 	f = {
-		"<cmd>lua require('harpoon.ui').nav_prev()<cr>",
-		"Previous Harpoon Mark",
+		"<cmd>lua vim.lsp.buf.format()<CR>",
+		"Format Buffer",
 	},
 	h = {
 		"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
 		"Harpoon Quick Menu",
 	},
-	j = {
-		"<cmd>lua require('harpoon.ui').nav_next()<cr>",
-		"Next Harpoon Mark",
-	},
-	q = {
-		"<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
-		"Harpoon Mark 1",
-	},
-	r = {
-		"<cmd>lua require('harpoon.ui').nav_file(5)<cr>",
-		"Harpoon Mark 4",
-	},
 	s = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
-	u = {
-		"<cmd>MundoToggle<cr>",
-		"Toggle Undo Tree",
-	},
-	x = {
-		"<cmd>TroubleToggle<cr>",
-		"Toggle All Diagnostics",
-	},
-	w = {
-		"<cmd>lua require('harpoon.ui').nav_file(2)<cr>",
-		"Harpoon Mark 2",
-	},
-	["1"] = {
-		"<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
-		"Harpoon Mark 1",
-	},
-	["2"] = {
-		"<cmd>lua require('harpoon.ui').nav_file(2)<cr>",
-		"Harpoon Mark 2",
-	},
-	["3"] = {
-		"<cmd>lua require('harpoon.ui').nav_file(3)<cr>",
-		"Harpoon Mark 3",
-	},
-	["4"] = {
-		"<cmd>lua require('harpoon.ui').nav_file(5)<cr>",
-		"Harpoon Mark 4",
-	},
-	["<C-d>"] = {
-		"<cmd>lua require'dapui'.toggle()<CR>",
-		"Open DAP UI",
-	},
 }, {
 	prefix = "<C-a>",
-})
-
--- Leader2
-wk.register({}, {
-	prefix = ";",
 })
 
 -- Visual mode refactor

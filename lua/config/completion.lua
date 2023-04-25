@@ -33,22 +33,27 @@ local kind_symbols = {
   TypeParameter = "",
 }
 
+
 local source_symbols = {
-  buffer = " ◉  BUF",
+  buffer = " 👀 BUF",
   nvim_lsp = " 👐 LSP",
-  copilot = " 🚀 GHC",
-  nvim_lua = " 🌙  LUA",
-  path = " 🚧 PTH",
-  luasnip = " 🌜 SNP",
-  treesitter = "🌲 TSi",
-  rg = " 🔍 RGr",
+  copilot = " 🤖 GHC ",
+  nvim_lua = " 🌙 LUA ",
+  path = " 📁 PATH",
+  luasnip = " ✂️  SNIP",
+  treesitter = " 🌲 TS",
+  rg = " 🔍 RG",
+  cmdline = " 📢 CMD",
+  dap = " 🐛 DAP",
+  cmp_git = " ✅ GIT",
+  nvim_lsp_document_symbol = " 📃 DOC"
 }
+
 
 local lspkind = require("lspkind")
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -128,12 +133,13 @@ cmp.setup({
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
   },
   sources = cmp.config.sources({
+    { name = 'nvim_lsp_signature_help'},
     { name = "copilot" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
-    { name = "treesitter" },
-    { name = "buffer" },
-    { name = "path" }
+    { name = "path" , max_item_count = 5},
+    { name = "treesitter", max_item_count = 5},
+    { name = "buffer", max_item_count = 5},
   }, {}),
   experimental = {
     ghost_text = true,
@@ -164,3 +170,13 @@ cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
     { name = "dap" }
   },
 })
+
+cmp.setup.filetype({"gitcommit"}, { 
+  sources = cmp.config.sources({
+    { name = "cmp_git" },
+  }, {
+    { name = "buffer" },
+  })
+})
+
+require("copilot_cmp").setup()
