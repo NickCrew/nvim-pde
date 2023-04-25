@@ -70,10 +70,9 @@ function M.disable_builtins()
   end
 end
 
+
 function M.listen_for_lights()
-  local pid = string(vim.fn.getpid())
-  local socket_name = '/tmp/nvim/nvim' .. pid .. '.sock'
-  vim.fn.mkdir('/tmp/nvim', 'p')
+  local socket_name = os.getenv("NVIM_LISTEN_ADDRESS")
   vim.fn.call.serverstart(socket_name)
 end
 
@@ -87,8 +86,6 @@ function M.update_theme()
     vim.opt.background = 'light'
     vim.cmd("colorscheme catpuccin-latte")
   end
-
-
 end
 
 

@@ -2,7 +2,6 @@
 --
 -- Setup plugins
 
-local vim = vim
 local fn = vim.fn
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -338,7 +337,6 @@ require("lazy").setup({
 	{
 		-- Project Drawer
 		"lambdalisue/fern.vim",
-		lazy = true,
 		dependencies = {
 			"yuki-yano/fern-preview.vim",
 			"lambdalisue/fern-hijack.vim",

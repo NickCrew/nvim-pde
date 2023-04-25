@@ -17,7 +17,7 @@ g.cursorhold_updatetime = 100
 
 map("", "<Space>", "<Nop>", { noremap = true, silent = true })
 g.mapleader = " "
-g.maplocalleader = " "
+g.maplocalleader = "\\"
 
 function _G.set_terminal_keymaps()
   bufmap(0, "t", "<esc>", [[<C-\><C-n>]], { noremap = true })

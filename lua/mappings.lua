@@ -350,6 +350,8 @@ wk.register({
 		"Harpoon Quick Menu",
 	},
 	s = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
+    u = { "<cmd>lua require('utils').update_theme()<cr>", "Update Theme"},
+    r = { "<cmd>ReloadLuaFile<cr>", "Reload Lua File"}
 }, {
 	prefix = "<C-a>",
 })

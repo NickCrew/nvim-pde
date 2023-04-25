@@ -9,6 +9,7 @@ augroup("hover", {})
 augroup("windows", {})
 augroup("terms", {})
 
+
 -- Commands
 
 autocmd("CursorHold", {
@@ -45,6 +46,7 @@ usercmd("DapREPL", "lua require('dap').repl.open()", {})
 usercmd("DapCmds", ":lua require('telescope').extensions.dap.commands()", {})
 usercmd("Format", "lua vim.lsp.buf.format()", {})
 usercmd("ReloadLuaFile", ":luafile %", {})
+usercmd("UpdateTheme", "lua require('utils').update_theme()", {})
 usercmd(
 	"CreateWorktree",
 	":lua require('telescope').extensions.git_worktree.create_git_worktree()",
@@ -88,6 +90,7 @@ for _, abbrev in ipairs({
 	{ "Ps", "PackerSync" },
 	{ "Pu", "PackerUpdate" },
 	{ "Rlf", "ReloadLuafile" },
+    { "UT", "UpdateTheme"},
 	{ "T", "Telescope" },
 	{ "Wk", "WhichKey" },
 }) do

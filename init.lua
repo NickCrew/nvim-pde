@@ -3,9 +3,9 @@
 
 local utils= require("utils")
 
-utils.disable_builtins()
 
 require('global')
+require('ft')
 require('cmds')
 require('options')
 require('plugins')
