@@ -4,93 +4,67 @@
 --
 
 local o = vim.o
+local nvim_cache = os.getenv("HOME") .. "/.cache/nvim"
 
 -- Appearance
 o.termguicolors = true
 
--- Encoding and Line Endings
-o.encoding = 'utf-8'
-o.fileformats = 'unix,dos,mac'    -- line endings to try
-
--- Quality of Life
+-- Input
+o.backspace = "indent,eol,start" -- Traditional backspace behavior
+o.errorbells = false -- Shut up
+o.magic = true -- Give certain characters special meaning with backslash
+o.mouse = "a" -- Mouse enabled in all modes
 o.timeoutlen = 500
-o.errorbells = false              -- shut up
-o.autochdir = false               -- automatically cd to current directory of open file
-o.magic = true                    -- give certain characters special meaning with backslash
-o.mouse = 'a'                     -- mouse enabled in all modes
-o.startofline = false             -- place cursor at start of line for certain commands e.g. S-g, gg, Ctrl-U, Ctrl-D
-o.backspace = 'indent,eol,start'  -- traditional backspace behavior
 
--- Completion
-o.completeopt = 'menu,menuone,noselect'
+-- Behavior Preferences
+o.autochdir = false -- Automatically cd to current directory of open file
+o.autoindent = true -- copy indent from current line when starting new line
+o.autoread = true -- Always load the file when entering a buffer
+o.autowriteall = true -- Always write the file when leaving the buffer
+o.hidden = true -- Allow switching buffers with unsaved changes
+o.splitbelow = true -- Always open splits below the current window
+o.splitright = true -- Always open splits to the right of the current window
+o.startofline = true -- Place cursor at start of line for certain commands e.g. S-g, gg, Ctrl-U, Ctrl-D
 
--- Spellcheck
-o.spell = false
-o.spelllang =  'en_us'
+-- Searching
+o.hlsearch = true -- highlight search results
+o.incsearch = true -- Show search matches as you type
+o.smartcase = true -- Case is ignored unless a capital letter is used explicitly
 
--- Tabs and Indents
-o.expandtab = false   -- expand tabs into spaces
+-- Look and feel
+o.linebreak = true
+o.textwidth = 0
+o.wrap = true
+o.winminheight = 0 -- Allow maximized windows
+o.winminwidth = 0 -- Allow maximized windows
+
+-- Default Tab Behavior
+o.expandtab = false -- expand tabs into spaces
 o.shiftwidth = 4
 o.softtabstop = 4
 o.tabstop = 4
-o.autoindent = true   -- copy indent from current line when starting new line
 
--- Text behaviour
--- o.formatoptions = o.formatoptions
---                    + 't'    -- auto-wrap text using textwidth
---                    + 'c'    -- auto-wrap comments using textwidth
---                    + 'r'    -- auto insert comment leader on pressing enter
---                    - 'o'    -- don't insert comment leader on pressing o
---                    + 'q'    -- format comments with gq
---                    - 'a'    -- don't autoformat the paragraphs (use some formatter instead)
---                    + 'n'    -- autoformat numbered list
---                    - '2'    -- I am a programmer and not a writer
---                    + 'j'    -- Join comments smartly
-o.joinspaces = false
+-- UI  Elements
+o.ruler = true -- Show the line and column number of the cursor position, separated by a comma.
+o.laststatus = 3 -- Last window status line: always and only
+o.showcmd = true -- show partial command in last line or screen
+o.showmatch = true -- When a bracket is inserted, briefly jump to the matching one
+o.showmode = true -- If in Insert, Replace or Visual mode put a message on the last line.
+o.number = true -- Show line numbers
+o.relativenumber = true  -- Use relative line numbers
+o.signcolumn = "yes" -- Show gutter
 
--- Wrapping
-o.wrap = true
-o.linebreak = true
-o.textwidth = 0
-
--- Folding
-o.foldenable = false
-o.foldmarker = '{{{,}}}'
-o.foldmethod = 'marker'
-
--- Searching
-o.hlsearch = true
-o.incsearch = true
-o.inccommand = "nosplit"
-o.smartcase = true
-
--- Look and feel
-o.winminheight=0
-o.winminwidth=0
-o.ruler = true
-o.laststatus = 2
-o.showcmd = true
-o.showmatch = false
-o.showmode = true
-o.splitbelow = true
-o.splitright = true
-o.number = true
-o.relativenumber = true
-o.signcolumn = "yes"
-
--- Wildmenu
-o.wildmenu = true
-o.wildmode = 'longest,list,full'
+-- Completion
+o.completeopt = "menu,menuone,noselect"
+o.wildmode = "longest,list,full"
+o.wildmenu = true  -- Enhanced command line completion
 o.wildignorecase = true
-o.wildignore = '.git/**,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**'
+o.wildignore = ".git/**,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**"
 
--- File Reading/Writing
-o.hidden = true
-o.autowriteall = true
-o.autoread = true
-o.backup = false
-o.swapfile = false
+-- Cache/Saving
+o.backup = true
+o.swapfile = true
 o.undofile = true
-o.directory = os.getenv('HOME') .. '/.cache/nvim/swap'
-o.backupdir = os.getenv('HOME') .. '/.cache/nvim/backup/'
-o.undodir = os.getenv('HOME') .. '/.cache/nvim/undo/'
+o.directory = nvim_cache .. "/swap"
+o.backupdir = nvim_cache .. "/backup"
+o.undodir = nvim_cache .. "/undo"
