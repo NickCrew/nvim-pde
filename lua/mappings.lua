@@ -7,12 +7,12 @@ local opts = { noremap = true, silent = true }
 local wk = require("which-key")
 
 function _G.set_terminal_keymaps()
-  bufmap(0, "t", "<esc>", [[<C-\><C-n>]], { noremap = true })
-  bufmap(0, "t", "jk", [[<C-\><C-n>]], { noremap = true })
-  bufmap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], { noremap = true })
-  bufmap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], { noremap = true })
-  bufmap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], { noremap = true })
-  bufmap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], { noremap = true })
+	bufmap(0, "t", "<esc>", [[<C-\><C-n>]], { noremap = true })
+	bufmap(0, "t", "jk", [[<C-\><C-n>]], { noremap = true })
+	bufmap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], { noremap = true })
+	bufmap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], { noremap = true })
+	bufmap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], { noremap = true })
+	bufmap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], { noremap = true })
 end
 
 map("", "<Space>", "<Nop>", { noremap = true, silent = true })
@@ -45,6 +45,8 @@ wk.register({
 		"Turn off search highlighting",
 	},
 	[";"] = { "zz", "Center Window" },
+
+	a = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
 	b = {
 		"<cmd>BufferLinePick<cr>",
 		"Pick Buffer",
@@ -120,6 +122,8 @@ wk.register({
 			"Toggle All Diagnostics",
 		},
 	},
+	R = { "<cmd>ReloadLuaFile<cr>", "Reload Lua File" },
+	U = { "<cmd>lua require('utils').update_theme()<cr>", "Update Theme" },
 }, {
 	prefix = "<leader>",
 })
@@ -282,6 +286,10 @@ wk.register({
 		},
 	},
 	K = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
+    F = {
+		"<cmd>lua vim.lsp.buf.format()<CR>",
+		"Format Buffer",
+	},
 }, {
 	mode = "n",
 })
@@ -328,6 +336,7 @@ wk.register({
 		"<cmd>lua require('dap').step_over()<cr>",
 		"Step Over",
 	},
+}, {
 })
 
 wk.register({}, {
@@ -335,11 +344,11 @@ wk.register({}, {
 })
 
 wk.register({}, {
-	prefix = "\\",
+	prefix = "<localleader>",
 })
 
 wk.register({
-	name = "+fastnav",
+	name = "+navigation",
 	["["] = {
 		"<cmd>lua require('harpoon.ui').nav_prev()<cr>",
 		"Previous Harpoon Mark",
@@ -352,19 +361,64 @@ wk.register({
 		"<cmd>lua require('harpoon.mark').add_file()<cr>",
 		"Add Harpoon Mark",
 	},
-	f = {
-		"<cmd>lua vim.lsp.buf.format()<CR>",
-		"Format Buffer",
-	},
+
 	h = {
 		"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
 		"Harpoon Quick Menu",
 	},
-	s = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
-    u = { "<cmd>lua require('utils').update_theme()<cr>", "Update Theme"},
-    r = { "<cmd>ReloadLuaFile<cr>", "Reload Lua File"}
+	["1"] = {
+		"<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
+		"Harpoon 1",
+	},
+	["2"] = {
+		"<cmd>lua require('harpoon.ui').nav_file(2)<cr>",
+		"Harpoon 2",
+	},
+	["3"] = {
+		"<cmd>lua require('harpoon.ui').nav_file(3)<cr>",
+		"Harpoon 3",
+	},
+	["4"] = {
+		"<cmd>lua require('harpoon.ui').nav_file(4)<cr>",
+		"Harpoon 4",
+	},
+	j = {
+		"<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
+		"Harpoon 1",
+	},
+	k = {
+		"<cmd>lua require('harpoon.ui').nav_file(2)<cr>",
+		"Harpoon 2",
+	},
+	l = {
+		"<cmd>lua require('harpoon.ui').nav_file(3)<cr>",
+		"Harpoon 3",
+	},
+	[";"] = {
+		"<cmd>lua require('harpoon.ui').nav_file(4)<cr>",
+		"Harpoon 4",
+	},
+	t = {
+		["1"] = {
+			"<cmd>lua require('harpoon.term').gotoTerminal(1)<cr>",
+			"Terminal 1",
+		},
+		["2"] = {
+			"<cmd>lua require('harpoon.term').gotoTerminal(2)<cr>",
+			"Terminal 2",
+		},
+		["3"] = {
+			"<cmd>lua require('harpoon.term').gotoTerminal(3)<cr>",
+			"Terminal 3",
+		},
+	},
 }, {
 	prefix = "<C-a>",
+})
+
+wk.register({
+}, {
+  prefix = "<C-e>"
 })
 
 -- Visual mode refactor
