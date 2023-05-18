@@ -25,6 +25,10 @@ require("lazy").setup({
 	},
 
 	{
+		"junegunn/fzf",
+		build = "fzf#install()",
+	},
+	{
 		"RishabhRD/popfix",
 		enabled = true,
 	},
@@ -109,12 +113,6 @@ require("lazy").setup({
 	},
 
 	{
-		-- Code scratch pad
-		"metakirby5/codi.vim",
-		enabled = false,
-	},
-
-	{
 		-- Better undo control
 		"simnalamburt/vim-mundo",
 		enabled = true,
@@ -129,12 +127,14 @@ require("lazy").setup({
 	{
 		-- Markdown previewer
 		"ellisonleao/glow.nvim",
+		ft = "markdown",
 		enabled = false,
 	},
 
 	{
 		-- Live markdown preview
 		"iamcco/markdown-preview.nvim",
+		ft = "markdown",
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
@@ -252,6 +252,7 @@ require("lazy").setup({
 
 	{
 		"someone-stole-my-name/yaml-companion.nvim",
+		ft = { "yaml" },
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"nvim-lua/plenary.nvim",
@@ -307,6 +308,7 @@ require("lazy").setup({
 		dependencies = "telescope.nvim",
 		config = function()
 			require("config.harpoon")
+			require("telescope").load_extension("harpoon")
 		end,
 	},
 
@@ -414,39 +416,122 @@ require("lazy").setup({
 		-- Smart Session Management
 		"folke/persistence.nvim",
 		lazy = true,
-        enabled = true,
+		enabled = true,
 		event = "BufReadPre", -- this will only start session saving when an actual file was opened
 		module = "persistence",
 		config = function()
 			require("persistence").setup()
 		end,
 	},
-
 	{
-		"nvim-treesitter/playground",
-		cmd = {
-			"TSPlaygroundToggle",
-			"TSHighlightCapturesUnderCursor",
-		},
+		"nvim-treesitter/nvim-treesitter-context",
 	},
-
 	{
-		-- Syntax highlighting and parsiging
+		"nvim-treesitter/nvim-treesitter-textobjects",
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
-		dependencies = {
-			"p00f/nvim-ts-rainbow",
-			"romgrk/nvim-treesitter-context",
-			"nvim-treesitter/playground",
-			"nvim-treesitter/playground",
-			"RRethy/nvim-treesitter-textsubjects",
-			"nvim-treesitter/nvim-treesitter-textobjects",
-		},
-		build = ":TSUpdate",
 		config = function()
-			require("config.treesitter")
+			local parser_configs =
+				require("nvim-treesitter.parsers").get_parser_configs()
+			parser_configs.markdown.filetype_to_parsername = "octo"
+			-- Treesitter Config
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = {
+					"bash",
+					"css",
+					"dockerfile",
+					"git_config",
+					"git_rebase",
+					"gitattributes",
+					"gitcommit",
+					"gitignore",
+					"http",
+					"html",
+					"ini",
+					"javascript",
+					"json",
+					"lua",
+					"make",
+					"markdown",
+					"python",
+					"rust",
+					"terraform",
+					"typescript",
+					"yaml",
+					"vim",
+					"regex",
+					"toml",
+				},
+				auto_install = false,
+				sync_install = false,
+				highlight = {
+					enable = true,
+				},
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+						init_selection = "gnn",
+						node_incremental = "grn",
+						scope_incremental = "grc",
+						node_decremental = "grm",
+					},
+				},
+				textobjects = {
+					swap = {
+						enable = true,
+						swap_next = {
+							["<leader>as"] = "@parameter.inner",
+						},
+						swap_previous = {
+							["<leader>aS"] = "@parameter.inner",
+						},
+					},
+
+					move = {
+						enable = true,
+						set_jumps = true, -- whether to set jumps in the jumplist
+						goto_next_start = {
+							["]m"] = "@function.outer",
+							["]]"] = "@class.outer",
+						},
+						goto_next_end = {
+							["]M"] = "@function.outer",
+							["]["] = "@class.outer",
+						},
+						goto_previous_start = {
+							["[m"] = "@function.outer",
+							["[["] = "@class.outer",
+						},
+						goto_previous_end = {
+							["[M"] = "@function.outer",
+							["[]"] = "@class.outer",
+						},
+					},
+					lsp_interop = {
+						enable = true,
+						border = "shadow",
+						peek_definition_code = {
+							["<leader><leader>d"] = "@function.outer",
+							["<leader><leader>D"] = "@class.outer",
+						},
+					},
+					select = {
+						enable = true,
+						-- Automatically jump forward to textobj, similar to targets.vim
+						lookahead = true,
+						keymaps = {
+							-- You can use the capture groups defined in textobjects.scm
+							["<leader>of"] = "@function.outer",
+							["<leader>if"] = "@function.inner",
+							["<leader>oc"] = "@class.outer",
+							["<leader>ic"] = "@class.inner",
+						},
+					},
+				},
+			})
 		end,
 	},
-
 	{
 		-- Docstring generator
 		"danymat/neogen",
@@ -489,7 +574,10 @@ require("lazy").setup({
 		dependencies = "mfussenegger/nvim-dap",
 	},
 
-	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "make",
+	},
 
 	{
 		-- Telescope
@@ -523,7 +611,7 @@ require("lazy").setup({
 			"nvim-telescope/telescope.nvim",
 		},
 		lazy = true,
-        cmd = "ChatGPT",
+		cmd = "ChatGPT",
 		config = function()
 			require("chatgpt").setup({})
 		end,
@@ -532,7 +620,7 @@ require("lazy").setup({
 		-- AI code completion
 		"zbirenbaum/copilot.lua",
 		event = "InsertEnter",
-        lazy = true,
+		lazy = true,
 		config = function()
 			require("config.copilot")
 		end,
@@ -589,9 +677,6 @@ require("lazy").setup({
 		"pwntester/octo.nvim",
 		cmd = "Octo",
 		lazy = true,
-		config = function()
-			require("config.octo-nvim")
-		end,
 	},
 
 	{
@@ -654,7 +739,7 @@ require("lazy").setup({
 			--   If not available, we use `mini` as the fallback
 			"rcarriga/nvim-notify",
 		},
-        enabled = true,
+		enabled = true,
 		config = function()
 			require("config.noice")
 			require("telescope").load_extension("noice")
@@ -686,7 +771,7 @@ require("lazy").setup({
 	{
 		-- Pretty notification windows/popups
 		"rcarriga/nvim-notify",
-        enabled = true,
+		enabled = true,
 		config = function()
 			require("config.notify")
 		end,
@@ -695,9 +780,10 @@ require("lazy").setup({
 	{
 		-- Project manager
 		"ahmedkhalf/project.nvim",
-        enabled = true,
+		enabled = true,
 		config = function()
 			require("config.project")
+			require("telescope").load_extension("projects")
 		end,
 	},
 
@@ -741,7 +827,7 @@ require("lazy").setup({
 
 	{
 		"folke/which-key.nvim",
-        enabled = true,
+		enabled = true,
 		config = function()
 			require("config.which-key-nvim")
 		end,
@@ -750,7 +836,7 @@ require("lazy").setup({
 	{
 		-- Smooth Scrolling
 		"karb94/neoscroll.nvim",
-        enabled = true,
+		enabled = true,
 		config = function()
 			require("neoscroll").setup({
 				easing_function = "quadratic",

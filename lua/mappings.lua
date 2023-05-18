@@ -29,11 +29,11 @@ map("n", "Q", "<nop>", opts)
 
 wk.register({
 	["["] = {
-		"<cmd>bp<cr>",
+		"<cmd>BufferLineCyclePrev<cr>",
 		"Focus Left Buffer",
 	},
 	["]"] = {
-		"<cmd>bn<cr>",
+		"<cmd>BufferLineCycleNext<cr>",
 		"Focus Right Buffer",
 	},
 	["<tab>"] = {
@@ -45,15 +45,21 @@ wk.register({
 		"Turn off search highlighting",
 	},
 	[";"] = { "zz", "Center Window" },
-
 	a = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
 	b = {
-		"<cmd>BufferLinePick<cr>",
-		"Pick Buffer",
-	},
-	d = {
-		"<cmd>lua require'dapui'.toggle()<CR>",
-		"Open DAP UI",
+		name = "+buffers",
+		b = {
+			"<cmd>BufferLinePick<cr>",
+			"Pick Buffer To View",
+		},
+		c = {
+			"<Cmd>BufferLinePickClose<cr>",
+			"Pick Buffer to Close",
+		},
+		p = {
+			"<cmd>BufferLineTogglePin<cr>",
+			"Toggle Pinned Buffer",
+		},
 	},
 	f = {
 		name = "+files",
@@ -80,10 +86,10 @@ wk.register({
 			"<cmd>HopLine<CR>",
 			"Hop To Line",
 		},
-		h = {
-			"<cmd>HopWordCurrentLine<CR>",
-			"Hop To Word",
-		},
+	},
+	h = {
+		"<cmd>HopWordCurrentLine<CR>",
+		"Hop To Word",
 	},
 	u = {
 		"<cmd>MundoToggle<cr>",
@@ -103,7 +109,7 @@ wk.register({
 			"Hop Vertical BC",
 		},
 	},
-	w = {
+	W = {
 		"<cmd>WhichKey<cr>",
 		"Toggle WhichKey",
 	},
@@ -121,6 +127,14 @@ wk.register({
 			"<cmd>TroubleToggle<cr>",
 			"Toggle All Diagnostics",
 		},
+		c = {
+			"<cmd>TroubleClose<CR>",
+			"Close Trouble",
+		},
+	},
+	D = {
+		"<cmd>lua require'dapui'.toggle()<CR>",
+		"Open DAP UI",
 	},
 	R = { "<cmd>ReloadLuaFile<cr>", "Reload Lua File" },
 	U = { "<cmd>lua require('utils').update_theme()<cr>", "Update Theme" },
@@ -217,26 +231,27 @@ wk.register({
 wk.register({
 	g = {
 		name = "+lsp",
-		R = {
-			"<cmd>lua vim.lsp.buf.rename()<CR>",
-			"Rename",
+		["["] = {
+			"<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>",
+			"Go To Previous",
 		},
-		o = {
-			"<cmd>lua vim.lsp.buf.outgoing_calls()<CR>",
-			"Outgoing Calls",
-		},
-		i = {
-			"<cmd>lua vim.lsp.buf.incoming_calls()<CR>",
-			"Incoming Calls",
+		["]"] = {
+			"<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+			"Go To Next",
 		},
 		d = {
 			"<cmd>lua vim.lsp.buf.definition()<CR>",
 			"Go To Defintion",
 		},
-		I = {
-			"<cmd>lua vim.lsp.buf.implementation()<CR>",
-			"Go To Implementation",
+		i = {
+			"<cmd>lua vim.lsp.buf.incoming_calls()<CR>",
+			"Incoming Calls",
 		},
+		o = {
+			"<cmd>lua vim.lsp.buf.outgoing_calls()<CR>",
+			"Outgoing Calls",
+		},
+		x = {},
 		p = {
 			name = "+preview",
 			c = {
@@ -268,28 +283,24 @@ wk.register({
 			"<cmd>lua vim.lsp.buf.document_symbol()<CR>",
 			"Document Symbol",
 		},
-		W = {
-			"<cmd>lua vim.lsp.buf.workspace_symbol()<CR>",
-			"Workspace Symbol",
-		},
-		["["] = {
-			"<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>",
-			"Go To Previous",
-		},
-		["]"] = {
-			"<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
-			"Go To Next",
-		},
 		D = {
 			"<cmd>lua vim.lsp.buf.declaration()<CR>",
 			"Go To Declaration",
 		},
+		I = {
+			"<cmd>lua vim.lsp.buf.implementation()<CR>",
+			"Go To Implementation",
+		},
+		R = {
+			"<cmd>lua vim.lsp.buf.rename()<CR>",
+			"Rename",
+		},
+		W = {
+			"<cmd>lua vim.lsp.buf.workspace_symbol()<CR>",
+			"Workspace Symbol",
+		},
 	},
 	K = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
-    F = {
-		"<cmd>lua vim.lsp.buf.format()<CR>",
-		"Format Buffer",
-	},
 }, {
 	mode = "n",
 })
@@ -328,7 +339,7 @@ wk.register({
 		"<cmd>lua require('dap').step_out()<cr>",
 		"Step Out",
 	},
-	["<F11>"] = {
+	["<C-F11>"] = {
 		"<cmd>lua require('dap').step_into()<cr>",
 		"Step In",
 	},
@@ -336,8 +347,7 @@ wk.register({
 		"<cmd>lua require('dap').step_over()<cr>",
 		"Step Over",
 	},
-}, {
-})
+}, {})
 
 wk.register({}, {
 	prefix = ";",
@@ -365,6 +375,10 @@ wk.register({
 	h = {
 		"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
 		"Harpoon Quick Menu",
+	},
+	c = {
+		"<cmd>cclose<cr>",
+		"Close Quickfix",
 	},
 	["1"] = {
 		"<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
@@ -416,9 +430,8 @@ wk.register({
 	prefix = "<C-a>",
 })
 
-wk.register({
-}, {
-  prefix = "<C-e>"
+wk.register({}, {
+	prefix = "<C-e>",
 })
 
 -- Visual mode refactor

@@ -23,11 +23,11 @@
               node_decremental = "grm",
           },
       },
-      rainbow = {
-          enable = true,
-          extended_mode = true,
-          max_file_lines = 1500,
-      },
+      -- rainbow = {
+      --     enable = true,
+      --     extended_mode = true,
+      --     max_file_lines = 1500,
+      -- },
       textsubjects = {
           enable = true,
           prev_selection = ',', -- (Optional) keymap to select the previous selection
