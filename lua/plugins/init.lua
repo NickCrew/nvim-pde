@@ -572,6 +572,9 @@ require("lazy").setup({
 	{
 		"nvim-telescope/telescope-dap.nvim",
 		dependencies = "mfussenegger/nvim-dap",
+        config = function()
+          require('telescope').load_extension('dap')
+        end
 	},
 
 	{
@@ -848,6 +851,8 @@ require("lazy").setup({
 		"catppuccin/nvim",
 		name = "catppuccin",
 	},
+    { 'tiagovla/tokyodark.nvim'},
+    { 'folke/tokyonight.nvim'},
 
 	{
 		"williamboman/mason.nvim",

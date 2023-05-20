@@ -9,21 +9,6 @@ function M.mk_abbrev(abbrev, command)
   {})
 end
 
-function M.toggle_qf()
-  local qf_exists = false
-  for _, win in pairs(vim.fn.getwininfo()) do
-    if win["quickfix"] == 1 then
-      qf_exists = true
-    end
-  end
-  if qf_exists == true then
-    vim.cmd("cclose")
-    return
-  end
-  if not vim.tbl_isempty(vim.fn.getqflist()) then
-    vim.cmd("copen")
-  end
-end
 
 function M.resize_split(plus_or_minus)
   local vim = vim
@@ -81,10 +66,10 @@ function M.update_theme()
 
   if is_dark then
     vim.opt.background = 'dark'
-    vim.cmd("colorscheme catppuccin")
+    vim.cmd("colorscheme tokyonight-moon")
   else
     vim.opt.background = 'light'
-    vim.cmd("colorscheme catpuccin-latte")
+    vim.cmd("colorscheme tokyonight-day")
   end
 end
 
