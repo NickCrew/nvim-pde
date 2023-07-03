@@ -1,4 +1,52 @@
 #!/usr/bin/env zsh
 
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-brew upgrade neovim --fetch-head
+
+upgrade_nightly_nvim() {
+	# Set installation values
+	download_url="https://github.com/neovim/neovim/releases/download/nightly/nvim-macos.tar.gz"
+	src="${HOME}/Downloads/nvim-macos.tar.gz"
+	dst="${HOME}/opt"
+	app="${HOME}/Applications/nvim"
+	# Move the old install path if it exists
+	[ -f "${src}" ] && mv "${src}" "${src}-orig"
+	# Download the new releasse
+	curl -fsSL $download_url -o "${src}"
+	# Fix permissions
+	xattr -c "${src}"
+	# Expand the archive
+	tar xvzf $src -C $dst
+	# Remove the source code
+	test -e $src && rm $src >/dev/null 2>&1
+	# Link into $PATH
+	test -e $app || ln -s "$dst/nvim-macos/bin/nvim" "$app/nvim"
+	# Display confirmation and install info
+	echo "==========[ Installed Neovim Nightly! ] ===========\n"
+	echo "  → Installed Executable Path : ${app}"
+	echo "  → Current Executable Path   : $(which nvim)"
+	echo "-------------------- Version ----------------------"
+	echo "$(nvim --version)"
+	echo "===================================================\n"
+}
+
+
+upgrade_stable_nvim() {
+	if [[ "$(uname)" == "Darwin" ]]; then
+		echo "Upgrading Neovim stable ...."
+		brew upgrade neovim
+	else
+		echo "Not on macOS. Please upgrade neovim stable manually."
+	fi
+}
+
+upgrade_nvim_plugins() {
+	nvim --headless \
+		-c 'lazy sync'
+}
+
+
+#
+# SCRIPT
+#
+upgrade_nvim_plugins 
+upgrade_stable_nvim
+upgrade_nightly_nvim

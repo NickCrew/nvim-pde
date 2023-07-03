@@ -1,16 +1,14 @@
 # Neovim IDE 
 
-_A PDE (Personal Development Environment) built on Neovim and customized with Lua._  
-
-
-The documentation for this project is still in progress.  
+_A PDE (Personal Development Environment) built on Neovim and configured with Lua._ 
 
 ---
 
 Table of Contents
 =================
 
-* [Neovim IDE](#neovim-ide)
+* [Neovim PDE](#neovim-ide)
+   * [The P is for Personal](#the-p-is-for-personal)
    * [Features](#features)
       * [VS Code Compatibility](#vs-code-compatibility)
       * [Keybindings](#keybindings)
@@ -34,11 +32,24 @@ Table of Contents
 
 
 ---
+
+## The P Is For Personal
+
+A personal development environment, or PDE, differs from an integrated development environment primarily in that it
+is _personal_. A PDE is a living thing, continuously configured and extended over the years by someone who thinks the 
+time sent building your own teools if well spent. 
+
+This is not a framework meant to help someone hit the ground running, it is my personal configuration. You should take, 
+ideas from it assuming some appeal to, and you should be doing that from many places in order to build _your personal_ development
+environment.  
+
+
+
 ## Functionality
 
 _The major features and capabilities of the PDE's default distribution._
 
----
+
 ### VS Code Compatibility
 
 These features are directly compatible with components of VS Code.  
@@ -62,6 +73,7 @@ These features are directly compatible with components of VS Code.
 >	`brew install --cask font-fira-code-nerd-font`
 
 ---
+
 ### Keybindings
 
 - Easy and logical method for assigning keybindings
@@ -69,6 +81,7 @@ These features are directly compatible with components of VS Code.
 - Complete (including native keybindings) and searchable legend
 
 ---
+
 ### Auto-Completion
 
 Includes __Path intellisense__ and __command-mode__ (`:`) completion.  
@@ -83,6 +96,7 @@ Auto-complete is highly configurable and supports many sources:
 - Treesitter
 
 ---
+
 ### Source Control Management
 
 - Show changes in the sign column (gutter)
@@ -91,6 +105,7 @@ Auto-complete is highly configurable and supports many sources:
 - Blame and commit messages for current line
 
 ---
+
 ### Language Support
 
 There are several language servers installed by default. You can easily add/remove additonal
@@ -129,6 +144,7 @@ _Enable/Disable_ installed language servers using the config at `lua/lsp/servers
 > - Recommended Code Actions/Fixes
 
 ---
+
 ### Convenience Features
 
 - Color highlight (by hex value)
@@ -140,6 +156,7 @@ _Enable/Disable_ installed language servers using the config at `lua/lsp/servers
   the same set of 4-5 files
 
 ---
+
 ### Easily discoverable commands and documentation
 - All default and custom keybindings are automatically added to the command palette
 - Customizable quick cheatsheet
@@ -148,6 +165,7 @@ _Enable/Disable_ installed language servers using the config at `lua/lsp/servers
 - Easy user-level customizations
 
 ---
+
 ## Plugin List
 
 _This is a list of plugins included in the default distribution and a short description of their purpose._
@@ -205,11 +223,12 @@ Dependencies:
 - [telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim)
 - [telescope-vimspector.nvim](https://github.com/nvim-telescope/telescope-vimspector.nvim)
 - [telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)
-- [telescope-vimspector.nvim](https://github.com/nvim-telescope/telescope-vimspector.nvim)
 - [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
 
 
+
 ---
+
 ## Cheatsheets and Custom help
 _Store some of your notes here in the custom help docs: `doc/halp`. To update help keywords for searching:_
 
@@ -222,6 +241,7 @@ using telescope. `:Cheatsheet!` will open in a popup window.
 
 
 ---
+
 ## Further Information
 
 - The [r/unixporn](https://reddit.com/r/unixporn) subreddit
@@ -229,6 +249,7 @@ using telescope. `:Cheatsheet!` will open in a popup window.
 
 
 ---
+
 ## Special Thanks 
 
 Users and repositories who taught or inspired me ...

@@ -37,6 +37,7 @@ o.textwidth = 0
 o.wrap = true
 o.winminheight = 0 -- Allow maximized windows
 o.winminwidth = 0 -- Allow maximized windows
+o.foldenable = true -- Enable folding
 
 -- Default Tab Behavior
 o.expandtab = false -- expand tabs into spaces
@@ -63,7 +64,7 @@ o.wildignore = ".git/**,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**
 
 -- Cache/Saving
 o.backup = true
-o.swapfile = true
+o.swapfile = false
 o.undofile = true
 o.directory = nvim_cache .. "/swap"
 o.backupdir = nvim_cache .. "/backup"

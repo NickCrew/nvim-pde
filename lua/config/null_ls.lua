@@ -14,9 +14,6 @@ null_ls.setup({
 		-- Diagnostics
 		diagnostics.jsonlint,
 		-- Formatting
-		formatting.stylua,
-		formatting.yapf,
-		formatting.isort,
 		formatting.markdown_toc,
 	},
 })

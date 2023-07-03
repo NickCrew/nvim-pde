@@ -25,10 +25,6 @@ require("lazy").setup({
 	},
 
 	{
-		"junegunn/fzf",
-		build = "fzf#install()",
-	},
-	{
 		"RishabhRD/popfix",
 		enabled = true,
 	},
@@ -208,6 +204,10 @@ require("lazy").setup({
 		build = "bash ./install.sh",
 	},
 
+    {
+      "mfussenegger/nvim-ansible"
+    },
+
 	{
 		"https://git.sr.ht/~havi/telescope-toggleterm.nvim",
 		lazy = true,
@@ -259,7 +259,7 @@ require("lazy").setup({
 			"nvim-telescope/telescope.nvim",
 		},
 		config = function()
-			require("telescope").load_extension("yaml_schema")
+			-- require("telescope").load_extension("yaml_schema")
 		end,
 	},
 
@@ -365,11 +365,11 @@ require("lazy").setup({
 		"jose-elias-alvarez/null-ls.nvim",
 		ft = {
 			"javascript",
-			"python",
+			-- "python",
 			"javascriptreact",
 			"typescript",
 			"typescriptreact",
-			"json",
+			-- "json",
 			"markdown",
 			"lua",
 		},
@@ -437,32 +437,32 @@ require("lazy").setup({
 			parser_configs.markdown.filetype_to_parsername = "octo"
 			-- Treesitter Config
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = {
-					"bash",
-					"css",
-					"dockerfile",
-					"git_config",
-					"git_rebase",
-					"gitattributes",
-					"gitcommit",
-					"gitignore",
-					"http",
-					"html",
-					"ini",
-					"javascript",
-					"json",
-					"lua",
-					"make",
-					"markdown",
-					"python",
-					"rust",
-					"terraform",
-					"typescript",
-					"yaml",
-					"vim",
-					"regex",
-					"toml",
-				},
+				-- ensure_installed = {
+				-- 	"bash",
+				-- 	"css",
+				-- 	"dockerfile",
+				-- 	"git_config",
+				-- 	"git_rebase",
+				-- 	"gitattributes",
+				-- 	"gitcommit",
+				-- 	"gitignore",
+				-- 	"http",
+				-- 	"html",
+				-- 	"ini",
+				-- 	"javascript",
+				-- 	"json",
+				-- 	"lua",
+				-- 	"make",
+				-- 	"markdown",
+				-- 	"python",
+				-- 	"rust",
+				-- 	"terraform",
+				-- 	"typescript",
+				-- 	"yaml",
+				-- 	"vim",
+				-- 	"regex",
+				-- 	"toml",
+				-- },
 				auto_install = false,
 				sync_install = false,
 				highlight = {

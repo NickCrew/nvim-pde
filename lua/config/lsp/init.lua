@@ -30,7 +30,6 @@ lspconfig.taplo.setup({})
 lspconfig.terraformls.setup({})
 lspconfig.tsserver.setup({})
 lspconfig.vimls.setup({})
-lspconfig.yamlls.setup({})
 
 -- Python
 lspconfig.pyright.setup({
@@ -42,18 +41,17 @@ lspconfig.pyright.setup({
 })
 
 -- Ansible
-local ansible_python_bin_dir = vim.g.python_bin_dir
 lspconfig.ansiblels.setup({
 	settings = {
 		ansible = {
-			path = ansible_python_bin_dir .. "ansible",
+			path = "/usr/local/Homebrew/ansible",
 		},
 		ansibleLint = {
 			enabled = true,
-			path = ansible_python_bin_dir .. "ansible-lint",
+			path = "/usr/local/Homebrew/ansible-lint"
 		},
 		python = {
-			interpreterPath = ansible_python_bin_dir .. "python",
+			interpreterPath = "/usr/local/Homebrew/python3"
 		},
 	},
 })
