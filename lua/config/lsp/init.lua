@@ -32,13 +32,22 @@ lspconfig.tsserver.setup({})
 lspconfig.vimls.setup({})
 
 -- Python
-lspconfig.pyright.setup({
-	python = {
-		analysis = {
-			typeCheckingMode = "off",
-		},
-	},
+lspconfig.pyright.setup({ 
+  flags = { 
+    debounce_text_changes = 300
+  },
+  settings = { 
+    python = {
+      analysis = {
+        autoSearchPaths = true, 
+        diagnosticMode = "openFilesOnly",
+        useLibraryCodeForTypes = true,
+        typeCheckingMode = "basic",
+    }, 
+  }, 
+},
 })
+
 
 -- Ansible
 lspconfig.ansiblels.setup({

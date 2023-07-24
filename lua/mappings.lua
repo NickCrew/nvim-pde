@@ -60,8 +60,16 @@ wk.register({
 			"<cmd>BufferLineTogglePin<cr>",
 			"Toggle Pinned Buffer",
 		},
+          x = {
+            "<cmd>bdelete<cr>",
+            "Close Current Buffer"
+          },
+          X = {
+            "<cmd>BufferlineCloseOthers<cr>",
+            "Close Other Buffers"
+          }
 	},
-	f = {
+	s = {
 		name = "+files",
 		f = {
 			"<cmd>Fern . -drawer -toggle<cr>",
