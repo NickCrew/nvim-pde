@@ -1,7 +1,6 @@
 -- init.lua
 --
 
-local utils= require("utils")
 
 
 require('global')
@@ -11,5 +10,5 @@ require('options')
 require('plugins')
 require('mappings')
 
-utils.update_theme()
 
+vim.cmd("colorscheme tokyonight-moon")

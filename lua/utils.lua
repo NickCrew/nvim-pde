@@ -56,22 +56,4 @@ function M.disable_builtins()
 end
 
 
-function M.listen_for_lights()
-  local socket_name = os.getenv("NVIM_LISTEN_ADDRESS")
-  vim.fn.call.serverstart(socket_name)
-end
-
-function M.update_theme()
-  local is_dark = vim._system('isdark')
-
-  if is_dark then
-    vim.opt.background = 'dark'
-    vim.cmd("colorscheme tokyonight-moon")
-  else
-    vim.opt.background = 'light'
-    vim.cmd("colorscheme tokyonight-day")
-  end
-end
-
-
 return M
