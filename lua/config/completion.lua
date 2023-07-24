@@ -37,7 +37,6 @@ local kind_symbols = {
 local source_symbols = {
   buffer = " 👀 BUF",
   nvim_lsp = " 👐 LSP",
-  copilot = " 🤖 GHC ",
   nvim_lua = " 🌙 LUA ",
   path = " 📁 PATH",
   luasnip = " ✂️  SNIP",
@@ -134,7 +133,7 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp_signature_help'},
-    { name = "copilot" },
+    -- { name = "copilot" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "path" , max_item_count = 5},
@@ -179,4 +178,4 @@ cmp.setup.filetype({"gitcommit"}, {
   })
 })
 
-require("copilot_cmp").setup()
+-- require("copilot_cmp").setup()

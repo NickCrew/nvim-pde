@@ -613,6 +613,7 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
 		},
+        enabled = false,
 		lazy = true,
 		cmd = "ChatGPT",
 		config = function()
@@ -623,6 +624,7 @@ require("lazy").setup({
 		-- AI code completion
 		"zbirenbaum/copilot.lua",
 		event = "InsertEnter",
+        enabled = false,
 		lazy = true,
 		config = function()
 			require("config.copilot")
@@ -633,8 +635,8 @@ require("lazy").setup({
 		-- Completion and Snippets
 		"hrsh7th/nvim-cmp",
 		dependencies = {
-			"zbirenbaum/copilot-cmp",
-			"zbirenbaum/copilot.lua",
+			-- "zbirenbaum/copilot-cmp",
+			-- "zbirenbaum/copilot.lua",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp",
