@@ -3,12 +3,13 @@
 
 
 
-require('global')
-require('ft')
-require('cmds')
-require('options')
+require('settings.global')
+require('settings.ft')
+require('settings.autocmd')
+require('settings.usercmd')
+require('settings.options')
 require('plugins')
-require('mappings')
+require('settings.keymaps')
 
 
 vim.cmd("colorscheme tokyonight-moon")
