@@ -1,15 +1,12 @@
 -- init.lua
 --
 
+local vim = vim
 
 
-require('settings.global')
-require('settings.ft')
-require('settings.autocmd')
-require('settings.usercmd')
-require('settings.options')
+require('settings')
 require('plugins')
-require('settings.keymaps')
+require('keymaps')
 
 
 vim.cmd("colorscheme tokyonight-moon")

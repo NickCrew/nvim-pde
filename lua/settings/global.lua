@@ -17,5 +17,3 @@ g.python3_host_prog = g.python_bin_dir .. '/python'
 g.fern_disable_startup_warnings = true
 g.cursorhold_updatetime = 100 
 
-
-
