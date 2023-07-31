@@ -128,7 +128,6 @@ local progress_meter = function()
 	return chars[index]
 end
 
-local recorder = require("recorder")
 
 -- LUALINE CONFIG
 local config = {
@@ -165,8 +164,6 @@ local config = {
 			{ ts(), cond = conditions.hide_in_width },
 		},
 		lualine_y = {
-			{ recorder.displaySlots },
-            {recorder.recordingStatus }
 		},
 		lualine_z = { { "location" }, { "progress" }, {window},},
 	},

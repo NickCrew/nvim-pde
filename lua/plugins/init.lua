@@ -51,7 +51,7 @@ require("lazy").setup({
 	{
 		-- Edit sandwiched textobjects
 		"machakann/vim-sandwich",
-		enabled = true,
+		enabled = false,
 	},
 
 	{
@@ -161,13 +161,6 @@ require("lazy").setup({
 		config = function()
 			require("devcontainer").setup({})
 		end,
-	},
-
-	{
-		-- Python debugging
-		"https://gitlab.com/HiPhish/debugpy.nvim",
-		name = "debugpy.nvim",
-		dependencies = { "mfussenegger/nvim-dap" },
 	},
 
 	{
@@ -315,6 +308,7 @@ require("lazy").setup({
 	{
 		-- RESTful API and HTTP Client
 		"NTBBloodbath/rest.nvim",
+        enabled = false,
 		config = function()
 			require("config.rest")
 		end,
@@ -437,32 +431,6 @@ require("lazy").setup({
 			parser_configs.markdown.filetype_to_parsername = "octo"
 			-- Treesitter Config
 			require("nvim-treesitter.configs").setup({
-				-- ensure_installed = {
-				-- 	"bash",
-				-- 	"css",
-				-- 	"dockerfile",
-				-- 	"git_config",
-				-- 	"git_rebase",
-				-- 	"gitattributes",
-				-- 	"gitcommit",
-				-- 	"gitignore",
-				-- 	"http",
-				-- 	"html",
-				-- 	"ini",
-				-- 	"javascript",
-				-- 	"json",
-				-- 	"lua",
-				-- 	"make",
-				-- 	"markdown",
-				-- 	"python",
-				-- 	"rust",
-				-- 	"terraform",
-				-- 	"typescript",
-				-- 	"yaml",
-				-- 	"vim",
-				-- 	"regex",
-				-- 	"toml",
-				-- },
 				auto_install = false,
 				sync_install = false,
 				highlight = {
@@ -726,12 +694,6 @@ require("lazy").setup({
 		enabled = false,
 	},
 
-	{
-		"chrisgrieser/nvim-recorder",
-		config = function()
-			require("recorder").setup()
-		end,
-	},
 
 	{
 		"folke/noice.nvim",
