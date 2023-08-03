@@ -14,7 +14,6 @@ return {
     enabled = true,
   },
 
-
   {
     -- Full transparency
     "xiyaowong/transparent.nvim",
