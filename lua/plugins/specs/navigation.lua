@@ -1,5 +1,12 @@
 return {
-
+{
+    ---Status bars
+    "akinsho/bufferline.nvim",
+    config = function()
+      require('bufferline').setup({})
+    end,
+    enabled = true,
+  },
   {
     -- Hyperfast project navigation
     "ThePrimeagen/harpoon",

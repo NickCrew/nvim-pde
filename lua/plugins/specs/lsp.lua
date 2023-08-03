@@ -1,5 +1,10 @@
 return {
   {
+    "arkav/lualine-lsp-progress",
+    dependencies = "lualine.nvim",
+    enabled = false,
+  },
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
@@ -17,7 +22,6 @@ return {
       require("config.lsp")
     end,
   },
-
   {
     -- Enhance LSP Diagnostics
     "folke/trouble.nvim",
@@ -47,8 +51,6 @@ return {
     "weilbith/nvim-code-action-menu",
     cmd = "CodeActionMenu",
   },
-
-
   {
     -- LSP Symbol Drawer
     "stevearc/aerial.nvim",
@@ -72,10 +74,6 @@ return {
     end,
   },
   {
-    "mfussenegger/nvim-ansible"
-  },
-
-  {
     -- Popup preview window for LSP
     "rmagatti/goto-preview",
     event = "BufEnter",
@@ -83,13 +81,5 @@ return {
       require("config.gotopreview")
     end,
   },
-{
-    -- Lua development tools
-    "folke/lua-dev.nvim",
-    lazy = true,
-  },
-
-
-
 
 }

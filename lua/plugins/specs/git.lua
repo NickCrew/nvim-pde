@@ -11,7 +11,6 @@ return {
     cmd = "Octo",
     lazy = true,
   },
-
   {
     -- git changes in sign column
     "lewis6991/gitsigns.nvim",
@@ -19,7 +18,6 @@ return {
       require("gitsigns").setup()
     end,
   },
-
   {
     -- Get links to github
     "ruifm/gitlinker.nvim",
@@ -27,7 +25,6 @@ return {
       require("gitlinker").setup()
     end,
   },
-
   {
     -- Git worktree support
     "ThePrimeagen/git-worktree.nvim",
@@ -38,6 +35,4 @@ return {
       require("telescope").load_extension("git_worktree")
     end,
   },
-
-
 }

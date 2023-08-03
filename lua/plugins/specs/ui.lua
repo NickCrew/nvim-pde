@@ -3,17 +3,14 @@ return {
     "antoinemadec/FixCursorHold.nvim",
     enabled = true,
   },
-
   {
     "RishabhRD/popfix",
     enabled = true,
   },
-
   {
     "MunifTanjim/nui.nvim",
     enabled = true,
   },
-
   {
     -- Full transparency
     "xiyaowong/transparent.nvim",
@@ -25,7 +22,6 @@ return {
     "andymass/vim-matchup",
     enabled = true,
   },
-
   {
     -- Icons and glyphs
     "kyazdani42/nvim-web-devicons",
@@ -39,8 +35,6 @@ return {
       require("bqf").setup()
     end,
   },
-
-
   {
     -- Dim parts of your code you're not workingon
     "folke/twilight.nvim",
@@ -50,33 +44,12 @@ return {
       require("twilight").setup({})
     end,
   },
-
-
-  {
-    ---Status bars
-    "akinsho/bufferline.nvim",
-    config = function()
-      require("config.buffline")
-    end,
-    enabled = true,
-  },
-
-  {
-    "arkav/lualine-lsp-progress",
-    dependencies = "lualine.nvim",
-    enabled = false,
-  },
-
-
   {
     "folke/noice.nvim",
     dependencies = {
       "telescope.nvim",
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
     enabled = true,
@@ -85,7 +58,6 @@ return {
       require("telescope").load_extension("noice")
     end,
   },
-
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
@@ -95,7 +67,6 @@ return {
       require("config.lualine")
     end,
   },
-
   {
     -- Pretty notification windows/popups
     "rcarriga/nvim-notify",
@@ -112,12 +83,10 @@ return {
       require("config.dashboard")
     end,
   },
-
   {
     "VonHeikemen/fine-cmdline.nvim",
     dependencies = "MunifTanjim/nui.nvim",
   },
-
   {
     -- Smooth Scrolling
     "karb94/neoscroll.nvim",
@@ -128,7 +97,5 @@ return {
       })
     end,
   },
-
-
 
 }

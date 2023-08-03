@@ -4,15 +4,11 @@ return {
     "matze/vim-move",
     enabled = true,
   },
-
-
   {
     -- More useful word motions
     "chaoren/vim-wordmotion",
     enabled = true,
   },
-
-
   {
     -- Quick movements
     "phaazon/hop.nvim",
@@ -23,7 +19,6 @@ return {
       })
     end,
   },
-
   {
     "ggandor/flit.nvim",
     config = function()
@@ -32,7 +27,6 @@ return {
       })
     end,
   },
-
   {
     -- Sneak/quick movements
     "ggandor/leap.nvim",
