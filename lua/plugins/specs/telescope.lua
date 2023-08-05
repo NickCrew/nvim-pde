@@ -19,16 +19,6 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-lua/popup.nvim",
       "tami5/sqlite.lua",
-      "LinArcX/telescope-env.nvim",
-      "nvim-telescope/telescope-file-browser.nvim",
-      "nvim-telescope/telescope-media-files.nvim",
-      "jvgrootveld/telescope-zoxide",
-      "nvim-telescope/telescope-github.nvim",
-      "nvim-telescope/telescope-live-grep-raw.nvim",
-      "nvim-telescope/telescope-symbols.nvim",
-      "nvim-telescope/telescope-ui-select.nvim",
-      "nvim-telescope/telescope-node-modules.nvim",
-      "nvim-telescope/telescope-dap.nvim",
     },
     config = function()
       require("config.telescope-nvim")
@@ -48,4 +38,29 @@ return {
       require("telescope").load_extension("toggleterm")
     end,
   },
+  {
+    "LinArcX/telescope-env.nvim",
+    "nvim-telescope/telescope-file-browser.nvim",
+    "nvim-telescope/telescope-media-files.nvim",
+    "jvgrootveld/telescope-zoxide",
+    "nvim-telescope/telescope-github.nvim",
+    "nvim-telescope/telescope-live-grep-raw.nvim",
+    "nvim-telescope/telescope-symbols.nvim",
+    "nvim-telescope/telescope-ui-select.nvim",
+    "nvim-telescope/telescope-node-modules.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim"
+    },
+    config = function()
+      local telescope = require('telescope')
+      telescope.load_extension("env")
+      telescope.load_extension("zoxide")
+      telescope.load_extension("ui-select")
+      telescope.load_extension("file_browser")
+      telescope.load_extension("media_files")
+      telescope.load_extension("luasnip")
+      telescope.load_extension("refactoring")
+      telescope.load_extension("node_modules")
+    end
+  }
 }

@@ -40,7 +40,7 @@ return {
     -- Find luasnip snippets using telescope
     "benfowler/telescope-luasnip.nvim",
     dependencies = {
-      "telescope.nvim",
+      "nvim-telescope/telescope.nvim",
       "L3MON4D3/LuaSnip",
     },
   },
