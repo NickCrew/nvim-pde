@@ -50,7 +50,7 @@ return {
 	s = {
 		name = "+sidebar",
 		f = {
-			"<cmd>Fern . -drawer -toggle<cr>",
+			"<cmd>Neotree<cr>",
 			"Toggle File Tree",
 		},
 	},

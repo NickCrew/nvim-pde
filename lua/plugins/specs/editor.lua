@@ -1,20 +1,8 @@
 return {
   {
-    -- Edit sandwiched textobjects
-    "machakann/vim-sandwich",
-    enabled = false,
-  },
-
-  {
     -- Syntax-aware commenting
     "tpope/vim-commentary",
     enabled = true,
-  },
-
-  {
-    -- Flip values on/off
-    "andrewradev/switch.vim",
-    enabled = false,
   },
 
   {
@@ -33,21 +21,8 @@ return {
       require("config.neoclip")
       require("telescope").load_extension("neoclip")
     end,
+    enabled = false
   },
-  {
-    "0styx0/abbreinder.nvim",
-    dependencies = {
-      {
-        "0styx0/abbremand.nvim",
-        module = "abbremand", -- if want to lazy load
-      },
-    },
-    config = function()
-      require("config.abbreinder-nvim")
-    end,
-    event = "BufRead", -- if want lazy load
-  },
-
   {
     -- Smart delimiters and pairs
     "windwp/nvim-autopairs",
@@ -135,7 +110,15 @@ return {
       require("telescope").load_extension("projects")
     end,
   },
-
+{
+    -- Hyperfast project navigation
+    "ThePrimeagen/harpoon",
+    dependencies = "telescope.nvim",
+    config = function()
+      require("config.harpoon")
+      require("telescope").load_extension("harpoon")
+    end,
+  },
   {
     "akinsho/toggleterm.nvim",
     event = "BufWinEnter",
@@ -173,8 +156,6 @@ return {
     "b0o/schemastore.nvim",
     enabled = true,
   },
-
-
 
 
 }

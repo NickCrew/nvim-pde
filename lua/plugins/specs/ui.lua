@@ -22,11 +22,7 @@ return {
     "andymass/vim-matchup",
     enabled = true,
   },
-  {
-    -- Icons and glyphs
-    "kyazdani42/nvim-web-devicons",
-    enabled = true,
-  },
+
   {
     -- Better quickfix window
     "kevinhwang91/nvim-bqf",
@@ -59,9 +55,17 @@ return {
     end,
   },
   {
+    ---Status bars
+    "akinsho/bufferline.nvim",
+    config = function()
+      require('bufferline').setup({})
+    end,
+    enabled = true,
+  },
+  {
     "nvim-lualine/lualine.nvim",
     dependencies = {
-      "kyazdani42/nvim-web-devicons",
+      "nvim-tree/nvim-web-devicons",
     },
     config = function()
       require("config.lualine")
@@ -78,7 +82,7 @@ return {
   {
     -- Splash Screen/Dashboard
     "goolord/alpha-nvim",
-    dependencies = { "kyazdani42/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("config.dashboard")
     end,
@@ -98,4 +102,17 @@ return {
     end,
   },
 
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+}
 }
