@@ -15,17 +15,24 @@ return {
 		"<cmd>noh<CR>",
 		"Turn off search highlighting",
 	},
-	[";"] = { "zz", "Center Window" },
 	a = {
       "<cmd>AerialToggle<cr>",
       "Toggle Symbols Tree"
     },
-	b = {
-		name = "+buffers",
-		b = {
+    [";"] = {
+      "<cmd>Neotree toggle<cr>",
+      "Toggle Neotree"
+    },
+	p = {
+      p = {
 			"<cmd>BufferLinePick<cr>",
 			"Pick Buffer To View",
+      }
 		},
+	b = {
+
+		name = "+buffers",
+
 		c = {
 			"<Cmd>BufferLinePickClose<cr>",
 			"Pick Buffer to Close",
@@ -47,13 +54,6 @@ return {
             "Close Other Buffers"
           }
 	},
-	s = {
-		name = "+sidebar",
-		f = {
-			"<cmd>Neotree<cr>",
-			"Toggle File Tree",
-		},
-	},
 	l = {
 		name = "+current_line",
 		a = {
@@ -73,32 +73,22 @@ return {
 			"Hop To Line",
 		},
 	},
-	h = {
-		"<cmd>HopWordCurrentLine<CR>",
-		"Hop To Word",
-	},
 	u = {
 		"<cmd>MundoToggle<cr>",
 		"Toggle Undo Tree",
-	},
-	v = {
-		v = {
-			"<cmd>HopVertical<CR>",
-			"Hop Vertical",
-		},
-		a = {
-			"<cmd>HopVerticalAC<CR>",
-			"Hop Vertical AC",
-		},
-		b = {
-			"<cmd>HopVerticalBC<CR>",
-			"Hop Vertical BC",
-		},
 	},
 	W = {
 		"<cmd>WhichKey<cr>",
 		"Toggle WhichKey",
 	},
+   t = {
+      "Enable Twilight",
+      "<cmd>TwilightEnable<cr>"
+    },
+    T = {
+      "Disable Twilight",
+      "<cmd>TwilightDisable<cr>"
+    },
 	x = {
 		name = "+diagnostics",
 		d = {
@@ -117,10 +107,6 @@ return {
 			"<cmd>TroubleClose<CR>",
 			"Close Trouble",
 		},
-	},
-	D = {
-		"<cmd>lua require'dapui'.toggle()<CR>",
-		"Open DAP UI",
 	},
 	R = { "<cmd>ReloadLuaFile<cr>", "Reload Lua File" },
 	U = { "<cmd>lua require('utils').update_theme()<cr>", "Update Theme" },

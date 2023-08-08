@@ -1,21 +1,12 @@
 local wk = require("which-key")
 
-wk.register(require('keymaps.wk.leader'), {
-  prefix = "<leader>"
-})
 
-wk.register(require('keymaps.wk.telescope'), {
-  prefix = "<leader><leader>"
-})
-wk.register(require('keymaps.wk.lsp'), {
-  mode = "n" })
-wk.register(require('keymaps.wk.dap'), {
-})
-wk.regsiter(require('keymaps.wk.nav'), {
-  prefix = "<C-a>" 
-})
-wk.register(require('keymaps.wk.editor'), {
-  prefix = "<C-e>" 
-})
-wk.register(require('keymaps.wk.refactor'), {
-  mode = "v" })
+wk.register(require('keymaps.wk.core.semicolon-leader'), { prefix = "\\" })
+wk.register(require('keymaps.wk.core.leader'), { prefix = "<leader>" })
+wk.register(require('keymaps.wk.core.f-keys'), {})
+wk.register(require('keymaps.wk.core.lsp'), {})
+
+wk.register(require('keymaps.wk.func.telescope'), { prefix = "<leader><leader>" })
+wk.register(require('keymaps.wk.func.harpoon'), { prefix = "<C-a>" })
+wk.register(require('keymaps.wk.func.refactor'), { mode = "v" })
+

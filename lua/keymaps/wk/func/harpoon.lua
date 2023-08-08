@@ -1,6 +1,11 @@
 return {
   {
     name = "+navigation",
+  t = {
+          "<cmd>Neotree toggle<cr>",
+          "Toggle File Tree",
+      },
+
     ["["] = {
       "<cmd>lua require('harpoon.ui').nav_prev()<cr>",
       "Previous Harpoon Mark",
@@ -17,10 +22,6 @@ return {
     h = {
       "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
       "Harpoon Quick Menu",
-    },
-    c = {
-      "<cmd>cclose<cr>",
-      "Close Quickfix",
     },
     ["1"] = {
       "<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
