@@ -3,7 +3,8 @@ local usercmd = vim.api.nvim_create_user_command
 
 
 
--- User Commands
+------------[ User Commands ]-----------------------------------------------------------
+
 usercmd("TestFunc", "lua require('dap-python').test_method()", {})
 usercmd("TestClass", "lua require('dap-python').test_class()", {})
 usercmd("BreakpointToggle", "lua require('dap').toggle_breakpoint()", {})
@@ -41,3 +42,34 @@ usercmd(
 )
 
 
+------------[ Abbreviations ]-----------------------------------------------------------
+
+for _, abbrev in ipairs({
+	{ "Bpt", "BreakpointToggle" },
+	{ "Cgwt", "CreateWorktree" },
+	{ "Dap", "Debug" },
+	{ "Dc", "DapCmds" },
+	{ "Ds", "DebugSelection" },
+	{ "Ff", "Fern" },
+	{ "Fmt", "Format" },
+	{ "Gs", "Gitsigns" },
+	{ "Lgwt", "ListWorktrees" },
+	{ "Mt", "MundoToggle" },
+	{ "N", "Neogen" },
+	{ "Pc", "PackerCompile" },
+	{ "Pi", "PackerInstall" },
+	{ "Ps", "PackerSync" },
+	{ "Pu", "PackerUpdate" },
+	{ "Rlf", "ReloadLuafile" },
+    { "UT", "UpdateTheme"},
+	{ "T", "Telescope" },
+	{ "Wk", "WhichKey" },
+}) do
+	vim.api.nvim_cmd({
+		cmd = "cnoreabbrev",
+		args = abbrev,
+	}, {})
+end
+
+
+-----------[ ]-----------------------------------------------------------------------------

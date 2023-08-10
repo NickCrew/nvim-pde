@@ -24,15 +24,14 @@ return {
       "Toggle Neotree"
     },
 	p = {
+      name = "+pick",
       p = {
 			"<cmd>BufferLinePick<cr>",
 			"Pick Buffer To View",
       }
 		},
 	b = {
-
 		name = "+buffers",
-
 		c = {
 			"<Cmd>BufferLinePickClose<cr>",
 			"Pick Buffer to Close",
@@ -46,7 +45,7 @@ return {
 			"Toggle Pinned Buffer",
 		},
           x = {
-            "<cmd>bdelete<cr>",
+            "<cmd>!bd<cr>",
             "Close Current Buffer"
           },
           X = {
@@ -73,6 +72,14 @@ return {
 			"Hop To Line",
 		},
 	},
+    o = {
+      "o<esc>",
+      "Insert Line Below"
+    },
+    O = {
+      "O<esc>",
+      "Insert line above"
+    },
 	u = {
 		"<cmd>MundoToggle<cr>",
 		"Toggle Undo Tree",

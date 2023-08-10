@@ -1,5 +1,15 @@
 return {
   {
+    "folke/neoconf.nvim",
+    lazy = true,
+    opts = {}
+  },
+  {
+    "folke/neodev.nvim",
+    lazy = true,
+    opts = {}
+  },
+  {
     "arkav/lualine-lsp-progress",
     dependencies = "lualine.nvim",
     enabled = false,
@@ -26,6 +36,7 @@ return {
     -- Enhance LSP Diagnostics
     "folke/trouble.nvim",
     dependencies = "telescope.nvim",
+    lazy = true,
     config = function()
       require("config.trouble")
     end,
@@ -50,6 +61,7 @@ return {
   {
     "weilbith/nvim-code-action-menu",
     cmd = "CodeActionMenu",
+    lazy = true
   },
   {
     -- LSP Symbol Drawer
@@ -62,21 +74,10 @@ return {
   },
 
   {
-    "someone-stole-my-name/yaml-companion.nvim",
-    ft = { "yaml" },
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    config = function()
-      -- require("telescope").load_extension("yaml_schema")
-    end,
-  },
-  {
     -- Popup preview window for LSP
     "rmagatti/goto-preview",
     event = "BufEnter",
+    lazy = true,
     config = function()
       require("config.gotopreview")
     end,

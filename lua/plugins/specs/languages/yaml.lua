@@ -2,6 +2,7 @@ return {
   {
     "someone-stole-my-name/yaml-companion.nvim",
     ft = { "yaml" },
+    lazy = true,
     dependencies = {
       "neovim/nvim-lspconfig",
       "nvim-lua/plenary.nvim",
@@ -12,7 +13,9 @@ return {
     end,
   },
   {
-    "mfussenegger/nvim-ansible"
+    "mfussenegger/nvim-ansible",
+    ft = {"yaml", "yaml.ansible"},
+    lazy = true
   },
 
 

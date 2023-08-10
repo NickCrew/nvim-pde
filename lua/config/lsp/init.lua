@@ -24,12 +24,19 @@ lspconfig.dockerls.setup({})
 lspconfig.eslint.setup({})
 lspconfig.html.setup({})
 lspconfig.jsonls.setup({})
-lspconfig.lua_ls.setup({})
 lspconfig.remark_ls.setup({})
 lspconfig.taplo.setup({})
 lspconfig.terraformls.setup({})
 lspconfig.tsserver.setup({})
 lspconfig.vimls.setup({})
+lspconfig.lua_ls.setup({ 
+settings = { 
+  Lua = { 
+    diagnostics = {
+      globals = {'vim'}
+    }
+  }
+}})
 
 -- Python
 lspconfig.pyright.setup({ 

@@ -27,7 +27,6 @@ map("n", "q:", "<nop>", opts)
 map("n", "Q", "<nop>", opts)
 
 
-require('keymaps.wk')
 
 
 

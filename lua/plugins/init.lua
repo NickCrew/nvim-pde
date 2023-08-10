@@ -2,7 +2,6 @@
 --
 -- Setup plugins
 
-local vim = vim
 local fn = vim.fn
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

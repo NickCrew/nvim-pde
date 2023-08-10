@@ -2,7 +2,7 @@ return {
   {
     -- Git Integration
     "tpope/vim-fugitive",
-    lazy = false,
+    lazy = true,
     enabled = true,
   },
   {
@@ -34,5 +34,6 @@ return {
     config = function()
       require("telescope").load_extension("git_worktree")
     end,
+    enabled = false
   },
 }

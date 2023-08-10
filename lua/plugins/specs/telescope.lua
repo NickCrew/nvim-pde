@@ -6,12 +6,10 @@ return {
       require('telescope').load_extension('dap')
     end
   },
-
   {
     "nvim-telescope/telescope-fzf-native.nvim",
     build = "make",
   },
-
   {
     -- Telescope
     "nvim-telescope/telescope.nvim",

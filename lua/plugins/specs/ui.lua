@@ -1,5 +1,9 @@
 return {
   {
+    "vimpostor/vim-lumen",
+    lazy = true
+  },
+  {
     "antoinemadec/FixCursorHold.nvim",
     enabled = true,
   },

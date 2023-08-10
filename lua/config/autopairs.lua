@@ -25,7 +25,7 @@ autopairs.setup({
     disable_in_visualblock = false,
     ---@usage  change default fast_wrap
     fast_wrap = {
-      map = "<M-e>",
+      map = "<C-e>",
       chars = { "{", "[", "(", '"', "'" },
       pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
       offset = 0, -- Offset from pattern match
