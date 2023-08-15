@@ -2,12 +2,13 @@ return {
   {
     -- Quick movements
     "phaazon/hop.nvim",
+    branch = 'v2',
     config = function()
       require("hop").setup({
-        case_insensitive = true,
-        char2_fallback_key = "<CR>",
+        case_insensitive = true
       })
-    end,
+      require("keymaps.hop_keys")
+    end
   },
   {
     "folke/flash.nvim",
@@ -18,10 +19,11 @@ return {
       { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
       { "S",     mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
       { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end,
-                                                                                                desc = "Treesitter Search" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = ""},
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    enabled = false
     },
+
     {
       -- Code refactoring
       "ThePrimeagen/refactoring.nvim",
@@ -40,7 +42,7 @@ return {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope.nvim",
       },
-      enabled = false,
+      enabled = true,
       lazy = true,
       cmd = "ChatGPT",
       config = function()
@@ -51,7 +53,7 @@ return {
       -- AI code completion
       "zbirenbaum/copilot.lua",
       event = "InsertEnter",
-      enabled = false,
+      enabled = true,
       lazy = true,
       config = function()
         require("config.copilot")
@@ -104,6 +106,7 @@ return {
       enabled = true,
       config = function()
         require("config.which-key-nvim")
+        require("keymaps.wk")
       end,
     },
     {
@@ -111,5 +114,5 @@ return {
       "b0o/schemastore.nvim",
       enabled = true,
     },
-  }
+ }
 }

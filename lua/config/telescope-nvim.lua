@@ -3,7 +3,6 @@ local actions = require('telescope.actions')
 
 local trouble = require("trouble.providers.telescope")
 local telescope = require("telescope")
-
 telescope.setup({
     defaults = {
         layout_strategy = "center",
@@ -99,18 +98,25 @@ telescope.setup({
           show_nesting = true
         },
         file_browser = {},
-        -- fzf = {
-        --     fuzzy = true,
-        --     override_generic_sorter = true,
-        --     override_file_sorter = true,
-        --     case_mode = "smart_case",
-        -- },
+        fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+        },
         ["ui-select"] = {
             require("telescope.themes").get_dropdown({}),
-            -- even more opts
         },
     },
 })
 
--- telescope.load_extension('fzf')
+telescope.load_extension('dap')
+telescope.load_extension("env")
+telescope.load_extension("ui-select")
+telescope.load_extension("file_browser")
+telescope.load_extension("luasnip")
+telescope.load_extension("refactoring")
+telescope.load_extension('fzf')
+
+
 

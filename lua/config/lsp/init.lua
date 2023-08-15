@@ -29,50 +29,49 @@ lspconfig.taplo.setup({})
 lspconfig.terraformls.setup({})
 lspconfig.tsserver.setup({})
 lspconfig.vimls.setup({})
-lspconfig.lua_ls.setup({ 
-settings = { 
-  Lua = { 
-    diagnostics = {
-      globals = {'vim'}
+lspconfig.lua_ls.setup({
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      }
     }
   }
-}})
+})
 
 -- Python
-lspconfig.pyright.setup({ 
-  flags = { 
+lspconfig.pyright.setup({
+  flags = {
     debounce_text_changes = 300
   },
-  settings = { 
+  settings = {
     python = {
       analysis = {
-        autoSearchPaths = true, 
+        autoSearchPaths = true,
         diagnosticMode = "openFilesOnly",
         useLibraryCodeForTypes = true,
         typeCheckingMode = "basic",
-    }, 
-  }, 
-},
+      },
+    },
+  },
 })
 
 
 -- Ansible
 lspconfig.ansiblels.setup({
-	settings = {
-		ansible = {
-			path = "/usr/local/Homebrew/ansible",
-		},
-		ansibleLint = {
-			enabled = true,
-			path = "/usr/local/Homebrew/ansible-lint"
-		},
-		python = {
-			interpreterPath = "/usr/local/Homebrew/python3"
-		},
-	},
+  settings = {
+    ansible = {
+      path = "/usr/local/Homebrew/ansible",
+    },
+    ansibleLint = {
+      enabled = true,
+      path = "/usr/local/Homebrew/ansible-lint"
+    },
+    python = {
+      interpreterPath = "/usr/local/Homebrew/python3"
+    },
+  },
 })
 
 -- Rust
 require("config.rust_tools")
-
-

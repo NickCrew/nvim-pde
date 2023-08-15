@@ -36,3 +36,8 @@ autocmd("termopen", {
 })
 
 
+autocmd("BufWritePost", {
+callback = function()
+  require("lint").try_lint()
+end
+})

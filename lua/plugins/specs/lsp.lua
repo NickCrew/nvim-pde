@@ -57,6 +57,15 @@ return {
     config = function()
       require("config.null_ls")
     end,
+    enabled = false,
+  },
+  { 
+    "mfussenegger/nvim-lint",
+    config = function()
+      require('lint').linters_by_ft = {
+        python = {"flake8"}
+      }
+    end
   },
   {
     "weilbith/nvim-code-action-menu",

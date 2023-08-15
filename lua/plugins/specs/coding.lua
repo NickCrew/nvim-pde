@@ -12,6 +12,12 @@ return {
     end,
     enabled = false
   },
+  { 
+  "mfussenegger/nvim-treehopper",
+  dependencies = {
+    "phaazon/hop.nvim"
+  }
+},
   {
     -- Syntax-aware commenting
     "tpope/vim-commentary",
@@ -52,8 +58,8 @@ return {
       "ray-x/cmp-treesitter",
       "rcarriga/cmp-dap",
       "saadparwaiz1/cmp_luasnip",
-    -- "zbirenbaum/copilot-cmp",
-    -- "zbirenbaum/copilot.lua",
+    "zbirenbaum/copilot-cmp",
+    "zbirenbaum/copilot.lua",
     },
     config = function()
       require("config.completion")

@@ -1,5 +1,6 @@
 return {
   {
+    r = {
     name = "+refactor(v)",
     e = {
       " <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>",
@@ -17,6 +18,7 @@ return {
       " <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>",
       "Inline Variable",
     },
+  },
     t = {
       name = "+test(v)",
       s = {

@@ -68,6 +68,7 @@ cmp.event:on(
   cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
 )
 
+
 cmp.setup({
   enabled = function()
     return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
@@ -93,7 +94,7 @@ cmp.setup({
     }),
   },
   mapping = {
-        ["<Tab>"] = cmp.mapping(function(fallback)
+    ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -104,7 +105,7 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -113,32 +114,40 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
-        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     -- invoke completion with only snippets
-        ["<C-S-s>"] = cmp.mapping(cmp.mapping.complete({
+    ["<C-S-s>"] = cmp.mapping(cmp.mapping.complete({
       config = {
         sources = {
           {
-            name = 'luasnip' }
+            name = 'luasnip'
+          }
+        }
+      },
+    }), { "i", "c" }),
+    -- invoke completion with only copilot
+    ["<C-S-c>"] = cmp.mapping(cmp.mapping.complete({
+      config = {
+        sources = {
+          name = 'copilot'
         }
       }
     }), { "i", "c" }),
-        ["<C-q>"] = cmp.mapping({
+    ["<C-q>"] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
   },
   sources = cmp.config.sources({
-    { name = 'nvim_lsp_signature_help'},
-    -- { name = "copilot" },
+    { name = 'nvim_lsp_signature_help' },
     { name = "nvim_lsp" },
     { name = "luasnip" },
-    { name = "path" , max_item_count = 5},
-    { name = "treesitter", max_item_count = 5},
-    { name = "buffer", max_item_count = 5},
+    { name = "path",                   max_item_count = 10 },
+    { name = "treesitter",             max_item_count = 10 },
+    { name = "buffer",                 max_item_count = 10 },
   }, {}),
   experimental = {
     ghost_text = true,
@@ -170,7 +179,7 @@ cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
   },
 })
 
-cmp.setup.filetype({"gitcommit"}, { 
+cmp.setup.filetype({ "gitcommit" }, {
   sources = cmp.config.sources({
     { name = "cmp_git" },
   }, {
@@ -178,4 +187,4 @@ cmp.setup.filetype({"gitcommit"}, {
   })
 })
 
--- require("copilot_cmp").setup()
+require("copilot_cmp").setup()
