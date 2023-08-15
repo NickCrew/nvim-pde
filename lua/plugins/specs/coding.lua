@@ -1,17 +1,4 @@
 return {
-  {
-    -- clipboard history
-    "AckslD/nvim-neoclip.lua",
-    dependencies = {
-      { "tami5/sqlite.lua",             module = "sqlite" },
-      { "nvim-telescope/telescope.nvim" },
-    },
-    config = function()
-      require("config.neoclip")
-      require("telescope").load_extension("neoclip")
-    end,
-    enabled = false
-  },
   { 
   "mfussenegger/nvim-treehopper",
   dependencies = {
@@ -71,18 +58,10 @@ return {
     "L3MON4D3/LuaSnip",
     dependencies = {
       "rafamadriz/friendly-snippets",
+      "benfowler/telescope-luasnip.nvim",
     },
     config = function()
       require("config.snippets")
     end,
-  },
-
-  {
-    -- Find luasnip snippets using telescope
-    "benfowler/telescope-luasnip.nvim",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "L3MON4D3/LuaSnip",
-    },
   },
 }

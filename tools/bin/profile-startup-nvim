@@ -1,7 +1,0 @@
-#!/usr/bin/env zsh
-#
-outfile=$HOME/.cache/nvim/startup.log
-
-[[ -f $outfile ]] && mv $outfile $outfile.1
-
-nvim --startuptime $outfile -c exit && tail -500 $outfile

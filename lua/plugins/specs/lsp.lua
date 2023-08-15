@@ -10,11 +10,6 @@ return {
     opts = {}
   },
   {
-    "arkav/lualine-lsp-progress",
-    dependencies = "lualine.nvim",
-    enabled = false,
-  },
-  {
     "neovim/nvim-lspconfig",
     dependencies = {
       "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
@@ -59,11 +54,11 @@ return {
     end,
     enabled = false,
   },
-  { 
+  {
     "mfussenegger/nvim-lint",
     config = function()
       require('lint').linters_by_ft = {
-        python = {"flake8"}
+        python = { "flake8" }
       }
     end
   },

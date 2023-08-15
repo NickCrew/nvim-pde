@@ -15,17 +15,6 @@ return {
     "MunifTanjim/nui.nvim",
     enabled = true,
   },
-  {
-    -- Full transparency
-    "xiyaowong/transparent.nvim",
-    lazy = true,
-    enabled = false,
-  },
-  {
-    -- Extend % operator
-    "andymass/vim-matchup",
-    enabled = true,
-  },
 
   {
     -- Better quickfix window
@@ -76,6 +65,12 @@ return {
     end,
   },
   {
+    "arkav/lualine-lsp-progress",
+    dependencies = "lualine.nvim",
+    enabled = false,
+  },
+
+  {
     -- Pretty notification windows/popups
     "rcarriga/nvim-notify",
     enabled = true,
@@ -118,5 +113,5 @@ return {
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
     }
-}
+  }
 }

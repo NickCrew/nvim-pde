@@ -1,54 +1,71 @@
-# Neovim IDE 
+# A Neovim PDE
 
-_A PDE (Personal Development Environment) built on Neovim and configured with Lua._ 
+This is my ever-evolving development environment built on Neovim. It is not a framework 
+or template, but can be used for inspiration in your own config. 
 
----
 
 Table of Contents
 =================
 
 * [Neovim PDE](#neovim-ide)
-   * [The P is for Personal](#the-p-is-for-personal)
-   * [Features](#features)
-      * [VS Code Compatibility](#vs-code-compatibility)
-      * [Keybindings](#keybindings)
-      * [Auto-Completion](#auto-completion)
-      * [Source Control Management](#source-control-management)
-      * [Language Support](#language-support)
-      * [Convenience Features](#convenience-features)
-      * [Easily discoverable commands and documentation](#easily-discoverable-commands-and-documentation)
-   * [Plugin List](#plugin-list)
-      * [Debugging Engine](#debugging-engine)
-         * [Debugging Enhancements](#debugging-enhancements)
-      * [Completion Engine](#completion-engine)
-         * [Completion Enhancements](#completion-enhancements)
-         * [Completion Sources](#completion-sources)
-      * [Snippets Engine](#snippets-engine)
-      * [Command Palette and Fuzzy Search](#command-palette-and-fuzzy-search)
-         * [Telescope Enhancements](#telescope-enhancements)
-   * [Cheatsheets and Custom help](#cheatsheets-and-custom-help)
+   * [Plugins](#plugins)
    * [Further Information](#further-information)
    * [Special Thanks](#special-thanks)
 
+---
+
+## Plugins
+
+_This is a list of plugins included in the default distribution and a short description of their purpose._
+
+### Debugging
+
+- [nvim-dap](https://github.com/mfussenegger/nvim-dap) - Debug Adapter Protocol for Neovim
+- [nvim-dap-virtual-text](https://github.com/mfussenegger/nvim-dap-virtual-text) - Virtual text display for nvim-dap
+- [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) - Graphical debug UI 
 
 ---
 
-## The P Is For Personal
+### Completion
+- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - Main completion engine
+- [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) - The active language server completion source
+- [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline) - Command mode
+- [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) - Current buffer
+- [cmp-path](https://github.com/hrsh7th/cmp-path) - Path completion source
+- [cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua) - Lua Completion Source
+- [cmp-copilot](https://github.com/hrsh7th/cmp-copilot) -  Github Copilot source for completion engine
+- [cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua) - Lua source
+- [cmp-nvim-lsp-document-symbol](https://github.com/hrsh7th/cmp-nvim-lsp-document-symbol) -  Document Symbol source
+- [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip) -  Luasnip Snippet completion source
+- [cmp-treesitter](https://github.com/ray-x/cmp-treesitter) -  Treesiter as completion source
+- [cmp-spell](https://github.com/f3fora/cmp-spell) - Spellcheck source for completion Engine
+- [cmp-rg](https://github.com/lukas-reineke/cmp-rg) -  Ripgrep source for completion engine
+- [cmp-git](https://github.com/petertriho/cmp-git) - Git source for completionn engine
+- [lspkind-nvim](https://github.com/onsails/lspkind-nvim) - Get VS Code symbols in completion menus
 
-A personal development environment, or PDE, differs from an integrated development environment primarily in that it
-is _personal_. A PDE is a living thing, continuously configured and extended over the years by someone who thinks the 
-time sent building your own teools if well spent. 
+---
 
-This is not a framework meant to help someone hit the ground running, it is my personal configuration. You should take, 
-ideas from it assuming some appeal to, and you should be doing that from many places in order to build _your personal_ development
-environment.  
+### Snippets 
+- [LuaSnip](https://github.com/L3MON4D3/LuaSnip) - Snippet engine programmable using Lua
 
+---
+### Command Palette and Fuzzy Search
+_Telescope acts as command palette and highly extensible interface to Neovim._
 
+- [telescope.nvim/](https://github.com/nvim-telescope/telescope.nvim/)
 
-## Functionality
+Dependencies:
+	- [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
+	- [popup.nvim](https://github.com/nvim-lua/popup.nvim)
+	- [sqlite.lua](https://github.com/tami5/sqlite.lua)
 
-_The major features and capabilities of the PDE's default distribution._
+#### Telescope Enhancements
+- [telescope-symbols.nvim](https://github.com/nvim-telescope/telescope-symbols.nvim)
+- [telescope-github.nvim](https://github.com/nvim-telescope/telescope-github.nvim)
+- [telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)
+- [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
 
+---
 
 ### VS Code Compatibility
 
@@ -68,187 +85,12 @@ These features are directly compatible with components of VS Code.
 	- Language-specific LSP signs in menus and tab bar
 - __Command Palette__ - most functionality is available through an extensible command pallete
 
-> _In order to correctly display all of the various glyphs, you will want to install a pached font._
->	`brew tap homebrew/cask-fonts`
->	`brew install --cask font-fira-code-nerd-font`
-
----
-
-### Keybindings
-
-- Easy and logical method for assigning keybindings
-- Inline (zero overhead) help remembering or discovering keybindings
-- Complete (including native keybindings) and searchable legend
-
----
-
-### Auto-Completion
-
-Includes __Path intellisense__ and __command-mode__ (`:`) completion.  
-
-Auto-complete is highly configurable and supports many sources:  
-
-- Language server
-- Current Buffer
-- Git 
-- Ripgrep
-- Github Copilot
-- Treesitter
-
----
-
-### Source Control Management
-
-- Show changes in the sign column (gutter)
-- Local git repo integrations including _Stage/Unstage_ chunk
-- Github integration (PRs, issues)
-- Blame and commit messages for current line
-
----
-
-### Language Support
-
-There are several language servers installed by default. You can easily add/remove additonal
-language servers using `:LSPInstall`. 
-
-_Enable/Disable_ installed language servers using the config at `lua/lsp/servers.lua`.  
-
-- Ansible
-- Bash
-- CSS
-- Dockerfile
-- Javascript
-- Lua
-- Markdown
-- Python
-- Rust
-- TOML
-- Terraform
-- Typescript
-- Vimscript
-- YAML
-- HTML
-
-
-> __LSP Capabilities__
->
-> - Auto-completion Source
-> - (Automatic) Formatting and Linting
-> - Go To definition (preview available)
-> - Find All References (preview available)
-> - Callstack
-> - Code Outline
-> - Symbol Outline
-> - Signature Help
-> - Preview Definition
-> - Recommended Code Actions/Fixes
-
----
-
-### Convenience Features
-
-- Color highlight (by hex value)
-- Integrated personal wiki and cheatsheet editor
-- Intergation with Dash.app (API documentation app for macOS)
-- Powerful find and replace tool
-- Extremely fast code search tool
-- Innovative fast navigation tool based on the idea that in most cases for a given project, we are frequently returning
-  the same set of 4-5 files
-
----
-
-### Easily discoverable commands and documentation
-- All default and custom keybindings are automatically added to the command palette
-- Customizable quick cheatsheet
-- Integrated personal wiki 
-- Integrated with Dash.app or devdocs.io documentation sources
-- Easy user-level customizations
-
----
-
-## Plugin List
-
-_This is a list of plugins included in the default distribution and a short description of their purpose._
-
-### Debugging Engine
-
-- [nvim-dap](https://github.com/mfussenegger/nvim-dap) - Debug Adapter Protocol for Neovim
-
-#### Debugging Enhancements
-- [nvim-dap-virtual-text](https://github.com/mfussenegger/nvim-dap-virtual-text) - Virtual text display for nvim-dap
-- [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) - Graphical debug UI 
-- [DAPInstall.nvim](https://github.com/Pocco81/DAPInstall.nvim) - Helper to install debug adapters and configurations
-
-
-### Completion Engine
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - Main completion engine
-
-#### Completion Enhancements
-- [lspkind-nvim](https://github.com/onsails/lspkind-nvim) - Get VS Code symbols in completion menus
-
-#### Completion Sources
-_These plugins provide additional sources to the completion engine_  
-
-- [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) - The active language server completion source
-- [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline) - Command mode
-- [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) - Current buffer
-- [cmp-path](https://github.com/hrsh7th/cmp-path) - Path completion source
-- [cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua) - Lua Completion Source
-- [cmp-copilot](https://github.com/hrsh7th/cmp-copilot) -  Github Copilot source for completion engine
-- [cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua) - Lua source
-- [cmp-nvim-lsp-document-symbol](https://github.com/hrsh7th/cmp-nvim-lsp-document-symbol) -  Document Symbol source
-- [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip) -  Luasnip Snippet completion source
-- [cmp-treesitter](https://github.com/ray-x/cmp-treesitter) -  Treesiter as completion source
-- [cmp-spell](https://github.com/f3fora/cmp-spell) - Spellcheck source for completion Engine
-- [cmp-rg](https://github.com/lukas-reineke/cmp-rg) -  Ripgrep source for completion engine
-- [cmp-git](https://github.com/petertriho/cmp-git) - Git source for completionn engine
-
-### Snippets Engine
-- [LuaSnip](https://github.com/L3MON4D3/LuaSnip) - Snippet engine programmable using Lua
-
-### Command Palette and Fuzzy Search
-_Telescope acts as command palette and highly extensible interface to Neovim._
-
-- [telescope.nvim/](https://github.com/nvim-telescope/telescope.nvim/)
-
-Dependencies:
-	- [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
-	- [popup.nvim](https://github.com/nvim-lua/popup.nvim)
-	- [sqlite.lua](https://github.com/tami5/sqlite.lua)
-
-#### Telescope Enhancements
-- [telescope-symbols.nvim](https://github.com/nvim-telescope/telescope-symbols.nvim)
-- [telescope-zoxide](https://github.com/jvgrootveld/telescope-zoxide)
-- [telescope-github.nvim](https://github.com/nvim-telescope/telescope-github.nvim)
-- [telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim)
-- [telescope-vimspector.nvim](https://github.com/nvim-telescope/telescope-vimspector.nvim)
-- [telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)
-- [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
-
-
-
----
-
-## Cheatsheets and Custom help
-_Store some of your notes here in the custom help docs: `doc/halp`. To update help keywords for searching:_
-
-```vim
-:helptags ~/.config/nvim/docs/
-```
-
-Add entries to the cheatsheet by editing `cheatsheet.txt`. The `:Cheatsheet` command will allow searching the cheatsheet
-using telescope. `:Cheatsheet!` will open in a popup window.
-
-
----
+_*In order to correctly display all of the various glyphs, you will want to install a pached font._  
 
 ## Further Information
 
 - The [r/unixporn](https://reddit.com/r/unixporn) subreddit
 - The [Awesome-Neovim](https://github.com/rockerBOO/awesome-neovim#readme) List
-
-
----
 
 ## Special Thanks 
 

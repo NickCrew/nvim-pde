@@ -38,11 +38,4 @@ return {
     end,
   },
 
-  {
-    -- GDB
-    "sakhnik/nvim-gdb",
-    enabled = false,
-    build = "bash ./install.sh",
-  },
-
 }
