@@ -1,12 +1,11 @@
 -- init.lua
 --
 
-
 require('settings.autocmd')
-require('settings.usercmd')
 require('settings.options')
 require('keymaps')
-require('plugins')
+require('settings.lazy')
+require('keymaps.wk')
 
 
 vim.cmd("colorscheme tokyonight-moon")

@@ -1,5 +1,38 @@
 return {
   {
+    -- Lua development tools
+    "folke/lua-dev.nvim",
+    ft = { "lua" },
+    lazy = true
+  },
+  {
+    "someone-stole-my-name/yaml-companion.nvim",
+    ft = { "yaml" },
+    lazy = true,
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+      require("telescope").load_extension("yaml_schema")
+    end,
+  },
+  {
+    "mfussenegger/nvim-ansible",
+    ft = { "yaml", "yaml.ansible" },
+    lazy = true
+  },
+  {
+    -- Live markdown preview
+    "iamcco/markdown-preview.nvim",
+    ft = "markdown",
+    lazy = true,
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter-context",
   },
   {
@@ -83,11 +116,23 @@ return {
     end,
   },
   {
+    "mfussenegger/nvim-treehopper",
+    dependencies = {
+      "phaazon/hop.nvim"
+    }
+  },
+  {
     -- treesitter based colorizing
     "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("config.colorizer")
-    end,
+    opts = {
+				"css",
+				"scss",
+				"javascript",
+				"javascriptreact",
+				"typescript",
+				"typescriptreact",
+				"html",
+			}
   },
 
 

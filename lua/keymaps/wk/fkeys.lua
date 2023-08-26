@@ -1,4 +1,6 @@
-return {
+local wk = require("which-key")
+
+wk.register({
   {
     ["<F3>"] = {
       "<cmd>DapVirtualTextForceRefresh<cr>",
@@ -41,4 +43,4 @@ return {
       "Step Over",
     },
   }
-}
+}, {mode = "n"}) 

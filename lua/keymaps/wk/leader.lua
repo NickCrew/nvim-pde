@@ -1,4 +1,6 @@
-return {
+local wk = require("which-key")
+
+wk.register({
   ["["] = {
     "<cmd>BufferLineCyclePrev<cr>",
     "Focus Left Buffer",
@@ -127,4 +129,4 @@ return {
     "<cmd>WhichKey<cr>",
     "Toggle WhichKey",
   },
-}
+}, { prefix = "<leader>", mode = "n" })

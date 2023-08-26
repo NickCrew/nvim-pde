@@ -22,7 +22,7 @@ dashboard.section.buttons.val =
   dashboard.button("f p", "  > Find Project", ":Telescope projects<CR>", opts),
   dashboard.button("z d", "  > File Browser", ":Telescope file_browser<CR>", opts),
   dashboard.button("f g", "  > Search in Files", ":Telescope live_grep<CR>", opts),
-  dashboard.button("u", "  > Update plugins", ":PackerSync<CR>", opts),
+  dashboard.button("u", "  > Sync plugins", ":Lazy sync<CR>", opts),
   dashboard.button("e", "  > New file", ":enew <CR>", opts),
   dashboard.button("q", "  > Quit NVIM", ":qa<CR>", opts),
 }

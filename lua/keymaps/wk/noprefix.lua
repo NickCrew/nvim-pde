@@ -1,4 +1,5 @@
-return {
+local wk = require("which-key")
+wk.register({
   {
     g = {
       name = "+lsp",
@@ -72,5 +73,23 @@ return {
       },
     },
     K = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
+s = {
+    "<cmd>HopChar2AC<cr>",
+    "Hop 2 Char After Cursor"
+  },
+  S = {
+    "<cmd>HopChar2BC<cr>",
+    "Hop 2 Char Before Cursor"
+  },
+  m = {
+    "<cmd>HopChar1AC<cr>",
+    "Hop Char 1 After Cursor"
+  },
+  M = {
+    "<cmd>HopChar1BC<cr>",
+    "Hop Char 1 Before Cursor"
   }
-}
+
+  }
+}, {
+  mode = "n"})

@@ -1,8 +1,5 @@
--- lua/plugins/init.lua
---
--- Setup plugins
-
 local fn = vim.fn
+
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -17,10 +14,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-  { import = "plugins.specs" },
-  { import = "plugins.specs.languages" }
-}, {
+require("lazy").setup("plugins", {
   performance = {
     rtp = {
       disabled_plugins = {

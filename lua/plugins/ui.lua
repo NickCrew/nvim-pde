@@ -1,5 +1,16 @@
 return {
   {
+    'folke/tokyonight.nvim',
+    priority = 1000
+  },
+  {
+    -- Colorscheme development
+    "rktjmp/lush.nvim",
+    enabled = false,
+  },
+
+
+  {
     "vimpostor/vim-lumen",
     lazy = true
   },
@@ -20,18 +31,14 @@ return {
     -- Better quickfix window
     "kevinhwang91/nvim-bqf",
     ft = "qf",
-    config = function()
-      require("bqf").setup()
-    end,
+    config = true
   },
   {
     -- Dim parts of your code you're not workingon
     "folke/twilight.nvim",
     lazy = true,
     cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
-    config = function()
-      require("twilight").setup({})
-    end,
+    config = true
   },
   {
     "folke/noice.nvim",
@@ -42,17 +49,43 @@ return {
       "rcarriga/nvim-notify",
     },
     enabled = true,
-    config = function()
-      require("config.noice")
-      require("telescope").load_extension("noice")
-    end,
+    opts = {
+      -- routes = {
+      --     view = "cmdline",
+      --     filter = { event = "msg_showmode"}
+      -- },
+      cmdline = {
+        enabled = true,
+      },
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+        progress = {
+          enabled = true,
+          throttle = 1000 / 100,
+        },
+        signature = {
+          enabled = true,
+        },
+      },
+      -- you can enable a preset for easier configuration
+      presets = {
+        bottom_search = true,         -- use a classic bottom cmdline for search
+        command_palette = true,       -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = true,            -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true,        -- add a border to hover docs and signature help
+      },
+    }
   },
   {
     ---Status bars
     "akinsho/bufferline.nvim",
-    config = function()
-      require('bufferline').setup({})
-    end,
+    config = true,
     enabled = true,
   },
   {
@@ -74,9 +107,20 @@ return {
     -- Pretty notification windows/popups
     "rcarriga/nvim-notify",
     enabled = true,
-    config = function()
-      require("config.notify")
-    end,
+    lazy = true,
+    opts = {
+      level = "info",
+      stages = "fade_in_slide_out",
+      timeout = 1500,
+      background_colour = "#2E3440",
+      icons = {
+        ERROR = "",
+        WARN = "",
+        INFO = "",
+        DEBUG = "",
+        TRACE = "✎",
+      },
+    }
   },
   {
     -- Splash Screen/Dashboard
@@ -104,14 +148,21 @@ return {
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
+    config = true
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
+    cmd = "Neotree",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
     }
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000
   }
 }

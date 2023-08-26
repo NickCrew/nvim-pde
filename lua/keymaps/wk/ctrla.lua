@@ -1,4 +1,5 @@
-return {
+local wk =require("which-key")
+wk.register({
   {
     name = "+navigation",
 
@@ -66,4 +67,4 @@ return {
       },
     },
   }
-}
+}, { prefix = "<C-a>" })

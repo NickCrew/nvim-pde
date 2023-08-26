@@ -3,13 +3,10 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
 
--- Groups
+--
+-- Hover Diagnostic
+-- 
 augroup("hover", {})
-augroup("windows", {})
-augroup("terms", {})
-
-
--- Commands
 
 autocmd("CursorHold", {
 	group = "hover",
@@ -29,15 +26,14 @@ autocmd("CursorHold", {
 	command = 'lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="rounded"})',
 })
 
+--
+-- Floating terminals (floatterm)
+--
+augroup("floatterm", {})
+
 autocmd("termopen", {
-	group = "terms",
+	group = "floatterm",
 	pattern = "term://*",
 	command = "lua set_terminal_keymaps()",
 })
 
-
-autocmd("BufWritePost", {
-callback = function()
-  require("lint").try_lint()
-end
-})

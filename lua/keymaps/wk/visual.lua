@@ -1,4 +1,5 @@
-return {
+local wk = require("which-key")
+wk.register({
   {
     r = {
     name = "+refactor(v)",
@@ -27,4 +28,4 @@ return {
       },
     },
   }
-}
+}, { mode = "v"})

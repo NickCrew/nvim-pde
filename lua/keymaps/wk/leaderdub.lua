@@ -1,4 +1,6 @@
-return {
+local wk = require("which-key")
+
+wk.register({
   {
     name = "+telescope",
     b = {
@@ -85,4 +87,5 @@ return {
       "Refactoring",
     },
   }
-}
+}, { prefix = "<leader><leader>", mode = "n" })
+
