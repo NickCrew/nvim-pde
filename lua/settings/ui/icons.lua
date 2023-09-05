@@ -1,12 +1,19 @@
 return {
   diagnostics = {
-          -- icons / text used for a diagnostic
-          error = "",
-          warning = "",
-          hint = "",
-          information = "",
-          other = "﫠"
-      },
+    -- icons / text used for a diagnostic
+    error = "",
+    warning = "",
+    hint = "",
+    information = "",
+    other = "﫠"
+  },
+    debug_breakpoints = {
+      stopped = "🔴",
+      normal = "🟠",
+      conditional = "🔵",
+      rejected = "⭕",
+      log = "🔶",
+    },
   kind = {
     Text = "",
     Copilot = "",

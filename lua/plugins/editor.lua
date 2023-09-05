@@ -1,27 +1,26 @@
 return {
   {
+    -- Syntax-aware commenting
+    "tpope/vim-commentary",
+    enabled = true,
+  },
+  {
+    -- Code refactoring
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = "telescope.nvim",
+    lazy = true,
+    config = function()
+      require("refactoring").setup()
+      require("telescope").load_extension("refactoring")
+    end,
+  },
+  {
     -- Quick movements
     "phaazon/hop.nvim",
     branch = 'v2',
-    config = function()
-      local hop = require('hop')
-      hop.setup({
-        case_insensitive = true
-      })
-      local directions = require('hop.hint').HintDirection
-      vim.keymap.set('', 'f', function()
-        hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
-      end, { remap = true })
-      vim.keymap.set('', 'F', function()
-        hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
-      end, { remap = true })
-      vim.keymap.set('', 't', function()
-        hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
-      end, { remap = true })
-      vim.keymap.set('', 'T', function()
-        hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
-      end, { remap = true })
-    end
+    opts = {
+      case_insensitive = true
+    }
   },
   {
     -- Telescope
@@ -109,9 +108,9 @@ return {
         },
         color_devicons = true,
         use_less = true,
+        dynamic_preview_title = true,
         set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
         file_sorter = require("telescope.sorters").get_fuzzy_file,
-        dynamic_preview_title = true,
         file_previewer = require("telescope.previewers").vim_buffer_cat.new,
         grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
         qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
@@ -212,14 +211,14 @@ return {
       hide_numbers = true, -- hide the number column in toggleterm buffers
       shade_filetypes = {},
       shade_terminals = true,
-      shading_factor = 3,   -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+      shading_factor = 3,     -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
       start_in_insert = true,
       insert_mappings = true, -- whether or not the open mapping applies in insert mode
       persist_size = true,
       -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
       direction = "float",
       close_on_exit = true, -- close the terminal window when the process exits
-      shell = vim.o.shell, -- change the default shell
+      shell = vim.o.shell,  -- change the default shell
       -- This field is only relevant if direction is set to 'float'
       float_opts = {
         -- The border key is *almost* the same as 'nvim_win_open'
@@ -240,16 +239,13 @@ return {
   },
   {
     "mrjones2014/legendary.nvim",
-    dependencies = "which-key.nvim",
     lazy = true,
     enabled = true,
-    config = function()
-      require("legendary").setup({
-        which_key = {
-          auto_register = true,
-        },
-      })
-    end,
+    opts = {
+      which_key = {
+        auto_register = true
+      }
+    }
   },
   {
     "folke/which-key.nvim",

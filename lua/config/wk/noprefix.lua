@@ -81,14 +81,6 @@ s = {
     "<cmd>HopChar2BC<cr>",
     "Hop 2 Char Before Cursor"
   },
-  m = {
-    "<cmd>HopChar1AC<cr>",
-    "Hop Char 1 After Cursor"
-  },
-  M = {
-    "<cmd>HopChar1BC<cr>",
-    "Hop Char 1 Before Cursor"
-  }
 
   }
 }, {

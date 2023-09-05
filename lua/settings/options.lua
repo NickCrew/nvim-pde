@@ -4,20 +4,6 @@
 local g = vim.g
 local o = vim.o
 
-local nvim_cache = os.getenv('HOME') .. "/.cache/nvim"
-
---
--- Global
---
-g.mapleader             = " "
-g.maplocalleader        = "\\"
-
-g.nvim_cache            = nvim_cache
-g.python_bin_dir        = os.getenv("HOME") .. '/.pyenv/versions/neovim/bin'
-g.python3_host_prog     = g.python_bin_dir .. '/python'
-
-g.cursorhold_updatetime = 100
-
 
 --
 -- Options
@@ -88,23 +74,6 @@ o.wildmode       = "longest,list,full"
 o.wildignore     = ".git/**,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**"
 
 
---- 
---- Filetypes
----
-vim.filetype.add({
-  pattern = {
-    ['.git*']                 = 'gitconfig',
-    ['.gitconfig']            = 'gitconfig',
-    ['~/.config/git/*']       = 'gitconfig',
-    ['*.snippets']            = 'snippets',
-    ['playbooks/*.yaml']      = 'yaml.ansible',
-    ['playbooks/*.yml']       = 'yaml.ansible',
-    ['roles/**/*.yml']        = 'yaml.ansible',
-    ['~/.tmux.conf.d/*.conf'] = 'tmux',
-    ['~/.tmux.conf']          = 'tmux',
-    ['*.hcl']                 = 'hcl'
-  }
-})
 
 
 

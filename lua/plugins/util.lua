@@ -1,14 +1,11 @@
 return {
-{
+  {
     -- Smart Session Management
     "folke/persistence.nvim",
     lazy = true,
     enabled = true,
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
     module = "persistence",
-    config = function()
-      require("persistence").setup()
-    end,
   },
   {
     "williamboman/mason.nvim",
@@ -16,32 +13,25 @@ return {
     enabled = false,
     build = ":MasonUpdate",
   },
-{
-		-- VS Code remote container support
-		"chipsenkbeil/distant.nvim",
-		lazy = true,
-		enabled = false,
-		config = function()
-			require("distant").setup()
-		end,
-	},
+  {
+    -- VS Code remote container support
+    "chipsenkbeil/distant.nvim",
+    lazy = true,
+    enabled = false,
+  },
+  {
+    -- Support for VS Code's task.json
+    "EthanJWright/vs-tasks.nvim",
+    lazy = true,
+    enabled = true,
+  },
 
-	{
-		-- Support for VS Code's task.json
-		"EthanJWright/vs-tasks.nvim",
-		lazy = true,
-		enabled = true,
-	},
-
-	{
-		-- VS Code container development support
-		"esensar/nvim-dev-container",
-		lazy = true,
-		enabled = false,
-		config = function()
-			require("devcontainer").setup({})
-		end,
-	},
+  {
+    -- VS Code container development support
+    "esensar/nvim-dev-container",
+    lazy = true,
+    enabled = false,
+  },
 
 
 

@@ -1,7 +1,0 @@
-require("keymaps.wk.leader")
-require("keymaps.wk.leaderdub")
-require("keymaps.wk.noprefix")
-require("keymaps.wk.fkeys")
-require("keymaps.wk.semicolon")
-require("keymaps.wk.ctrla")
-require("keymaps.wk.visual")

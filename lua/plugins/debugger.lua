@@ -5,8 +5,6 @@ return {
     lazy = true,
     enabled = true,
   },
-
-
   {
     -- Debug UI
     "rcarriga/nvim-dap-ui",
@@ -93,22 +91,6 @@ return {
               silent = keymap.silent == 1
             })
         end
-      end
-
-
-      vim.api.nvim_create_user_command("BreakpointToggle", "lua require('dap').toggle_breakpoint()", {})
-      vim.api.nvim_create_user_command("Debug", "lua require('dap').continue()", {})
-      vim.api.nvim_create_user_command("DapREPL", "lua require('dap').repl.open()", {})
-      vim.api.nvim_create_user_command("DapCmds", ":lua require('telescope').extensions.dap.commands()", {})
-
-      for type, icon in pairs({
-        DapBreakpoint          = "🟠",
-        DapBreakpointCondition = "🔵",
-        DapBreakpointRejected  = "⭕",
-        DapLogPoint            = "🔶",
-        DapStopped             = "🔴"
-      }) do
-        vim.fn.sign_define(type, { text = icon, texthl = "", numhl = "", linehl = "" })
       end
     end,
 

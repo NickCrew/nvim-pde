@@ -1,29 +1,9 @@
 return {
-  {
-    -- Syntax-aware commenting
-    "tpope/vim-commentary",
-    enabled = true,
-  },
+  
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {}
-  },
-  {
-    -- Schemas
-    "b0o/schemastore.nvim",
-    enabled = true,
-  },
-
-  {
-    -- Code refactoring
-    "ThePrimeagen/refactoring.nvim",
-    dependencies = "telescope.nvim",
-    lazy = true,
-    config = function()
-      require("refactoring").setup()
-      require("telescope").load_extension("refactoring")
-    end,
   },
   {
     -- Docstring generator
@@ -71,13 +51,13 @@ return {
     config = function()
       local cmp_autopairs = require('nvim-autopairs.completion.cmp')
       local cmp = require('cmp')
+      local icons = require("settings.ui.icons")
       cmp.event:on(
         'confirm_done',
         cmp_autopairs.on_confirm_done()
       )
       local lspkind = require("lspkind")
       local luasnip = require("luasnip")
-      local cmp = require("cmp")
 
       local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -103,10 +83,10 @@ return {
             mode = "symbol_text",
             maxwidth = 75,
             preset = "codicons",
-            symbol_map = require("config.icons").kind,
+            symbol_map = icons.kind,
             before = function(entry, vim_item)
               vim_item.kind = lspkind.presets.default[vim_item.kind]
-              vim_item.menu = require("config.icons").lsp[entry.source.name]
+              vim_item.menu = icons.lsp[entry.source.name]
               return vim_item
             end,
           }),

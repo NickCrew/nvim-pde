@@ -5,6 +5,10 @@ wk.register({
     "<cmd>HopLineStart<cr>",
     "Hop To Start of Line"
   },
+  l = {
+    "<cmd>HopLine<cr>",
+    "Hop To Line"
+  },
   a = {
     "<cmd>HopAnywhereCurrentLine<cr>",
     "Hop Anywhere in Current Line"

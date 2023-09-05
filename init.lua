@@ -1,11 +1,20 @@
 -- init.lua
---
 
-require('settings.autocmd')
-require('settings.options')
-require('keymaps')
-require('settings.lazy')
-require('keymaps.wk')
+require("settings.autocmd")
+require("settings.usercmd")
+
+require("settings.global")
+require("settings.options")
+
+require("settings.filetypes")
+require("settings.diagnostics")
+require("settings.keymaps")
+
+-- Load Plugins
+require("settings.lazy")
+
+require("settings.ui")
+
+require('config.wk')
 
 
-vim.cmd("colorscheme tokyonight-moon")

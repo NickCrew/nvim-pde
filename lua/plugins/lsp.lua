@@ -1,4 +1,42 @@
 return {
+{
+    -- Lua development tools
+    "folke/lua-dev.nvim",
+    ft = { "lua" },
+    lazy = true
+  },
+  {
+    "someone-stole-my-name/yaml-companion.nvim",
+    ft = { "yaml" },
+    lazy = true,
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+      require("telescope").load_extension("yaml_schema")
+    end,
+  },
+  {
+    "mfussenegger/nvim-ansible",
+    ft = { "yaml", "yaml.ansible" },
+    lazy = true
+  },
+  {
+    -- Live markdown preview
+    "iamcco/markdown-preview.nvim",
+    ft = "markdown",
+    lazy = true,
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
+{
+    -- Schemas
+    "b0o/schemastore.nvim",
+    enabled = true,
+  },
   {
     "folke/neoconf.nvim",
     lazy = true,
@@ -70,7 +108,7 @@ return {
       auto_preview = true,             -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
       auto_fold = false,               -- automatically fold a file trouble list at creation
       auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
-      signs = require("config.icons").diagnostics,
+      signs = require("settings.ui.icons").diagnostics,
       use_diagnostic_signs = false     -- enabling this will use the signs defined in your lsp client
     },
   },
