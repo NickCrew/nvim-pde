@@ -73,14 +73,14 @@ wk.register({
       },
     },
     K = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
-s = {
-    "<cmd>HopChar2AC<cr>",
-    "Hop 2 Char After Cursor"
-  },
-  S = {
-    "<cmd>HopChar2BC<cr>",
-    "Hop 2 Char Before Cursor"
-  },
+-- s = {
+--     "<cmd>HopChar2AC<cr>",
+--     "Hop 2 Char After Cursor"
+--   },
+--   S = {
+--     "<cmd>HopChar2BC<cr>",
+--     "Hop 2 Char Before Cursor"
+--   },
 
   }
 }, {

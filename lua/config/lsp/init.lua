@@ -1,7 +1,38 @@
 
 -- LSP Configuration
 --
+--
+vim.diagnostic.config({
+	virtual_text = false,
+	signs = true,
+	update_in_insert = true,
+	underline = true,
+	severity_sort = false,
+	float = {
+		border = "rounded",
+		source = "always",
+	},
+})
 
+
+local icons = require("settings.ui.icons")
+
+
+for type, icon in pairs({
+  DiagnosticSignError       = icons.diagnostics.error,
+  DiagnosticSignWarning     = icons.diagnostics.warning,
+  DiagnosticSignWarn        = icons.diagnostics.warning,
+  DiagnosticSignHint        = icons.diagnostics.hint,
+  DiagnosticSignInformation = icons.diagnostics.information,
+  DiagnosticSignInfo        = icons.diagnostics.information ,
+}) do
+  vim.fn.sign_define(type, { 
+    text = icon,
+    texthl = "",
+    numhl = "",
+    linehl = ""
+  })
+end
 
 
 

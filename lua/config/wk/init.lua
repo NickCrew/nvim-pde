@@ -1,7 +1,0 @@
-require("config.wk.leader")
-require("config.wk.leaderdub")
-require("config.wk.noprefix")
-require("config.wk.fkeys")
-require("config.wk.semicolon")
-require("config.wk.ctrla")
-require("config.wk.visual")

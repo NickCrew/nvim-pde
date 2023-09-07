@@ -1,13 +1,26 @@
 -- vim: foldmethod=marker foldmarker={{{,}}}
---
---
+
+
+--############################--
+--          Global
+--############################--
 local g = vim.g
+
+g.mapleader             = " "
+g.maplocalleader        = "\\"
+
+g.nvim_cache            = os.getenv('HOME') .. "/.cache/nvim"
+g.python_bin_dir        = os.getenv("HOME") .. '/.pyenv/versions/neovim/bin'
+g.python3_host_prog     = g.python_bin_dir .. '/python'
+
+g.cursorhold_updatetime = 100
+
+
+--############################--
+--        Options
+--############################--
 local o = vim.o
 
-
---
--- Options
---
 o.directory      = g.nvim_cache .. "/swap"
 o.backupdir      = g.nvim_cache .. "/backup"
 o.undodir        = g.nvim_cache .. "/undo"
@@ -72,8 +85,4 @@ o.wildignorecase = true
 o.completeopt    = "menu,menuone,noselect"
 o.wildmode       = "longest,list,full"
 o.wildignore     = ".git/**,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**"
-
-
-
-
 

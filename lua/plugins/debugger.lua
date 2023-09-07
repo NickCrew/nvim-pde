@@ -14,6 +14,14 @@ return {
       local dap = require("dap")
       local dapui = require("dapui")
 
+      local bp_icons = {
+        stopped     = "🔴",
+        normal      = "🟠",
+        conditional = "🔵",
+        rejected    = "⭕",
+        log         = "🔶",
+      }
+
       dapui.setup({
         icons = { expanded = "▾", collapsed = "▸" },
         mappings = {
@@ -60,6 +68,21 @@ return {
           max_type_length = nil, -- Can be integer or nil.
         }
       })
+
+      for type, icon in pairs({
+        DapBreakpoint          = bp_icons.normal,
+        DapBreakpointCondition = bp_icons.conditional,
+        DapBreakpointRejected  = bp_icons.rejected,
+        DapLogPoint            = bp_icons.log,
+        DapStopped             = bp_icons.stopped,
+      }) do
+        vim.fn.sign_define(type, {
+          text = icon,
+          texthl = "",
+          numhl = "",
+          linehl = ""
+        })
+      end
 
       dap.defaults.fallback.exception_breakpoints = { 'raised', 'uncaught' }
       dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
