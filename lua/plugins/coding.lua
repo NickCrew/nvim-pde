@@ -124,6 +124,7 @@ return {
               }
             },
           }), { "i", "c" }),
+
           -- invoke completion with only copilot
           ["<C-S-c>"] = cmp.mapping(cmp.mapping.complete({
             config = {

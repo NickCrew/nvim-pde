@@ -17,14 +17,13 @@ vim.diagnostic.config({
 
 local icons = require("settings.ui.icons")
 
-
 for type, icon in pairs({
-  DiagnosticSignError       = icons.diagnostics.error,
-  DiagnosticSignWarning     = icons.diagnostics.warning,
-  DiagnosticSignWarn        = icons.diagnostics.warning,
-  DiagnosticSignHint        = icons.diagnostics.hint,
-  DiagnosticSignInformation = icons.diagnostics.information,
-  DiagnosticSignInfo        = icons.diagnostics.information ,
+  DiagnosticSignError       = icons.diagnostics_fancy.error,
+  DiagnosticSignWarning     = icons.diagnostics_fancy.warning,
+  DiagnosticSignWarn        = icons.diagnostics_fancy.warning,
+  DiagnosticSignHint        = icons.diagnostics_fancy.hint,
+  DiagnosticSignInformation = icons.diagnostics_fancy.information,
+  DiagnosticSignInfo        = icons.diagnostics_fancy.information ,
 }) do
   vim.fn.sign_define(type, { 
     text = icon,
