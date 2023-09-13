@@ -3,20 +3,14 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = false,
-    enabled = false,
-    priority = 1000,
-    config = function()
-      vim.cmd([[colorscheme catppuccin-macciato]])
-    end
+    enabled = true,
+    priority = 1000
   },
   {
     'folke/tokyonight.nvim',
     priority = 1000,
     lazy = false,
-    enabled = true,
-    config = function()
-      vim.cmd([[colorscheme tokyonight]])
-    end
+    enabled = true
   },
   {
     -- Colorscheme development

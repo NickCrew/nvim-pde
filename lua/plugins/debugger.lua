@@ -1,12 +1,16 @@
+-- [1] nvim-dap
+-- [3] vim-dap-ui
+-- [2] nvim-dap-virtual-text
+-- [4] nvim-dap-python
 return {
   {
-    -- Debug adapter protocol support
+    -- [1] Debug adapter protocol support
     "mfussenegger/nvim-dap",
     lazy = true,
     enabled = true,
   },
   {
-    -- Debug UI
+    -- [2] Debug UI 
     "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap" },
     lazy = true,
@@ -118,8 +122,9 @@ return {
     end,
 
   },
-  {
-    -- Debugger virtual text
+  { 
+    -- [3] Debugger 
+    -- Debugger, virtual text
     "theHamsta/nvim-dap-virtual-text",
     dependencies = { "mfussenegger/nvim-dap" },
     lazy = true,
@@ -137,7 +142,8 @@ return {
     }
   },
   {
-    -- python debuggin
+    -- [4] 
+    -- -- python debuggin
     "mfussenegger/nvim-dap-python",
     ft = "python",
     lazy = true,

@@ -1,3 +1,8 @@
+-- vim-commentary
+-- refactoring
+-- hop
+-- flash
+-- telescope
 return {
   {
 
