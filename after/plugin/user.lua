@@ -7,7 +7,7 @@ local function mk_abr_cmd(abr, name, cmd, opts)
 end
 
 
-local ok, user_cmds =  pcall(require, "settings.user.commands")
+local ok, user_cmds =  pcall(require, "settings.user.cmds")
 if not ok then
   print("Failed to load custom user commands.")
 else
@@ -16,6 +16,4 @@ else
   end
 end
 
-
-
-
+require('settings.user.diagnostics')

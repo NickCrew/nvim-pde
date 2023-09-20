@@ -187,52 +187,18 @@ return {
         col = 1,
       },
       yadm = {
-        enable = false,
+        enable = true,
       },
     }
   },
   {
     -- Get links to github
     "ruifm/gitlinker.nvim",
-    config = function()
-      require("gitlinker").setup()
-    end,
   },
   {
     -- Git worktree support
     "ThePrimeagen/git-worktree.nvim",
     config = function()
-      local usercmd = vim.api.nvim_create_user_command
-      usercmd(
-        "CreateWorktree",
-        ":lua require('telescope').extensions.git_worktree.create_git_worktree()",
-        {}
-      )
-
-      usercmd(
-        "ListWorktrees",
-        ":lua require('telescope').extensions.git_worktree.git_worktrees()",
-        {}
-      )
-
-      usercmd(
-        "RefactorExtractBlock",
-        " <Cmd>lua require('refactoring').refactor('Extract Block')<CR>",
-        {}
-      )
-
-      usercmd(
-        "RefactorExtractBlockToFile",
-        "<Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>",
-        {}
-      )
-
-      usercmd(
-        "RefactorInlineVariable",
-        "<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>",
-        {}
-      )
-
       require("telescope").load_extension("git_worktree")
     end,
     enabled = false

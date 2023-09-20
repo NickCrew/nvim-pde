@@ -5,4 +5,4 @@ require("settings.lazy")
 require("settings.mappings")
 
 
-vim.cmd([[colorscheme catppuccin-latte]])
+vim.cmd([[colorscheme catppuccin-frappe]])

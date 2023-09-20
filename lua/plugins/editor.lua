@@ -1,12 +1,19 @@
--- vim-commentary
--- refactoring
--- hop
--- flash
--- telescope
-return {
-  {
+--[[
+Group: Editor Enhancements
 
-  },
+Plugins:
+ - vim-commentary
+ - refactoring
+ - hop
+ - flash
+ - telescope
+ - harpoon
+ - toggleterm
+ - legendary
+ - which-key
+
+--]]
+return {
   {
     -- Syntax-aware commenting
     "tpope/vim-commentary",
@@ -15,7 +22,6 @@ return {
   {
     -- Code refactoring
     "ThePrimeagen/refactoring.nvim",
-    dependencies = "telescope.nvim",
     lazy = true,
     config = function()
       require("refactoring").setup()
@@ -33,18 +39,38 @@ return {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
     opts = {},
-    -- stylua: ignore
     keys = {
-      { "s",     mode = { "n", "o", "x" }, function() require("flash").jump() end,              desc = "Flash" },
-      { "S",     mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end,
-                                                                                                  desc =
-        "Treesitter Search" },
-      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc =
-      "Toggle Flash Search" },
+      {
+        "s",
+        mode = { "n", "o", "x" },
+        function() require("flash").jump() end,
+        desc = "Flash"
+      },
+      {
+        "S",
+        mode = { "n", "o", "x" },
+        function() require("flash").treesitter() end,
+        desc = "Flash Treesitter"
+      },
+      {
+        "r",
+        mode = "o",
+        function() require("flash").remote() end,
+        desc = "Remote Flash"
+      },
+      {
+        "R",
+        mode = { "o", "x" },
+        function() require("flash").treesitter_search() end,
+        desc = "Treesitter Search"
+      },
+      {
+        "<c-s>",
+        mode = { "c" },
+        function() require("flash").toggle() end,
+        desc = "Toggle Flash Search"
+      },
     },
   },
   {
@@ -112,7 +138,6 @@ return {
           "--ignore-file",
           (vim.fn.stdpath("config") .. "/.telescope_ignore"),
         },
-        -- prompt_prefix = "  ",
         prompt_prefix = " ",
         selection_caret = " ",
         selection_strategy = "reset",
@@ -307,7 +332,7 @@ return {
       icons = {
         breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
         separator = "➜", -- symbol used between a key and it's label
-        group = "+",      -- symbol prepended to a group
+        group = "+", -- symbol prepended to a group
       },
       window = {
         border = "shadow",         -- none, single, double, shadow

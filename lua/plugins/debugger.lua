@@ -10,7 +10,7 @@ return {
     enabled = true,
   },
   {
-    -- [2] Debug UI 
+    -- [2] Debug UI
     "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap" },
     lazy = true,
@@ -122,9 +122,8 @@ return {
     end,
 
   },
-  { 
-    -- [3] Debugger 
-    -- Debugger, virtual text
+  {
+    -- [3] Debugger
     "theHamsta/nvim-dap-virtual-text",
     dependencies = { "mfussenegger/nvim-dap" },
     lazy = true,
@@ -142,8 +141,7 @@ return {
     }
   },
   {
-    -- [4] 
-    -- -- python debuggin
+    -- [4] python debugging
     "mfussenegger/nvim-dap-python",
     ft = "python",
     lazy = true,
@@ -153,9 +151,6 @@ return {
       local py_path = os.getenv("HOME") .. "/.pyenv/versions/neovim/bin/python"
       dap_py.setup(py_path)
       dap_py.test_runner = "pytest"
-      vim.api.nvim_create_user_command("TestFunc", "lua require('dap-python').test_method()", {})
-      vim.api.nvim_create_user_command("TestClass", "lua require('dap-python').test_class()", {})
-      vim.api.nvim_create_user_command("DebugSelection", "lua require('dap-python').debug_selection()", {})
     end,
   },
 }
