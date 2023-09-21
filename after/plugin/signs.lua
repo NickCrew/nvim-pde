@@ -1,19 +1,12 @@
-vim.diagnostic.config({
-	virtual_text = false,
-	signs = true,
-	update_in_insert = true,
-	underline = true,
-	severity_sort = false,
-	float = {
-		border = "rounded",
-		source = "always",
-	},
-})
-
 
 local icons = require("settings.ui.icons")
 
 for type, icon in pairs({
+  DapBreakpoint             = icons.dap.normal,
+  DapBreakpointCondition    = icons.dap.conditional,
+  DapBreakpointRejected     = icons.dap.rejected,
+  DapLogPoint               = icons.dap.log,
+  DapStopped                = icons.dap.stopped,
   DiagnosticSignError       = icons.diagnostics_fancy.error,
   DiagnosticSignWarning     = icons.diagnostics_fancy.warning,
   DiagnosticSignWarn        = icons.diagnostics_fancy.warning,
@@ -21,7 +14,7 @@ for type, icon in pairs({
   DiagnosticSignInformation = icons.diagnostics_fancy.information,
   DiagnosticSignInfo        = icons.diagnostics_fancy.information ,
 }) do
-  vim.fn.sign_define(type, { 
+  vim.fn.sign_define(type, {
     text = icon,
     texthl = "",
     numhl = "",

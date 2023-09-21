@@ -13,7 +13,7 @@ return {
     information = " ",
     other       = " ",
   },
-  debug_breakpoints = {
+  dap = {
     stopped     = "🔴",
     normal      = "🟠",
     conditional = "🔵",

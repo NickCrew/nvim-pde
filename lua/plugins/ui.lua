@@ -1,5 +1,10 @@
 return {
-{
+  {
+    "Shatur/neovim-ayu",
+    priority = 1000,
+    enabled = true
+  },
+  {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = false,
@@ -24,7 +29,7 @@ return {
     enabled = true,
   },
   {
-  -- macos system dark/mode
+    -- macos system dark/mode
     "vimpostor/vim-lumen",
     lazy = true
   },
@@ -49,16 +54,6 @@ return {
   {
     "VonHeikemen/fine-cmdline.nvim",
     dependencies = "MunifTanjim/nui.nvim",
-  },
-  {
-    -- Smooth Scrolling
-    "karb94/neoscroll.nvim",
-    enabled = true,
-    config = function()
-      require("neoscroll").setup({
-        easing_function = "quadratic",
-      })
-    end,
   },
   {
     "folke/todo-comments.nvim",
@@ -124,7 +119,7 @@ return {
       },
     }
   },
-  
+
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
@@ -249,14 +244,45 @@ return {
     }
   },
   {
-    -- Splash Screen/Dashboard
-    "goolord/alpha-nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    "echasnovski/mini.animate",
+    event = "VeryLazy",
     opts = function()
-      local btn_opts = {}
-      local dashboard = require("alpha.themes.dashboard")
+      -- don't use animate when scrolling with the mouse
+      local mouse_scrolled = false
+      for _, scroll in ipairs({ "Up", "Down" }) do
+        local key = "<ScrollWheel" .. scroll .. ">"
+        vim.keymap.set({ "", "i" }, key, function()
+          mouse_scrolled = true
+          return key
+        end, { expr = true })
+      end
 
-      dashboard.section.header.val = {
+      local animate = require("mini.animate")
+      return {
+        resize = {
+          timing = animate.gen_timing.linear({ duration = 100, unit = "total" }),
+        },
+        scroll = {
+          timing = animate.gen_timing.linear({ duration = 150, unit = "total" }),
+          subscroll = animate.gen_subscroll.equal({
+            predicate = function(total_scroll)
+              if mouse_scrolled then
+                mouse_scrolled = false
+                return false
+              end
+              return total_scroll > 1
+            end,
+          }),
+        },
+      }
+    end,
+  },
+  {
+  "echasnovski/mini.starter",
+  version = false, -- wait till new 0.7.0 release to put it back on semver
+  event = "VimEnter",
+  opts = function()
+    local logo = table.concat({
         "                                                     ",
         "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
         "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
@@ -265,22 +291,34 @@ return {
         "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
         "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
         "                                                     ",
-      }
-
-      dashboard.section.buttons.val =
-      {
-        dashboard.button("f f", "  > Find File", ":Telescope find_files<CR>", btn_opts),
-        dashboard.button("f p", "  > Find Project", ":Telescope projects<CR>", btn_opts),
-        dashboard.button("z d", "  > File Browser", ":Telescope file_browser<CR>", btn_opts),
-        dashboard.button("f g", "  > Search in Files", ":Telescope live_grep<CR>", btn_opts),
-        dashboard.button("u", "  > Sync plugins", ":Lazy sync<CR>", btn_opts),
-        dashboard.button("e", "  > New file", ":enew <CR>", btn_opts),
-        dashboard.button("q", "  > Quit NVIM", ":qa<CR>", btn_opts),
-      }
-
-      dashboard.section.footer.val = require('alpha.fortune')
-      return dashboard.opts
+    }, "\n")
+    local pad = string.rep(" ", 22)
+    local new_section = function(name, action, section)
+      return { name = name, action = action, section = pad .. section }
     end
-  } 
-  
+
+    local starter = require("mini.starter")
+    --stylua: ignore
+    local config = {
+      evaluate_single = true,
+      header = logo,
+      items = {
+        new_section("Find file",    "Telescope find_files", "Telescope"),
+        new_section("Recent files", "Telescope oldfiles",   "Telescope"),
+        new_section("Grep text",    "Telescope live_grep",  "Telescope"),
+        new_section("init.lua",     "e $MYVIMRC",           "Config"),
+        new_section("Lazy",         "Lazy",                 "Config"),
+        new_section("New file",     "ene | startinsert",    "Built-in"),
+        new_section("Quit",         "qa",                   "Built-in"),
+        new_section("Session restore", [[lua require("persistence").load()]], "Session"),
+      },
+      content_hooks = {
+        starter.gen_hook.adding_bullet(pad .. "░ ", false),
+        starter.gen_hook.aligning("center", "center"),
+      },
+    }
+    return config
+  end,
+  }
+
 }

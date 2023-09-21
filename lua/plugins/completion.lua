@@ -1,10 +1,5 @@
 return {
   {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = {}
-  },
-  {
     -- Docstring generator
     "danymat/neogen",
     cmd = "Neogen",
@@ -48,13 +43,8 @@ return {
 
     },
     config = function()
-      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
       local cmp = require('cmp')
       local icons = require("settings.ui.icons")
-      cmp.event:on(
-        'confirm_done',
-        cmp_autopairs.on_confirm_done()
-      )
       local lspkind = require("lspkind")
       local luasnip = require("luasnip")
 

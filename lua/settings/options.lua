@@ -86,3 +86,23 @@ o.completeopt    = "menu,menuone,noselect"
 o.wildmode       = "longest,list,full"
 o.wildignore     = ".git/**,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**"
 
+
+--############################--
+--        Diagnostics 
+--############################--
+
+vim.diagnostic.config({
+	virtual_text = false,
+	signs = true,
+	update_in_insert = true,
+	underline = true,
+	severity_sort = false,
+	float = {
+		border = "rounded",
+		source = "always",
+	},
+})
+
+
+
+

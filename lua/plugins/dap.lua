@@ -1,30 +1,25 @@
--- [1] nvim-dap
--- [3] vim-dap-ui
--- [2] nvim-dap-virtual-text
--- [4] nvim-dap-python
+--[[
+- nvim-dap
+- vim-dap-ui
+- nvim-dap-virtual-text
+- nvim-dap-python
+- nvim-dap-go
+--]]
 return {
   {
-    -- [1] Debug adapter protocol support
+    -- Debug adapter protocol support
     "mfussenegger/nvim-dap",
     lazy = true,
     enabled = true,
   },
   {
-    -- [2] Debug UI
+    -- Debugger GUI
     "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap" },
     lazy = true,
     config = function()
       local dap = require("dap")
       local dapui = require("dapui")
-
-      local bp_icons = {
-        stopped     = "🔴",
-        normal      = "🟠",
-        conditional = "🔵",
-        rejected    = "⭕",
-        log         = "🔶",
-      }
 
       dapui.setup({
         icons = { expanded = "▾", collapsed = "▸" },
@@ -73,21 +68,6 @@ return {
         }
       })
 
-      for type, icon in pairs({
-        DapBreakpoint          = bp_icons.normal,
-        DapBreakpointCondition = bp_icons.conditional,
-        DapBreakpointRejected  = bp_icons.rejected,
-        DapLogPoint            = bp_icons.log,
-        DapStopped             = bp_icons.stopped,
-      }) do
-        vim.fn.sign_define(type, {
-          text = icon,
-          texthl = "",
-          numhl = "",
-          linehl = ""
-        })
-      end
-
       dap.defaults.fallback.exception_breakpoints = { 'raised', 'uncaught' }
       dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
       dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
@@ -123,7 +103,7 @@ return {
 
   },
   {
-    -- [3] Debugger
+    -- Debugger virtual text
     "theHamsta/nvim-dap-virtual-text",
     dependencies = { "mfussenegger/nvim-dap" },
     lazy = true,
@@ -141,16 +121,50 @@ return {
     }
   },
   {
-    -- [4] python debugging
+    -- Python debugging
     "mfussenegger/nvim-dap-python",
     ft = "python",
     lazy = true,
     dependencies = { "mfussenegger/nvim-dap" },
     config = function()
       local dap_py = require("dap-python")
-      local py_path = os.getenv("HOME") .. "/.pyenv/versions/neovim/bin/python"
+      local py_path = os.getenv("HOME") .. "/.pyenv/versions/debugpy/bin/python"
       dap_py.setup(py_path)
       dap_py.test_runner = "pytest"
     end,
   },
+  { -- Golang debugging
+    'leoluz/nvim-dap-go',
+    lazy = true,
+    ft = "go",
+    dependencies = {
+      "mfussenegger/nvim-dap" }
+  },
+  { -- Javascript debugging
+    'mxsdev/nvim-dap-vscode-js',
+    lazy = true,
+    dependencies = {
+      "mfussenegger/nvim-dap" }
+  },
+  {
+  "jay-babu/mason-nvim-dap.nvim",
+  lazy = true,
+  dependencies = "mason.nvim",
+  cmd = { "DapInstall", "DapUninstall" },
+  opts = {
+    -- Makes a best effort to setup the various debuggers with
+    -- reasonable debug configurations
+    automatic_installation = true,
+
+    -- You can provide additional configuration to the handlers,
+    -- see mason-nvim-dap README for more information
+    handlers = {},
+
+    -- You'll need to check that you have the required things installed
+    -- online, please don't ask me how to install them :)
+    ensure_installed = {
+      -- Update this to ensure that you have the debuggers for the langs you want
+    },
+  },
+}
 }

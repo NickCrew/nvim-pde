@@ -2,7 +2,6 @@
 
 require("settings.options")
 require("settings.lazy")
-require("settings.mappings")
 
 
-vim.cmd([[colorscheme catppuccin-frappe]])
+vim.cmd([[colorscheme ayu-mirage]])

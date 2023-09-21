@@ -1,4 +1,7 @@
-return {
+-- file: after/plugin/usercmds.lua
+-- description: loads commands created by the user last
+--
+local commands = {
   {
     name = "ReloadLuaFile",
     command = ":luafile %",
@@ -72,3 +75,12 @@ return {
     abbrev = "DPS"
   }
 }
+
+local function mk_abr_cmd(abr, name, cmd, opts)
+  vim.api.nvim_create_user_command(name, cmd, opts)
+  vim.cmd { cmd = 'cnoreabbrev', args = { abr, cmd } }
+end
+
+for _, e in pairs(commands) do
+  mk_abr_cmd(e.abbrev, e.name, e.command, e.opts)
+end

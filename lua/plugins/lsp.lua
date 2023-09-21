@@ -1,53 +1,123 @@
 return {
-  {
-    -- Lua development tools
-    "folke/lua-dev.nvim",
-    ft = { "lua" },
-    lazy = true
-  },
-  {
-    "someone-stole-my-name/yaml-companion.nvim",
-    ft = { "yaml" },
-    lazy = true,
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    config = function()
-      require("telescope").load_extension("yaml_schema")
-    end,
-  },
-  {
-    "mfussenegger/nvim-ansible",
-    ft = { "yaml", "yaml.ansible" },
-    lazy = true
-  },
-  {
-    -- Live markdown preview
-    "iamcco/markdown-preview.nvim",
-    ft = "markdown",
-    lazy = true,
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
-  },
+  
   {
     -- Schemas
     "b0o/schemastore.nvim",
     enabled = true,
   },
   {
-    "folke/neoconf.nvim",
-    lazy = true,
-    opts = {}
+    "williamboman/mason.nvim",
+    lazy = false,
+    enabled = true,
+    config = function()
+      require("mason").setup({
+        ui = {
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+          }
+        }
+      })
+    end
   },
   {
-    "folke/neodev.nvim",
-    lazy = true,
-    opts = {}
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig"
+    },
+    lazy = false,
+    enabled = true,
+    config = function()
+      require('mason-lspconfig').setup({
+        ensure_installed = {
+          "ansiblels",
+          "bashls",
+          "dockerls",
+          "gopls",
+          "helm_ls",
+          "jsonls",
+          "lua_ls",
+          "pyright",
+          "remark_ls",
+          "rust_analyzer",
+          "taplo",
+          "terraformls",
+          "tsserver",
+          "vimls",
+          "yamlls",
+        },
+        automatic_installations = true
+      })
+
+      local lspconfig = require("lspconfig")
+      local lsp_defaults = lspconfig.util.default_config
+
+      --
+      -- Capabilities
+      --
+      lsp_defaults.capabilities = vim.tbl_deep_extend(
+        'force',
+        lsp_defaults.capabilities,
+        require('cmp_nvim_lsp').default_capabilities()
+      )
+
+      --
+      -- Server Setup
+      --
+      lspconfig.bashls.setup({})
+      lspconfig.dockerls.setup({})
+      lspconfig.jsonls.setup({})
+      lspconfig.remark_ls.setup({})
+      lspconfig.gopls.setup({})
+      lspconfig.taplo.setup({})
+      lspconfig.terraformls.setup({})
+      lspconfig.tsserver.setup({})
+      lspconfig.vimls.setup({})
+
+      lspconfig.lua_ls.setup({
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { 'vim' }
+            }
+          }
+        }
+      })
+
+      lspconfig.pyright.setup({
+        flags = {
+          debounce_text_changes = 300
+        },
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              diagnosticMode = "openFilesOnly",
+              useLibraryCodeForTypes = true,
+              typeCheckingMode = "basic",
+            },
+          },
+        },
+      })
+
+      lspconfig.ansiblels.setup({
+        settings = {
+          ansible = {
+            path = "/usr/local/Homebrew/ansible",
+          },
+          ansibleLint = {
+            enabled = true,
+            path = "/usr/local/Homebrew/ansible-lint"
+          },
+          python = {
+            interpreterPath = "/usr/local/Homebrew/python3"
+          },
+        },
+      })
+    end
   },
-  
   {
     "neovim/nvim-lspconfig",
     lazy = true,
@@ -55,7 +125,6 @@ return {
       "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
       "weilbith/nvim-code-action-menu",
       "ray-x/lsp_signature.nvim",
-      "jose-elias-alvarez/nvim-lsp-ts-utils",
       "folke/lsp-colors.nvim",
       "nvim-lua/lsp-status.nvim",
       "kosayoda/nvim-lightbulb"
@@ -125,23 +194,8 @@ return {
       use_diagnostic_signs = false       -- enabling this will use the signs defined in your lsp client
     },
   },
-
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    ft = {
-      "javascript",
-      -- "python",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
-      -- "json",
-      "markdown",
-      "lua",
-    },
-    config = function()
-      require("config.null_ls")
-    end,
-    enabled = false,
+    "mhartington/formatter.nvim"
   },
   {
     "mfussenegger/nvim-lint",
