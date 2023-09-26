@@ -22,8 +22,6 @@ map("n", "Q", "<nop>",                opts)
 -- Keep centered
 map("n", "N", "Nzz",                  opts)
 map("n", "n", "nzz",                  opts)
-map("n", "<C-d>", "<C-d>zz",          opts)
-map("n", "<C-u>", "<C-u>zz",          opts)
 -- Handy Maximized Window Nav
 map("n", "<M-left>", "<C-w>h<C-w>|",  opts)
 map("n", "<M-right>", "<C-w>l<C-w>|", opts)

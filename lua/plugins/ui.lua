@@ -1,28 +1,5 @@
 return {
   {
-    "Shatur/neovim-ayu",
-    priority = 1000,
-    enabled = true
-  },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    lazy = false,
-    enabled = true,
-    priority = 1000
-  },
-  {
-    'folke/tokyonight.nvim',
-    priority = 1000,
-    lazy = false,
-    enabled = true
-  },
-  {
-    -- Colorscheme development
-    "rktjmp/lush.nvim",
-    enabled = false,
-  },
-  {
     ---Status bars
     "akinsho/bufferline.nvim",
     config = true,
@@ -244,45 +221,35 @@ return {
     }
   },
   {
-    "echasnovski/mini.animate",
-    event = "VeryLazy",
-    opts = function()
-      -- don't use animate when scrolling with the mouse
-      local mouse_scrolled = false
-      for _, scroll in ipairs({ "Up", "Down" }) do
-        local key = "<ScrollWheel" .. scroll .. ">"
-        vim.keymap.set({ "", "i" }, key, function()
-          mouse_scrolled = true
-          return key
-        end, { expr = true })
-      end
+    "karb94/neoscroll.nvim",
+    config = function()
+      require('neoscroll').setup({
+        easing_function = "quadratic", -- Default easing function
+        -- Set any other options as needed
+      })
 
-      local animate = require("mini.animate")
-      return {
-        resize = {
-          timing = animate.gen_timing.linear({ duration = 100, unit = "total" }),
-        },
-        scroll = {
-          timing = animate.gen_timing.linear({ duration = 150, unit = "total" }),
-          subscroll = animate.gen_subscroll.equal({
-            predicate = function(total_scroll)
-              if mouse_scrolled then
-                mouse_scrolled = false
-                return false
-              end
-              return total_scroll > 1
-            end,
-          }),
-        },
-      }
-    end,
+      local t    = {}
+      -- Syntax: t[keys] = {function, {function arguments}}
+      -- Use the "sine" easing function
+      t['<C-u>'] = { 'scroll', { '-vim.wo.scroll', 'true', '350', [['sine']] } }
+      t['<C-d>'] = { 'scroll', { 'vim.wo.scroll', 'true', '350', [['sine']] } }
+      -- Use the "circular" easing function
+      t['<C-b>'] = { 'scroll', { '-vim.api.nvim_win_get_height(0)', 'true', '500', [['circular']] } }
+      t['<C-f>'] = { 'scroll', { 'vim.api.nvim_win_get_height(0)', 'true', '500', [['circular']] } }
+      -- When no easing function is provided the default easing function (in this case "quadratic") will be used
+      t['zt']    = { 'zt', { '300' } }
+      t['zz']    = { 'zz', { '300' } }
+      t['zb']    = { 'zb', { '300' } }
+
+      require('neoscroll.config').set_mappings(t)
+    end
   },
   {
-  "echasnovski/mini.starter",
-  version = false, -- wait till new 0.7.0 release to put it back on semver
-  event = "VimEnter",
-  opts = function()
-    local logo = table.concat({
+    "echasnovski/mini.starter",
+    version = false, -- wait till new 0.7.0 release to put it back on semver
+    event = "VimEnter",
+    opts = function()
+      local logo = table.concat({
         "                                                     ",
         "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
         "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
@@ -291,34 +258,34 @@ return {
         "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
         "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
         "                                                     ",
-    }, "\n")
-    local pad = string.rep(" ", 22)
-    local new_section = function(name, action, section)
-      return { name = name, action = action, section = pad .. section }
-    end
+      }, "\n")
+      local pad = string.rep(" ", 22)
+      local new_section = function(name, action, section)
+        return { name = name, action = action, section = pad .. section }
+      end
 
-    local starter = require("mini.starter")
-    --stylua: ignore
-    local config = {
-      evaluate_single = true,
-      header = logo,
-      items = {
-        new_section("Find file",    "Telescope find_files", "Telescope"),
-        new_section("Recent files", "Telescope oldfiles",   "Telescope"),
-        new_section("Grep text",    "Telescope live_grep",  "Telescope"),
-        new_section("init.lua",     "e $MYVIMRC",           "Config"),
-        new_section("Lazy",         "Lazy",                 "Config"),
-        new_section("New file",     "ene | startinsert",    "Built-in"),
-        new_section("Quit",         "qa",                   "Built-in"),
-        new_section("Session restore", [[lua require("persistence").load()]], "Session"),
-      },
-      content_hooks = {
-        starter.gen_hook.adding_bullet(pad .. "░ ", false),
-        starter.gen_hook.aligning("center", "center"),
-      },
-    }
-    return config
-  end,
+      local starter = require("mini.starter")
+      --stylua: ignore
+      local config = {
+        evaluate_single = true,
+        header = logo,
+        items = {
+          new_section("Find file", "Telescope find_files", "Telescope"),
+          new_section("Recent files", "Telescope oldfiles", "Telescope"),
+          new_section("Grep text", "Telescope live_grep", "Telescope"),
+          new_section("init.lua", "e $MYVIMRC", "Config"),
+          new_section("Lazy", "Lazy", "Config"),
+          new_section("New file", "ene | startinsert", "Built-in"),
+          new_section("Quit", "qa", "Built-in"),
+          new_section("Session restore", [[lua require("persistence").load()]], "Session"),
+        },
+        content_hooks = {
+          starter.gen_hook.adding_bullet(pad .. "░ ", false),
+          starter.gen_hook.aligning("center", "center"),
+        },
+      }
+      return config
+    end,
   }
 
 }
