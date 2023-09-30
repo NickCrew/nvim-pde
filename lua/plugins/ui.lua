@@ -1,5 +1,16 @@
 return {
   {
+    "stevearc/oil.nvim",
+    config = true,
+  },
+  {
+    "s1n7ax/nvim-window-picker",
+    name = 'window-picker',
+    event = "VeryLazy",
+    version = '2.*',
+    config = true
+  },
+  {
     ---Status bars
     "akinsho/bufferline.nvim",
     config = true,

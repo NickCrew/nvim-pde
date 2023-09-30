@@ -1,5 +1,5 @@
 return {
-{
+  {
     -- Quick movements
     "phaazon/hop.nvim",
     branch = 'v2',
@@ -44,7 +44,7 @@ return {
       },
     },
   },
-{
+  {
     -- Hyperfast project navigation
     "ThePrimeagen/harpoon",
     lazy = true,
@@ -67,4 +67,3 @@ return {
     end,
   },
 }
-

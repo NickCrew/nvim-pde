@@ -27,4 +27,4 @@ map("n", "<M-left>", "<C-w>h<C-w>|",  opts)
 map("n", "<M-right>", "<C-w>l<C-w>|", opts)
 map("n", "<M-down>", "<C-w>j<C-w>_",  opts)
 map("n", "<M-up>", "<C-w>k<C-w>_",    opts)
-
+map("n", "-", "<cmd>Oil<cr>", opts)

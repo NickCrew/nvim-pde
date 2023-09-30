@@ -1,5 +1,4 @@
 
-require("settings.mappings")
 
 local ok, um = pcall(require, "settings.mappings.wk")
 if not ok then

@@ -4,4 +4,4 @@ require("settings.options")
 require("settings.lazy")
 
 
-vim.cmd([[colorscheme rose-pine-dawn]])
+vim.cmd([[colorscheme catppuccin-macchiato]])
