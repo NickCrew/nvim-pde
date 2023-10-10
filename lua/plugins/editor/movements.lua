@@ -1,5 +1,5 @@
 return {
-  {
+{
     -- Quick movements
     "phaazon/hop.nvim",
     branch = 'v2',

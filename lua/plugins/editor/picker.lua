@@ -112,14 +112,7 @@ return {
       require("telescope").load_extension("file_browser")
     end
   },
-  {
-    lazy = true,
-    "benfowler/telescope-luasnip.nvim",
-    config = function()
-      require("telescope").load_extension("luasnip")
-    end
-  },
-  {
+    {
     lazy = true,
     "nvim-telescope/telescope-ui-select.nvim",
     config = function()

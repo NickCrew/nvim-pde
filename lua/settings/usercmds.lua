@@ -1,6 +1,8 @@
 -- file: after/plugin/usercmds.lua
 -- description: loads commands created by the user last
 --
+local utils = require("utils")
+
 local commands = {
   {
     name = "ReloadLuaFile",
@@ -76,11 +78,6 @@ local commands = {
   }
 }
 
-local function mk_abr_cmd(abr, name, cmd, opts)
-  vim.api.nvim_create_user_command(name, cmd, opts)
-  vim.cmd { cmd = 'cnoreabbrev', args = { abr, cmd } }
-end
-
 for _, e in pairs(commands) do
-  mk_abr_cmd(e.abbrev, e.name, e.command, e.opts)
+  utils.mk_abr_cmd(e.abbrev, e.name, e.command, e.opts)
 end

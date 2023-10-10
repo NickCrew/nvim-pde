@@ -132,23 +132,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
   },
   {
-    "simrat39/rust-tools.nvim",
-    ft = "rs",
-    opts = function()
-      local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.6.7/"
-      local codelldb_path = extension_path .. "adapter/codelldb"
-      local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-      return {
-        dap = {
-          adapter = require("rust-tools.dap").get_codelldb_adapter(
-            codelldb_path,
-            liblldb_path
-          ),
-        },
-      }
-    end
-  },
-  {
     -- Enhance LSP Diagnostics
     "folke/trouble.nvim",
     -- lazy = true,
@@ -208,7 +191,7 @@ return {
   {
     -- LSP Symbol Drawer
     "stevearc/aerial.nvim",
-    dependencies = { "telescope.nvim" },
+    lazy = true,
     config = function()
       require("aerial").setup({
         backends = {

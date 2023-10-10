@@ -16,12 +16,23 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    { import = "plugins.lang"},
-    { import = "plugins.utils"},
+    { import = "plugins.editor" },
+    { import = "plugins.lang" },
+    { import = "plugins.utils" },
     { import = "plugins.ui" },
-    { import = "plugins" }
+    { import = "plugins.coding" },
   }
 }, {
+  profiling = {
+    loader = true,
+    require = true,
+  },
+  checker = {
+    enabled = true
+  },
+  install = {
+    colorscheme = "catppuccin-macchiato"
+  },
   performance = {
     rtp = {
       disabled_plugins = {

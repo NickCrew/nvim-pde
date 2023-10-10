@@ -1,5 +1,5 @@
 
-local icons = require("settings.ui.icons")
+local icons = require("settings._icons")
 
 for type, icon in pairs({
   DapBreakpoint             = icons.dap.normal,

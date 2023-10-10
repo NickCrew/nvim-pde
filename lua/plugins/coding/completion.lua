@@ -1,3 +1,4 @@
+
 return {
   {
     -- Docstring generator
@@ -18,6 +19,7 @@ return {
   {
     -- Completion and Snippets
     "hrsh7th/nvim-cmp",
+    -- lazy = true,
     dependencies = {
       "f3fora/cmp-spell",
       "hrsh7th/cmp-buffer",
@@ -206,6 +208,7 @@ return {
   {
     -- Lua-based snippet engine
     "L3MON4D3/LuaSnip",
+    lazy = true,
     dependencies = {
       {
         "rafamadriz/friendly-snippets",
@@ -213,6 +216,14 @@ return {
           require("luasnip.loaders.from_vscode").lazy_load()
         end
       },
+{
+    lazy = true,
+    "benfowler/telescope-luasnip.nvim",
+    config = function()
+      require("telescope").load_extension("luasnip")
+    end
+  },
+
     },
     opts = {
       history = true,

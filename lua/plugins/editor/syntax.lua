@@ -191,5 +191,20 @@ return {
           a = a,
         })
       end
-  }
+  },
+{
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = true
+  }, 
+  {
+    'echasnovski/mini.bracketed',
+    version = false
+  },
+  {
+    -- Syntax-aware commenting
+    "tpope/vim-commentary",
+    enabled = true,
+  },
+
 }

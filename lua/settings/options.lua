@@ -1,10 +1,12 @@
 -- vim: foldmethod=marker foldmarker={{{,}}}
 
 
---############################--
---          Global
---############################--
+local o = vim.o
 local g = vim.g
+
+--------------------------------
+------- (Global) Vars ----------
+--------------------------------
 
 g.mapleader             = " "
 g.maplocalleader        = "\\"
@@ -16,10 +18,10 @@ g.python3_host_prog     = g.python_bin_dir .. '/python'
 g.cursorhold_updatetime = 100
 
 
---############################--
---        Options
---############################--
-local o = vim.o
+-------------------------------
+---------- Options -------------
+-------------------------------
+
 
 o.directory      = g.nvim_cache .. "/swap"
 o.backupdir      = g.nvim_cache .. "/backup"
@@ -29,6 +31,7 @@ o.backup         = true
 o.swapfile       = false
 o.undofile       = true
 o.undolevels     = 10000
+o.cursorline     = true
 
 o.timeoutlen     = 300
 o.backspace      = "indent,eol,start" -- Traditional backspace behavior
@@ -85,24 +88,6 @@ o.wildignorecase = true
 o.completeopt    = "menu,menuone,noselect"
 o.wildmode       = "longest,list,full"
 o.wildignore     = ".git/**,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**"
-
-
---############################--
---        Diagnostics 
---############################--
-
-vim.diagnostic.config({
-	virtual_text = false,
-	signs = true,
-	update_in_insert = true,
-	underline = true,
-	severity_sort = false,
-	float = {
-		border = "rounded",
-		source = "always",
-	},
-})
-
 
 
 

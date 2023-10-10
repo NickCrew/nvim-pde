@@ -3,7 +3,7 @@ return {
     "stevearc/oil.nvim",
     config = true,
   },
-{
+  {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     lazy = true,

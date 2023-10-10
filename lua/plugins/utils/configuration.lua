@@ -1,5 +1,26 @@
 return {
 {
+    "folke/neoconf.nvim",
+    lazy = true,
+    config = true,
+    enabled = false
+  },
+{
+    -- macos system dark/mode
+    "vimpostor/vim-lumen",
+    lazy = true
+  },
+{
+    "s1n7ax/nvim-window-picker",
+    name = 'window-picker',
+    event = "VeryLazy",
+    version = '2.*',
+    config = true
+  },
+  {
+    "antoinemadec/FixCursorHold.nvim",
+  },
+{
     -- VS Code remote container support
     "chipsenkbeil/distant.nvim",
     lazy = true,

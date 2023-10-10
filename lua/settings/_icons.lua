@@ -48,7 +48,6 @@ return {
     Operator      = "",
     TypeParameter = "",
   },
-
   lsp = {
     buffer                   = " 👀 BUF",
     nvim_lsp                 = " 👐 LSP",
