@@ -44,7 +44,7 @@ return {
     },
     config = function()
       local cmp = require('cmp')
-      local icons = require("settings.ui.icons")
+      local icons = require("settings._icons")
       local lspkind = require("lspkind")
       local luasnip = require("luasnip")
 

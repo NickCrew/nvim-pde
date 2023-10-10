@@ -1,16 +1,12 @@
 return {
-  {
+{
     "folke/lua-dev.nvim",
     ft = { "lua" },
     lazy = true
   },
-  {
+{
     "folke/neodev.nvim",
-    lazy = true,
-    opts = {}
-  },
-  {
-    "folke/neoconf.nvim",
+    ft = { "lua" },
     lazy = true,
     opts = {}
   },
