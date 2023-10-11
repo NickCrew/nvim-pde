@@ -18,13 +18,7 @@ return {
         return require("trouble.providers.telescope").open_selected_with_trouble(...)
       end
 
-      return {
-        defaults = {
-          prompt_prefix = " ",
-          selection_caret = " ",
-          -- open files in the first window that is an actual file.
-          -- use the current window if no other window is available.
-          get_selection_window = function()
+      local get_selected_window = function()
             local wins = vim.api.nvim_list_wins()
             table.insert(wins, 1, vim.api.nvim_get_current_win())
             for _, win in ipairs(wins) do
@@ -34,7 +28,13 @@ return {
               end
             end
             return 0
-          end,
+          end
+
+      return {
+        defaults = {
+          prompt_prefix = "  ",
+          selection_caret = " ",
+          get_selection_window = get_selected_window,
           mappings = {
             i = {
               ["<C-j>"] = actions.move_selection_next,
@@ -57,6 +57,15 @@ return {
               ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
             },
           },
+        },
+        pickers = {
+          find_files = {
+            theme = "dropdown"
+          },
+          buffers = {
+            theme = "dropdown"
+          }
+
         },
         extensions = {
           aerial = {
@@ -91,7 +100,7 @@ return {
     end
   },
   {
-    lazy =true,
+    lazy = true,
     "nvim-telescope/telescope-fzf-native.nvim",
     build = "make",
     config = function()

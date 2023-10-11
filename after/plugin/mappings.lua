@@ -1,5 +1,24 @@
-local wk = require("which-key")
 
+local map = vim.api.nvim_set_keymap
+local bufmap = vim.api.nvim_buf_set_keymap
+
+local opts = { noremap = true, silent = true }
+
+-- Eliminate Dumbness
+map("", "<Space>", "<Nop>", opts)
+map("n", "q:", "<nop>", opts)
+map("n", "Q", "<nop>", opts)
+-- Keep centered
+map("n", "N", "Nzz", opts)
+map("n", "n", "nzz", opts)
+-- Handy Maximized Window Nav
+map("n", "<M-left>", "<C-w>h<C-w>|", opts)
+map("n", "<M-right>", "<C-w>l<C-w>|", opts)
+map("n", "<M-down>", "<C-w>j<C-w>_", opts)
+map("n", "<M-up>", "<C-w>k<C-w>_", opts)
+map("n", "-", "<cmd>Oil<cr>", opts)
+
+local wk = require("which-key")
 wk.register({
     g = {
       name = "+lsp",
@@ -20,6 +39,7 @@ wk.register({
       W = { "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "Workspace Symbol", },
     },
     ["<leader>"] = {
+      a = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
       f = {
         name = "+telescope",
         a = { "<cmd>Telescope aerial<cr>", "Find Symbols", },
@@ -28,6 +48,7 @@ wk.register({
         g = { "<cmd>Telescope live_grep<cr>", "Find String in Files", },
         m = { "<cmd>Telescope marks<cr>", "Find in Marks", },
         r = { "<cmd>Telescope registers<cr>", "Find in Registers", },
+        s = { "<cmd>Telescope luasnip<cr>", "Find Snippet", },
       },
       h = {
         name = "+harpoon",
@@ -41,36 +62,33 @@ wk.register({
       },
       l = {
         name = "+line",
-        a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Show Code Actions", },
+        a = { "<cmd>CodeActionMenu<cr>", "Show Code Actions", },
         b = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle In-Line Blame Text", },
         c = { "<cmd>Gitsigns blame_line<cr>", "Show commit message in floating window", },
         s = { "<cmd>HopLineStart<cr>", "Hop To Start of Line" },
         l = { "<cmd>HopLine<cr>", "Hop To Line" },
         w = { "<cmd>HopWordCurrentLine<cr>", "Hop to Word In Current Line" },
+        o = { "o<esc>", "Insert Line Below" },
+        O = { "O<esc>", "Insert line above" },
       },
+      t = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
       x = {
         name = "+trouble",
+        d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Toggle Document Diagnostics", },
         w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Toggle Workspace Diagnostics", },
         x = { "<cmd>TroubleToggle<cr>", "Toggle All Diagnostics", },
         c = { "<cmd>TroubleClose<CR>", "Close Trouble", },
       },
-      o = { "o<esc>", "Insert Line Below" },
-      O = { "O<esc>", "Insert line above" },
       R = { "<cmd>ReloadLuaFile<cr>", "Reload Lua File" },
-      S = { "<cmd>Telescope luasnip<cr>", "Find Snippet", },
+      T = { "<cmd>Telescope<cr>", "Telescope" },
       U = { "<cmd>lua require('utils').update_theme()<cr>", "Update Theme" },
       ["<tab>"] = { "<cmd>b#<CR>", "Last Focused Buffer", },
       [","] = { "<cmd>noh<CR>", "Turn off search highlighting", },
       ["["] = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "Harpoon Previous", },
       ["]"] = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "Harpoon Next", },
-      ["<leader>"] = {
-        ["-"] = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
-        [";"] = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
-      },
+      ["<leader>"] = {},
     },
     ["<C-g>"] = {},
-    ["<C-a>"] = {},
-    ["<C-t>"] = {},
     ["<C-p>"] = {},
     ["<F1>"] = {},
     ["<F2>"] = {},
@@ -89,3 +107,4 @@ wk.register({
   {
     mode = "n"
   })
+  

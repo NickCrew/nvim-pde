@@ -12,6 +12,14 @@ return {
   {
     "MunifTanjim/nui.nvim",
   },
+  {
+    "echasnovski/mini.bufremove",
+    config = true
+  },
+  {
+    "echasnovski/mini.tabline",
+    config = true,
+  },
 {
     -- Pretty notification windows/popups
     "rcarriga/nvim-notify",
@@ -33,6 +41,7 @@ return {
   {
     -- Better quickfix window
     "kevinhwang91/nvim-bqf",
+    lazy = true,
     ft = "qf",
     config = true
   },

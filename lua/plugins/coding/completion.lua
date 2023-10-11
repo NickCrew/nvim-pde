@@ -1,5 +1,5 @@
 
-return {
+return { 
   {
     -- Docstring generator
     "danymat/neogen",
@@ -115,7 +115,6 @@ return {
               }
             },
           }), { "i", "c" }),
-
           -- invoke completion with only copilot
           ["<C-S-c>"] = cmp.mapping(cmp.mapping.complete({
             config = {
@@ -134,6 +133,7 @@ return {
           { name = 'nvim_lsp_signature_help' },
           { name = "nvim_lsp" },
           { name = "luasnip" },
+          { name = "copilot" },
           { name = "path",                   max_item_count = 10 },
           { name = "treesitter",             max_item_count = 10 },
           { name = "buffer",                 max_item_count = 10 },
