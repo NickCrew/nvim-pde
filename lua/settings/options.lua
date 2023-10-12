@@ -39,7 +39,7 @@ o.errorbells     = false              -- Shut up
 o.magic          = true               -- Give certain characters special meaning with backslash
 o.mouse          = "a"                -- Mouse enabled in all modes
 
-o.foldenable     = true               -- Enable folding
+o.foldenable     = false               -- Enable folding
 o.termguicolors  = true               -- true color support
 o.conceallevel   = 3                  -- Hide * markup for bold and italic
 

@@ -1,4 +1,17 @@
 return {
+{
+    -- Python debugging
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    lazy = true,
+    dependencies = { "mfussenegger/nvim-dap" },
+    config = function()
+      local dap_py = require("dap-python")
+      local py_path = os.getenv("HOME") .. "/.pyenv/versions/debugpy/bin/python"
+      dap_py.setup(py_path)
+      dap_py.test_runner = "pytest"
+    end,
+  },
   {
     "nvim-neotest/neotest",
     lazy = true,

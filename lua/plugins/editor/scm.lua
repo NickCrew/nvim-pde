@@ -8,6 +8,7 @@ return {
   {
     -- Get links to github
     "ruifm/gitlinker.nvim",
+    config = true
   },
   {
     -- Git worktree support
@@ -22,6 +23,7 @@ return {
     "pwntester/octo.nvim",
     cmd = "Octo",
     lazy = true,
+    config = true
   },
   {
     -- git changes in sign column

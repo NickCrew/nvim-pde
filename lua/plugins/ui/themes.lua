@@ -1,14 +1,19 @@
 return {
   { 
     "rose-pine/neovim",
-    name = "rose-pine"
+    name = "rose-pine",
+    config = function()
+      vim.cmd([[colorscheme rose-pine-moon]])
+    end
   },
   {
     "Shatur/neovim-ayu",
+    lazy = true,
     priority = 1000,
   },
   {
     "catppuccin/nvim",
+    lazy = true,
     name = "catppuccin",
     priority = 1000,
     config = function()
@@ -17,6 +22,7 @@ return {
   },
   {
     'folke/tokyonight.nvim',
+    lazy = true,
     priority = 1000,
   },
   {

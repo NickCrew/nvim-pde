@@ -1,5 +1,12 @@
 return {
-  
+{
+  "j-hui/fidget.nvim",
+  tag = "legacy",
+  event = "LspAttach",
+  opts = {
+    -- options
+  },
+},
   {
     -- Schemas
     "b0o/schemastore.nvim",
@@ -122,8 +129,6 @@ return {
     "neovim/nvim-lspconfig",
     lazy = true,
     dependencies = {
-      "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
-      "weilbith/nvim-code-action-menu",
       "ray-x/lsp_signature.nvim",
       "folke/lsp-colors.nvim",
       "nvim-lua/lsp-status.nvim",
@@ -135,6 +140,7 @@ return {
     -- Enhance LSP Diagnostics
     "folke/trouble.nvim",
     -- lazy = true,
+    lazy  = true,
     opts = {
       position = "bottom", -- position of the list can be: bottom, top, left, right
       height = 10, -- height of the trouble list when position is top or bottom
@@ -169,11 +175,11 @@ return {
       },
       indent_lines = true,               -- add an indent guide below the fold icons
       auto_open = false,                 -- automatically open the list when you have diagnostics
-      auto_close = false,                -- automatically close the list when you have no diagnostics
+      auto_close = true,                -- automatically close the list when you have no diagnostics
       auto_preview = true,               -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
       auto_fold = false,                 -- automatically fold a file trouble list at creation
       auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
-      signs = require("settings._icons").diagnostics,
+      signs = require("settings._icons").diagnostics_fancy,
       use_diagnostic_signs = false       -- enabling this will use the signs defined in your lsp client
     },
   },
@@ -252,7 +258,7 @@ return {
         }),
       },
       focus_on_open = true,    -- Focus the floating window when opening it.
-      dismiss_on_move = false, -- Dismiss the floating window when moving the cursor.
+      dismiss_on_move = true, -- Dismiss the floating window when moving the cursor.
       force_close = true,      -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
       bufhidden = "wipe",      -- the bufhidden option to set on the floating window. See :h bufhidden
     }
