@@ -1,3 +1,4 @@
+
 return {
   diagnostics = {
     -- icons / text used for a diagnostic
@@ -47,19 +48,19 @@ return {
     Event         = "",
     Operator      = "",
     TypeParameter = "",
-  },
+  }, 
   lsp = {
-    buffer                   = " 👀 BUF",
-    nvim_lsp                 = " 👐 LSP",
-    nvim_lua                 = " 🌙 LUA ",
-    path                     = " 📁 PATH",
-    luasnip                  = " ✂️  SNIP",
-    treesitter               = " 🌲 TS",
-    rg                       = " 🔍 RG",
-    cmdline                  = " 📢 CMD",
-    dap                      = " 🐛 DAP",
-    cmp_git                  = " ✅ GIT",
-    nvim_lsp_document_symbol = " 📃 DOC"
+    buffer                   = "   ",
+    nvim_lsp                 = "   ",
+    nvim_lua                 = "   ",
+    path                     = "   ",
+    luasnip                  = "   ",
+    treesitter               = "   ",
+    rg                       = "   ",
+    cmdline                  = "   ",
+    dap                      = "   ",
+    cmp_git                  = "   ",
+    nvim_lsp_document_symbol = "   "
   }
 
 

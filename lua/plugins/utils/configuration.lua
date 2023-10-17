@@ -5,11 +5,7 @@ return {
     config = true,
     enabled = false
   },
-{
-    -- macos system dark/mode
-    "vimpostor/vim-lumen",
-    lazy = true
-  },
+
 {
     "s1n7ax/nvim-window-picker",
     name = 'window-picker',

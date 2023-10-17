@@ -1,5 +1,4 @@
-
-return { 
+return {
   {
     -- Docstring generator
     "danymat/neogen",
@@ -26,15 +25,15 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lsp-document-symbol",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-path",
-      "lukas-reineke/cmp-rg",
       "onsails/lspkind-nvim",
-      "petertriho/cmp-git",
       "ray-x/cmp-treesitter",
       "rcarriga/cmp-dap",
       "saadparwaiz1/cmp_luasnip",
+      "petertriho/cmp-git",
+      -- "hrsh7th/cmp-nvim-lsp-signature-help",
+      -- "lukas-reineke/cmp-rg",
       {
         "zbirenbaum/copilot.lua",
         "zbirenbaum/copilot-cmp",
@@ -130,13 +129,13 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         },
         sources = cmp.config.sources({
-          { name = 'nvim_lsp_signature_help' },
+          -- { name = 'nvim_lsp_signature_help' },
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "copilot" },
-          { name = "path",                   max_item_count = 10 },
-          { name = "treesitter",             max_item_count = 10 },
-          { name = "buffer",                 max_item_count = 10 },
+          { name = "path",       max_item_count = 10 },
+          { name = "treesitter", max_item_count = 10 },
+          { name = "buffer",     max_item_count = 10 },
         }, {}),
         experimental = {
           ghost_text = true,
@@ -216,18 +215,57 @@ return {
           require("luasnip.loaders.from_vscode").lazy_load()
         end
       },
-{
-    lazy = true,
-    "benfowler/telescope-luasnip.nvim",
-    config = function()
-      require("telescope").load_extension("luasnip")
-    end
-  },
+      {
+        lazy = true,
+        "benfowler/telescope-luasnip.nvim",
+        config = function()
+          require("telescope").load_extension("luasnip")
+        end
+      },
 
     },
     opts = {
       history = true,
       updateevents = "TextChanged,TextChangedI",
     }
+  },
+  {
+    -- Code refactoring
+    "ThePrimeagen/refactoring.nvim",
+    lazy = true,
+    keys = {
+      {
+        "e",
+        mode = { "v" },
+        " <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>",
+        desc =
+        "Extract Function"
+      },
+      {
+        "f",
+        mode = { "v" },
+        " <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>",
+        desc =
+        "Extract Function To File"
+      },
+      {
+        "v",
+        mode = { "v" },
+        " <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>",
+        desc =
+        "Extract Variable"
+      },
+      {
+        "i",
+        mode = { "v" },
+        " <Esc><Cmd>lua require('refactoring').refactor('Extract Inline Variable')<CR>",
+        desc =
+        "Extract Inline Variable"
+      },
+    },
+    config = function()
+      require("refactoring").setup()
+      require("telescope").load_extension("refactoring")
+    end,
   },
 }

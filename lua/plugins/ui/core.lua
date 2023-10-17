@@ -1,12 +1,17 @@
 return {
-{
+  {
+    -- macos system dark/mode
+    "vimpostor/vim-lumen",
+    lazy = true
+  },
+  {
     -- Dim parts of your code you're not workingon
     "folke/twilight.nvim",
     lazy = true,
     cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
     config = true
   },
- {
+  {
     "RishabhRD/popfix",
   },
   {
@@ -16,7 +21,7 @@ return {
     "echasnovski/mini.bufremove",
     config = true
   },
-{
+  {
     -- Pretty notification windows/popups
     "rcarriga/nvim-notify",
     lazy = true,
@@ -33,10 +38,9 @@ return {
         TRACE = "✎",
       },
     }
-  }, 
+  },
   {
     "VonHeikemen/fine-cmdline.nvim",
     dependencies = "MunifTanjim/nui.nvim",
   },
-  
 }

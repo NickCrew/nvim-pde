@@ -31,7 +31,7 @@ require("lazy").setup({
     enabled = true
   },
   install = {
-    colorscheme = "rose-pine-moon"
+    colorscheme = "rose-pine-dawn"
   },
   performance = {
     rtp = {
