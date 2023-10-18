@@ -1,5 +1,5 @@
 -- plugins.editor.search
---[[ 
+--[[
  - oil
  - spectre
  - telescope
@@ -7,6 +7,24 @@
  - which-key
 --]]
 return {
+  {
+    "mrjones2014/legendary.nvim",
+    version  = "v2.1.0",
+    enabled  = true,
+    lazy     = false,
+    priority = 10000,
+    keys     = {
+      { "<C-p>", "<cmd>Legendary<cr>", desc = "Legendary" },
+    },
+    opts     = {
+      lazy_nvim = {
+        auto_register = true
+      },
+      which_key = {
+        auto_register = true
+      }
+    }
+  },
   {
     "stevearc/oil.nvim",
     config = true,
@@ -102,6 +120,35 @@ return {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown({}),
           },
+          lazy = {
+            -- Optional theme (the extension doesn't set a default theme)
+            theme = "ivy",
+            -- Whether or not to show the icon in the first column
+            show_icon = true,
+            -- Mappings for the actions
+            mappings = {
+              open_in_browser = "<C-o>",
+              open_in_file_browser = "<M-b>",
+              open_in_find_files = "<C-f>",
+              open_in_live_grep = "<C-g>",
+              open_in_terminal = "<C-t>",
+              open_plugins_picker = "<C-b>", -- Works only after having called first another action
+              open_lazy_root_find_files = "<C-r>f",
+              open_lazy_root_live_grep = "<C-r>g",
+            },
+            -- Configuration that will be passed to the window that hosts the terminal
+            -- For more configuration options check 'nvim_open_win()'
+            terminal_opts = {
+              relative = "editor",
+              style = "minimal",
+              border = "rounded",
+              title = "Telescope lazy",
+              title_pos = "center",
+              width = 0.5,
+              height = 0.5,
+            },
+            -- Other telescope configuration options
+          },
         },
       }
     end
@@ -114,66 +161,77 @@ return {
     end
   },
   {
-    lazy = true,
     "nvim-telescope/telescope-dap.nvim",
+    lazy = true,
     config = function()
       require("telescope").load_extension('dap')
     end
   },
   {
-    lazy = true,
     "nvim-telescope/telescope-fzf-native.nvim",
+    lazy = true,
     build = "make",
     config = function()
       require("telescope").load_extension('fzf')
     end
   },
   {
-    lazy = true,
     "LinArcX/telescope-env.nvim",
+    lazy = true,
     config = function()
       require("telescope").load_extension("env")
     end
   },
   {
-    lazy = true,
     "nvim-telescope/telescope-file-browser.nvim",
+    lazy = true,
     config = function()
       require("telescope").load_extension("file_browser")
     end
   },
   {
-    lazy = true,
     "nvim-telescope/telescope-ui-select.nvim",
+    lazy = true,
     config = function()
       require("telescope").load_extension("ui-select")
     end
   },
   {
-    lazy = true,
     "nvim-telescope/telescope-github.nvim",
+    lazy = true,
     config = function()
       require("telescope").load_extension('gh')
     end
   },
   {
-    "mrjones2014/legendary.nvim",
-    version  = "v2.1.0",
-    enabled  = true,
-    lazy     = false,
-    priority = 10000,
-    keys     = {
-      { "<C-p>", "<cmd>Legendary<cr>", desc = "Legendary" },
-    },
-    opts     = {
-      lazy_nvim = {
-        auto_register = true
-      },
-      which_key = {
-        auto_register = true
-      }
-    }
+    "xiyaowong/telescope-emoji.nvim",
+    lazy = true,
+    config = function()
+      require("telescope").load_extension("emoji")
+    end
   },
+  {
+    "ghassan0/telescope-glyph.nvim",
+    lazy = true,
+    config = function()
+      require("telescope").load_extension("glyph")
+    end
+  },
+  {
+    "tsakirist/telescope-lazy.nvim",
+    lazy = true,
+    config = function()
+      require("telescope").load_extension("lazy")
+    end
+  },
+  {
+    lazy = true,
+    "benfowler/telescope-luasnip.nvim",
+    config = function()
+      require("telescope").load_extension("luasnip")
+    end
+  },
+
   {
     "folke/which-key.nvim",
     enabled = true,

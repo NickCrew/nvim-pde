@@ -19,14 +19,6 @@ return {
     }
   },
   {
-    -- Smart Session Management
-    "folke/persistence.nvim",
-    lazy = true,
-    enabled = true,
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    module = "persistence",
-  },
-  {
     "folke/noice.nvim",
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -73,7 +65,6 @@ return {
     config = true
   },
   { -- Language-aware commenting
-    -- Syntax-aware commenting
     "tpope/vim-commentary",
     enabled = true,
   },

@@ -215,14 +215,6 @@ return {
           require("luasnip.loaders.from_vscode").lazy_load()
         end
       },
-      {
-        lazy = true,
-        "benfowler/telescope-luasnip.nvim",
-        config = function()
-          require("telescope").load_extension("luasnip")
-        end
-      },
-
     },
     opts = {
       history = true,

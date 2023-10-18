@@ -3,15 +3,19 @@ return {
   {
   'nvimdev/dashboard-nvim',
   event = 'VimEnter',
-  config = function()
-    require('dashboard').setup {
+  opts = {
     theme = 'hyper',
     config = {
       week_header = {
        enable = true,
       },
       shortcut = {
-        { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+        {
+          desc = '󰊳 Plugins',
+          group = '@property',
+          action = 'Lazy',
+          key = 'p'
+        },
         {
           desc = " Browse",
           action = "Neotree toggle",
@@ -39,8 +43,7 @@ return {
         },
       },
     },
-    }
-  end,
+  },
   dependencies = { {'nvim-tree/nvim-web-devicons'}}
 }
 

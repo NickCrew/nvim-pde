@@ -4,6 +4,7 @@ return {
     "tpope/vim-fugitive",
     lazy = true,
     enabled = true,
+    config  = true
   },
   {
     -- Get links to github
