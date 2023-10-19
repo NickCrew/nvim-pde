@@ -41,7 +41,6 @@ return {
           require("copilot_cmp").setup()
         end
       },
-
     },
     config = function()
       local cmp = require('cmp')
@@ -131,8 +130,8 @@ return {
         sources = cmp.config.sources({
           -- { name = 'nvim_lsp_signature_help' },
           { name = "nvim_lsp" },
-          { name = "luasnip" },
           { name = "copilot" },
+          { name = "luasnip" },
           { name = "path",       max_item_count = 10 },
           { name = "treesitter", max_item_count = 10 },
           { name = "buffer",     max_item_count = 10 },

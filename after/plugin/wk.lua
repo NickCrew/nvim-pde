@@ -2,6 +2,8 @@ local wk = require("which-key")
 wk.register({
     g = {
       name = "+lsp",
+      a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Actions"},
+      d = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Go To Type Definition", },
       k = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
       p = {
         name = "+preview",
@@ -11,7 +13,6 @@ wk.register({
         r = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>", "Preview References", },
       },
       r = { "<cmd>lua vim.lsp.buf.references()<CR>", "Show References", },
-      d = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Go To Type Definition", },
       w = { "<cmd>lua vim.lsp.buf.document_symbol()<CR>", "Document Symbol", },
       D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go To Declaration", },
       I = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Go To Implementation", },
@@ -34,12 +35,22 @@ wk.register({
       },
       g = {
         name = "+git",
-        b = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blame Line", },
-        c = { "<cmd>Gitsigns blame_line<cr>", "Show Commit Message", },
+        B = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blame Line", },
+        b = { "<cmd>Gitsigns blame_line<cr>", "Show Commit Message", },
+        s = {
+          name = "+stage",
+          h = { "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk"},
+          b = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer"},
+          H = { "<cmd>Gitsigns undo_stage_hunk<cr>", "Undo Stage Hunk"},
+        },
+        r = {
+          name = "+reset",
+            h = { "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk"},
+            b = { "<cmd>Gitsigns reset_buffer<cr>", "Reset Buffer"},
+        }
       },
       l = {
         name = "+line",
-        a = { "<cmd>CodeActionMenu<cr>", "Show Code Actions", },
         c = { "<cmd>HopWordCurrentLine<cr>", "Hop to Word In Current Line" },
         l = { "<cmd>HopLine<cr>", "Hop To Line" },
         s = { "<cmd>HopLineStart<cr>", "Hop To Start of Line" },
