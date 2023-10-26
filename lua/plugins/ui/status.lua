@@ -90,10 +90,10 @@ return {
           },
           lualine_x = {
             { "aerial" },
-            { treesitter_source(), cond = conditions.hide_in_width },
           },
           lualine_y = {
             { "filetype",          cond = conditions.buffer_not_empty },
+            { treesitter_source(), cond = conditions.hide_in_width },
           },
           lualine_z = {
             { "location", icon = "" },

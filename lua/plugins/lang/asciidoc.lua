@@ -1,8 +1,8 @@
 return {
   {
-  'tigion/nvim-asciidoc-preview',
-  ft = { 'asciidoc' },
-  lazy = true
-  -- opts = {},
-},
+    'tigion/nvim-asciidoc-preview',
+    ft = { 'asciidoc' },
+    lazy = true,
+    opts = {},
+  }
 }

@@ -1,6 +1,6 @@
 return {
-{ -- Javascript debugging
+  { -- Javascript debugging
     'mxsdev/nvim-dap-vscode-js',
     lazy = true,
-}
+  }
 }

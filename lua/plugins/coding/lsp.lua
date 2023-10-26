@@ -1,5 +1,22 @@
 return {
 {
+    -- Schemas
+    "b0o/schemastore.nvim",
+    enabled = true,
+  },
+  {
+    "mhartington/formatter.nvim"
+  },
+  {
+    "mfussenegger/nvim-lint",
+  },
+  {
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
+    lazy = true
+  },
+
+{
   "j-hui/fidget.nvim",
   tag = "legacy",
   event = "LspAttach",
@@ -140,7 +157,7 @@ return {
     -- Enhance LSP Diagnostics
     "folke/trouble.nvim",
     -- lazy = true,
-    lazy  = true,
+    lazy  = false,
     opts = {
       position = "bottom", -- position of the list can be: bottom, top, left, right
       height = 10, -- height of the trouble list when position is top or bottom

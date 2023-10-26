@@ -16,6 +16,17 @@ return {
     },
   },
   {
+    -- AI code completion
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    enabled = true,
+    lazy = true,
+    opts = {
+      suggestion = { enabled = true },
+      panel = { enabled = false },
+    }
+  },
+  {
     -- Completion and Snippets
     "hrsh7th/nvim-cmp",
     -- lazy = true,
@@ -38,7 +49,6 @@ return {
         "zbirenbaum/copilot.lua",
         "zbirenbaum/copilot-cmp",
         config = function()
-          require("copilot_cmp").setup()
         end
       },
     },
@@ -129,8 +139,8 @@ return {
         },
         sources = cmp.config.sources({
           -- { name = 'nvim_lsp_signature_help' },
-          { name = "nvim_lsp" },
           { name = "copilot" },
+          { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "path",       max_item_count = 10 },
           { name = "treesitter", max_item_count = 10 },
@@ -174,34 +184,6 @@ return {
         })
       })
     end,
-  },
-  {
-    -- AI chatbot
-    "jackMort/ChatGPT.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    enabled = true,
-    lazy = true,
-    cmd = "ChatGPT",
-    config = true
-  },
-  {
-    -- AI code completion
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    enabled = true,
-    lazy = true,
-    opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
-      filetypes = {
-        python = true,
-        ["*"] = false,
-      },
-    }
   },
   {
     -- Lua-based snippet engine
