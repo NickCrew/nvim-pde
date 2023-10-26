@@ -1,8 +1,8 @@
 local wk = require("which-key")
 wk.register({
-    g = {
+  g = {
       name = "+lsp",
-      a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Actions"},
+      a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Actions" },
       d = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Go To Type Definition", },
       k = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
       p = {
@@ -21,6 +21,9 @@ wk.register({
     },
     ["<leader>"] = {
       a = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
+      b = {
+        f = { "<cmd>FormatBuffer<cr>", "Format Buffer" }
+      },
       f = {
         name = "+telescope",
         a = { "<cmd>Telescope aerial<cr>", "Find Symbols", },
@@ -29,7 +32,7 @@ wk.register({
         g = { "<cmd>Telescope live_grep<cr>", "Find String in Files", },
         h = { "<cmd>Telescope harpoon marks<cr>", "Find Harpooned Files", },
         m = { "<cmd>Telescope marks<cr>", "Find in Marks", },
-        o = { "<cmd>Telescope old_files<cr>", "Find Recent Files"},
+        o = { "<cmd>Telescope old_files<cr>", "Find Recent Files" },
         r = { "<cmd>Telescope registers<cr>", "Find in Registers", },
         s = { "<cmd>Telescope luasnip<cr>", "Find Snippet", },
       },
@@ -39,14 +42,14 @@ wk.register({
         b = { "<cmd>Gitsigns blame_line<cr>", "Show Commit Message", },
         s = {
           name = "+stage",
-          h = { "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk"},
-          b = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer"},
-          H = { "<cmd>Gitsigns undo_stage_hunk<cr>", "Undo Stage Hunk"},
+          h = { "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk" },
+          b = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer" },
+          H = { "<cmd>Gitsigns undo_stage_hunk<cr>", "Undo Stage Hunk" },
         },
         r = {
           name = "+reset",
-            h = { "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk"},
-            b = { "<cmd>Gitsigns reset_buffer<cr>", "Reset Buffer"},
+          h = { "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk" },
+          b = { "<cmd>Gitsigns reset_buffer<cr>", "Reset Buffer" },
         }
       },
       l = {
@@ -57,17 +60,17 @@ wk.register({
         o = { "o<esc>", "Insert Line Below" },
         O = { "O<esc>", "Insert line above" },
       },
-      s = { "<cmd>HopChar2<CR>", "Hop 2 Char" },
-      t = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
       x = {
         name = "+trouble",
         d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Toggle Document Diagnostics", },
         w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Toggle Workspace Diagnostics", },
         r = { "<cmd>TroubleToggle lsp_references<cr>", "Toggle LSP References", },
         D = { "<cmd>TroubleToggle lsp_definitions<cr>", "Toggle LSP Definitions", },
-        x = { "<cmd>TroubleToggle<cr>", "Toggle All Diagnostics", },
+        t = { "<cmd>TroubleToggle<cr>", "Toggle All Diagnostics", },
         c = { "<cmd>TroubleClose<CR>", "Close Trouble", },
       },
+      s = { "<cmd>HopChar2<CR>", "Hop 2 Char" },
+      t = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
       R = { "<cmd>ReloadLuaFile<cr>", "Reload Lua File" },
       U = { "<cmd>lua require('utils').update_theme()<cr>", "Update Theme" },
       ["<tab>"] = { "<cmd>b#<CR>", "Last Focused Buffer", },
@@ -88,8 +91,11 @@ wk.register({
       },
     },
     ["<C-g>"] = {},
-    ["<C-p>"] = {},
-    ["<C-s>"] = { "<cmd>w<cr>", "Save"},
+    ["<C-p>"] = {
+      p = { "<cmd>Telescope<cr>", "Open Telescope" },
+    },
+    ["<C-e>"] = { "<cmd>Telescope buffers<cr>", "Find Buffer" },
+    ["<C-s>"] = { "<cmd>w<cr>", "Save" },
     ["<F1>"] = {},
     ["<F2>"] = {},
     ["<F3>"] = { "<cmd>DapVirtualTextForceRefresh<cr>", "Refresh Virtual Text", },

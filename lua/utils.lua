@@ -9,5 +9,10 @@ function M.mk_abr_cmd(abr, name, cmd, opts)
   M.mk_abbrev(abr, cmd)
 end
 
+function M.def_signs(p)
+  for type, icon in p do
+    vim.fn.sign_define(type, { text = icon , texthl = "", numhl = "", linehl = ""} )
+  end
+end
 
 return M

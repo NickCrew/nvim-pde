@@ -207,11 +207,6 @@ return {
     "mfussenegger/nvim-lint",
   },
   {
-    "weilbith/nvim-code-action-menu",
-    cmd = "CodeActionMenu",
-    lazy = true
-  },
-  {
     -- LSP Symbol Drawer
     "stevearc/aerial.nvim",
     lazy = true,

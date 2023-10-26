@@ -23,3 +23,5 @@ for type, icon in pairs({
     linehl = ""
   })
 end
+
+
