@@ -56,7 +56,7 @@ return {
           width = vim.api.nvim_win_get_width(0) - 4,
         },
         global_settings = {
-          tabline = true,
+          tabline = false,
           save_on_toggle = true,
           save_on_change = true,
           enter_on_sendcmd = true,

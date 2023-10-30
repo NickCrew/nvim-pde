@@ -1,10 +1,3 @@
---[[
-- nvim-dap
-- vim-dap-ui
-- nvim-dap-virtual-text
-- nvim-dap-python
-- nvim-dap-go
---]]
 return {
   {
     -- Debug adapter protocol support

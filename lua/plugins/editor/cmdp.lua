@@ -9,6 +9,7 @@ return {
     },
     opts = function()
       local actions = require("telescope.actions")
+      local themes = require("telescope.themes")
 
       local open_with_trouble = function(...)
         return require("trouble.providers.telescope").open_with_trouble(...)
@@ -79,7 +80,16 @@ return {
             case_mode = "smart_case",
           },
           ["ui-select"] = {
-            require("telescope.themes").get_dropdown({}),
+            themes.get_dropdown({}),
+          },
+          frecency = {
+            ignore_patterns = { "*.git/*", "*/tmp/*"},
+            workspaces = {
+              ["work"] = "/Users/nick/Work",
+              ["personal"] = "/Users/nick/Code",
+              ["conf"] = "/Users/nick/.config",
+              ["data"] = "/Users/nick/.local/share"
+            }
           },
           lazy = {
             -- Optional theme (the extension doesn't set a default theme)
@@ -112,6 +122,24 @@ return {
           },
         },
       }
+    end
+  },
+  {
+    "gbprod/yanky.nvim",
+    config = function()
+      require("telescope").load_extension("yank_history")
+    end
+  },
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function()
+      require("telescope").load_extension("frecency")
+    end,
+  },
+  {
+    "nvim-telescope/telescope-github.nvim",
+    config = function()
+      require('telescope').load_extension('gh')
     end
   },
   {
@@ -192,7 +220,7 @@ return {
       require("telescope").load_extension("luasnip")
     end
   },
-{
+  {
     "mrjones2014/legendary.nvim",
     version  = "v2.1.0",
     enabled  = false,

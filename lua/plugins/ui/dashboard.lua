@@ -11,35 +11,29 @@ return {
       },
       shortcut = {
         {
-          desc = '󰊳 Plugins',
+          desc = '󰊳 Plugins',
           group = '@property',
           action = 'Lazy',
           key = 'p'
         },
         {
-          desc = " Browse",
+          desc = " Explorer",
+          group = 'Number',
           action = "Neotree toggle",
-          key = "b"
+          key = "e"
         },
         {
           icon = ' ',
-          icon_hl = '@variable',
           desc = 'Files',
           group = 'Label',
           action = 'Telescope find_files',
           key = 'f',
         },
         {
-          desc = ' Apps',
-          group = 'DiagnosticHint',
-          action = 'Telescope app',
-          key = 'a',
-        },
-        {
-          desc = ' dotfiles',
-          group = 'Number',
-          action = 'Telescope dotfiles',
-          key = 'd',
+          desc = ' Search',
+          action = 'Telescope live_grep',
+          grup = 'DiagnosticHint',
+          key = 'g',
         },
       },
     },

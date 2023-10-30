@@ -24,6 +24,9 @@ wk.register({
       b = {
         f = { "<cmd>FormatBuffer<cr>", "Format Buffer" }
       },
+      e = {
+
+      },
       f = {
         name = "+telescope",
         a = { "<cmd>Telescope aerial<cr>", "Find Symbols", },
@@ -33,7 +36,8 @@ wk.register({
         h = { "<cmd>Telescope harpoon marks<cr>", "Find Harpooned Files", },
         m = { "<cmd>Telescope marks<cr>", "Find in Marks", },
         o = { "<cmd>Telescope old_files<cr>", "Find Recent Files" },
-        r = { "<cmd>Telescope registers<cr>", "Find in Registers", },
+        c = { "<cmd>Telescope registers<cr>", "Find in Registers", },
+        t = { "<cmd>Telescope frecency<cr>", "Find Frecent Files", },
         s = { "<cmd>Telescope luasnip<cr>", "Find Snippet", },
       },
       g = {
