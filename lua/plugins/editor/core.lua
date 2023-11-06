@@ -1,10 +1,3 @@
--- plugins.editor.core
---[[
-- oil
-- neo-tree
-- persistence
-- noice
---]]
 
 return {
   {

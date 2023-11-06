@@ -1,5 +1,8 @@
-local fn = vim.fn
-
+--------------------------------------------------
+-- File: settings.lazy
+-- Sourced Directly By: init.lua
+-- Description: Load plugins using Lazy
+--------------------------------------------------
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -30,7 +33,7 @@ require("lazy").setup({
     enabled = true
   },
   install = {
-    colorscheme = "rose-pine-dawn"
+    colorscheme = "tokyonight"
   },
   performance = {
     rtp = {

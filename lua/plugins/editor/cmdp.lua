@@ -7,9 +7,25 @@ return {
     dependencies = {
       { "nvim-lua/plenary.nvim" },
     },
+    keys = {
+      { "<leader>fa", "<cmd>Telescope aerial<cr>",        desc = "Find Symbols" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>",       desc = "Find Buffer" },
+      { "<leader>fc", "<cmd>Telescope registers<cr>",     desc = "Find in Registers" },
+      { "<leader>ff", "<cmd>Telescope find_files<cr>",    desc = "Find File" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>",     desc = "Find String in Files" },
+      { "<leader>fh", "<cmd>Telescope harpoon marks<cr>", desc = "Find Harpooned Files" },
+      { "<leader>fm", "<cmd>Telescope marks<cr>",         desc = "Find in Marks" },
+      { "<leader>fn", "<cmd>Telescope notify<cr>",        desc = "Find Notification" },
+      { "<leader>fr", "<cmd>Telescope oldfiles<cr>",      desc = "Find Recent Files" },
+      { "<leader>fs", "<cmd>Telescope luasnip<cr>",       desc = "Find Snippet" },
+      { "<leader>ft", "<cmd>Telescope frecency<cr>",      desc = "Find Frecent Files" },
+      { "<leader>fB", "<cmd>Telescope file_browser",      desc = "Find in File Browser" },
+
+    },
     opts = function()
       local actions = require("telescope.actions")
       local themes = require("telescope.themes")
+      local project_actions = require("telescope._extensions.project.actions")
 
       local open_with_trouble = function(...)
         return require("trouble.providers.telescope").open_with_trouble(...)
@@ -34,7 +50,7 @@ return {
       return {
         defaults = {
           prompt_prefix = "  ",
-          selection_caret = " ",
+          selection_caret = "  ",
           get_selection_window = get_selected_window,
           mappings = {
             i = {
@@ -65,6 +81,9 @@ return {
           },
           buffers = {
             theme = "dropdown"
+          },
+          live_grep = {
+            theme = "ivy"
           }
 
         },
@@ -72,7 +91,9 @@ return {
           aerial = {
             show_nesting = true
           },
-          file_browser = {},
+          file_browser = {
+            theme = "dropdown"
+          },
           fzf = {
             fuzzy = false,
             override_generic_sorter = true,
@@ -83,12 +104,13 @@ return {
             themes.get_dropdown({}),
           },
           frecency = {
-            ignore_patterns = { "*.git/*", "*/tmp/*"},
+            db_root = vim.fn.stdpath("data"),
+            ignore_patterns = { "*.git/*", "*/tmp/*" },
             workspaces = {
-              ["work"] = "/Users/nick/Work",
-              ["personal"] = "/Users/nick/Code",
-              ["conf"] = "/Users/nick/.config",
-              ["data"] = "/Users/nick/.local/share"
+              ["work"] = os.getenv("HOME") .. "/Work",
+              ["personal"] = os.getenv('HOME') .. "/Code",
+              ["conf"] = os.getenv('HOME') .. "/.config",
+              ["data"] = os.getenv('HOME') .. "/.local/share"
             }
           },
           lazy = {
@@ -106,6 +128,21 @@ return {
               open_plugins_picker = "<C-b>", -- Works only after having called first another action
               open_lazy_root_find_files = "<C-r>f",
               open_lazy_root_live_grep = "<C-r>g",
+            },
+            project = {
+              base_dirs = {
+                { path = "~/Work", max_depth = 1 },
+                { path = "~/Code", max_depth = 1 }
+              },
+              hidden_files = false,
+              theme = "dropdown",
+              order_by = "asc",
+              search_by = "title",
+              -- on_project_selected = function(prompt_bufnr)
+              --   project_actions.change_working_directory(prompt_bufnr, false)
+              --   require("harpoon.ui").nav_file(1)
+              -- end
+
             },
             -- Configuration that will be passed to the window that hosts the terminal
             -- For more configuration options check 'nvim_open_win()'
@@ -126,12 +163,14 @@ return {
   },
   {
     "gbprod/yanky.nvim",
+    lazy = true,
     config = function()
       require("telescope").load_extension("yank_history")
     end
   },
   {
     "nvim-telescope/telescope-frecency.nvim",
+    lazy = true,
     config = function()
       require("telescope").load_extension("frecency")
     end,
@@ -179,6 +218,13 @@ return {
     end
   },
   {
+    "nvim-telescope/telescope-project.nvim",
+    lazy = true,
+    config = function()
+      require 'telescope'.load_extension('project')
+    end
+  },
+  {
     "nvim-telescope/telescope-ui-select.nvim",
     lazy = true,
     config = function()
@@ -218,6 +264,13 @@ return {
     "benfowler/telescope-luasnip.nvim",
     config = function()
       require("telescope").load_extension("luasnip")
+    end
+  },
+  {
+    "ThePrimeagen/harpoon",
+    lazy = true,
+    config = function()
+      require("telescope").load_extension("harpoon")
     end
   },
   {

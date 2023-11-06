@@ -1,8 +1,13 @@
 return {
-{
+  {
     -- Quick movements
     "phaazon/hop.nvim",
     branch = 'v2',
+    keys = {
+      { "<leader>hc", "<cmd>HopWordCurrentLine<cr>", desc = "Hop to Word In Current Line" },
+      { "<leader>hl", "<cmd>HopLine<cr>",            desc = "Hop To Line" },
+      { "<leader>hs", "<cmd>HopLineStart<cr>",       desc = "Hop To Start of Line" },
+    },
     opts = {
       case_insensitive = true
     }
@@ -48,23 +53,18 @@ return {
     -- Hyperfast project navigation
     "ThePrimeagen/harpoon",
     lazy = true,
-    dependencies = "telescope.nvim",
-    config = function()
-      require("harpoon").setup({
-        -- dynamic width menu
-        menu = {
-          width = vim.api.nvim_win_get_width(0) - 4,
-        },
-        global_settings = {
-          tabline = false,
-          save_on_toggle = true,
-          save_on_change = true,
-          enter_on_sendcmd = true,
-          tmux_autoclose_windows = false,
-          excluded_filetypes = { "harpoon" },
-        },
-      })
-      require("telescope").load_extension("harpoon")
-    end,
+    opts = {
+      menu = {
+        width = vim.api.nvim_win_get_width(0) - 4,
+      },
+      global_settings = {
+        tabline = false,
+        save_on_toggle = true,
+        save_on_change = true,
+        enter_on_sendcmd = true,
+        tmux_autoclose_windows = false,
+        excluded_filetypes = { "harpoon" },
+      },
+    }
   },
 }

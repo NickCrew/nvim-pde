@@ -97,9 +97,6 @@ return {
         "Extract Inline Variable"
       },
     },
-    config = function()
-      require("refactoring").setup()
-      require("telescope").load_extension("refactoring")
-    end,
+    config = true
   },
 }

@@ -4,12 +4,7 @@
 
 local utils = require("utils")
 
--- 
--- Abbreviations
--- 
-utils.mk_abbrev("T", "Telescope")
-
--- 
+--
 -- Commands
 --
 for _, e in pairs({
@@ -37,7 +32,7 @@ for _, e in pairs({
     opts = {},
     abbrev = "Dr"
   },
-{
+  {
     name = "DebugConfigs",
     command = "<cmd>Telescope dap configurations<cr>",
     opts = {},

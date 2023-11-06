@@ -1,4 +1,5 @@
 
+
 return {
   diagnostics = {
     -- icons / text used for a diagnostic
@@ -6,20 +7,20 @@ return {
     warning     = "",
     hint        = "",
     information = "",
-    other       = "﫠"
+    other       = "﫠"
   },
-  diagnostics_fancy = {
+  diagnostics_solid = {
     error       = " ",
     warning     = " ",
     information = " ",
     other       = " ",
   },
   dap = {
-    stopped     = "🔴",
-    normal      = "🟠",
-    conditional = "🔵",
-    rejected    = "⭕",
-    log         = "🔶",
+    stopped     = "",
+    normal      = "",
+    conditional = "",
+    rejected    = "ﰸ",
+    log         = "",
   },
   kind = {
     Text          = "",
@@ -48,20 +49,18 @@ return {
     Event         = "",
     Operator      = "",
     TypeParameter = "",
-  }, 
+  },
   lsp = {
-    buffer                   = "   buf ",
-    nvim_lsp                 = "   lsp ",
-    nvim_lua                 = "   lua ",
-    path                     = "   path",
-    luasnip                  = "   snip",
-    treesitter               = "   tree",
-    rg                       = "   grep",
-    cmdline                  = "   cmd ",
-    dap                      = "   dap ",
-    cmp_git                  = "   git ",
-    nvim_lsp_document_symbol = "   symb"
+    buffer                   = "",
+    nvim_lsp                 = "",
+    nvim_lua                 = "",
+    path                     = "",
+    luasnip                  = "",
+    treesitter               = "",
+    rg                       = "",
+    cmdline                  = "",
+    dap                      = "",
+    cmp_git                  = "",
+    nvim_lsp_document_symbol = ""
   }
-
-
 }

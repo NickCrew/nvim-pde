@@ -1,3 +1,10 @@
+-------------------------------------------------
+-- FIle: utils
+-- Sourced Directly By: -
+-- Description: Helper functions and such
+-------------------------------------------------
+
+
 local M = {}
 
 function M.mk_abbrev(abr, cmd)

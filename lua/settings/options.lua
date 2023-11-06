@@ -1,11 +1,15 @@
--- vim: foldmethod=marker foldmarker={{{,}}}
-
+-------------------------------------------------
+-- File: settings.options
+-- Sourced Directly By: init.lua
+-- Description: Options and Globals
+-------------------------------------------------
 
 local o                 = vim.o
 local g                 = vim.g
 
-------- (Global) Vars ----------
---------------------------------
+-------------------------
+------- Global ----------
+-------------------------
 g.cursorhold_updatetime = 100
 g.mapleader             = " "
 g.maplocalleader        = "\\"
@@ -13,8 +17,9 @@ g.nvim_cache            = os.getenv('HOME') .. "/.cache/nvim"
 g.python3_host_prog     = os.getenv("HOME") .. '/.pyenv/versions/neovim/bin/python'
 
 
----------- Options -------------
--------------------------------
+-------------------------
+-------- Options --------
+-------------------------
 o.autowrite      = true               -- Enable auto write
 o.backspace      = "indent,eol,start" -- Traditional backspace behavior
 o.backup         = true

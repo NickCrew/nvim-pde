@@ -4,7 +4,7 @@ return {
     dependencies = {
       "phaazon/hop.nvim"
     },
-    enabled = false,
+    enabled = true,
   },
   { -- highlight color codes
     "norcalli/nvim-colorizer.lua",

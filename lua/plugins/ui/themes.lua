@@ -1,7 +1,10 @@
 return {
-  { 
+  {
     "rose-pine/neovim",
+    lazy = true,
+    enabled = false,
     name = "rose-pine",
+    priority = 1000,
     config = function()
       require("rose-pine").setup({
         disable_background = false
@@ -16,6 +19,7 @@ return {
   },
   {
     "catppuccin/nvim",
+    enabled = false,
     lazy = true,
     name = "catppuccin",
     priority = 1000,
@@ -25,10 +29,10 @@ return {
   },
   {
     'folke/tokyonight.nvim',
-    lazy = true,
+    lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme tokyonight-storm]])
+      vim.cmd([[colorscheme tokyonight]])
     end
   },
   {
