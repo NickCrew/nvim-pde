@@ -1,5 +1,10 @@
 return {
-
+  {
+    "zeioth/garbage-day.nvim",
+    event = "VeryLazy",
+    opts = {
+    }
+  },
   {
     "williamboman/mason.nvim",
     lazy = false,
@@ -138,7 +143,6 @@ return {
           end, opts)
         end,
       })
-
     end
   },
   {
