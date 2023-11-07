@@ -1,13 +1,12 @@
 
-
 return {
   diagnostics = {
     -- icons / text used for a diagnostic
-    error       = "",
-    warning     = "",
-    hint        = "",
-    information = "",
-    other       = "﫠"
+    error       = " ",
+    warning     = " ",
+    hint        = " ",
+    information = " ",
+    other       = " "
   },
   diagnostics_solid = {
     error       = " ",
@@ -51,16 +50,16 @@ return {
     TypeParameter = "",
   },
   lsp = {
-    buffer                   = "",
-    nvim_lsp                 = "",
-    nvim_lua                 = "",
-    path                     = "",
-    luasnip                  = "",
-    treesitter               = "",
-    rg                       = "",
-    cmdline                  = "",
-    dap                      = "",
-    cmp_git                  = "",
-    nvim_lsp_document_symbol = ""
+    buffer                   = "   BUF ",
+    nvim_lsp                 = "   LSP ",
+    nvim_lua                 = "   LUA ",
+    path                     = " L PATH",
+    luasnip                  = "   SNIP",
+    treesitter               = "   TS  ",
+    rg                       = "   GREP",
+    cmdline                  = "   CMD ",
+    dap                      = "   DAP ",
+    cmp_git                  = "   GIT ",
+    nvim_lsp_document_symbol = "   SYM "
   }
 }

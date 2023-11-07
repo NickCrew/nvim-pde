@@ -1,8 +1,5 @@
 -- after/plugin/dap-exten
 --
--- Customizations for debugging/DAP
-
-local utils = require("utils")
 
 --
 -- Commands
@@ -87,8 +84,6 @@ for _, e in pairs({
     abbrev = "Dps"
   }
 }) do
-  utils.mk_abr_cmd(e.abbrev, e.name, e.command, e.opts)
+  vim.api.nvim_create_user_command(e.name, e.command, e.opts)
+  vim.cmd { cmd = 'cnoreabbrev', args = { e.abbrev, e.command } }
 end
-
-
-

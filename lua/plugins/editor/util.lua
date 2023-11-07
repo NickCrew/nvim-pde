@@ -1,5 +1,9 @@
 return {
   {
+    'willothy/wezterm.nvim',
+    config = true
+  },
+  {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
     config = function()

@@ -1,5 +1,6 @@
 vim.filetype.add({
   pattern = {
+    [ '.adoc']                = 'asciidoc',
     ['.git*']                 = 'gitconfig',
     ['.gitconfig']            = 'gitconfig',
     ['~/.config/git/*']       = 'gitconfig',

@@ -46,74 +46,99 @@ return {
         automatic_installations = true
       })
 
-      local lspconfig = require("lspconfig")
-      local lsp_defaults = lspconfig.util.default_config
+      -- Add additional capabilities supported by nvim-cmp
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      --
-      -- Capabilities
-      --
-      lsp_defaults.capabilities = vim.tbl_deep_extend(
-        'force',
-        lsp_defaults.capabilities,
-        require('cmp_nvim_lsp').default_capabilities()
-      )
-
-      --
-      -- Server Setup
-      --
-      lspconfig.bashls.setup({})
-      lspconfig.dockerls.setup({})
-      lspconfig.jsonls.setup({})
-      lspconfig.remark_ls.setup({})
-      lspconfig.gopls.setup({})
-      lspconfig.taplo.setup({})
-      lspconfig.terraformls.setup({})
-      lspconfig.tsserver.setup({})
-      lspconfig.vimls.setup({})
-
-      -- Lua
-      lspconfig.lua_ls.setup({
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { 'vim' }
-            }
+      local handlers = {
+        -- default
+        function(server_name)
+          require("lspconfig")[server_name].setup {
+            capabilities = capabilities
           }
-        }
-      })
-
-      -- Python
-      lspconfig.pyright.setup({
-        flags = {
-          debounce_text_changes = 300
-        },
-        settings = {
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              diagnosticMode = "openFilesOnly",
-              useLibraryCodeForTypes = true,
-              typeCheckingMode = "basic",
+        end,
+        -- Python
+        ["pyright"] = function()
+          require("lspconfig").pyright.setup({
+            flags = {
+              debounce_text_changes = 300
             },
-          },
-        },
+            settings = {
+              python = {
+                analysis = {
+                  autoSearchPaths = true,
+                  diagnosticMode = "openFilesOnly",
+                  useLibraryCodeForTypes = true,
+                  typeCheckingMode = "basic",
+                },
+              },
+            },
+          })
+        end,
+        --- lua
+        ["lua_ls"] = function()
+          require("lspconfig").lua_ls.setup({
+            settings = {
+              Lua = {
+                diagnostics = {
+                  globals = { 'vim' }
+                }
+              }
+            }
+          })
+        end,
+        -- Ansible
+        ["ansiblels"] = function()
+          require("lspconfig").ansiblels.setup({
+            settings = {
+              ansible = {
+                path = "/usr/local/Homebrew/ansible",
+              },
+              ansibleLint = {
+                enabled = true,
+                path = "/usr/local/Homebrew/ansible-lint"
+              },
+              python = {
+                interpreterPath = "/usr/local/Homebrew/python3"
+              },
+            },
+          })
+        end
+      }
+
+      require("mason-lspconfig").setup_handlers(handlers)
+
+      -- Use LspAttach autocommand to only map the following keys
+
+      -- after the language server attaches to the current buffer
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+        callback = function(ev)
+          -- Enable completion triggered by <c-x><c-o>
+          vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+          -- Buffer local mappings.
+          -- See `:help vim.lsp.*` for documentation on any of the below functions
+          local opts = { buffer = ev.buf }
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+          vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+          vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+          vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+          vim.keymap.set('n', '<space>wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+          end, opts)
+          vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+          vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+          vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+          vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+          vim.keymap.set('n', '<space>f', function()
+            vim.lsp.buf.format { async = true }
+          end, opts)
+        end,
       })
 
-      -- Ansible
-      lspconfig.ansiblels.setup({
-        settings = {
-          ansible = {
-            path = "/usr/local/Homebrew/ansible",
-          },
-          ansibleLint = {
-            enabled = true,
-            path = "/usr/local/Homebrew/ansible-lint"
-          },
-          python = {
-            interpreterPath = "/usr/local/Homebrew/python3"
-          },
-        },
-      })
     end
   },
   {
@@ -174,11 +199,11 @@ return {
       { "<leader>xd", "<cmd>TroubleToggle lsp_definitions<cr>",       desc = "Toggle LSP Definitions", },
       { "<leader>xi", "<cmd>TroubleToggle lsp_implementations<cr>",   desc = "Toggle LSP Implementations", },
       { "<leader>xt", "<cmd>TroubleToggle lsp_type_definitions<cr>",  desc = "Toggle LSP Type Defintiosn", },
-      { "<leader>xx",  "<cmd>TroubleToggle<cr>",                       desc = "Toggle All Diagnostics", },
+      { "<leader>xx", "<cmd>TroubleToggle<cr>",                       desc = "Toggle All Diagnostics", },
     },
     opts = {
       width = 50, -- width of the list when position is left or right
-      position = "bottom",                                                                                                               -- position of the list can be: bottom, top, left, right
+      position = "bottom", -- position of the list can be: bottom, top, left, right
       icons = true, -- use devicons for filenames
       mode = "document_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
       fold_open = "", -- icon used for open folds
