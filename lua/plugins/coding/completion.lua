@@ -15,16 +15,22 @@ return {
       },
     },
   },
+{
+      -- AI code completion
+      "zbirenbaum/copilot.lua",
+      enabled = true,
+      lazy = true,
+      event = "InsertEnter",
+      opts = {
+        suggestion = { enabled = false },
+        panel = { enabled = false }
+      },
+      config = true
+    },
   {
-    -- AI code completion
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    enabled = true,
-    lazy = true,
-    opts = {
-      suggestion = { enabled = true },
-      panel = { enabled = false },
-    }
+    "zbirenbaum/copilot-cmp",
+    after = "copilot.lua",
+    config = true
   },
   {
     -- Completion and Snippets
@@ -43,14 +49,9 @@ return {
       "rcarriga/cmp-dap",
       "saadparwaiz1/cmp_luasnip",
       "petertriho/cmp-git",
+      "lukas-reineke/cmp-rg",
       -- "hrsh7th/cmp-nvim-lsp-signature-help",
-      -- "lukas-reineke/cmp-rg",
-      {
-        "zbirenbaum/copilot.lua",
-        "zbirenbaum/copilot-cmp",
-        config = function()
-        end
-      },
+
     },
     config = function()
       local cmp = require('cmp')
@@ -58,13 +59,19 @@ return {
       local lspkind = require("lspkind")
       local luasnip = require("luasnip")
 
-      local has_words_before = function()
+      local has_words_before_old = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0
             and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
             :sub(col, col)
             :match("%s")
             == nil
+      end
+
+      local has_words_before = function()
+        if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
       end
 
       cmp.setup({
@@ -92,7 +99,9 @@ return {
         },
         mapping = {
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
+            if cmp.visible() and has_words_before() then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            elseif cmp.visible() then
               cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
@@ -137,12 +146,13 @@ return {
           }),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         },
+
         sources = cmp.config.sources({
           -- { name = 'nvim_lsp_signature_help' },
-          { name = "copilot" },
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "path",       max_item_count = 10 },
+          { name = "copilot", group_index = 2},
+          { name = "nvim_lsp",  group_index = 2, max_item_count = 20 },
+          { name = "luasnip", group_index = 2 , max_item_Count = 20 },
+          { name = "path",  group_index = 2, max_item_count = 10 },
           { name = "treesitter", max_item_count = 10 },
           { name = "buffer",     max_item_count = 10 },
         }, {}),
@@ -177,7 +187,7 @@ return {
         },
       })
 
-      -- Git 
+      -- Git
       cmp.setup.filetype({ "gitcommit" }, {
         sources = cmp.config.sources({
           { name = "cmp_git" },
@@ -204,5 +214,4 @@ return {
       updateevents = "TextChanged,TextChangedI",
     }
   },
-  
 }

@@ -29,6 +29,7 @@ return {
   {
     -- git changes in sign column
     "lewis6991/gitsigns.nvim",
+    lazy = false,
     keys = {
       { "<leader>gB",  "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Blame Line" },
       { "<leader>gb",  "<cmd>Gitsigns blame_line<cr>",                desc = "Show Commit Message" },

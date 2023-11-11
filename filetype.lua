@@ -1,6 +1,7 @@
 vim.filetype.add({
   pattern = {
-    [ '.adoc']                = 'asciidoc',
+    ['*.adoc']                = 'asciidoc',
+    ['*.asc']                 = 'asciidoc',
     ['.git*']                 = 'gitconfig',
     ['.gitconfig']            = 'gitconfig',
     ['~/.config/git/*']       = 'gitconfig',
@@ -10,6 +11,10 @@ vim.filetype.add({
     ['roles/**/*.yml']        = 'yaml.ansible',
     ['~/.tmux.conf.d/*.conf'] = 'tmux',
     ['~/.tmux.conf']          = 'tmux',
-    ['*.hcl']                 = 'hcl'
+    ['*.hcl']                 = 'hcl',
+    ['*.tf*']                 = 'hcl',
+    ['*.json.j2']             = 'json',
+    ['Dockerfile-*']          = 'Dockerfile'
+
   }
 })

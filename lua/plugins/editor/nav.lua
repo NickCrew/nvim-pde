@@ -55,7 +55,7 @@ return {
     lazy = true,
     keys = {
         {"<leader><leader>a", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Add Harpoon Mark" },
-        {"<leader><leader>b", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Harpoon Quick Menu" },
+        {"<leader><leader>h", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Harpoon Quick Menu" },
         {"<leader><leader>[", "<cmd>lua require('harpoon.ui').nav_prev()<cr>", desc = "Harpoon Previous" },
         {"<leader><leader>]", "<cmd>lua require('harpoon.ui').nav_next()<cr>", desc = "Harpoon Next" },
         {"<leader><leader>j", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", desc = "Harpoon 1" },

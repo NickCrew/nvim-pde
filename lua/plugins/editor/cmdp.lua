@@ -49,8 +49,19 @@ return {
 
       return {
         defaults = {
+          layout_strategy = "horizontal",
+          layout_config = {
+            vertical = {
+              width = 0.9,
+             prompt_position = "bottom",
+            },
+            horizontal = { 
+              width = 0.8
+
+            }
+          },
           prompt_prefix = "  ",
-          selection_caret = "  ",
+          selection_caret = "   ",
           get_selection_window = get_selected_window,
           mappings = {
             i = {
@@ -83,13 +94,19 @@ return {
             theme = "dropdown"
           },
           live_grep = {
-            theme = "ivy"
+            theme = "dropbown"
+          },
+          marks = {
+            theme = "dropdown"
           }
 
         },
         extensions = {
           aerial = {
             show_nesting = true
+          },
+          harpoon = {
+            theme = "dropdown"
           },
           file_browser = {
             theme = "dropdown"
@@ -226,16 +243,9 @@ return {
   },
   {
     "nvim-telescope/telescope-ui-select.nvim",
-    lazy = true,
+    lazy = false,
     config = function()
       require("telescope").load_extension("ui-select")
-    end
-  },
-  {
-    "nvim-telescope/telescope-github.nvim",
-    lazy = true,
-    config = function()
-      require("telescope").load_extension('gh')
     end
   },
   {

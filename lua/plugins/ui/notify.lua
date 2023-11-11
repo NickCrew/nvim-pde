@@ -12,7 +12,7 @@ return {
     opts = {
       level = "info",
       stages = "fade_in_slide_out",
-      timeout = 1500,
+      timeout = 1000,
       background_colour = "#2E3440",
       icons = {
         ERROR = "",

@@ -20,12 +20,20 @@ wk.register({
   })
 
 wk.register({
-  name = "+quick_toggle",
-  g = { "<cmd>Telescope<cr>", "Open Telescope" },
-  b = { "<cmd>Telescope buffers<cr>", "Find Buffer" },
-  a = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
-  t = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
+  ["<C-g>"] = {
+    name = "+editor",
+    g = { "<cmd>Telescope<cr>", "Open Telescope" },
+    b = { "<cmd>Telescope buffers<cr>", "Find Buffer" },
+    a = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
+    t = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
+
+  },
+  ["<C-p>"] = {
+
+  },
+  ["<C-t"] = {
+
+  },
 }, {
-  prefix = "<C-g>",
   mode = "n"
 })

@@ -50,16 +50,17 @@ return {
     TypeParameter = "",
   },
   lsp = {
-    buffer                   = "   BUF ",
-    nvim_lsp                 = "   LSP ",
-    nvim_lua                 = "   LUA ",
-    path                     = " L PATH",
-    luasnip                  = "   SNIP",
-    treesitter               = "   TS  ",
-    rg                       = "   GREP",
-    cmdline                  = "   CMD ",
-    dap                      = "   DAP ",
-    cmp_git                  = "   GIT ",
-    nvim_lsp_document_symbol = "   SYM "
+    buffer                   = " 📄 BUFF",
+    nvim_lsp                 = " 📚 LSP ",
+    nvim_lua                 = " 🌙 LUA ",
+    path                     = " 📂 PATH",
+    luasnip                  = " ✂️  SNIP",
+    treesitter               = " 🌲 TREE",
+    rg                       = " 🔎 GREP",
+    cmdline                  = " 📣 CMD ",
+    dap                      = " 🐛 DAP ",
+    cmp_git                  = " 🐙 GIT ",
+    copilot                  = " 🤖 COPI",
+    nvim_lsp_document_symbol = " 🔣 SYMB"
   }
 }

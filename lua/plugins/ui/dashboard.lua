@@ -11,7 +11,7 @@ return {
       },
       shortcut = {
         {
-          desc = '󰊳 Plugins',
+          desc = ' Plugins',
           group = '@property',
           action = 'Lazy',
           key = 'p'

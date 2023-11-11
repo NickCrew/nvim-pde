@@ -17,12 +17,6 @@ map("n", "Q", "<nop>", opts)
 map("n", "N", "Nzz", opts)
 map("n", "n", "nzz", opts)
 
--- Handy Maximized Window Nav
-map("n", "<M-left>", "<C-w>h<C-w>|", opts)
-map("n", "<M-right>", "<C-w>l<C-w>|", opts)
-map("n", "<M-down>", "<C-w>j<C-w>_", opts)
-map("n", "<M-up>", "<C-w>k<C-w>_", opts)
-
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", opts)
 map("n", "<C-j>", "<C-w>j", opts)
@@ -53,10 +47,10 @@ map("n", "<C-s>q", "<cmd>wqall<cr>", opts)
 -- Quit all without saving
 map("n", "<C-s>s", "<cmd>!qall<cr>", opts)
 
+
 local mk_abbrev = function(abr, cmd)
   vim.cmd { cmd = 'cnoreabbrev', args = { abr, cmd } }
 end
-
 
 mk_abbrev("W!",   "w!")
 mk_abbrev("W1",   "w!")

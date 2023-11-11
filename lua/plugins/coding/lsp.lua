@@ -197,8 +197,14 @@ return {
     -- lazy = true,
     lazy = false,
     keys = {
-      { "<leader>xD", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Toggle Document Diagnostics", },
-      { "<leader>xW", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Toggle Workspace Diagnostics", },
+      { "<C-g>d", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Toggle Document Diagnostics", },
+      { "<C-g>w", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Toggle Workspace Diagnostics", },
+      { "<C-g>r", "<cmd>TroubleToggle lsp_references<cr>",        desc = "Toggle LSP References", },
+      { "<C-g><C-d>", "<cmd>TroubleToggle lsp_definitions<cr>",       desc = "Toggle LSP Definitions", },
+      { "<C-g><C-g>", "<cmd>TroubleToggle<cr>",                       desc = "Toggle All Diagnostics", },
+
+      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Toggle Document Diagnostics", },
+      { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Toggle Workspace Diagnostics", },
       { "<leader>xr", "<cmd>TroubleToggle lsp_references<cr>",        desc = "Toggle LSP References", },
       { "<leader>xd", "<cmd>TroubleToggle lsp_definitions<cr>",       desc = "Toggle LSP Definitions", },
       { "<leader>xi", "<cmd>TroubleToggle lsp_implementations<cr>",   desc = "Toggle LSP Implementations", },
