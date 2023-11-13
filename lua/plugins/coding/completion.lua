@@ -1,6 +1,7 @@
 return {
   {
     -- Docstring generator
+
     "danymat/neogen",
     cmd = "Neogen",
     lazy = true,
@@ -158,6 +159,10 @@ return {
         }, {}),
         experimental = {
           ghost_text = true,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered()
         },
       })
 

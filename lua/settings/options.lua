@@ -76,3 +76,21 @@ o.wildmode       = "longest,list,full"
 o.winminheight   = 0     -- Allow maximized windows
 o.winminwidth    = 0     -- Allow maximized windows
 o.wrap           = false -- Do not wrap text
+
+
+local _border = "single"
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = _border })
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = _border })
+
+vim.diagnostic.config({
+  underline = true,
+  virtual_text = true,
+  signs = true,
+  update_in_insert = false,
+  float = {
+    header = false,
+    border = 'rounded',
+    focusable = true
+  }
+})
