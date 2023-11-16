@@ -9,10 +9,6 @@ return {
     },
     enabled = true,
     opts = {
-      -- routes = {
-      --     view = "cmdline",
-      --     filter = { event = "msg_showmode"}
-      -- },
       cmdline = {
         enabled = true,
       },
@@ -26,10 +22,23 @@ return {
         progress = {
           enabled = true,
           throttle = 1000 / 100,
+          view = "mini"
         },
         signature = {
           enabled = true,
+          auto_open = {
+            enabled = true,
+            trigger = true,
+            luasnip = true,
+            throttle = 50
+          }
         },
+        hover = {
+          enabled = true,
+          silent = false,
+          view = nil,
+          opts = {}
+      }
       },
       -- you can enable a preset for easier configuration
       presets = {
@@ -140,7 +149,7 @@ return {
         n = { "o", "O" },
       },
     }
-  }, 
+  },
   { -- HIghlight TODO comments
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },

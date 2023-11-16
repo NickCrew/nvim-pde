@@ -92,6 +92,7 @@ return {
           },
           lualine_y = {
             { "filetype",          cond = conditions.buffer_not_empty },
+            { "encoding", },
             { treesitter_source(), cond = conditions.hide_in_width },
           },
           lualine_z = {

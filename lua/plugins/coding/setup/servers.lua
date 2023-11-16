@@ -1,0 +1,17 @@
+return {
+          "ansiblels",
+          "bashls",
+          "dockerls",
+          "gopls",
+          "helm_ls",
+          "jsonls",
+          "lua_ls",
+          "pyright",
+          "remark_ls",
+          "rust_analyzer",
+          "taplo",
+          "terraformls",
+          "tsserver",
+          "vimls",
+          "yamlls",
+        }

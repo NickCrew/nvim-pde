@@ -25,8 +25,6 @@ return {
     opts = function()
       local actions = require("telescope.actions")
       local themes = require("telescope.themes")
-      local project_actions = require("telescope._extensions.project.actions")
-
       local open_with_trouble = function(...)
         return require("trouble.providers.telescope").open_with_trouble(...)
       end
@@ -53,9 +51,9 @@ return {
           layout_config = {
             vertical = {
               width = 0.9,
-             prompt_position = "bottom",
+              prompt_position = "bottom",
             },
-            horizontal = { 
+            horizontal = {
               width = 0.8
 
             }
@@ -90,11 +88,11 @@ return {
           find_files = {
             theme = "dropdown"
           },
-          buffers = {
+          live_grep = {
             theme = "dropdown"
           },
-          live_grep = {
-            theme = "dropbown"
+          buffers = {
+            theme = "dropdown"
           },
           marks = {
             theme = "dropdown"
@@ -146,10 +144,14 @@ return {
               open_lazy_root_find_files = "<C-r>f",
               open_lazy_root_live_grep = "<C-r>g",
             },
+
+            git_diffs = {
+              git_command = { "git", "log", "--oneline", "--decorate", "--all", "." } -- list result
+            },
             project = {
               base_dirs = {
-                { path = "~/Work", max_depth = 1 },
-                { path = "~/Code", max_depth = 1 }
+                { path = "~/Work", max_depth = 2 },
+                { path = "~/Code", max_depth = 2 }
               },
               hidden_files = false,
               theme = "dropdown",
@@ -277,11 +279,41 @@ return {
     end
   },
   {
+    'barrett-ruth/telescope-http.nvim',
+    dependencies = {
+      'savq/paq-nvim'
+    },
+    lazy = true,
+    config = function()
+      require("telescope").load_extension("http")
+    end
+  },
+  {
+    'olacin/telescope-cc.nvim',
+    lazy = true,
+    config = function()
+      require('telescope').load_extension('cc')
+    end
+  },
+  {
     "ThePrimeagen/harpoon",
     lazy = true,
     config = function()
       require("telescope").load_extension("harpoon")
     end
+  },
+  {
+    "paopaol/telescope-git-diffs.nvim",
+    lazy = true,
+    config = function()
+      require("telescope").load_extension("git_diffs")
+    end
+
+  },
+  { 
+    "NickCrew/dash.nvim",
+    build = "make install"
+
   },
   {
     "mrjones2014/legendary.nvim",

@@ -1,6 +1,7 @@
 return {
 {
   "akinsho/bufferline.nvim",
+  enabled = true,
   lazy = true,
   event = "BufEnter",
   keys = {
@@ -25,7 +26,7 @@ return {
       diagnostics = "nvim_lsp",
       always_show_bufferline = true,
       persist_buffer_sort = true,
-      show_tab_indicators = false,
+      show_tab_indicators = true,
       show_close_icon = true,
       separator_style = "slant",
       diagnostics_indicator = function(_, _, diag)

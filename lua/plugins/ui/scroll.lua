@@ -1,26 +1,14 @@
 return {
 {
     "karb94/neoscroll.nvim",
-    config = function()
-      require('neoscroll').setup({
-        easing_function = "quadratic", -- Default easing function
-        -- Set any other options as needed
-      })
-
-      local t    = {}
-      -- Syntax: t[keys] = {function, {function arguments}}
-      -- Use the "sine" easing function
-      t['<C-u>'] = { 'scroll', { '-vim.wo.scroll', 'true', '350', [['sine']] } }
-      t['<C-d>'] = { 'scroll', { 'vim.wo.scroll', 'true', '350', [['sine']] } }
-      -- Use the "circular" easing function
-      t['<C-b>'] = { 'scroll', { '-vim.api.nvim_win_get_height(0)', 'true', '500', [['circular']] } }
-      t['<C-f>'] = { 'scroll', { 'vim.api.nvim_win_get_height(0)', 'true', '500', [['circular']] } }
-      -- When no easing function is provided the default easing function (in this case "quadratic") will be used
-      t['zt']    = { 'zt', { '300' } }
-      t['zz']    = { 'zz', { '300' } }
-      t['zb']    = { 'zb', { '300' } }
-
-      require('neoscroll.config').set_mappings(t)
-    end
+    lazy = true,
+    opts = {
+      easing_funtion = "sine",
+      mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb' },
+      hide_cursor = true,
+      stop_eof = true,
+      respect_scrolloff = false,
+      cursor_scrolls_alone = true,
+    },
   },
 }

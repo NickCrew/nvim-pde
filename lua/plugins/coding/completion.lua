@@ -1,39 +1,5 @@
 return {
   {
-    -- Docstring generator
-
-    "danymat/neogen",
-    cmd = "Neogen",
-    lazy = true,
-    opts = {
-      enabled = true,
-      languages = {
-        python = {
-          template = {
-            annotation_convention = "google_docstrings",
-          },
-        },
-      },
-    },
-  },
-{
-      -- AI code completion
-      "zbirenbaum/copilot.lua",
-      enabled = true,
-      lazy = true,
-      event = "InsertEnter",
-      opts = {
-        suggestion = { enabled = false },
-        panel = { enabled = false }
-      },
-      config = true
-    },
-  {
-    "zbirenbaum/copilot-cmp",
-    after = "copilot.lua",
-    config = true
-  },
-  {
     -- Completion and Snippets
     "hrsh7th/nvim-cmp",
     -- lazy = true,
@@ -60,14 +26,6 @@ return {
       local lspkind = require("lspkind")
       local luasnip = require("luasnip")
 
-      local has_words_before_old = function()
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0
-            and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
-            :sub(col, col)
-            :match("%s")
-            == nil
-      end
 
       local has_words_before = function()
         if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
@@ -100,9 +58,7 @@ return {
         },
         mapping = {
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() and has_words_before() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-            elseif cmp.visible() then
+            if cmp.visible() then
               cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
@@ -201,22 +157,5 @@ return {
         })
       })
     end,
-  },
-  {
-    -- Lua-based snippet engine
-    "L3MON4D3/LuaSnip",
-    lazy = true,
-    dependencies = {
-      {
-        "rafamadriz/friendly-snippets",
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end
-      },
-    },
-    opts = {
-      history = true,
-      updateevents = "TextChanged,TextChangedI",
-    }
-  },
+  }
 }

@@ -5,3 +5,4 @@ require("settings.lazy")
 require("settings.mappings")
 
 
+vim.cmd("colo rose-pine")

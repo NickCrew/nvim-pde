@@ -1,3 +1,4 @@
+-- Custom file type definitions
 vim.filetype.add({
   pattern = {
     ['*.adoc']                = 'asciidoc',
@@ -14,7 +15,8 @@ vim.filetype.add({
     ['*.hcl']                 = 'hcl',
     ['*.tf*']                 = 'hcl',
     ['*.json.j2']             = 'json',
-    ['Dockerfile-*']          = 'Dockerfile'
+    ['Dockerfile-*']          = 'Dockerfile',
+    ['*.template']            = 'json'
 
   }
 })

@@ -5,9 +5,14 @@ return {
   event = 'VimEnter',
   opts = {
     theme = 'hyper',
+    disable_move = true,
+    change_to_vsc_root = true,
     config = {
       week_header = {
        enable = true,
+      },
+      footer = {
+
       },
       shortcut = {
         {

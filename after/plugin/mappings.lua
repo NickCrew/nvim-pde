@@ -28,9 +28,6 @@ wk.register({
     t = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
 
   },
-  ["<C-p>"] = {
-
-  },
   ["<C-t"] = {
 
   },

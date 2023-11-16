@@ -13,6 +13,11 @@ map("", "<Space>", "<Nop>", opts)
 map("n", "q:", "<nop>", opts)
 map("n", "Q", "<nop>", opts)
 
+-- Yank to void buffer
+map("n", "<leader><leader>x", '"_x', opts)
+map("n", "<leader><leader>y", '"_y', opts)
+map("n", "<leader><leader>d", '"_dd', opts)
+
 -- Keep centered
 map("n", "N", "Nzz", opts)
 map("n", "n", "nzz", opts)
