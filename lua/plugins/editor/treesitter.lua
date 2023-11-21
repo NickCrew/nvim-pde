@@ -29,9 +29,12 @@ return {
       require("nvim-dap-repl-highlights").setup()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
-          'dap_repl'
+          'dap_repl',
+          'lua',
+          'rust',
+          'toml'
         },
-        auto_install = false,
+        auto_install = true,
         sync_install = false,
         highlight = {
           enable = true,

@@ -6,6 +6,10 @@ return {
     config = true
   },
   {
+    "stevearc/dressing.nvim",
+    opts = {}
+  },
+  {
     -- Dim parts of your code you're not workingon
     "folke/twilight.nvim",
     lazy = true,

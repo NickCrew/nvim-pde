@@ -4,9 +4,9 @@ return {
     "phaazon/hop.nvim",
     branch = 'v2',
     keys = {
-      { "<leader>hc", "<cmd>HopWordCurrentLine<cr>", desc = "Hop to Word In Current Line" },
-      { "<leader>hl", "<cmd>HopLine<cr>",            desc = "Hop To Line" },
-      { "<leader>hs", "<cmd>HopLineStart<cr>",       desc = "Hop To Start of Line" },
+      { "<leader>lc", "<cmd>HopWordCurrentLine<cr>", desc = "Hop to Word In Current Line" },
+      { "<leader>ll", "<cmd>HopLine<cr>",            desc = "Hop To Line" },
+      { "<leader>ls", "<cmd>HopLineStart<cr>",       desc = "Hop To Start of Line" },
     },
     opts = {
       case_insensitive = true
@@ -61,10 +61,10 @@ return {
         {"<leader><leader>j", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", desc = "Harpoon 1" },
         {"<leader><leader>k", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", desc = "Harpoon 2" },
         {"<leader><leader>l", "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", desc = "Harpoon 3" },
-        {"<leader><leader>;", "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", desc = "Harpoon 4" },
-        {"<leader><leader>s", "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", desc = "Harpoon 6" },
-        {"<leader><leader>d", "<cmd>lua require('harpoon.ui').nav_file(7)<cr>", desc = "Harpoon 7" },
-        {"<leader><leader>f", "<cmd>lua require('harpoon.ui').nav_file(8)<cr>", desc = "Harpoon 8" },
+        {"<leader><leader>;", "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", desc = "Harpoon 4" },
+        {"<leader><leader>s", "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", desc = "Harpoon 5" },
+        {"<leader><leader>d", "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", desc = "Harpoon 6" },
+        {"<leader><leader>f", "<cmd>lua require('harpoon.ui').nav_file(7)<cr>", desc = "Harpoon 7" },
     },
     opts = {
       menu = {
@@ -80,4 +80,5 @@ return {
       },
     }
   },
-}
+    
+  }

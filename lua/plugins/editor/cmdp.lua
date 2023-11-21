@@ -310,7 +310,7 @@ return {
     end
 
   },
-  { 
+  {
     "NickCrew/dash.nvim",
     build = "make install"
 
