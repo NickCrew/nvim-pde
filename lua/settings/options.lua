@@ -4,22 +4,9 @@
 -- Description: Options and Globals
 -------------------------------------------------
 
-local o                 = vim.o
-local g                 = vim.g
+local o = vim.o
+local g = vim.g
 
--------------------------
-------- Global ----------
--------------------------
-g.cursorhold_updatetime = 100
-g.mapleader             = " "
-g.maplocalleader        = "\\"
-g.nvim_cache            = os.getenv('HOME') .. "/.cache/nvim"
-g.python3_host_prog     = os.getenv("HOME") .. '/.pyenv/versions/neovim/bin/python'
-
-
--------------------------
--------- Options --------
--------------------------
 o.autowrite      = true               -- Enable auto write
 o.autoread       = true               -- Read files changed outside of neovim
 o.autoindent     = true               -- Copy indent from current line when starting new
@@ -58,13 +45,13 @@ o.smartcase      = true          -- Case is ignored unless a capital letter is u
 o.smartindent    = true          -- Insert indents automatically
 o.smoothscroll   = true
 o.softtabstop    = 4
-o.splitbelow     = true -- Always open splits below the current window
-o.splitright     = true -- Always open splits to the right of the current window
-o.startofline    = true -- Place cursor at start of line for certain commands e.g. S-g, gg, Ctrl-U, Ctrl-D
+o.splitbelow     = true          -- Always open splits below the current window
+o.splitright     = true          -- Always open splits to the right of the current window
+o.startofline    = true          -- Place cursor at start of line for certain commands e.g. S-g, gg, Ctrl-U, Ctrl-D
 o.swapfile       = true
 o.tabstop        = 4
-o.termguicolors  = true -- true color support
-o.textwidth      = 0    -- Unlimited text width
+o.termguicolors  = true          -- true color support
+o.textwidth      = 0             -- Unlimited text width
 o.timeoutlen     = 300
 o.undodir        = g.nvim_cache .. "/undo"
 o.undofile       = true
@@ -78,19 +65,4 @@ o.winminwidth    = 0     -- Allow maximized windows
 o.wrap           = false -- Do not wrap text
 
 
-local _border = "single"
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = _border })
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = _border })
-
-vim.diagnostic.config({
-  underline = true,
-  virtual_text = true,
-  signs = true,
-  update_in_insert = false,
-  float = {
-    header = false,
-    border = 'rounded',
-    focusable = true
-  }
-})

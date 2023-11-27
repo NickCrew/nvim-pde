@@ -4,7 +4,7 @@ wk.register({
       name = "+user",
       f = {
         name = "+format",
-        b = { "<cmd>FormatBuffer<cr>", "Format Buffer" }
+        b = { "<Cmd>lua vim.lsp.buf.format()<Cr>", "Format Buffer" }
       },
       r = {
         name = "+reload",
@@ -26,6 +26,7 @@ wk.register({
     b = { "<cmd>Telescope buffers<cr>", "Find Buffer" },
     a = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
     t = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
+    d = {"<cmd>Trouble document_dignostics<cr>", "Document Diagnostics"},
 
   },
   ["<C-t"] = {

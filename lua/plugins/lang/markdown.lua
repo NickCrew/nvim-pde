@@ -1,5 +1,9 @@
 return {
-{
+  { "ellisonleao/glow.nvim", lazy = true, 
+  opts = {
+    glow_path =     "/opt/homebrew/bin/glow"
+  }, cmd = "Glow" },
+  {
     -- Live markdown preview
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
@@ -8,7 +12,7 @@ return {
       vim.fn["mkdp#util#install"]()
     end,
   },
-{
+  {
     "epwalsh/obsidian.nvim",
     lazy = true,
     event = {

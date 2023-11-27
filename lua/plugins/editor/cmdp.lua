@@ -47,17 +47,7 @@ return {
 
       return {
         defaults = {
-          layout_strategy = "horizontal",
-          layout_config = {
-            vertical = {
-              width = 0.9,
-              prompt_position = "bottom",
-            },
-            horizontal = {
-              width = 0.8
-
-            }
-          },
+          layout_strategy = "vertical",
           prompt_prefix = "  ",
           selection_caret = "   ",
           get_selection_window = get_selected_window,
@@ -95,7 +85,7 @@ return {
             theme = "dropdown"
           },
           marks = {
-            theme = "dropdown"
+            theme = "cursor"
           }
 
         },

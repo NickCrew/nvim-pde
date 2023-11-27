@@ -1,4 +1,5 @@
 
+
 return {
   diagnostics = {
     -- icons / text used for a diagnostic
@@ -23,7 +24,7 @@ return {
   },
   kind = {
     Text          = "",
-    Copilot       = "",
+    copilot       = "",
     Method        = "",
     Function      = "",
     Constructor   = "",

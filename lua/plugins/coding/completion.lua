@@ -71,8 +71,8 @@ return {
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
+            elseif luasnip.expand_or_jumpable(-1) then
+              luasnip.expand_or_jump(-1)
             else
               fallback()
             end
@@ -103,7 +103,6 @@ return {
           }),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         },
-
         sources = cmp.config.sources({
           -- { name = 'nvim_lsp_signature_help' },
           { name = "copilot", group_index = 2},
@@ -120,6 +119,9 @@ return {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered()
         },
+        sorting = {
+          priority_weight = 2,
+        }
       })
 
       -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
