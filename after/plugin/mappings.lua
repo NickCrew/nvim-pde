@@ -26,7 +26,7 @@ wk.register({
     b = { "<cmd>Telescope buffers<cr>", "Find Buffer" },
     a = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
     t = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
-    d = {"<cmd>Trouble document_dignostics<cr>", "Document Diagnostics"},
+    d = { "<cmd>Trouble document_dignostics<cr>", "Document Diagnostics" },
 
   },
   ["<C-t"] = {

@@ -48,7 +48,7 @@ return {
         desc = "Toggle Flash Search"
       },
     },
-  },
+  }, 
   {
     -- Hyperfast project navigation
     "ThePrimeagen/harpoon",

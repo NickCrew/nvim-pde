@@ -48,6 +48,12 @@ return {
       return {
         defaults = {
           layout_strategy = "vertical",
+          layout_config = {
+            vertical = {
+              mirror = false,
+              width = 0.7
+            },
+          },
           prompt_prefix = "  ",
           selection_caret = "   ",
           get_selection_window = get_selected_window,
@@ -283,6 +289,13 @@ return {
     lazy = true,
     config = function()
       require('telescope').load_extension('cc')
+    end
+  },
+  {
+    "ahmedkhalf/project.nvim",
+    lazy = true,
+    config = function()
+      require 'telescope'.extensions.projects.projects {}
     end
   },
   {
