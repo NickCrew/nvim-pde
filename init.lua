@@ -1,6 +1,5 @@
 -- init.lua
 
-require("settings.global")
 require("settings.autocmds")
 require("settings.options")
 require("settings.lazy")

@@ -5,6 +5,7 @@ return {
     -- lazy = true,
     dependencies = {
       "f3fora/cmp-spell",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lsp",
@@ -46,7 +47,7 @@ return {
         formatting = {
           format = lspkind.cmp_format({
             mode = "symbol_text",
-            maxwidth = 75,
+            maxwidth = 85,
             preset = "codicons",
             symbol_map = icons.kind,
             before = function(entry, vim_item)
@@ -85,7 +86,7 @@ return {
             config = {
               sources = {
                 {
-                  name = 'luasnip' }
+                  name = 'nvim_lsp_signature_help' }
               }
             },
           }), { "i", "c" }),
@@ -103,12 +104,12 @@ return {
           }),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         },
+
         sources = cmp.config.sources({
-          -- { name = 'nvim_lsp_signature_help' },
-          { name = "copilot", group_index = 2},
-          { name = "nvim_lsp",  group_index = 2, max_item_count = 20 },
-          { name = "luasnip", group_index = 2 , max_item_Count = 20 },
-          { name = "path",  group_index = 2, max_item_count = 10 },
+          { name = "copilot",    group_index = 1, priority = 100 },
+          { name = "nvim_lsp",   group_index = 2, max_item_count = 20, priority = 200 },
+          { name = "luasnip",    group_index = 2, max_item_Count = 20 },
+          { name = "path",       group_index = 2, max_item_count = 10 },
           { name = "treesitter", max_item_count = 10 },
           { name = "buffer",     max_item_count = 10 },
         }, {}),
@@ -159,5 +160,59 @@ return {
         })
       })
     end,
-  }
+  },
+  {
+    -- Lua-based snippet engine
+    "L3MON4D3/LuaSnip",
+    lazy = true,
+    dependencies = {
+      {
+        "rafamadriz/friendly-snippets",
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+        end
+      },
+    },
+    opts = {
+      history = true,
+      updateevents = "TextChanged,TextChangedI",
+    }
+  },
+  {
+    -- Docstring generator
+
+    "danymat/neogen",
+    cmd = "Neogen",
+    lazy = true,
+    opts = {
+      enabled = true,
+      languages = {
+        python = {
+          template = {
+            annotation_convention = "google_docstrings",
+          },
+        },
+      },
+    },
+  },
+  {
+    -- AI code completion
+    "zbirenbaum/copilot.lua",
+    enabled = true,
+    lazy = true,
+    event = "InsertEnter",
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+      fieltypes = {
+        markdown = true,
+        help = true
+      }
+    },
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    after = "copilot.lua",
+    config = true
+  },
 }

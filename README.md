@@ -21,12 +21,8 @@ Table of Contents
             * [Debuggers (DAP)](#dap)
             * [Formatters](#formatters)
             * [Linters](#linters)
-
 ---
 
-## Capabilities
-
-What can it do?
 
 
 ### Language Support

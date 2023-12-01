@@ -314,11 +314,6 @@ return {
 
   },
   {
-    "NickCrew/dash.nvim",
-    build = "make install"
-
-  },
-  {
     "mrjones2014/legendary.nvim",
     version  = "v2.1.0",
     enabled  = false,

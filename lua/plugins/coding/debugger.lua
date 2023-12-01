@@ -1,3 +1,4 @@
+-- Deubgger configuration
 return {
   {
     -- Debug adapter protocol support

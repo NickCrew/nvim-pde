@@ -1,4 +1,3 @@
-
 return {
   {
     "folke/noice.nvim",
@@ -38,7 +37,7 @@ return {
           silent = false,
           view = nil,
           opts = {}
-      }
+        }
       },
       -- you can enable a preset for easier configuration
       presets = {
@@ -158,5 +157,26 @@ return {
   { -- Language-aware commenting
     "tpope/vim-commentary",
     enabled = true,
+  },
+  {
+    'willothy/wezterm.nvim',
+    config = true
+  },
+  {
+    "dstein64/vim-startuptime",
+    cmd = "StartupTime",
+    config = function()
+      vim.g.startuptime_tries = 10
+    end,
+  },
+  {
+    "s1n7ax/nvim-window-picker",
+    name = 'window-picker',
+    event = "VeryLazy",
+    version = '2.*',
+    config = true
+  },
+  {
+    "antoinemadec/FixCursorHold.nvim",
   },
 }
