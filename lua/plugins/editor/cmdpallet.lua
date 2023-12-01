@@ -50,6 +50,7 @@ return {
           layout_strategy = "vertical",
           layout_config = {
             vertical = {
+              prompt_position = "top",
               mirror = false,
               width = 0.7
             },
@@ -82,9 +83,6 @@ return {
         },
         pickers = {
           find_files = {
-            theme = "dropdown"
-          },
-          live_grep = {
             theme = "dropdown"
           },
           buffers = {

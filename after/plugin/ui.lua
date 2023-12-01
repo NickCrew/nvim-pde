@@ -1,6 +1,12 @@
+-- after/plugin/ui.lua
+--
+-- These are UI changes that must take place after all plugins
+-- are loaded. (e.g., Diagnostics, signs, highlights, etc.)
+--
 
 
 -- Diagnostics
+--
 local lsp = vim.lsp
 local _border = "single"
 
@@ -17,6 +23,7 @@ vim.diagnostic.config({
 })
 
 -- LSP Handlers
+--
 lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
   border = _border })
 lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
@@ -24,6 +31,7 @@ lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_hel
   local icons = require("settings._icons")
 
 -- Signs
+--
 for type, icon in pairs({
   -- DAP
   DapBreakpoint             = icons.dap.normal,
@@ -48,12 +56,8 @@ for type, icon in pairs({
 end
 
 -- Kind
+--
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
 
 
--- Abbreviations
-local mk_abbrev = require("settings._util").npde_mk_abbrev
 
-mk_abbrev("T", "Telescope ")
-mk_abbrev("Lr", "Lazy reload ")
-mk_abbrev("Ws", "WeztermSpawn ")

@@ -4,8 +4,17 @@
 -- Description: Options and Globals
 -------------------------------------------------
 
+
 local o = vim.o
 local g = vim.g
+
+-------------------[ GLOBAL ]----------------------
+g.mapleader = " "
+g.maplocalleader = "\\"
+g.cursorhold_updatetime = 100
+g.nvim_cache            = os.getenv('HOME') .. "/.cache/nvim"
+g.python3_host_prog     = os.getenv("HOME") .. '/.pyenv/versions/neovim/bin/python'
+---------------------------------------------------
 
 o.autowrite      = true               -- Enable auto write
 o.autoread       = true               -- Read files changed outside of neovim
