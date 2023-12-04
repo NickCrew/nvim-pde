@@ -23,7 +23,7 @@ update: ## Update Neovim nightly
 	@tar xvzf $(download_path) -C $(install_path)
 	@rm -rvf $(download_path)
 	@echo "\n🔗 Creating symlink ..."
-	@cd $(bin_path) && ln -sfv ../../opt/nvim-macos/bin/nvim nvim-nightly
+	@cd $(bin_path) && ln -sfv ../../opt/nvim-macos/bin/nvim nvim-nightly;
 	@echo "\n✅ Installed Neovim nightly!"
 
 

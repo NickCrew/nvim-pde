@@ -61,7 +61,7 @@ return {
     "echasnovski/mini.pairs",
     event = "VeryLazy",
     opts = {},
-    enabled = false,
+    enabled = true,
   },
   {
     "echasnovski/mini.surround",

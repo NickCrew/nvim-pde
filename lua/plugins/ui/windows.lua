@@ -128,8 +128,6 @@ return {
     lazy = true,
     config = true
   },
-  {
     -- amongst your other plugins
-    { 'akinsho/toggleterm.nvim', version = "*", config = true, lazy = true },
-  }
+    { 'akinsho/toggleterm.nvim', version = "*", config = true},
 }
