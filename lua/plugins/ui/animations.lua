@@ -23,6 +23,7 @@ return {
       },
     }
   },
+{ 'echasnovski/mini.animate', version = false },
 {
     "karb94/neoscroll.nvim",
     lazy = true,

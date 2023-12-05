@@ -1,5 +1,5 @@
 
--- local ol = vim.opt_local
+local ol = vim.opt_local
 
 -- ol.localmapleader = ','
 -- ol.foldmethod = "indent"
@@ -11,4 +11,4 @@
 -- ol.tabstop = 4
 -- ol.softtabstop = 4
 -- ol.shiftwdth = 4
--- ol.expandtab = true
+ ol.expandtab = true

@@ -1,24 +1,27 @@
-local mk_abbrev = function(abr, cmd)
-  vim.cmd { cmd = 'cnoreabbrev', args = { abr, cmd } }
-end
 
-mk_abbrev("W!",   "w!")
-mk_abbrev("W1",   "w!")
-mk_abbrev("w1",   "w!")
-mk_abbrev("Q!",   "q!")
-mk_abbrev("Q1",   "q!")
-mk_abbrev("q1",   "q!")
-mk_abbrev("Qa",   "! qa!")
-mk_abbrev("Qall", "! qall!")
-mk_abbrev("Wa",   " wa")
-mk_abbrev("Wq",   " wq")
-mk_abbrev("wQ",   " wq")
-mk_abbrev("WQ",   " wq")
-mk_abbrev("wq1",  " wq!")
-mk_abbrev("Wq1",  " wq!")
-mk_abbrev("wQ1",  " wq!")
-mk_abbrev("WQ1",  " wq!")
-mk_abbrev("W",    "w")
-mk_abbrev("Q",    "q")
-mk_abbrev("Qa",   "qa")
-mk_abbrev("Qall", "qall")
+local abbrevs = {
+  { "W!",   "w!" },
+  { "W1",   "w!" },
+  { "w1",   "w!" },
+  { "Q!",   "q!" },
+  { "Q1",   "q!" },
+  { "q1",   "q!" },
+  { "Qa",   "! qa!" },
+  { "Qall", "! qall!" },
+  { "Wa",   " wa" },
+  { "Wq",   " wq" },
+  { "wQ",   " wq" },
+  { "WQ",   " wq" },
+  { "wq1",  " wq!" },
+  { "Wq1",  " wq!" },
+  { "wQ1",  " wq!" },
+  { "WQ1",  " wq!" },
+  { "W",    "w" },
+  { "Q",    "q" },
+  { "Qa",   "qa" },
+  { "Qall", "qall" },
+}
+
+for abr, cmd in pairs(abbrevs) do
+  require("settings._util").npde_mk_abbrev(abr, cmd)
+end

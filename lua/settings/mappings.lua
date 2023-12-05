@@ -4,8 +4,6 @@
 -- Description: Core mappings, non-which-key, non-lazy etc.
 --------------------------------------------------
 
-require("settings._abbrev")
-
 local map = vim.api.nvim_set_keymap
 
 local opts = { noremap = true, silent = true }
