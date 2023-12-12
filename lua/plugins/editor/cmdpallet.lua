@@ -47,12 +47,16 @@ return {
 
       return {
         defaults = {
-          layout_strategy = "vertical",
+          layout_strategy = "horizontal",
           layout_config = {
             vertical = {
               prompt_position = "top",
               mirror = false,
-              width = 0.7
+              width = 0.6
+            },
+            horizontal = {
+              width = 0.7,
+              height = 0.7
             },
           },
           prompt_prefix = "  ",
@@ -82,6 +86,12 @@ return {
           },
         },
         pickers = {
+          command_history = {
+            theme = "dropdown"
+          },
+          harpoon = {
+            theme = "dropdown"
+          },
           find_files = {
             theme = "dropdown"
           },
@@ -96,9 +106,6 @@ return {
         extensions = {
           aerial = {
             show_nesting = true
-          },
-          harpoon = {
-            theme = "dropdown"
           },
           file_browser = {
             theme = "dropdown"

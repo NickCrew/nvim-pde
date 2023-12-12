@@ -46,13 +46,13 @@ return {
       { "<C-g><C-d>", "<cmd>TroubleToggle lsp_definitions<cr>",       desc = "Toggle LSP Definitions", },
       { "<C-g><C-g>", "<cmd>TroubleToggle<cr>",                       desc = "Toggle All Diagnostics", },
 
-      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Toggle Document Diagnostics", },
-      { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Toggle Workspace Diagnostics", },
-      { "<leader>xr", "<cmd>TroubleToggle lsp_references<cr>",        desc = "Toggle LSP References", },
-      { "<leader>xd", "<cmd>TroubleToggle lsp_definitions<cr>",       desc = "Toggle LSP Definitions", },
-      { "<leader>xi", "<cmd>TroubleToggle lsp_implementations<cr>",   desc = "Toggle LSP Implementations", },
-      { "<leader>xt", "<cmd>TroubleToggle lsp_type_definitions<cr>",  desc = "Toggle LSP Type Defintiosn", },
-      { "<leader>xx", "<cmd>TroubleToggle<cr>",                       desc = "Toggle All Diagnostics", },
+      { "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Toggle Document Diagnostics", },
+      { "<leader>wd", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Toggle Workspace Diagnostics", },
+      { "<leader>gr", "<cmd>TroubleToggle lsp_references<cr>",        desc = "Toggle LSP References", },
+      { "<leader>gd", "<cmd>TroubleToggle lsp_definitions<cr>",       desc = "Toggle LSP Definitions", },
+      { "<leader>gi", "<cmd>TroubleToggle lsp_implementations<cr>",   desc = "Toggle LSP Implementations", },
+      { "<leader>gt", "<cmd>TroubleToggle lsp_type_definitions<cr>",  desc = "Toggle LSP Type Defintiosn", },
+      { "<leader>gg", "<cmd>TroubleToggle<cr>",                       desc = "Toggle All Diagnostics", },
     },
     opts = {
       width = 50, -- width of the list when position is left or right
@@ -90,7 +90,7 @@ return {
       auto_close = true,                 -- automatically close the list when you have no diagnostics
       auto_preview = true,               -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
       auto_fold = false,                 -- automatically fold a file trouble list at creation
-      auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
+      auto_jump = { "lsp_definitions", "lsp_references" }, -- for the given modes, automatically jump if there is only a single result
       signs = require("settings._icons").diagnostics_solid,
       use_diagnostic_signs = false       -- enabling this will use the signs defined in your lsp client
     },

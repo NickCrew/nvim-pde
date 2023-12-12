@@ -56,6 +56,7 @@ return {
       -- LUALINE CONFIG
       return {
         options = {
+          global_status = true,
           theme = "auto",
           icons_enabled = true,
           disabled_filetypes = {},

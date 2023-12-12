@@ -40,6 +40,7 @@ return {
         bottom = {
           -- toggleterm / lazyterm at the bottom with a height of 40% of the screen
           {
+            title = "Terminal",
             ft = "toggleterm",
             size = { height = 0.4 },
             -- exclude floating windows
@@ -63,7 +64,7 @@ return {
             end,
           },
           "Trouble",
-          { ft = "qf",            title = "QuickFix" },
+          { ft = "qf", title = "QuickFix" },
           {
             ft = "help",
             size = { height = 20 },
@@ -80,12 +81,16 @@ return {
               return vim.bo[buf].buftype == "help"
             end,
           },
-          { ft = "spectre_panel", size = { height = 0.4 } },
+          {
+            title = "Find & Replace",
+            ft = "spectre_panel",
+            size = { height = 0.4 }
+          },
         },
         left = {
           -- Neo-tree filesystem always takes half the screen height
           {
-            title = "Neo-Tree",
+            title = "Browse",
             ft = "neo-tree",
             filter = function(buf)
               return vim.b[buf].neo_tree_source == "filesystem"
@@ -93,7 +98,7 @@ return {
             size = { height = 0.5 },
           },
           {
-            title = "Neo-Tree Git",
+            title = "Source Control",
             ft = "neo-tree",
             filter = function(buf)
               return vim.b[buf].neo_tree_source == "git_status"
@@ -102,7 +107,7 @@ return {
             open = "Neotree position=right git_status",
           },
           {
-            title = "Neo-Tree Buffers",
+            title = "Buffers",
             ft = "neo-tree",
             filter = function(buf)
               return vim.b[buf].neo_tree_source == "buffers"
@@ -111,9 +116,9 @@ return {
             open = "Neotree position=top buffers",
           },
           {
-            ft = "Outline",
+            ft = "Symbols",
             pinned = true,
-            open = "SmybolsOutline",
+            open = "SmybolsOutlineOpen",
           },
           -- any other neo-tree windows
           "neo-tree",
@@ -128,6 +133,6 @@ return {
     lazy = true,
     config = true
   },
-    -- amongst your other plugins
-    { 'akinsho/toggleterm.nvim', version = "*", config = true},
+  -- amongst your other plugins
+  { 'akinsho/toggleterm.nvim', version = "*", config = true },
 }

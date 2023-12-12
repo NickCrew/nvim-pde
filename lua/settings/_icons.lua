@@ -1,4 +1,32 @@
 
+local lsp_emoji = {
+    buffer                   = " 📄 BUFF",
+    nvim_lsp                 = " 📚 LSP ",
+    nvim_lua                 = " 🌙 LUA ",
+    path                     = " 📂 PATH",
+    luasnip                  = " ✂️  SNIP",
+    treesitter               = " 🌲 TREE",
+    rg                       = " 🔎 GREP",
+    cmdline                  = " 📣 CMD ",
+    dap                      = " 🐛 DAP ",
+    cmp_git                  = " 🐙 GIT ",
+    copilot                  = " 🤖 COPI",
+    nvim_lsp_document_symbol = " 🔣 SYMB"
+  }
+local lsp_plain = {
+    buffer                   = "  ",
+    nvim_lsp                 = "  ",
+    nvim_lua                 = "  ",
+    path                     = "  ",
+    luasnip                  = "  ",
+    treesitter               = "  ",
+    rg                       = "  ",
+    cmdline                  = "  ",
+    dap                      = "  ",
+    cmp_git                  = "  ",
+    copilot                  = "  ",
+    nvim_lsp_document_symbol = "  "
+  }
 
 return {
   diagnostics = {
@@ -50,18 +78,5 @@ return {
     Operator      = "",
     TypeParameter = "",
   },
-  lsp = {
-    buffer                   = " 📄 BUFF",
-    nvim_lsp                 = " 📚 LSP ",
-    nvim_lua                 = " 🌙 LUA ",
-    path                     = " 📂 PATH",
-    luasnip                  = " ✂️  SNIP",
-    treesitter               = " 🌲 TREE",
-    rg                       = " 🔎 GREP",
-    cmdline                  = " 📣 CMD ",
-    dap                      = " 🐛 DAP ",
-    cmp_git                  = " 🐙 GIT ",
-    copilot                  = " 🤖 COPI",
-    nvim_lsp_document_symbol = " 🔣 SYMB"
-  }
+  lsp = lsp_plain,
 }
