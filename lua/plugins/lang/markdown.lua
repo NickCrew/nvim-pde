@@ -1,8 +1,12 @@
 return {
-  { "ellisonleao/glow.nvim", lazy = true, 
-  opts = {
-    glow_path =     "/opt/homebrew/bin/glow"
-  }, cmd = "Glow" },
+  {
+    "ellisonleao/glow.nvim",
+    lazy = true,
+    opts = {
+      glow_path = "/opt/homebrew/bin/glow"
+    },
+    cmd = "Glow"
+  },
   {
     -- Live markdown preview
     "iamcco/markdown-preview.nvim",

@@ -26,12 +26,13 @@ return {
   },
   {
     "mhartington/formatter.nvim",
-    enabled = false,
     lazy = true,
+    enabled = false
   },
   {
     "mfussenegger/nvim-lint",
-    lazy = true
+    lazy = true,
+    enabled = false
   },
   {
     -- Schemas

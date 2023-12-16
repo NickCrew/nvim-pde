@@ -33,7 +33,7 @@ require("lazy").setup({
     enabled = true
   },
   install = {
-    colorscheme = "tokyonight"
+    colorscheme = "catppuccin"
   },
   performance = {
     rtp = {

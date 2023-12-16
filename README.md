@@ -27,13 +27,7 @@ Table of Contents
 
 ### Language Support
 
-Currently, this config has the best support for __Python__. (Debugging, Linting, etc. is all configured.)
-
-I also write a lot of YAML, Ansible, Markdown, AsciiDoc, Shell, and Lua.
-
-Full list of packages as of *__Nov. 10, 2023__*:
-
-#### LSP
+#### LSPs
 ````
 ✓ ansible-language-server ansiblels
 ✓ bash-language-server bashls
@@ -53,7 +47,7 @@ Full list of packages as of *__Nov. 10, 2023__*:
 ✓ yaml-language-server yamlls
 ````
 
-#### DAP
+#### Debug Adapters
 ````
 ✓ bash-debug-adapter
 ✓ codelldb

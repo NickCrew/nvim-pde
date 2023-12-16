@@ -1,9 +1,10 @@
+local prefs = require("plugins.prefs")
 return {
 
   {
     "folke/edgy.nvim",
     lazy = true,
-    event = "VeryLazy",
+    enaled = prefs.sidebar.enabled,
     init = function()
       vim.opt.laststatus = 3
       vim.opt.splitkeep = "screen"
@@ -63,7 +64,7 @@ return {
               return not vim.b[buf].lazyterm_cmd
             end,
           },
-          "Trouble",
+          {"Trouble", title = "Problems"},
           { ft = "qf", title = "QuickFix" },
           {
             ft = "help",
@@ -88,14 +89,13 @@ return {
           },
         },
         left = {
-          -- Neo-tree filesystem always takes half the screen height
           {
             title = "Browse",
             ft = "neo-tree",
             filter = function(buf)
               return vim.b[buf].neo_tree_source == "filesystem"
             end,
-            size = { height = 0.5 },
+            size = { height = 0.4 },
           },
           {
             title = "Source Control",
@@ -116,9 +116,9 @@ return {
             open = "Neotree position=top buffers",
           },
           {
-            ft = "Symbols",
+            ft = "Outline",
             pinned = true,
-            open = "SmybolsOutlineOpen",
+            open = "SymbolsOutline",
           },
           -- any other neo-tree windows
           "neo-tree",
@@ -128,11 +128,18 @@ return {
   },
   {
     "simrat39/symbols-outline.nvim",
-    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-    cmd = "SymbolsOutline",
+    keys = {
+      { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" }
+    },
+    cmd = {"SymbolsOutline", "SymbolsOutlineOpen"},
     lazy = true,
     config = true
   },
   -- amongst your other plugins
-  { 'akinsho/toggleterm.nvim', version = "*", config = true },
+  {
+    'akinsho/toggleterm.nvim',
+    cmd = "ToggleTerm",
+    version = "*",
+    config = true
+  },
 }

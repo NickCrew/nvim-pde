@@ -18,7 +18,6 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "petertriho/cmp-git",
       "lukas-reineke/cmp-rg",
-      -- "hrsh7th/cmp-nvim-lsp-signature-help",
 
     },
     config = function()
@@ -52,7 +51,7 @@ return {
             symbol_map = icons.kind,
             before = function(entry, vim_item)
               vim_item.kind = lspkind.presets.default[vim_item.kind]
-              vim_item.menu = icons.lsp[entry.source.name]
+              vim_item.menu = icons.lsp.emoji[entry.source.name]
               return vim_item
             end,
           }),
@@ -82,21 +81,13 @@ return {
           ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
           ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
           -- invoke completion with only snippets
-          ["<C-S-s>"] = cmp.mapping(cmp.mapping.complete({
+          ["<C-S-Space>"] = cmp.mapping(cmp.mapping.complete({
             config = {
               sources = {
                 {
                   name = 'nvim_lsp_signature_help' }
               }
             },
-          }), { "i", "c" }),
-          -- invoke completion with only copilot
-          ["<C-S-c>"] = cmp.mapping(cmp.mapping.complete({
-            config = {
-              sources = {
-                name = 'copilot'
-              }
-            }
           }), { "i", "c" }),
           ["<C-q>"] = cmp.mapping({
             i = cmp.mapping.abort(),
@@ -181,7 +172,6 @@ return {
   },
   {
     -- Docstring generator
-
     "danymat/neogen",
     cmd = "Neogen",
     lazy = true,

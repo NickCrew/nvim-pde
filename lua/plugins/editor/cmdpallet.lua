@@ -3,24 +3,32 @@ return {
     -- Telescope
     "nvim-telescope/telescope.nvim",
     version = false,
+    lazy = true,
     cmd = "Telescope",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
     },
     keys = {
-      { "<leader>fa", "<cmd>Telescope aerial<cr>",        desc = "Find Symbols" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>",       desc = "Find Buffer" },
-      { "<leader>fc", "<cmd>Telescope registers<cr>",     desc = "Find in Registers" },
-      { "<leader>ff", "<cmd>Telescope find_files<cr>",    desc = "Find File" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>",     desc = "Find String in Files" },
-      { "<leader>fh", "<cmd>Telescope harpoon marks<cr>", desc = "Find Harpooned Files" },
-      { "<leader>fm", "<cmd>Telescope marks<cr>",         desc = "Find in Marks" },
-      { "<leader>fn", "<cmd>Telescope notify<cr>",        desc = "Find Notification" },
-      { "<leader>fr", "<cmd>Telescope oldfiles<cr>",      desc = "Find Recent Files" },
-      { "<leader>fs", "<cmd>Telescope luasnip<cr>",       desc = "Find Snippet" },
-      { "<leader>ft", "<cmd>Telescope frecency<cr>",      desc = "Find Frecent Files" },
-      { "<leader>fB", "<cmd>Telescope file_browser",      desc = "Find in File Browser" },
-
+      { "<leader>fC", "<cmd>Telescope commands",             desc = "Find Command"},
+      { "<leader>fE", "<cmd>Telescope emoji<cr>",            desc = "Find Emoji" },
+      { "<leader>fF", "<cmd>Telescope frecency<cr>",         desc = "Find Frecent Files" },
+      { "<leader>fG", "<cmd>Telescope glyph<cr>",            desc = "Find Glyph" },
+      { "<leader>fH", "<cmd>Telescope command_history<cr>",  desc = "Find Recent Command"},
+      { "<leader>fT", "<cmd>Telescope treesitter",           desc = "Find Treesitter Symbol"},
+      { "<leader>fa", "<cmd>Telescope aerial<cr>",           desc = "Find Symbols" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>",          desc = "Find Buffer" },
+      { "<leader>fe", "<cmd>Telescope file_browser",         desc = "Find in File Browser" },
+      { "<leader>ff", "<cmd>Telescope find_files<cr>",       desc = "Find File" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>",        desc = "Find String in Files" },
+      { "<leader>fh", "<cmd>Telescope harpoon marks<cr>",    desc = "Find Harpooned Files" },
+      { "<leader>fj", "<cmd>Telescope jumplist",             desc = "Find in Jumplist"},
+      { "<leader>fk", "<cmd>Telescope keymaps",              desc = "Find Keymaps"},
+      { "<leader>fm", "<cmd>Telescope marks<cr>",            desc = "Find in Marks" },
+      { "<leader>fn", "<cmd>Telescope notify<cr>",           desc = "Find Notification" },
+      { "<leader>fo", "<cmd>Telescope oldfiles<cr>",         desc = "Find Recent Files" },
+      { "<leader>fr", "<cmd>Telescope registers<cr>",        desc = "Find in Registers" },
+      { "<leader>fs", "<cmd>Telescope luasnip<cr>",          desc = "Find Snippet" },
+      { "<leader>fx", "<cmd>Telescope quickfix",             desc = "Send To QuickFix"},
     },
     opts = function()
       local actions = require("telescope.actions")
@@ -98,20 +106,17 @@ return {
           buffers = {
             theme = "dropdown"
           },
-          marks = {
-            theme = "cursor"
-          }
-
         },
         extensions = {
           aerial = {
-            show_nesting = true
+            show_nesting = true,
+            theme = "dropdown"
           },
           file_browser = {
             theme = "dropdown"
           },
           fzf = {
-            fuzzy = false,
+            fuzzy = true,
             override_generic_sorter = true,
             override_file_sorter = true,
             case_mode = "smart_case",
@@ -123,7 +128,7 @@ return {
             db_root = vim.fn.stdpath("data"),
             ignore_patterns = { "*.git/*", "*/tmp/*" },
             workspaces = {
-              ["work"] = os.getenv("HOME") .. "/Work",
+              ["work"] = os.getenv("HOME") .. "/Work/Projects",
               ["personal"] = os.getenv('HOME') .. "/Code",
               ["conf"] = os.getenv('HOME') .. "/.config",
               ["data"] = os.getenv('HOME') .. "/.local/share"
@@ -197,6 +202,7 @@ return {
   },
   {
     "nvim-telescope/telescope-github.nvim",
+    lazy = true,
     config = function()
       require('telescope').load_extension('gh')
     end

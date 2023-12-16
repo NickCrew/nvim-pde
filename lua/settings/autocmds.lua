@@ -1,17 +1,25 @@
-
+-- Autocmds
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("custom_" .. name, { clear = true })
 end
+local mk_aucmd = vim.api.nvim_create_autocmd
 
--- Check if we need to reload the file when it changed
-vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+--------------------------------------
+-- Check if we need to reload the file 
+-- after changes
+----------------------------------------
+mk_aucmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
   command = "checktime",
 })
 
--- Auto create dir when saving a file, in case some intermediate directory does not exist
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+
+--------------------------------------
+-- Auto create parent directories when 
+-- saving a file
+--------------------------------------
+mk_aucmd({ "BufWritePre" }, {
   group = augroup("auto_create_dir"),
   callback = function(event)
     if event.match:match("^%w%w+://") then
@@ -22,16 +30,22 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
+
+--------------------------------------
 -- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
+--------------------------------------
+mk_aucmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
     vim.highlight.on_yank()
   end,
 })
 
--- resize splits if window got resized
-vim.api.nvim_create_autocmd({ "VimResized" }, {
+
+--------------------------------------
+-- Resize splits if window got resized
+--------------------------------------
+mk_aucmd({ "VimResized" }, {
   group = augroup("resize_splits"),
   callback = function()
     local current_tab = vim.fn.tabpagenr()

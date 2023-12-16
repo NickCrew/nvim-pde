@@ -1,47 +1,19 @@
-
-local lsp_emoji = {
-    buffer                   = " 📄 BUFF",
-    nvim_lsp                 = " 📚 LSP ",
-    nvim_lua                 = " 🌙 LUA ",
-    path                     = " 📂 PATH",
-    luasnip                  = " ✂️  SNIP",
-    treesitter               = " 🌲 TREE",
-    rg                       = " 🔎 GREP",
-    cmdline                  = " 📣 CMD ",
-    dap                      = " 🐛 DAP ",
-    cmp_git                  = " 🐙 GIT ",
-    copilot                  = " 🤖 COPI",
-    nvim_lsp_document_symbol = " 🔣 SYMB"
-  }
-local lsp_plain = {
-    buffer                   = "  ",
-    nvim_lsp                 = "  ",
-    nvim_lua                 = "  ",
-    path                     = "  ",
-    luasnip                  = "  ",
-    treesitter               = "  ",
-    rg                       = "  ",
-    cmdline                  = "  ",
-    dap                      = "  ",
-    cmp_git                  = "  ",
-    copilot                  = "  ",
-    nvim_lsp_document_symbol = "  "
-  }
-
 return {
   diagnostics = {
-    -- icons / text used for a diagnostic
-    error       = " ",
-    warning     = " ",
-    hint        = " ",
-    information = " ",
-    other       = " "
-  },
-  diagnostics_solid = {
-    error       = " ",
-    warning     = " ",
-    information = " ",
-    other       = " ",
+    solid = {
+      error       = " ",
+      warning     = " ",
+      information = " ",
+      other       = " ",
+    },
+    transparent = {
+      -- icons / text used for a diagnostic
+      error       = " ",
+      warning     = " ",
+      hint        = " ",
+      information = " ",
+      other       = " "
+    }
   },
   dap = {
     stopped     = "",
@@ -52,7 +24,7 @@ return {
   },
   kind = {
     Text          = "",
-    copilot       = "",
+    Copilot       = "",
     Method        = "",
     Function      = "",
     Constructor   = "",
@@ -62,7 +34,7 @@ return {
     Interface     = "",
     Module        = "",
     Property      = "ﰠ",
-    Unit          = "塞",
+    Unit          = "",
     Value         = "",
     Enum          = "",
     Keyword       = "",
@@ -76,7 +48,36 @@ return {
     Struct        = "פּ",
     Event         = "",
     Operator      = "",
-    TypeParameter = "",
+    TypeParameter = "",
   },
-  lsp = lsp_plain,
+  lsp = {
+    emoji = {
+      buffer                   = " 📄 ",
+      nvim_lsp                 = " 💠 ",
+      nvim_lua                 = " 🌙 ",
+      path                     = " 📂 ",
+      luasnip                  = " 🧩 ",
+      treesitter               = " 🌲 ",
+      rg                       = " 🔎 ",
+      cmdline                  = " 💻 ",
+      dap                      = " 🔬 ",
+      cmp_git                  = " 🐙 ",
+      copilot                  = " 🤖 ",
+      nvim_lsp_document_symbol = " 🔣 "
+    },
+    glyph = {
+      buffer                   = "  ",
+      nvim_lsp                 = "  ",
+      nvim_lua                 = "  ",
+      path                     = "  ",
+      luasnip                  = "  ",
+      treesitter               = "  ",
+      rg                       = "  ",
+      cmdline                  = "  ",
+      dap                      = "  ",
+      cmp_git                  = "  ",
+      copilot                  = "  ",
+      nvim_lsp_document_symbol = "  "
+    }
+  }
 }

@@ -3,11 +3,6 @@ return {
     -- Quick movements
     "phaazon/hop.nvim",
     branch = 'v2',
-    keys = {
-      { "<leader>lc", "<cmd>HopWordCurrentLine<cr>", desc = "Hop to Word In Current Line" },
-      { "<leader>ll", "<cmd>HopLine<cr>",            desc = "Hop To Line" },
-      { "<leader>ls", "<cmd>HopLineStart<cr>",       desc = "Hop To Start of Line" },
-    },
     opts = {
       case_insensitive = true
     }

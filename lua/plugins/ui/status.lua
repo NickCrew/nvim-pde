@@ -16,6 +16,7 @@ return {
 
     },
     opts = function()
+      -- Conditions
       local conditions = {
         buffer_not_empty = function()
           return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -32,6 +33,7 @@ return {
         end,
       }
 
+      -- Diff source
       local diff_source = function()
         local gitsigns = vim.b.gitsigns_status_dict
         if gitsigns then
@@ -43,6 +45,7 @@ return {
         end
       end
 
+      -- Treesitter source
       local treesitter_source = function()
         return function()
           local b = vim.api.nvim_get_current_buf()
@@ -65,7 +68,9 @@ return {
         },
         sections = {
           lualine_a = { { "mode" } },
-          lualine_b = { { "branch", icon = "" } },
+          lualine_b = { { "branch", icon = "", cond = conditions.check_git_workspace },
+
+        },
           lualine_c = {
             {
               "diff",
@@ -89,19 +94,21 @@ return {
             },
           },
           lualine_x = {
-            { "aerial" },
+            { "aerial", cond = conditions.hide_in_width },
+            -- {"filename", cond = conditions.buffer_not_empty},
           },
           lualine_y = {
-            { "filetype",          cond = conditions.buffer_not_empty },
-            { "encoding", },
+            -- { "filetype", cond = conditions.buffer_not_empty },
+            -- { "encoding", cond = conditions.buffer_not_empty, icon = ""},
             { treesitter_source(), cond = conditions.hide_in_width },
           },
           lualine_z = {
-            { "location", icon = "" },
-            { "progress", icon = "" },
+            { "location", icon = " " },
+            { "progress", icon = " " },
           },
         },
         extensions = {
+          "neo-tree",
           "quickfix",
           "aerial",
           "toggleterm",

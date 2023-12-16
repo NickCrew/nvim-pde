@@ -12,8 +12,6 @@ return {
     { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
     { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
     { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
-    { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-    { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
     { "<leader>[", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
     { "<leader>]", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
   },
@@ -30,7 +28,7 @@ return {
       show_close_icon = true,
       separator_style = "slant",
       diagnostics_indicator = function(_, _, diag)
-        local icons = require("settings._icons").diagnostics_solid
+        local icons = require("settings._icons").diagnostics.solid
         local ret = (diag.error and icons.error .. diag.error .. " " or "")
           .. (diag.warning and icons.warning .. diag.warning or "")
         return vim.trim(ret)

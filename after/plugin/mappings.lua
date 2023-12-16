@@ -7,13 +7,26 @@
   - Abbreviations
 
 ]]
-   --
+--
 
 local map = vim.api.nvim_set_keymap
 local bufmap = vim.api.nvim_buf_set_keymap
 local opts = { noremap = true, silent = true }
+
 local wk = require("which-key")
-local mkabr = require("settings._util").npde_mk_abbrev
+
+
+
+----------------------------------------
+-- Abbreviations
+----------------------------------------
+local function mkabr(abr, cmd)
+  vim.cmd { cmd = 'cnoreabbrev', args = { abr, cmd } }
+end
+
+mkabr("T", "Telescope ")
+mkabr("Lr", "Lazy reload ")
+
 
 
 ----------------------------------------
@@ -80,7 +93,6 @@ wk.register({
     g = { "<cmd>lua require('edgy').toggle()<cr>", "Toggle Edgy" },
     o = { "<cmd>SymbolsOutline<cr>", "Symbols Outline" },
     t = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
-    h = {}
   },
 }, {
   mode = "n"
@@ -88,22 +100,57 @@ wk.register({
 
 -- Normal | Leader
 wk.register({
-  h = { "<cmd>Telescope command_history<CR>", "Command History" },
   ["<leader>"] = {
-    f = {"<cmd>file<cr>", "File"},
+    f = { "<cmd>file<cr>", "File" },
     k = { "<Cmd>WhichKey<Cr>", "WhichKey" },
-    o = {"<cmd>Oil<CR>", "Oil"}
+    o = { "<cmd>Oil<CR>", "Oil" },
+  },
+  t = {
+    name = "+trouble",
+    d = {
+      name = "+diagnostics",
+      d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Toggle Document Diagnostics", },
+      w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Toggle Workspace Diagnostics", },
+    },
+    l = {
+      name = "+lsp",
+      r = { "<cmd>TroubleToggle lsp_references<cr>", "Toggle LSP References", },
+      d = { "<cmd>TroubleToggle lsp_definitions<cr>", "Toggle LSP Definitions", },
+      i = { "<cmd>TroubleToggle lsp_implementations<cr>", "Toggle LSP Implementations", },
+      T = { "<cmd>TroubleToggle lsp_type_definitions<cr>", "Toggle LSP Type Defintiosn", },
+    },
+    q = { "<cmd>TroubleToggle quickfix<cr>", "Toggle QuickFix", },
+    t = { "<cmd>TroubleToggle<cr>", "Toggle All Diagnostics", },
+  },
+  n = {
+    name = "+notifications",
+    n = { "<cmd>Notifications<cr>", "Notifications", },
+    e = { "<cmd>NoiceErrors<cr>", "Errors", },
+    h = { "<cmd>NoiceHistory<cr>", "History", },
+    x = { "<cmd>NoiceDismiss<cr>", "Dismis Notifications", },
+  },
+  h = {
+    name = "+hop",
+    c = { "<cmd>HopWordCurrentLine<cr>", "Hop to Word In Current Line" },
+    l = { "<cmd>HopLine<cr>", "Hop To Line" },
+    s = { "<cmd>HopLineStart<cr>", "Hop To Start of Line" },
+  },
+  b = {
+    name  = "+buffers",
+    p     = { "<Cmd>BufferLineTogglePin<CR>", "Toggle pin" },
+    b     = { "<Cmd>BufferLinePick<CR>", "Pick Buffer" },
+    c     = { "<Cmd>BufferLinePickClose<CR>", "Pick Buffer To Close" },
+    P     = { "<Cmd>BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers" },
+    o     = { "<Cmd>BufferLineCloseOthers<CR>", "Delete other buffers" },
+    r     = { "<Cmd>BufferLineCloseRight<CR>", "Delete buffers to the right" },
+    l     = { "<Cmd>BufferLineCloseLeft<CR>", "Delete buffers to the left" },
+    ["["] = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },
+    ["]"] = { "<cmd>BufferLineCycleNext<cr>", "Next buffer" },
   }
 }, {
   mode = "n",
   prefix = "<leader>"
 })
-
-
-----------------------------------------
--- Abbreviations
-----------------------------------------
-mkabr("T", "Telescope")
 
 
 ----------------------------------------

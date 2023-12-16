@@ -1,11 +1,4 @@
 return {
-  {
-    "mfussenegger/nvim-treehopper",
-    dependencies = {
-      "phaazon/hop.nvim"
-    },
-    enabled = true,
-  },
   { -- highlight color codes
     "norcalli/nvim-colorizer.lua",
     enabled = false

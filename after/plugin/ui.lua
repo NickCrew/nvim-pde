@@ -4,16 +4,17 @@
 -- are loaded. (e.g., Diagnostics, signs, highlights, etc.)
 --
 
+local lsp = vim.lsp
+local _border = "single"
+local hl = vim.api.nvim_set_hl
+local icons = require("settings._icons")
 
 ----------------------------------------
 -- Diagnostics
 ----------------------------------------
-local lsp = vim.lsp
-local _border = "single"
-
 vim.diagnostic.config({
   underline = true,
-  virtual_text = true,
+  virtual_text = false,
   signs = true,
   update_in_insert = false,
   float = {
@@ -31,7 +32,6 @@ lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
   border = _border })
 lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
   border = _border })
-  local icons = require("settings._icons")
 
 
 ----------------------------------------
@@ -45,12 +45,12 @@ for type, icon in pairs({
   DapLogPoint               = icons.dap.log,
   DapStopped                = icons.dap.stopped,
   -- Diagnostics
-  DiagnosticSignError       = icons.diagnostics_solid.error,
-  DiagnosticSignWarning     = icons.diagnostics_solid.warning,
-  DiagnosticSignWarn        = icons.diagnostics_solid.warning,
-  DiagnosticSignHint        = icons.diagnostics_solid.hint,
-  DiagnosticSignInformation = icons.diagnostics_solid.information,
-  DiagnosticSignInfo        = icons.diagnostics_solid.information ,
+  DiagnosticSignError       = icons.diagnostics.solid.error,
+  DiagnosticSignWarning     = icons.diagnostics.solid.warning,
+  DiagnosticSignWarn        = icons.diagnostics.solid.warning,
+  DiagnosticSignHint        = icons.diagnostics.solid.hint,
+  DiagnosticSignInformation = icons.diagnostics.solid.information,
+  DiagnosticSignInfo        = icons.diagnostics.solid.information ,
 }) do
   vim.fn.sign_define(type, {
     text = icon,
@@ -61,7 +61,7 @@ for type, icon in pairs({
 end
 
 ----------------------------------------
--- Kind
+-- Highlights
 ----------------------------------------
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
+hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
 
