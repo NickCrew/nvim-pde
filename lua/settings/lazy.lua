@@ -23,6 +23,7 @@ require("lazy").setup({
     { import = "plugins.lang" },
     { import = "plugins.ui" },
     { import = "plugins.coding" },
+    { import = "plugins.utils" }
   }
 }, {
   profiling = {

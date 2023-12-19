@@ -2,8 +2,7 @@ return {
 {
     "zeioth/garbage-day.nvim",
     event = "VeryLazy",
-    opts = {
-    }
+    opts = {}
   },
   {
     "williamboman/mason.nvim",

@@ -5,6 +5,7 @@ return {
       warning     = " ",
       information = " ",
       other       = " ",
+      hint       = " ",
     },
     transparent = {
       -- icons / text used for a diagnostic

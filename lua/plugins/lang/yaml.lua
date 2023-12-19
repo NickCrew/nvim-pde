@@ -17,4 +17,11 @@ return {
     ft = { "yaml", "yaml.ansible" },
     lazy = true
   },
+{
+    -- Schemas
+    "b0o/schemastore.nvim",
+    lazy = true,
+    enabled = true,
+    ft = { "yaml", "json" },
+  },
 }

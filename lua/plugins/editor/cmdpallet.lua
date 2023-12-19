@@ -8,28 +8,6 @@ return {
     dependencies = {
       { "nvim-lua/plenary.nvim" },
     },
-    keys = {
-      { "<leader>fC", "<cmd>Telescope commands",             desc = "Find Command"},
-      { "<leader>fE", "<cmd>Telescope emoji<cr>",            desc = "Find Emoji" },
-      { "<leader>fF", "<cmd>Telescope frecency<cr>",         desc = "Find Frecent Files" },
-      { "<leader>fG", "<cmd>Telescope glyph<cr>",            desc = "Find Glyph" },
-      { "<leader>fH", "<cmd>Telescope command_history<cr>",  desc = "Find Recent Command"},
-      { "<leader>fT", "<cmd>Telescope treesitter",           desc = "Find Treesitter Symbol"},
-      { "<leader>fa", "<cmd>Telescope aerial<cr>",           desc = "Find Symbols" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>",          desc = "Find Buffer" },
-      { "<leader>fe", "<cmd>Telescope file_browser",         desc = "Find in File Browser" },
-      { "<leader>ff", "<cmd>Telescope find_files<cr>",       desc = "Find File" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>",        desc = "Find String in Files" },
-      { "<leader>fh", "<cmd>Telescope harpoon marks<cr>",    desc = "Find Harpooned Files" },
-      { "<leader>fj", "<cmd>Telescope jumplist",             desc = "Find in Jumplist"},
-      { "<leader>fk", "<cmd>Telescope keymaps",              desc = "Find Keymaps"},
-      { "<leader>fm", "<cmd>Telescope marks<cr>",            desc = "Find in Marks" },
-      { "<leader>fn", "<cmd>Telescope notify<cr>",           desc = "Find Notification" },
-      { "<leader>fo", "<cmd>Telescope oldfiles<cr>",         desc = "Find Recent Files" },
-      { "<leader>fr", "<cmd>Telescope registers<cr>",        desc = "Find in Registers" },
-      { "<leader>fs", "<cmd>Telescope luasnip<cr>",          desc = "Find Snippet" },
-      { "<leader>fx", "<cmd>Telescope quickfix",             desc = "Send To QuickFix"},
-    },
     opts = function()
       local actions = require("telescope.actions")
       local themes = require("telescope.themes")
@@ -106,6 +84,9 @@ return {
           buffers = {
             theme = "dropdown"
           },
+          spell_suggest = {
+            theme = "cursor"
+          }
         },
         extensions = {
           aerial = {
@@ -134,6 +115,9 @@ return {
               ["data"] = os.getenv('HOME') .. "/.local/share"
             }
           },
+          luasnip = {
+            theme = "cursor"
+          },
           lazy = {
             -- Optional theme (the extension doesn't set a default theme)
             theme = "ivy",
@@ -150,24 +134,43 @@ return {
               open_lazy_root_find_files = "<C-r>f",
               open_lazy_root_live_grep = "<C-r>g",
             },
-
             git_diffs = {
               git_command = { "git", "log", "--oneline", "--decorate", "--all", "." } -- list result
             },
             project = {
               base_dirs = {
-                { path = "~/Work", max_depth = 2 },
-                { path = "~/Code", max_depth = 2 }
+                { path = "~/Work/Projects", max_depth = 3 },
+                { path = "~/Code",          max_depth = 2 }
               },
               hidden_files = false,
               theme = "dropdown",
               order_by = "asc",
               search_by = "title",
-              -- on_project_selected = function(prompt_bufnr)
-              --   project_actions.change_working_directory(prompt_bufnr, false)
-              --   require("harpoon.ui").nav_file(1)
-              -- end
+            },
+            tasks = {
+              theme = "ivy",
+              output = {
+                style = "float",   -- "split" | "float" | "tab"
+                layout = "center", -- "left" | "right" | "center" | "below" | "above"
+                scale = 0.4,       -- output window to editor size ratio
+                -- NOTE: scale and "center" layout are only relevant when style == "float"
+              },
+              env = {
+                cargo = {
+                  -- Example environment used when running cargo projects
+                  RUST_LOG = "debug",
+                  -- ...
+                },
+                -- ...
+              },
+              binary = {
+                -- Example binary used when running python projects
+                python = "python3",
+                -- ...
+              },
+              -- NOTE: environment and commands may be modified for each task separately from the picker
 
+              -- other picker setup values
             },
             -- Configuration that will be passed to the window that hosts the terminal
             -- For more configuration options check 'nvim_open_win()'
@@ -323,6 +326,20 @@ return {
       require("telescope").load_extension("git_diffs")
     end
 
+  },
+  {
+    "LinArcX/telescope-ports.nvim",
+    lazy = true,
+    config = function()
+      require("telescope").load_extension("ports")
+    end
+  },
+  {
+    "lpoto/telescope-tasks.nvim",
+    lazy = true,
+    config = function()
+      require("telescope").load_extension("tasks")
+    end
   },
   {
     "mrjones2014/legendary.nvim",

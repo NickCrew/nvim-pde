@@ -8,25 +8,56 @@ return {
     keys = {
       ["<F1>"] = {},
       ["<F2>"] = {},
-      { "<F3>",    "<cmd>DapVirtualTextForceRefresh<cr>",                                                desc =
-      "Refresh Virtual Text" },
-      { "<F4>",    "<cmd>lua require('dap').run_last()<cr>",                                             desc =
-      "Run Last" },
-      { "<F5>",    "<cmd>lua require('dap').continue()<cr>",                                             desc =
-      "Continue" },
-      { "<F6>",    "<cmd>lua require('dap').run_to_cursor()<cr>",                                        desc =
-      "Run To Cursor" },
-      { "<F7>",    "<cmd>lua require('dap').pause()<cr>",                                                desc = "Pause" },
-      { "<F8>",    "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
-                                                                                                           desc =
-        "Conditional Breakpoint" },
-      { "<F9>",    "<cmd>lua require('dap').toggle_breakpoint()<cr>",                                    desc =
-      "Toggle Breakpoint" },
-      { "<F10>",   "<cmd>lua require('dap').step_out()<cr>",                                             desc =
-      "Step Out" },
-      { "<F12>",   "<cmd>lua require('dap').step_over()<cr>",                                            desc =
-      "Step Over" },
-      { "<C-F11>", "<cmd>lua require('dap').step_into()<cr>",                                            desc = "Step In" },
+      {
+        "<F3>",
+        "<cmd>DapVirtualTextForceRefresh<cr>",
+        desc =
+        "Refresh Virtual Text"
+      },
+      {
+        "<F4>",
+        "<cmd>lua require('dap').run_last()<cr>",
+        desc =
+        "Run Last"
+      },
+      {
+        "<F5>",
+        "<cmd>lua require('dap').continue()<cr>",
+        desc =
+        "Continue"
+      },
+      {
+        "<F6>",
+        "<cmd>lua require('dap').run_to_cursor()<cr>",
+        desc =
+        "Run To Cursor"
+      },
+      { "<F7>",    "<cmd>lua require('dap').pause()<cr>",     desc = "Pause" },
+      {
+        "<F8>",
+        "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
+        desc =
+        "Conditional Breakpoint"
+      },
+      {
+        "<F9>",
+        "<cmd>lua require('dap').toggle_breakpoint()<cr>",
+        desc =
+        "Toggle Breakpoint"
+      },
+      {
+        "<F10>",
+        "<cmd>lua require('dap').step_out()<cr>",
+        desc =
+        "Step Out"
+      },
+      {
+        "<F12>",
+        "<cmd>lua require('dap').step_over()<cr>",
+        desc =
+        "Step Over"
+      },
+      { "<C-F11>", "<cmd>lua require('dap').step_into()<cr>", desc = "Step In" },
     },
     dependencies = {
       {
@@ -155,7 +186,10 @@ return {
             -- Update this to ensure that you have the debuggers for the langs you want
           },
         },
-      }
+      },
+      {
+        "LiadOz/nvim-dap-repl-highlights",
+      },
     }
   },
 }

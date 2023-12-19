@@ -1,39 +1,37 @@
 return {
   {
-    "rebelot/heirline.nvim",
-    config = true,
-    enabled = false
-  },
-  {
     "nvim-lualine/lualine.nvim",
     enabled = true,
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      { "nvim-tree/nvim-web-devicons" },
       {
         "arkav/lualine-lsp-progress",
         enabled = false
       },
-
     },
     opts = function()
-      -- Conditions
+      -----------------
+      -- Conditions --
+      -----------------
       local conditions = {
+        -- Buffer Not Empty
         buffer_not_empty = function()
           return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
         end,
-
+        --- Hide in width
         hide_in_width = function()
           return vim.fn.winwidth(0) > 80
         end,
-
+        -- Check git workspace
         check_git_workspace = function()
           local filepath = vim.fn.expand("%:p:h")
           local gitdir = vim.fn.finddir(".git", filepath .. ";")
           return gitdir and #gitdir > 0 and #gitdir < #filepath
         end,
       }
-
-      -- Diff source
+      -----------------
+      -- Git Status --
+      -----------------
       local diff_source = function()
         local gitsigns = vim.b.gitsigns_status_dict
         if gitsigns then
@@ -44,34 +42,46 @@ return {
           }
         end
       end
-
-      -- Treesitter source
+      -----------------------
+      -- Treesitter source --
+      -----------------------
       local treesitter_source = function()
         return function()
           local b = vim.api.nvim_get_current_buf()
           if next(vim.treesitter.highlighter.active[b]) then
-            return " TS"
+            return " TS "
           end
           return ""
         end
       end
 
-      -- LUALINE CONFIG
+      --------------------
+      -- Lualine Config --
+      --------------------
       return {
         options = {
           global_status = true,
           theme = "auto",
+          always_divide_middle = false,
           icons_enabled = true,
           disabled_filetypes = {},
-          component_separators = { left = "", right = "" },
-          section_separators = { left = "", right = "" },
+      section_separators = { left = '', right = '' },
+      component_separators = { left = '', right = '' }
+      -- component_separators = { left = '', right = '' }
         },
         sections = {
-          lualine_a = { { "mode" } },
-          lualine_b = { { "branch", icon = "", cond = conditions.check_git_workspace },
-
-        },
+          lualine_a = {
+            { "mode" }
+          },
+          lualine_b = {
+            {
+              "branch",
+              icon = "",
+              cond = conditions.check_git_workspace
+            },
+          },
           lualine_c = {
+
             {
               "diff",
               source = diff_source,
@@ -92,28 +102,35 @@ return {
                 hint = " ",
               },
             },
+
           },
           lualine_x = {
             { "aerial", cond = conditions.hide_in_width },
-            -- {"filename", cond = conditions.buffer_not_empty},
           },
           lualine_y = {
-            -- { "filetype", cond = conditions.buffer_not_empty },
-            -- { "encoding", cond = conditions.buffer_not_empty, icon = ""},
-            { treesitter_source(), cond = conditions.hide_in_width },
+
+            {"filetype", cond = conditions.buffer_not_empty },
+            {  treesitter_source(), cond= conditions.buffer_not_empty},
           },
           lualine_z = {
-            { "location", icon = " " },
-            { "progress", icon = " " },
+            { "location", icon = "" },
+            { "progress", icon = "" },
+            -- { "encoding", cond = conditions.buffer_not_empty },
+            -- { "fileformat", cond = conditions.buffer_not_empty },
           },
         },
         extensions = {
-          "neo-tree",
-          "quickfix",
           "aerial",
-          "toggleterm",
-          "nvim-dap-ui",
+          "fugitive",
+          "lazy",
+          "mason",
           "mundo",
+          "neo-tree",
+          "nvim-dap-ui",
+          "quickfix",
+          "symbols-outline",
+          "toggleterm",
+          "trouble",
         },
       }
     end

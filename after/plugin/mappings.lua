@@ -28,8 +28,7 @@ mkabr("T", "Telescope ")
 mkabr("Lr", "Lazy reload ")
 
 
-
-----------------------------------------
+----------------------------------------:w
 -- Basic Mappings
 ----------------------------------------
 
@@ -81,18 +80,16 @@ map("n", "<C-s>s", "<cmd>!qall<cr>", opts)
 ----------------------------------------
 -- Which-Key Mappings
 ----------------------------------------
+
+--
+-- LEADER
+--
 wk.register({
   ["<C-\\>"] = { "<cmd>ToggleTerm<CR>", "Toggle Terminal" },
   ["<C-e>"] = { "<Cmd>Telescope buffers<CR>", "Find Buffers" },
   ["<C-p>"] = { "<Cmd>Telescope<CR>", "Find" },
   ["<C-g>"] = {
-    name = "+editor",
-    a = { "<cmd>AerialToggle<cr>", "Toggle Symbols Tree" },
-    d = { "<cmd>Trouble document_diagnostics<cr>", "Document Diagnostics" },
-    f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format Buffer and Save" },
-    g = { "<cmd>lua require('edgy').toggle()<cr>", "Toggle Edgy" },
-    o = { "<cmd>SymbolsOutline<cr>", "Symbols Outline" },
-    t = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
+    name = "+drawer",
   },
 }, {
   mode = "n"
@@ -100,11 +97,83 @@ wk.register({
 
 -- Normal | Leader
 wk.register({
-  ["<leader>"] = {
-    f = { "<cmd>file<cr>", "File" },
-    k = { "<Cmd>WhichKey<Cr>", "WhichKey" },
-    o = { "<cmd>Oil<CR>", "Oil" },
+  b = {
+    name = "+buffers",
+    c    = {
+      name = "+close",
+      u    = { "<Cmd>BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers" },
+      l    = { "<Cmd>BufferLineCloseLeft<CR>", "Delete buffers to the left" },
+      r    = { "<Cmd>BufferLineCloseRight<CR>", "Delete buffers to the right" },
+      o    = { "<Cmd>BufferLineCloseOthers<CR>", "Delete other buffers" },
+    },
+    P    = { "<Cmd>BufferLineTogglePin<CR>", "Toggle pin" },
+    b    = { "<Cmd>BufferLinePick<CR>", "Pick Buffer" },
+    f    = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format Buffer and Save" },
+    p    = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },
+    n    = { "<cmd>BufferLineCycleNext<cr>", "Next buffer" },
   },
+  f = {
+    name = "+find",
+    C = { "<cmd>Telescope commands", "Find Command" },
+    E = { "<cmd>Telescope emoji<cr>", "Find Emoji" },
+    F = { "<cmd>Telescope frecency<cr>", "Find Frecent Files" },
+    G = { "<cmd>Telescope glyph<cr>", "Find Glyph" },
+    H = { "<cmd>Telescope command_history<cr>", "Find Recent Command" },
+    T = { "<cmd>Telescope treesitter", "Find Treesitter Symbol" },
+    a = { "<cmd>Telescope aerial<cr>", "Find Symbols" },
+    b = { "<cmd>Telescope buffers<cr>", "Find Buffer" },
+    e = { "<cmd>Telescope file_browser", "Find in File Browser" },
+    f = { "<cmd>Telescope find_files<cr>", "Find File" },
+    g = { "<cmd>Telescope live_grep<cr>", "Find String in Files" },
+    h = { "<cmd>Telescope harpoon marks<cr>", "Find Harpooned Files" },
+    j = { "<cmd>Telescope jumplist", "Find in Jumplist" },
+    k = { "<cmd>Telescope keymaps", "Find Keymaps" },
+    m = { "<cmd>Telescope marks<cr>", "Find in Marks" },
+    n = { "<cmd>Telescope notify<cr>", "Find Notification" },
+    o = { "<cmd>Telescope oldfiles<cr>", "Find Recent Files" },
+    r = { "<cmd>Telescope registers<cr>", "Find in Registers" },
+    s = { "<cmd>Telescope luasnip<cr>", "Find Snippet" },
+    x = { "<cmd>Telescope quickfix", "Send To QuickFix" },
+  },
+  -- GIT
+  g = {
+    name = "+git",
+    b = {
+      name = "+blame",
+      c = { "<cmd>Gitsigns blame_line<cr>", "Show Commit Message" },
+      l = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blame Line" },
+    },
+    d = { "<cmd>Gitsigns diffthis", "Diff This" },
+    n = { "<cmd>Gitsigns next_hunk", "Next Hunk" },
+    p = { "<cmd>Gitsigns next_hunk", "Previous Hunk" },
+    s = {
+      name = "+stage",
+      H = { "<cmd>Gitsigns undo_stage_hunk<cr>", "Undo Stage Hunk" },
+      b = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer" },
+      h = { "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk" },
+    },
+    r = {
+      name = "+reset",
+      h = { "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk" },
+      b = { "<cmd>Gitsigns reset_buffer<cr>", "Reset Buffer" },
+    }
+  },
+  -- HOP
+  l = {
+    name = "+current_line",
+    c = { "<cmd>HopWordCurrentLine<cr>", "Hop to Word In Current Line" },
+    l = { "<cmd>HopLine<cr>", "Hop To Line" },
+    s = { "<cmd>HopLineStart<cr>", "Hop To Start of Line" },
+  },
+  -- NOTIFICATIONS
+  n = {
+    name = "+notifications",
+    n = { "<cmd>Notifications<cr>", "Notifications", },
+    e = { "<cmd>NoiceErrors<cr>", "Errors", },
+    h = { "<cmd>NoiceHistory<cr>", "History", },
+    x = { "<cmd>NoiceDismiss<cr>", "Dismis Notifications", },
+  },
+  -- TROUBLE
   t = {
     name = "+trouble",
     d = {
@@ -122,34 +191,47 @@ wk.register({
     q = { "<cmd>TroubleToggle quickfix<cr>", "Toggle QuickFix", },
     t = { "<cmd>TroubleToggle<cr>", "Toggle All Diagnostics", },
   },
-  n = {
-    name = "+notifications",
-    n = { "<cmd>Notifications<cr>", "Notifications", },
-    e = { "<cmd>NoiceErrors<cr>", "Errors", },
-    h = { "<cmd>NoiceHistory<cr>", "History", },
-    x = { "<cmd>NoiceDismiss<cr>", "Dismis Notifications", },
+  ["["] = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },
+  ["]"] = { "<cmd>BufferLineCycleNext<cr>", "Next buffer" },
+  -- LEADER (x2)
+  ["<leader>"] = {
+    name = "+harpoon",
+    a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Harpoon Add File" },
+    h = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Harpoon Quick Menu" },
+    j = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "Harpoon 1 (j)" },
+    k = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "Harpoon 2 (k)" },
+    l = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "Harpoon 3 (l)" },
+    f = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "Harpoon 4 (f)" },
+    d = { "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", "Harpoon 5 (d)" },
+    s = { "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", "Harpoon 6 (s)" },
+    ["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "Harpoon 1" },
+    ["2"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "Harpoon 2" },
+    ["3"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "Harpoon 3" },
+    ["4"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "Harpoon 4" },
+    ["5"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", "Harpoon 5" },
+    ["6"] = { "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", "Harpoon 6" },
+    ["["] = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "Harpoon Previous" },
+    ["]"] = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "Harpoon Next" },
   },
-  h = {
-    name = "+hop",
-    c = { "<cmd>HopWordCurrentLine<cr>", "Hop to Word In Current Line" },
-    l = { "<cmd>HopLine<cr>", "Hop To Line" },
-    s = { "<cmd>HopLineStart<cr>", "Hop To Start of Line" },
-  },
-  b = {
-    name  = "+buffers",
-    p     = { "<Cmd>BufferLineTogglePin<CR>", "Toggle pin" },
-    b     = { "<Cmd>BufferLinePick<CR>", "Pick Buffer" },
-    c     = { "<Cmd>BufferLinePickClose<CR>", "Pick Buffer To Close" },
-    P     = { "<Cmd>BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers" },
-    o     = { "<Cmd>BufferLineCloseOthers<CR>", "Delete other buffers" },
-    r     = { "<Cmd>BufferLineCloseRight<CR>", "Delete buffers to the right" },
-    l     = { "<Cmd>BufferLineCloseLeft<CR>", "Delete buffers to the left" },
-    ["["] = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },
-    ["]"] = { "<cmd>BufferLineCycleNext<cr>", "Next buffer" },
-  }
 }, {
   mode = "n",
   prefix = "<leader>"
+})
+
+--
+-- Ctrl-G
+--
+wk.register({
+  name      = "+quick",
+  ["<C-h>"] = { "<cmd>Spectre<cr>}", "Search and Replace" },
+  a         = { "<cmd>AerialToggle<cr>", "Toggle Aerial" },
+  o         = { "<cmd>SymbolsOutline<cr>", "Toggle Outline" },
+  t         = { "<cmd>Neotree toggle<cr>", "Toggle Explorer" },
+  s         = { "<cmd>Neotree git_status", "Toggle Status" },
+  w         = { "<Cmd>WhichKey<Cr>", "WhichKey" },
+}, {
+  mode = "n",
+  prefix = "<C-g>"
 })
 
 

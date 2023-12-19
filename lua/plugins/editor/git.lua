@@ -30,15 +30,6 @@ return {
     -- git changes in sign column
     "lewis6991/gitsigns.nvim",
     lazy = false,
-    keys = {
-      { "<leader>gB",  "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Blame Line" },
-      { "<leader>gb",  "<cmd>Gitsigns blame_line<cr>",                desc = "Show Commit Message" },
-      { "<leader>gsh", "<cmd>Gitsigns stage_hunk<cr>",                desc = "Stage Hunk" },
-      { "<leader>gsb", "<cmd>Gitsigns stage_buffer<cr>",              desc = "Stage Buffer" },
-      { "<leader>gsH", "<cmd>Gitsigns undo_stage_hunk<cr>",           desc = "Undo Stage Hunk" },
-      { "<leader>grh", "<cmd>Gitsigns reset_hunk<cr>",                desc = "Reset Hunk" },
-      { "<leader>grb", "<cmd>Gitsigns reset_buffer<cr>",              desc = "Reset Buffer" },
-    },
     opts = {
       signs = {
         add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },

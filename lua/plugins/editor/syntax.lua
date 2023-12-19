@@ -1,19 +1,15 @@
 return {
-  { -- highlight color codes
-    "norcalli/nvim-colorizer.lua",
-    enabled = false
-  },
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-  },
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-  },
-  {
-    "LiadOz/nvim-dap-repl-highlights",
-  },
+
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter-context",
+      },
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+      },
+    },
     config = function()
       local parser_configs =
           require("nvim-treesitter.parsers").get_parser_configs()
