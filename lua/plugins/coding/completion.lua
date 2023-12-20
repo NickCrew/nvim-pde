@@ -1,3 +1,63 @@
+local icons = {
+    emoji = {
+      buffer                   = " 📄 ",
+      nvim_lsp                 = " 👌 ",
+      nvim_lua                 = " 🌙 ",
+      path                     = " 📂 ",
+      luasnip                  = " 🧩 ",
+      treesitter               = " 🌲 ",
+      rg                       = " 🔎 ",
+      cmdline                  = " 💻 ",
+      dap                      = " 🔬 ",
+      cmp_git                  = " 🐙 ",
+      copilot                  = " 🤖 ",
+      nvim_lsp_document_symbol = " 🔣 "
+    },
+    glyph = {
+      buffer                   = "  ",
+      nvim_lsp                 = "  ",
+      nvim_lua                 = "  ",
+      path                     = "  ",
+      luasnip                  = "  ",
+      treesitter               = "  ",
+      rg                       = "  ",
+      cmdline                  = "  ",
+      dap                      = "  ",
+      cmp_git                  = "  ",
+      copilot                  = "  ",
+      nvim_lsp_document_symbol = "  "
+    }
+  }
+
+local kind = {
+    Text          = "",
+    Copilot       = "",
+    Method        = "",
+    Function      = "",
+    Constructor   = "",
+    Field         = "ﰠ",
+    Variable      = "",
+    Class         = "ﴯ",
+    Interface     = "",
+    Module        = "",
+    Property      = "ﰠ",
+    Unit          = "",
+    Value         = "",
+    Enum          = "",
+    Keyword       = "",
+    Snippet       = "",
+    Color         = "",
+    File          = "",
+    Reference     = "",
+    Folder        = "",
+    EnumMember    = "",
+    Constant      = "",
+    Struct        = "פּ",
+    Event         = "",
+    Operator      = "",
+    TypeParameter = "",
+}
+
 return {
   {
     -- Completion and Snippets
@@ -22,7 +82,6 @@ return {
     },
     config = function()
       local cmp = require('cmp')
-      local icons = require("settings._icons")
       local lspkind = require("lspkind")
       local luasnip = require("luasnip")
 
@@ -51,7 +110,7 @@ return {
             symbol_map = icons.kind,
             before = function(entry, vim_item)
               vim_item.kind = lspkind.presets.default[vim_item.kind]
-              vim_item.menu = icons.lsp.emoji[entry.source.name]
+              vim_item.menu = icons.emoji[entry.source.name]
               return vim_item
             end,
           }),

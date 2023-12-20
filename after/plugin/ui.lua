@@ -3,11 +3,26 @@
 -- These are UI changes that must take place after all plugins
 -- are loaded. (e.g., Diagnostics, signs, highlights, etc.)
 --
+local icons = {
+  diagnostics = {
+    error       = " ",
+    warning     = " ",
+    information = " ",
+    other       = " ",
+    hint        = " ",
+  },
+  dap = {
+    stopped     = "",
+    normal      = "",
+    conditional = "",
+    rejected    = "ﰸ",
+    log         = "",
+  },
+}
 
 local lsp = vim.lsp
 local _border = "single"
 local hl = vim.api.nvim_set_hl
-local icons = require("settings._icons")
 
 ----------------------------------------
 -- Diagnostics
@@ -45,12 +60,12 @@ for type, icon in pairs({
   DapLogPoint               = icons.dap.log,
   DapStopped                = icons.dap.stopped,
   -- Diagnostics
-  DiagnosticSignError       = icons.diagnostics.solid.error,
-  DiagnosticSignWarning     = icons.diagnostics.solid.warning,
-  DiagnosticSignWarn        = icons.diagnostics.solid.warning,
-  DiagnosticSignHint        = icons.diagnostics.solid.hint,
-  DiagnosticSignInformation = icons.diagnostics.solid.information,
-  DiagnosticSignInfo        = icons.diagnostics.solid.information ,
+  DiagnosticSignError       = icons.diagnostics.error,
+  DiagnosticSignWarning     = icons.diagnostics.warning,
+  DiagnosticSignWarn        = icons.diagnostics.warning,
+  DiagnosticSignHint        = icons.diagnostics.hint,
+  DiagnosticSignInformation = icons.diagnostics.information,
+  DiagnosticSignInfo        = icons.diagnostics.information,
 }) do
   vim.fn.sign_define(type, {
     text = icon,
@@ -63,5 +78,4 @@ end
 ----------------------------------------
 -- Highlights
 ----------------------------------------
-hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
-
+hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })

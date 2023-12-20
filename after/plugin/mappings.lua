@@ -54,8 +54,6 @@ map("n", "<C-l>", "<C-w>l", opts)
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<A-Up>", "<cmd>resize +3<cr>", opts)
-map("n", "<A-Down>", "<cmd>resize -3<cr>", opts)
-map("n", "<A-Left>", "<cmd>vertical resize -3<cr>", opts)
 map("n", "<A-Right>", "<cmd>vertical resize +3<cr>", opts)
 
 -- Last Buffer
@@ -82,15 +80,60 @@ map("n", "<C-s>s", "<cmd>!qall<cr>", opts)
 ----------------------------------------
 
 --
--- LEADER
+-- F-KEYS
 --
+wk.register({
+  ["<F1>"] = {
+
+  },
+  ["<F2>"] = {
+
+  },
+  ["<F3>"] = {
+    "<cmd>DapVirtualTextForceRefresh<cr>",
+    "Refresh Virtual Text"
+  },
+  ["<F4>"] = {
+    "<cmd>lua require('dap').run_last()<cr>",
+    "Run Last"
+  },
+  ["<F5>"] = {
+    "<cmd>lua require('dap').continue()<cr>",
+    "Continue"
+  },
+  ["<F6>"] = {
+    "<cmd>lua require('dap').run_to_cursor()<cr>",
+    "Run To Cursor"
+  },
+  ["<F7>"] = { "<cmd>lua require('dap').pause()<cr>", "Pause" },
+  ["<F8>"] = {
+    "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
+    "Conditional Breakpoint"
+  },
+  ["<F9>"] = {
+    "<cmd>lua require('dap').toggle_breakpoint()<cr>",
+    "Toggle Breakpoint"
+  },
+  ["<F10>"] = {
+    "<cmd>lua require('dap').step_out()<cr>",
+    "Step Out"
+  },
+  ["<F12>"] = {
+    "<cmd>lua require('dap').step_over()<cr>",
+    "Step Over"
+  },
+  ["<C-F11>"] = { "<cmd>lua require('dap').step_into()<cr>", "Step In"
+  },
+}, {
+  mode = "n"
+})
+
+-- No Leader
 wk.register({
   ["<C-\\>"] = { "<cmd>ToggleTerm<CR>", "Toggle Terminal" },
   ["<C-e>"] = { "<Cmd>Telescope buffers<CR>", "Find Buffers" },
   ["<C-p>"] = { "<Cmd>Telescope<CR>", "Find" },
-  ["<C-g>"] = {
-    name = "+drawer",
-  },
+  ["<C-g>"] = {}
 }, {
   mode = "n"
 })
@@ -154,7 +197,7 @@ wk.register({
     },
     r = {
       name = "+reset",
-      h = { "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk" },
+      h = { "<cmd>Gitsegns reset_hunk<cr>", "Reset Hunk" },
       b = { "<cmd>Gitsigns reset_buffer<cr>", "Reset Buffer" },
     }
   },

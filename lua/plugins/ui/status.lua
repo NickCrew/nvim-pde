@@ -66,8 +66,8 @@ return {
           icons_enabled = true,
           disabled_filetypes = {},
       section_separators = { left = '', right = '' },
-      component_separators = { left = '', right = '' }
-      -- component_separators = { left = '', right = '' }
+      -- component_separators = { left = '', right = '' },
+      component_separators = { left = '', right = '' }
         },
         sections = {
           lualine_a = {
@@ -102,21 +102,24 @@ return {
                 hint = " ",
               },
             },
+            {"filename"},
 
           },
           lualine_x = {
+
             { "aerial", cond = conditions.hide_in_width },
           },
           lualine_y = {
 
-            {"filetype", cond = conditions.buffer_not_empty },
-            {  treesitter_source(), cond= conditions.buffer_not_empty},
-          },
-          lualine_z = {
             { "location", icon = "" },
             { "progress", icon = "" },
-            -- { "encoding", cond = conditions.buffer_not_empty },
-            -- { "fileformat", cond = conditions.buffer_not_empty },
+          },
+          lualine_z = {
+
+
+             { "fileformat", cond = conditions.buffer_not_empty },
+            {  treesitter_source(), cond= conditions.buffer_not_empty},
+             { "encoding", cond = conditions.buffer_not_empty },
           },
         },
         extensions = {

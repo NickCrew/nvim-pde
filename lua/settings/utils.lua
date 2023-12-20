@@ -33,4 +33,19 @@ M.toggle_ll = function()
 	vim.cmd("lopen")
 end
 
+-- Update theme
+M.update_theme = function()
+  local isdark = vim.fn.system("isdark")
+  local theme = "rose-pine"
+  local bg = "dark"
+  if not isdark == 1 then
+    theme = "rose-pine-dawn"
+    bg = "light"
+  end
+  vim.opt.background = bg
+  vim.cmd("colorscheme ".. theme)
+end
+
 return M
+
+
