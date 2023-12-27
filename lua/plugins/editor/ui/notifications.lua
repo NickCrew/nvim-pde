@@ -1,16 +1,23 @@
 
 return {
+  {'RishabhRD/popfix'},
   {
     "folke/noice.nvim",
-    dependencies = { {
+    lazy = true,
+    event = "VeryLazy",
+    enabled = true,
+    dependencies = { 
+      {
       "MunifTanjim/nui.nvim"
-    },
+      },
       {
         "VonHeikemen/fine-cmdline.nvim",
       },
       {
         -- Pretty notification windows/popups
         "rcarriga/nvim-notify",
+        lazy = true,
+        event = "VeryLazy",
         opts = {
           level = "warn",
           render = "compact",
@@ -25,7 +32,6 @@ return {
         }
       },
     },
-    enabled = true,
     opts = {
       cmdline = {
         enabled = true,
@@ -37,11 +43,13 @@ return {
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true,
         },
-        messages = { view_search = false },
+        messages = { 
+          view_search = true
+        },
         progress = {
           enabled = true,
           throttle = 1000 / 100,
-          view = "mini"
+          format = "lsp_progress"
         },
         signature = {
           enabled = true,
@@ -59,7 +67,7 @@ return {
       },
       -- you can enable a preset for easier configuration
       presets = {
-        bottom_search = true,         -- use a classic bottom cmdline for search
+        bottom_search = false,         -- use a classic bottom cmdline for search
         command_palette = true,       -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
         inc_rename = true,            -- enables an input dialog for inc-rename.nvim

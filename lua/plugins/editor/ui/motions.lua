@@ -1,30 +1,12 @@
 return {
 {
-    -- Hyperfast project navigation
-    "ThePrimeagen/harpoon",
-    lazy = true,
-    opts = {
-      menu = {
-        width = vim.api.nvim_win_get_width(0) - 4,
-      },
-      global_settings = {
-        tabline = true,
-        save_on_toggle = true,
-        save_on_change = true,
-        enter_on_sendcmd = true,
-        tmux_autoclose_windows = false,
-        excluded_filetypes = { "harpoon" },
-      },
-    }
-  },
-{
     'echasnovski/mini.bracketed',
     version = false,
     lazy = true,
     opts = {},
     event = "VeryLazy"
   },
-{
+  {
     -- Quick movements
     "phaazon/hop.nvim",
     branch = 'v2',
@@ -32,8 +14,9 @@ return {
       case_insensitive = true
     }
   },
-{
+  {
     "folke/flash.nvim",
+    lazy = true,
     event = "VeryLazy",
     opts = {},
     keys = {

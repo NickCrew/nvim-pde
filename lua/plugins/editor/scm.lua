@@ -9,27 +9,23 @@ return {
   {
     -- Get links to github
     "ruifm/gitlinker.nvim",
-    config = true
-  },
-  {
-    -- Git worktree support
-    "ThePrimeagen/git-worktree.nvim",
-    config = function()
-      require("telescope").load_extension("git_worktree")
-    end,
-    enabled = false
+    config = true,
+    lazy = true,
+    event = "VeryLazy"
   },
   {
     -- Github integration
     "pwntester/octo.nvim",
     cmd = "Octo",
+    event = "VeryLazy",
     lazy = true,
     config = true
   },
   {
     -- git changes in sign column
     "lewis6991/gitsigns.nvim",
-    lazy = false,
+    lazy = true,
+    event = "VeryLazy",
     opts = {
       signs = {
         add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
@@ -83,6 +79,12 @@ return {
       },
     }
   },
-
-
+{
+    -- Git worktree support
+    "ThePrimeagen/git-worktree.nvim",
+    config = function()
+      require("telescope").load_extension("git_worktree")
+    end,
+    enabled = false
+  },
 }

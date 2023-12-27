@@ -1,15 +1,9 @@
-local icons = {
-  error       = " ",
-  warning     = " ",
-  information = " ",
-  other       = " ",
-  hint        = " ",
-}
+local icons = require("settings.utils").get_diagnostic_icons()
 
 return {
-  {
+{
     "echasnovski/mini.bufremove",
-    event = "VeryLazy",
+    event = "BufEnter",
     lazy = true,
     version = false,
     opts = {}
@@ -31,6 +25,7 @@ return {
         persist_buffer_sort = true,
         show_tab_indicators = true,
         sort_by = "tabs",
+
         show_close_icon = true,
         separator_style = "padded_slant",
         diagnostics_indicator = function(_, _, diag)
@@ -41,13 +36,12 @@ return {
         offsets = {
           {
             filetype = "neo-tree",
-            text = "Neo-tree",
+            text = "Buffers",
             highlight = "Directory",
             text_align = "left",
           },
         },
       },
     },
-  }
-
+  },
 }

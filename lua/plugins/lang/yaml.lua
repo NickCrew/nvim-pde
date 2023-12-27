@@ -1,5 +1,5 @@
 return {
-{
+  {
     "someone-stole-my-name/yaml-companion.nvim",
     ft = { "yaml" },
     lazy = true,
@@ -17,7 +17,7 @@ return {
     ft = { "yaml", "yaml.ansible" },
     lazy = true
   },
-{
+  {
     -- Schemas
     "b0o/schemastore.nvim",
     lazy = true,

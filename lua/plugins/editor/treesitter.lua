@@ -2,30 +2,40 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = true,
+    event = "VeryLazy",
     dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-context",
-      },
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-      },
+      "nvim-treesitter/nvim-treesitter-context",
+      "nvim-treesitter/nvim-treesitter-textobjects",
     },
     config = function()
       local parser_configs =
           require("nvim-treesitter.parsers").get_parser_configs()
       parser_configs.markdown.filetype_to_parsername = "octo"
 
-      require("nvim-dap-repl-highlights").setup()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
-          'dap_repl',
+          'bash',
+          'css',
+          'hcl',
+          'java',
+          'javascript',
           'lua',
+          'markdown',
+          'python',
           'rust',
-          'toml'
+          'rust',
+          'toml',
+          'typescript',
+          'yaml'
         },
         auto_install = true,
         sync_install = false,
         highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+        ident = {
           enable = true,
         },
         incremental_selection = {
@@ -52,27 +62,27 @@ return {
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               ["]m"] = "@function.outer",
-              ["]]"] = "@class.outer",
+              ["]n"] = "@class.outer",
             },
             goto_next_end = {
               ["]M"] = "@function.outer",
-              ["]["] = "@class.outer",
+              ["]N"] = "@class.outer",
             },
             goto_previous_start = {
               ["[m"] = "@function.outer",
-              ["[["] = "@class.outer",
+              ["[n"] = "@class.outer",
             },
             goto_previous_end = {
               ["[M"] = "@function.outer",
-              ["[]"] = "@class.outer",
+              ["[n"] = "@class.outer",
             },
           },
           lsp_interop = {
             enable = true,
-            border = "shadow",
+            border = "single",
             peek_definition_code = {
-              ["<leader><leader>d"] = "@function.outer",
-              ["<leader><leader>D"] = "@class.outer",
+              ["<leader><leader>m"] = "@function.outer",
+              ["<leader><leader>n"] = "@class.outer",
             },
           },
           select = {
@@ -91,7 +101,7 @@ return {
       })
     end,
   },
-  {
+{
     "echasnovski/mini.ai",
     keys = {
       { "a", mode = { "x", "o" } },
@@ -159,4 +169,5 @@ return {
     end
   },
 
-}
+
+  }

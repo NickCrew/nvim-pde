@@ -4,7 +4,7 @@ return {
   },
   {
     "karb94/neoscroll.nvim",
-    lazy = true,
+    lazy = false,
     enabled = true,
     opts = {
       easing_funtion = "sine",

@@ -1,6 +1,4 @@
 --------------------------------------------------
--- File: settings.lazy
--- Sourced Directly By: init.lua
 -- Description: Load plugins using Lazy
 --------------------------------------------------
 
@@ -21,9 +19,8 @@ require("lazy").setup({
   spec = {
     { import = "plugins.coding" },
     { import = "plugins.editor" },
+    { import = "plugins.editor.ui" },
     { import = "plugins.lang" },
-    { import = "plugins.ui" },
-    { import = "plugins.utils" }
   }
 }, {
   profiling = {
@@ -34,7 +31,7 @@ require("lazy").setup({
     enabled = true
   },
   install = {
-    colorscheme = "rose-pine"
+    colorscheme = "catppucin"
   },
   performance = {
     rtp = {

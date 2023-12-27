@@ -1,36 +1,33 @@
 -- Autocmds
 
 
-local mkautocmd = vim.api.nvim_create_autocmd
-
---------------
--- Helpers --
---------------
+----------
+-- Helpers
+----------
 local function augroup(name)
   return vim.api.nvim_create_augroup("custom_" .. name, { clear = true })
 end
+local aucmd = vim.api.nvim_create_autocmd
+
+----------------
+-- User Commands
+----------------
+vim.api.nvim_command("command! UpdateTheme lua require('settings.utils').update_theme()")
 
 
--- mkautocmd({ "VimEnter" }, {
---    group = augroup("Startup"), 
---   command = "lua require('settings.utils').update_theme()"
--- })
---
-------------------------------------
--- Check if we need to reload the file
--- after changes
-----------------------------------------
-mkautocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+-----------------------------------------------------
+-- Check if we need to reload the file after changes
+----------------------------------------------------
+aucmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
   command = "checktime",
 })
 
 
---------------------------------------
--- Auto create parent directories when
--- saving a file
---------------------------------------
-mkautocmd({ "BufWritePre" }, {
+-----------------------------------------------------
+-- Auto create parent directories when saving a file
+-----------------------------------------------------
+aucmd({ "BufWritePre" }, {
   group = augroup("auto_create_dir"),
   callback = function(event)
     if event.match:match("^%w%w+://") then
@@ -42,10 +39,10 @@ mkautocmd({ "BufWritePre" }, {
 })
 
 
---------------------------------------
+---------------------
 -- Highlight on yank
---------------------------------------
-mkautocmd("TextYankPost", {
+--------------------
+aucmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
     vim.highlight.on_yank()
@@ -56,7 +53,7 @@ mkautocmd("TextYankPost", {
 --------------------------------------
 -- Resize splits if window got resized
 --------------------------------------
-mkautocmd({ "VimResized" }, {
+aucmd({ "VimResized" }, {
   group = augroup("resize_splits"),
   callback = function()
     local current_tab = vim.fn.tabpagenr()
@@ -66,7 +63,4 @@ mkautocmd({ "VimResized" }, {
 })
 
 
---------------------
--- User Commands --
---------------------
-vim.api.nvim_command("command! UpdateTheme lua require('settings.utils').update_theme()")
+

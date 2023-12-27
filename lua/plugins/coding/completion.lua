@@ -1,3 +1,4 @@
+
 local icons = {
     emoji = {
       buffer                   = " 📄 ",
@@ -12,6 +13,20 @@ local icons = {
       cmp_git                  = " 🐙 ",
       copilot                  = " 🤖 ",
       nvim_lsp_document_symbol = " 🔣 "
+    },
+    text = {
+      buffer                   = "   buf",
+      nvim_lsp                 = "   lsp",
+      nvim_lua                 = "   lua",
+      path                     = "   path",
+      luasnip                  = "   snip",
+      treesitter               = "   tree",
+      rg                       = "   grep",
+      cmdline                  = "   cmd",
+      dap                      = "   dap",
+      cmp_git                  = "   scm",
+      copilot                  = "   bot",
+      nvim_lsp_document_symbol = "   doc"
     },
     glyph = {
       buffer                   = "  ",
@@ -62,7 +77,8 @@ return {
   {
     -- Completion and Snippets
     "hrsh7th/nvim-cmp",
-    -- lazy = true,
+    lazy = true,
+    event = "VeryLazy",
     dependencies = {
       "f3fora/cmp-spell",
       "hrsh7th/cmp-nvim-lsp-signature-help",
@@ -110,7 +126,7 @@ return {
             symbol_map = icons.kind,
             before = function(entry, vim_item)
               vim_item.kind = lspkind.presets.default[vim_item.kind]
-              vim_item.menu = icons.emoji[entry.source.name]
+              vim_item.menu = icons.text[entry.source.name]
               return vim_item
             end,
           }),
@@ -140,23 +156,14 @@ return {
           ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
           ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
           -- invoke completion with only snippets
-          ["<C-S-Space>"] = cmp.mapping(cmp.mapping.complete({
-            config = {
-              sources = {
-                {
-                  name = 'nvim_lsp_signature_help' }
-              }
-            },
-          }), { "i", "c" }),
-          ["<C-q>"] = cmp.mapping({
+         ["<C-q>"] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
           }),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         },
-
         sources = cmp.config.sources({
-          { name = "nvim_lsp_signature_help", group_index = 2, priority = 50},
+          { name = "nvim_lsp_signature_help", priority = 50},
           { name = "copilot",    group_index = 2, priority = 100 },
           { name = "nvim_lsp",   group_index = 2, max_item_count = 20, priority = 200 },
           { name = "luasnip",    group_index = 2, max_item_Count = 20 },
@@ -185,7 +192,6 @@ return {
           { name = "buffer" },
         }),
       })
-
       -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
@@ -216,6 +222,7 @@ return {
     -- Lua-based snippet engine
     "L3MON4D3/LuaSnip",
     lazy = true,
+    event = "VeryLazy",
     dependencies = {
       {
         "rafamadriz/friendly-snippets",

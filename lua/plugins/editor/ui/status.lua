@@ -1,12 +1,13 @@
 return {
-  {
+{
     "nvim-lualine/lualine.nvim",
     enabled = true,
+    event = "VeryLazy",
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
       {
         "arkav/lualine-lsp-progress",
-        enabled = false
+        enabled = true
       },
     },
     opts = function()
@@ -49,7 +50,7 @@ return {
         return function()
           local b = vim.api.nvim_get_current_buf()
           if next(vim.treesitter.highlighter.active[b]) then
-            return " TS "
+            return " "
           end
           return ""
         end
@@ -60,18 +61,28 @@ return {
       --------------------
       return {
         options = {
-          global_status = true,
+          global_status = false,
           theme = "auto",
-          always_divide_middle = false,
+          always_divide_middle = true,
           icons_enabled = true,
           disabled_filetypes = {},
-      section_separators = { left = '', right = '' },
-      -- component_separators = { left = '', right = '' },
-      component_separators = { left = '', right = '' }
+          section_separators = { left = '', right = '' },
+--          component_separators = { left = '', right = '' }
+       component_separators = { left = ' ', right = ' ' }
+
+        },
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = { 'filename' },
+          lualine_x = { 'location' },
+          lualine_y = {},
+          lualine_z = {}
         },
         sections = {
           lualine_a = {
-            { "mode" }
+            { "mode" },
+
           },
           lualine_b = {
             {
@@ -79,10 +90,18 @@ return {
               icon = "",
               cond = conditions.check_git_workspace
             },
+            { "filetype", cond = conditions.buffer_not_empty },
           },
+
           lualine_c = {
 
-            {
+            { treesitter_source(), cond = conditions.buffer_not_empty },
+            { "filename", path = 3 },
+            { "aerial",   cond = conditions.hide_in_width },
+
+          },
+          lualine_x = {
+{
               "diff",
               source = diff_source,
               symbols = {
@@ -90,7 +109,7 @@ return {
                 modified = "柳",
                 removed = " ",
               },
-              cond = conditions.hide_in_width,
+              cond = conditions.check_git_workspace
             },
             {
               "diagnostics",
@@ -102,24 +121,16 @@ return {
                 hint = " ",
               },
             },
-            {"filename"},
 
-          },
-          lualine_x = {
 
-            { "aerial", cond = conditions.hide_in_width },
           },
           lualine_y = {
-
-            { "location", icon = "" },
-            { "progress", icon = "" },
           },
           lualine_z = {
+            { "location", icon = "" },
+            { "progress", icon = "" },
 
-
-             { "fileformat", cond = conditions.buffer_not_empty },
-            {  treesitter_source(), cond= conditions.buffer_not_empty},
-             { "encoding", cond = conditions.buffer_not_empty },
+            { "tabs" }
           },
         },
         extensions = {

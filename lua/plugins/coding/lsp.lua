@@ -1,52 +1,69 @@
+local ts_parsers = {
+  "ansiblels",
+  "bashls",
+  "dockerls",
+  "gopls",
+  "grammarly",
+  "html",
+  "helm_ls",
+  "jsonls",
+  "lua_ls",
+  "pyright",
+  "pylsp",
+  "sqlls",
+  "remark_ls",
+  "rust_analyzer",
+  "taplo",
+  "terraformls",
+  "tsserver",
+  "tflint",
+  "vimls",
+  "yamlls",
+}
+
 return {
-{
+  {
     "zeioth/garbage-day.nvim",
     event = "VeryLazy",
-    opts = {}
-  },
-  {
-    "williamboman/mason.nvim",
-    lazy = false,
-    enabled = true,
-    config = function()
-      require("mason").setup({
-        ui = {
-          icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-          }
-        }
-      })
-    end
+    enabled = false,
+    opts = {
+      notifications = true,
+    }
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "neovim/nvim-lspconfig"
-    },
-    lazy = false,
+    lazy = true,
+    event = "BufReadPre",
     enabled = true,
+    dependencies = {
+      {
+        "williamboman/mason.nvim",
+        lazy = false,
+        enabled = true,
+        config = function()
+          require("mason").setup({
+            ui = {
+              icons = {
+                package_installed = "✓",
+                package_pending = "➜",
+                package_uninstalled = "✗"
+              }
+            }
+          })
+        end
+      },
+      {
+        "neovim/nvim-lspconfig",
+        lazy = true,
+        dependencies = {
+          "folke/lsp-colors.nvim",
+        },
+        event = { "BufReadPre", "BufNewFile" },
+      },
+    },
     config = function()
       require('mason-lspconfig').setup({
-        ensure_installed = {
-          "ansiblels",
-          "bashls",
-          "dockerls",
-          "gopls",
-          "helm_ls",
-          "jsonls",
-          "lua_ls",
-          "pyright",
-          "remark_ls",
-          "rust_analyzer",
-          "taplo",
-          "terraformls",
-          "tsserver",
-          "vimls",
-          "yamlls",
-        },
+        ensure_installed = ts_parsers,
         automatic_installations = true
       })
 
@@ -144,12 +161,5 @@ return {
       })
     end
   },
-  {
-    "neovim/nvim-lspconfig",
-    lazy = true,
-    dependencies = {
-      "folke/lsp-colors.nvim",
-    },
-    event = { "BufReadPre", "BufNewFile" },
-  },
+
 }

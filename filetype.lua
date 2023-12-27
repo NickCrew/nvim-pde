@@ -12,8 +12,6 @@ vim.filetype.add({
     ['roles/**/*.yml']        = 'yaml.ansible',
     ['~/.tmux.conf.d/*.conf'] = 'tmux',
     ['~/.tmux.conf']          = 'tmux',
-    ['*.hcl']                 = 'hcl',
-    ['*.tf*']                 = 'hcl',
     ['*.json.j2']             = 'json',
     ['Dockerfile-*']          = 'Dockerfile',
     ['*.template']            = 'json'
