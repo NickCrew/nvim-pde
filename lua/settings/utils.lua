@@ -38,25 +38,16 @@ M.update_theme = function()
   local isdark = vim.fn.system("isdark")
   local theme = "catppuccin"
   local bg = "dark"
+
   if not isdark == 1 then
     theme = "catppuccin-macchiato"
     bg = "light"
   end
+
   vim.opt.background = bg
   vim.cmd("colorscheme ".. theme)
 end
 
-M.get_diagnostic_icons = function()
-  return {
-    error       = " ",
-    warning     = " ",
-    warn        = " ",
-    information = " ",
-    info = " ",
-    other       = " ",
-    hint        = " ",
-  }
-end
 
 return M
 

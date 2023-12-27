@@ -1,7 +1,15 @@
-local icons = require("settings.utils").get_diagnostic_icons()
+local icons = {
+  error       = " ",
+  warning     = " ",
+  warn        = " ",
+  information = " ",
+  info        = " ",
+  other       = " ",
+  hint        = " ",
+}
 
 return {
-{
+  {
     "echasnovski/mini.bufremove",
     event = "BufEnter",
     lazy = true,

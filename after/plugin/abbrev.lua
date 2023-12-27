@@ -8,4 +8,9 @@ end
 mkabr("T", "Telescope ")
 mkabr("Lr", "Lazy reload ")
 mkabr("L", "Lazy")
+mkabr("RV", "vertical resize +20")
+mkabr("Rv", "vertical resize -20")
+mkabr("RH", "resize +20")
+mkabr("Rh", "resize -20")
+
 

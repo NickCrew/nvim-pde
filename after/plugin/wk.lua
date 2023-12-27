@@ -62,19 +62,20 @@ wk.register({
 -- Normal | Leader
 wk.register({
   b = {
-    name = "+buffers",
-    c    = {
+    name  = "+buffers",
+    b     = { "<Cmd>BufferLinePick<CR>", "Pick Buffer" },
+    c     = {
       name = "+close",
-      u    = { "<Cmd>BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers" },
       l    = { "<Cmd>BufferLineCloseLeft<CR>", "Delete buffers to the left" },
-      r    = { "<Cmd>BufferLineCloseRight<CR>", "Delete buffers to the right" },
       o    = { "<Cmd>BufferLineCloseOthers<CR>", "Delete other buffers" },
+      r    = { "<Cmd>BufferLineCloseRight<CR>", "Delete buffers to the right" },
+      u    = { "<Cmd>BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers" },
     },
-    P    = { "<Cmd>BufferLineTogglePin<CR>", "Toggle pin" },
-    b    = { "<Cmd>BufferLinePick<CR>", "Pick Buffer" },
-    f    = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format Buffer and Save" },
-    p    = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },
-    n    = { "<cmd>BufferLineCycleNext<cr>", "Next buffer" },
+    f     = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format Buffer" },
+    p     = { "<Cmd>BufferLineTogglePin<CR>", "Toggle pin" },
+    x     = { "<cmd>BufferLinePickClose<CR>", "Pick Buffer To Close" },
+    ["["] = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },
+    ["]"] = { "<cmd>BufferLineCycleNext<cr>", "Next buffer" },
   },
   f = {
     name = "+find",
@@ -102,12 +103,15 @@ wk.register({
   -- GIT
   g = {
     name = "+git",
+    g = { "<Cmd>Octo gist list<cr>", "List Gists" },
     b = {
       name = "+blame",
       c = { "<cmd>Gitsigns blame_line<cr>", "Show Commit Message" },
       l = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blame Line" },
     },
     d = { "<cmd>Gitsigns diffthis<cr>", "Diff This" },
+    f = { "<cmd>Gitsigns setqflsit", "Set QF List" },
+    l = { "<cmd>Gitsigns setloclist", "Set Location List" },
     n = { "<cmd>Gitsigns next_hunk<cr>", "Next Hunk" },
     p = { "<cmd>Gitsigns next_hunk<cr>", "Previous Hunk" },
     s = {
@@ -117,8 +121,9 @@ wk.register({
       h = { "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk" },
     },
     r = {
+
       name = "+reset",
-      h = { "<cmd>Gitsegns reset_hunk<cr>", "Reset Hunk" },
+      h = { "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk" },
       b = { "<cmd>Gitsigns reset_buffer<cr>", "Reset Buffer" },
     }
   },
@@ -137,6 +142,7 @@ wk.register({
     h = { "<cmd>NoiceHistory<cr>", "History", },
     x = { "<cmd>NoiceDismiss<cr>", "Dismis Notifications", },
   },
+
   -- TROUBLE
   t = {
     name = "+trouble",
@@ -160,7 +166,6 @@ wk.register({
   -- LEADER (x2)
   ["<leader>"] = {
     name = "+harpoon",
-
     a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Harpoon Add File" },
     j = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "Harpoon 1 (j)" },
     k = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "Harpoon 2 (k)" },
@@ -186,16 +191,14 @@ wk.register({
 -- Ctrl-G
 --
 wk.register({
-  name      = "+quick",
-  r         = { "<cmd>Spectre<cr>", "Search and Replace" },
-  a         = { "<cmd>AerialToggle<cr>", "Toggle Aerial" },
-  o         = { "<cmd>SymbolsOutline<cr>", "Toggle Outline" },
-  t         = { "<cmd>Neotree toggle<cr>", "Toggle Explorer" },
-  s         = { "<cmd>Neotree git_status<cr>", "Toggle Status" },
-  w         = { "<Cmd>WhichKey<Cr>", "WhichKey" },
+  a = { "<cmd>AerialToggle<cr>", "Symbols (Aerial)" },
+  b = { "<cmd>Neotree buffers<cr>", "Buffers " },
+  t = { '<cmd>Neotree<cr>', "Explorer" },
+  o = { "<cmd>SymbolsOutline<cr>", "Outline" },
+  r = { "<cmd>Spectre<cr>", "Search and Replace" },
+  g = { "<cmd>Neotree git_status<cr>", "Git Status" },
+  w = { "<Cmd>WhichKey<Cr>", "WhichKey" },
 }, {
   mode = "n",
   prefix = "<C-g>"
 })
-
-

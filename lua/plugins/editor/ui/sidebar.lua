@@ -93,6 +93,12 @@ return {
           size = { height = 0.3 },
         },
         {
+          ft = "Outline",
+          pinned = true,
+          open = "SymbolsOutlineOpen",
+          size = { width = 40, height = 0.3 },
+        },
+        {
           title = "Git Status",
           ft = "neo-tree",
           filter = function(buf)
@@ -109,13 +115,7 @@ return {
           end,
           pinned = true,
           open = "Neotree position=top buffers",
-        },
-        {
-          ft = "Outline",
-          pinned = true,
-          open = "SymbolsOutlineOpen",
-          size = { width = 40, height = 0.3 },
-        },
+        }, 
         -- any other neo-tree windows
         "neo-tree",
       },

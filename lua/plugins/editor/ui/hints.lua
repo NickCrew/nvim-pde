@@ -1,9 +1,6 @@
 return {
 
-  {
-    "antoinemadec/FixCursorHold.nvim",
-  },
-  {
+    {
     "folke/which-key.nvim",
     lazy = true,
     event = "VeryLazy",
