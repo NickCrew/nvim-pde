@@ -94,13 +94,6 @@ return {
           },
 
           lualine_c = {
-
-            { treesitter_source(), cond = conditions.buffer_not_empty },
-            { "filename", path = 3 },
-            { "aerial",   cond = conditions.hide_in_width },
-
-          },
-          lualine_x = {
 {
               "diff",
               source = diff_source,
@@ -121,6 +114,12 @@ return {
                 hint = " ",
               },
             },
+
+          },
+          lualine_x = {
+
+            { treesitter_source(), cond = conditions.buffer_not_empty },
+            { "aerial",   cond = conditions.hide_in_width },
 
 
           },

@@ -1,9 +1,22 @@
 return {
+  { "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",  -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      -- Only one of these is needed, not both.
+      "nvim-telescope/telescope.nvim", -- optional
+      "ibhagwan/fzf-lua",              -- optional
+    },
+    lazy = true,
+    config = true,
+    cmd = "Neogit"
+  },
   {
     -- Git Integration
     "tpope/vim-fugitive",
     lazy    = true,
-    enabled = true,
+    enabled = false,
     config  = true
   },
   {
@@ -79,7 +92,7 @@ return {
       },
     }
   },
-{
+  {
     -- Git worktree support
     "ThePrimeagen/git-worktree.nvim",
     config = function()
