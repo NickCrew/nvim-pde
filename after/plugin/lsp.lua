@@ -7,3 +7,16 @@ lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_hel
   border = _border })
 
 
+vim.diagnostic.config({
+  underline = true,
+  virtual_text = false,
+  signs = true,
+  update_in_insert = false,
+  float = {
+    header = false,
+    border = 'rounded',
+    focusable = true
+  }
+})
+
+

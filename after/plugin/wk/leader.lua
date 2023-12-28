@@ -1,66 +1,4 @@
-local wk = require("which-key")
-
-
---
--- F-KEYS
---
-wk.register({
-  ["<F1>"] = {
-
-  },
-  ["<F2>"] = {
-
-  },
-  ["<F3>"] = {
-    "<cmd>DapVirtualTextForceRefresh<cr>",
-    "Refresh Virtual Text"
-  },
-  ["<F4>"] = {
-    "<cmd>lua require('dap').run_last()<cr>",
-    "Run Last"
-  },
-  ["<F5>"] = {
-    "<cmd>lua require('dap').continue()<cr>",
-    "Continue"
-  },
-  ["<F6>"] = {
-    "<cmd>lua require('dap').run_to_cursor()<cr>",
-    "Run To Cursor"
-  },
-  ["<F7>"] = { "<cmd>lua require('dap').pause()<cr>", "Pause" },
-  ["<F8>"] = {
-    "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
-    "Conditional Breakpoint"
-  },
-  ["<F9>"] = {
-    "<cmd>lua require('dap').toggle_breakpoint()<cr>",
-    "Toggle Breakpoint"
-  },
-  ["<F10>"] = {
-    "<cmd>lua require('dap').step_out()<cr>",
-    "Step Out"
-  },
-  ["<F12>"] = {
-    "<cmd>lua require('dap').step_over()<cr>",
-    "Step Over"
-  },
-  ["<C-F11>"] = { "<cmd>lua require('dap').step_into()<cr>", "Step In"
-  },
-}, {
-  mode = "n"
-})
-
--- No Leader
-wk.register({
-  ["<C-\\>"] = { "<cmd>ToggleTerm<CR>", "Toggle Terminal" },
-  ["<C-p>"] = { "<Cmd>Telescope<CR>", "Find" },
-  ["<C-g>"] = {}
-}, {
-  mode = "n"
-})
-
--- Normal | Leader
-wk.register({
+require("which-key").register({
   b = {
     name  = "+buffers",
     b     = { "<Cmd>BufferLinePick<CR>", "Pick Buffer" },
@@ -187,18 +125,3 @@ wk.register({
   prefix = "<leader>"
 })
 
---
--- Ctrl-G
---
-wk.register({
-  a = { "<cmd>AerialToggle<cr>", "Symbols (Aerial)" },
-  b = { "<cmd>Neotree buffers<cr>", "Buffers " },
-  t = { '<cmd>Neotree<cr>', "Explorer" },
-  o = { "<cmd>SymbolsOutline<cr>", "Outline" },
-  r = { "<cmd>Spectre<cr>", "Search and Replace" },
-  g = { "<cmd>Neotree git_status<cr>", "Git Status" },
-  w = { "<Cmd>WhichKey<Cr>", "WhichKey" },
-}, {
-  mode = "n",
-  prefix = "<C-g>"
-})
