@@ -12,49 +12,29 @@ return {
           enable = true,
         },
         footer = {
-
+          "",
+          "  " .. vim.fn.getcwd(),
         },
         shortcut = {
-          {
-            desc = 'New',
-            icon = '  ',
-            group = "@property",
-            action = 'new',
-            key = 'n'
-          },
-          {
-            desc = 'Open',
+        {
+            desc = 'Find Files',
             icon = '  ',
             group = '@number',
             action = 'Telescope find_files',
             key = 'f',
           },
           {
-            desc = "Browse",
-            icon = "  ",
-            group = '@label',
-            action = "Neotree toggle",
-            key = "b"
-          },
-          {
-            desc = 'Search',
+            desc = 'Search in Files',
             icon = " ",
             action = 'Telescope live_grep',
             group = '@keyword',
             key = 'g',
           },
           {
-            desc = 'Changes',
-            icon = " ",
-            action = 'Telescope git_status',
-            group = 'DashboardShortCut',
-            key = 'c',
-          },
-          {
-            desc = 'Marks',
+            desc = 'Bookmarks',
             icon = '  ',
-            group = '@variable',
-            action = 'Telescope marks',
+            group = 'DashboardShortCut',
+            action = 'Telescope harpoon marks',
             key = 'm'
           },
           {
@@ -62,7 +42,7 @@ return {
             icon = '  ',
             group = 'DiagnosticHint',
             action = 'Lazy',
-            key = 'p'
+            key = 'l'
           },
         },
       },

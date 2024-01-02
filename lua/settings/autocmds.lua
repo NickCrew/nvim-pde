@@ -9,11 +9,6 @@ local function augroup(name)
 end
 local aucmd = vim.api.nvim_create_autocmd
 
-----------------
--- User Commands
-----------------
-vim.api.nvim_command("command! UpdateTheme lua require('settings.utils').update_theme()")
-
 
 -----------------------------------------------------
 -- Check if we need to reload the file after changes
@@ -60,6 +55,27 @@ aucmd({ "VimResized" }, {
     vim.cmd("tabdo wincmd =")
     vim.cmd("tabnext " .. current_tab)
   end,
+})
+
+----------------------------------
+-- Terminal escaping improvements
+----------------------------------
+aucmd({ "TermOpen" }, {
+  group = augroup("terminals"),
+  callback = function()
+    _G.set_terminal_keymaps()
+  end,
+})
+
+
+------------------
+-- User LSP Config
+------------------
+aucmd('LspAttach', {
+        group = augroup('UserLspConfig'),
+        callback = function(ev)
+          _G.set_lsp_keymaps(ev.buf)
+        end,
 })
 
 

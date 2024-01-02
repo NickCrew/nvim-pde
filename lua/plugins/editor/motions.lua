@@ -1,41 +1,22 @@
+
 local select_any_word = function()
   require("flash").jump({
-  pattern = ".", -- initialize pattern with any char
-  search = {
-    mode = function(pattern)
-      -- remove leading dot
-      if pattern:sub(1, 1) == "." then
-        pattern = pattern:sub(2)
-      end
-      -- return word pattern and proper skip pattern
-      return ([[\<%s\w*\>]]):format(pattern), ([[\<%s]]):format(pattern)
-    end,
-  },
-  -- select the range
-  jump = { pos = "range" },
-})
-end
-
-local jump_diagnostics = function()
-  -- More advanced example that also highlights diagnostics:
-  require("flash").jump({
-    matcher = function(win)
-      return vim.tbl_map(function(diag)
-        return {
-          pos = { diag.lnum + 1, diag.col },
-          end_pos = { diag.end_lnum + 1, diag.end_col - 1 },
-        }
-      end, vim.diagnostic.get(vim.api.nvim_win_get_buf(win)))
-    end,
-    action = function(match, state)
-      vim.api.nvim_win_call(match.win, function()
-        vim.api.nvim_win_set_cursor(match.win, match.pos)
-        vim.diagnostic.open_float()
-      end)
-      state:restore()
-    end,
+    pattern = ".", -- initialize pattern with any char
+    search = {
+      mode = function(pattern)
+        -- remove leading dot
+        if pattern:sub(1, 1) == "." then
+          pattern = pattern:sub(2)
+        end
+        -- return word pattern and proper skip pattern
+        return ([[\<%s\w*\>]]):format(pattern), ([[\<%s]]):format(pattern)
+      end,
+    },
+    -- select the range
+    jump = { pos = "range" },
   })
 end
+
 
 local jump_to_line = function()
   require("flash").jump({
@@ -47,12 +28,13 @@ end
 
 local jump_to_word_under_cursor = function()
   require("flash").jump({
-  pattern = vim.fn.expand("<cword>"),
-})
+    pattern = vim.fn.expand("<cword>"),
+  })
 end
 
+
 return {
-{
+  {
     'echasnovski/mini.bracketed',
     version = false,
     lazy = true,
@@ -62,6 +44,7 @@ return {
   {
     -- Quick movements
     "phaazon/hop.nvim",
+    enabled = false,
     branch = 'v2',
     opts = {
       case_insensitive = true
@@ -71,12 +54,19 @@ return {
     "folke/flash.nvim",
     lazy = true,
     event = "VeryLazy",
-  opts = {
+    opts = {
       modes = {
-        char = { 
+        char = {
           jump_labels = true
         },
-      }
+      },
+      jump = {
+        nohlsearch = true,
+        autojump = false
+      },
+      search = {
+        multi_window = true
+      },
     },
     keys = {
       {
@@ -103,24 +93,24 @@ return {
         function() require("flash").treesitter_search() end,
         desc = "Treesitter Search"
       },
-            {
-        ";*",
+      {
+        "<leader>*",
         mode = { "n" },
         jump_to_word_under_cursor,
         desc = "Jump To Word Under Cursor"
       },
       {
-        ";l",
+        "<leader>'",
         mode = { "n" },
         jump_to_line,
         desc = "Jump To Line"
       },
       {
-        "<c-s>",
-        mode = { "c" },
-        function() require("flash").toggle() end,
-        desc = "Toggle Flash Search"
+        "<leader>W",
+        mode = { "n" },
+        select_any_word,
+        desc = "Select Any Word"
       },
     },
-  },
+  }
 }

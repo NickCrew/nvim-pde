@@ -5,10 +5,27 @@ return {
     "mfussenegger/nvim-dap",
     lazy = true,
     enabled = true,
+    keys = {
+
+      { "<F3>",    mode = "n", "<cmd>DapVirtualTextForceRefresh<cr>",                                                desc = "Refresh Virtual Text" },
+      { "<F4>",    mode = "n", "<cmd>lua require('dap').run_last()<cr>",                                             desc = "Run Last" },
+      { "<F5>",    mode = "n", "<cmd>lua require('dap').continue()<cr>",                                             desc = "Continue" },
+      { "<F6>",    mode = "n", "<cmd>lua require('dap').run_to_cursor()<cr>",                                        desc = "Run To Cursor" },
+      { "<F7>",    mode = "n", "<cmd>lua require('dap').pause()<cr>",                                                desc = "Pause" },
+      { "<F8>",    mode = "n", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", desc = "Conditional Breakpoint" },
+      { "<F9>",    mode = "n", "<cmd>lua require('dap').toggle_breakpoint()<cr>",                                    desc = "le Breakpoint" },
+      { "<F10>",   mode = "n", "<cmd>lua require('dap').step_out()<cr>",                                             desc = "Step Out" },
+      { "<C-F10>", mode = "n", "<cmd>lua require('dap').step_into()<cr>",                                            desc = "Step In" },
+      { "<F12>",   mode = "n", "<cmd>lua require('dap').step_over()<cr>",                                            desc = "Step Overer" }
+    },
     dependencies = {
       {
         -- Debugger GUI
         "rcarriga/nvim-dap-ui",
+        keys = {
+          { '<leader>k', mode = 'n', "<cmd>lua require('dapui').eval()<CR>",   desc = "Eval" },
+          { "<F2>",      mode = "n", "<cmd>lua require('dapui').toggle()<cr>", desc = "Dap UI" },
+        },
         config = function()
           local dap = require("dap")
           local dapui = require("dapui")
@@ -64,35 +81,6 @@ return {
           dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
           dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
           dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
-
-          dap.listeners.after.event_initialized["me"] = function()
-            for _, buf in pairs(vim.api.nvim_list_bufs()) do
-              local keymaps = vim.api.nvim_buf_get_keymap(buf, "n")
-              for _, keymap in pairs(keymaps) do
-                if keymap.lhs == "K" then
-                  table.insert({}, keymap)
-                  vim.api.nvim_buf_del_keymap(buf, "n", "K")
-                end
-              end
-            end
-            vim.api.nvim_set_keymap(
-              "n",
-              "K",
-              '<Cmd>lua require("dapui").eval()<CR>',
-              { silent = true })
-          end
-
-          dap.listeners.after.event_terminated["me"] = function()
-            for _, keymap in pairs({}) do
-              vim.api.nvim_buf_set_keymap(
-                keymap.buffer,
-                keymap.mode,
-                keymap.lhs,
-                keymap.rhs, {
-                  silent = keymap.silent == 1
-                })
-            end
-          end
         end,
 
       },

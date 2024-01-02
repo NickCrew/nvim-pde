@@ -1,14 +1,27 @@
 return {
-{
+  {
     -- Enhance LSP Diagnostics
     "folke/trouble.nvim",
     lazy = true,
     cmd = "TroubleToggle",
+    keys = {
+
+      { "<C-t><C-d>",     mode = "n", "<esc><cmd>TroubleToggle lsp_definitions<cr>",       desc = "Toggle LSP Definitions", },
+      { "<C-t><C-r>",     mode = "n", "<esc><cmd>TroubleToggle lsp_references<cr>",        desc = "Toggle LSP References", },
+      { "<C-g>d",     mode = "n", "<esc><cmd>TroubleToggle<cr>",                       desc = "Diagnostics" },
+      { "<C-t>f",     mode = "n", "<esc><cmd>TroubleToggle quickfix<cr>",              desc = "Toggle QuickFix", },
+      { "<C-t>l",     mode = "n", "<esc><cmd>TroubleToggle loclist<cr>",               desc = "Toggle Location List", },
+      { "<C-t>d",     mode = "n", "<esc><cmd>TroubleToggle document_diagnostics<cr>",  desc = "Toggle Document Diagnostics", },
+      { "<C-t>w",     mode = "n", "<esc><cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Toggle Workspace Diagnostics", },
+      { "<C-t>t",    mode = "n", "<esc><cmd>TroubleToggle<cr>",                       desc = "Toggle Trouble", },
+      { "<C-t>r",    mode = "n", "<esc><cmd>TroubleRefresh<cr>",                       desc = "Trouble Refresh", },
+
+    },
     opts = {
       width = 50, -- width of the list when position is left or right
       position = "bottom", -- position of the list can be: bottom, top, left, right
       icons = true, -- use devicons for filenames
-      mode = "document_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
+      mode = "workspace_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
       fold_open = "", -- icon used for open folds
       fold_closed = "", -- icon used for closed folds
       group = true, -- group results by file

@@ -9,6 +9,32 @@ return {
     dependencies = {
       { "nvim-lua/plenary.nvim" },
     },
+    keys = {
+      { "<leader>fC", mode = "n", "<esc><cmd>Telescope commands<cr>",        desc = "Command" },
+      { "<leader>fH", mode = "n", "<esc><cmd>Telescope command_history<cr>", desc = "Recent Command" },
+      { "<leader>fS", mode = "n", "<esc><cmd>Telescope search_history<cr>",  desc = "in Search History" },
+      { "<leader>fT", mode = "n", "<esc><cmd>Telescope treesitter<cr>",      desc = "Treesitter Symbol" },
+      { "<leader>fa", mode = "n", "<esc><cmd>Telescope aerial<cr>",          desc = "Symbols" },
+      { "<leader>fb", mode = "n", "<esc><cmd>Telescope buffers<cr>",         desc = "Buffer" },
+      { "<leader>fe", mode = "n", "<esc><cmd>Telescope file_browser<cr>",    desc = "in File Browser" },
+      { "<leader>ff", mode = "n", "<esc><cmd>Telescope find_files<cr>",      desc = "File" },
+      { "<leader>fg", mode = "n", "<esc><cmd>Telescope live_grep<cr>",       desc = "String in Files" },
+      { "<leader>fh", mode = "n", "<esc><cmd>Telescope harpoon marks<cr>",   desc = "Harpooned Files" },
+      { "<leader>fj", mode = "n", "<esc><cmd>Telescope jumplist<cr>",        desc = "in Jumplist" },
+      { "<leader>fk", mode = "n", "<esc><cmd>Telescope keymaps<cr>",         desc = "Keymaps" },
+      { "<leader>fm", mode = "n", "<esc><cmd>Telescope marks<cr>",           desc = "in Marks" },
+      { "<leader>fn", mode = "n", "<esc><cmd>Telescope notify<cr>",          desc = "Notification" },
+      { "<leader>fo", mode = "n", "<esc><cmd>Telescope oldfiles<cr>",        desc = "Recent Files" },
+      { "<leader>fr", mode = "n", "<esc><cmd>Telescope registers<cr>",       desc = "in Registers" },
+      { "<leader>fs", mode = "n", "<esc><cmd>Telescope luasnip<cr>",         desc = "Snippet" },
+      { "<leader>fx", mode = "n", "<esc><cmd>Telescope quickfix<cr>",        desc = "Send To QuickFix" },
+      { "<leader>fR", mode = "n", "<esc><cmd>Telescope reloader<cr>",        desc = "Reloader" },
+      { "<leader>fu", mode = "n", "<esc><cmd>Telescope undo<cr>",            desc = "Search Undo" },
+      { "<C-g>p",     mode = "n", "<esc><Cmd>Telescope<cr>",                 desc = "Telescope" },
+      { "<C-p>",     mode = "n", "<esc><Cmd>Telescope buffers<cr>",         desc = "Open Buffer" },
+      { "<C-g>m",     mode = "n", "<esc><cmd>Telescope harpoon marks<cr>",   desc = "Harpoon Marks" },
+      { "<C-g>r",     mode = "n", "<esc><cmd>Telescope oldfiles<cr>",        desc = "Open Recent File" },
+    },
     opts = function()
       local actions = require("telescope.actions")
       local themes = require("telescope.themes")
@@ -34,17 +60,14 @@ return {
 
       return {
         defaults = {
+          sorting_strategy = "ascending",
+          winblend = 0,
           layout_strategy = "horizontal",
           layout_config = {
-            vertical = {
-              prompt_position = "top",
-              mirror = false,
-              width = 0.6
-            },
-            horizontal = {
-              width = 0.7,
-              height = 0.7
-            },
+            height = 0.5,
+            width = 0.7,
+            prompt_position = "top",
+
           },
           prompt_prefix = "  ",
           selection_caret = "   ",
@@ -78,6 +101,9 @@ return {
           },
           harpoon = {
             theme = "dropdown"
+          },
+          marks = {
+            theme = "ivy"
           },
           find_files = {
             theme = "dropdown"
@@ -187,6 +213,9 @@ return {
   {
     "gbprod/yanky.nvim",
     lazy = true,
+    keys = {
+      { "<leader>fp", mode = "n", "<esc><cmd>Telescope yank_history<cr>", desc = "Yank History" }
+    },
     config = function()
       require("telescope").load_extension("yank_history")
     end
@@ -215,6 +244,12 @@ return {
   {
     "nvim-telescope/telescope-dap.nvim",
     lazy = true,
+    keys = {
+      { "<leader>fdb", mode = "n", "<esc><Cmd>Telescope dap list_breakpoints<cr>", desc = "DAP Commands" },
+      { "<leader>fdc", mode = "n", "<esc><Cmd>Telescope dap configurations<cr>",   desc = "DAP Commands" },
+      { "<leader>fdd", mode = "n", "<esc><Cmd>Telescope dap commands<cr>",         desc = "DAP Commands" },
+      { "<leader>fdv", mode = "n", "<esc><Cmd>Telescope dap variables<cr>",        desc = "DAP Commands" },
+    },
     config = function()
       require("telescope").load_extension('dap')
     end
@@ -258,6 +293,9 @@ return {
   {
     "xiyaowong/telescope-emoji.nvim",
     lazy = true,
+    keys = {
+      { "<leader>fe", mode = "n", "<esc><cmd>Telescope emoji<cr>", desc = "Emoji" },
+    },
     config = function()
       require("telescope").load_extension("emoji")
     end
@@ -265,6 +303,9 @@ return {
   {
     "ghassan0/telescope-glyph.nvim",
     lazy = true,
+    keys = {
+      { "<leader>fG", mode = "n", "<esc><cmd>Telescope glyph<cr>", desc = "Icon" },
+    },
     config = function()
       require("telescope").load_extension("glyph")
     end
@@ -308,13 +349,6 @@ return {
     end
   },
   {
-    "ThePrimeagen/harpoon",
-    lazy = true,
-    config = function()
-      require("telescope").load_extension("harpoon")
-    end
-  },
-  {
     "paopaol/telescope-git-diffs.nvim",
     lazy = true,
     config = function()
@@ -335,6 +369,57 @@ return {
     config = function()
       require("telescope").load_extension("tasks")
     end
+  },
+  {
+    "debugloop/telescope-undo.nvim",
+    lazy = true,
+    keys = {
+      { "<leader>fu", mode = "n", "<esc><cmd>Telescope undo_list<cr>", desc = "Undo List" }
+    },
+    config = function()
+      require("telescope").load_extension("undo")
+    end
+  },
+  {
+    "aznhe21/actions-preview.nvim",
+    lazy = true,
+    keys = {
+      {"<leader>fa", mode = "n", "<esc><cmd>lua require('actions-preview').code_actions<cr>", desc = "Code Actions"}
+    },
+    config = function()
+      require("telescope").load_extension("actions-preview")
+    end
+  },
+  {
+    'dawsers/telescope-file-history.nvim',
+    lazy = true,
+    config = function()
+      require('telescope').load_extension('file_history')
+    end
+  },
+  {
+    'olacin/telescope-gitmoji.nvim',
+    lazy = true,
+    keys = {
+      {"<leader>fE", mode = "n", "<esc><cmd>Telescope gitmoji<cr>", desc = "Gitmoji"}
+    },
+    config = function()
+      require('telescope').load_extension('gitmoji')
+    end
+
+  },
+  {
+    'Shatur/neovim-session-manager',
+    lazy = true,
+    config = function()
+      require('telescope').load_extension('session_manager')
+    end
+  },
+  {
+    "ryanmsnyder/toggleterm-manager.nvim",
+    lazy = true,
+    cmd = "Telescope toggleterm_manager",
+    config = true
   },
   {
     "mrjones2014/legendary.nvim",

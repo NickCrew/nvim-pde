@@ -1,11 +1,15 @@
 return {
   {
     'echasnovski/mini.animate', version = false,
-    enabled = true
+    enabled = true,
+    event = "VeryLazy",
+    lazy = true,
   },
   {
     "karb94/neoscroll.nvim",
     enabled = true,
+    lazy =  true,
+    event = "VeryLazy",
     opts = {
       easing_funtion = "sine",
       mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb' },

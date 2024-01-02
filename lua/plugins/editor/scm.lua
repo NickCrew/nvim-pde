@@ -1,24 +1,4 @@
 return {
-  { "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim",  -- required
-      "sindrets/diffview.nvim", -- optional - Diff integration
-
-      -- Only one of these is needed, not both.
-      "nvim-telescope/telescope.nvim", -- optional
-      "ibhagwan/fzf-lua",              -- optional
-    },
-    lazy = true,
-    config = true,
-    cmd = "Neogit"
-  },
-  {
-    -- Git Integration
-    "tpope/vim-fugitive",
-    lazy    = true,
-    enabled = false,
-    config  = true
-  },
   {
     -- Get links to github
     "ruifm/gitlinker.nvim",
@@ -35,10 +15,41 @@ return {
     config = true
   },
   {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",  -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      -- Only one of these is needed, not both.
+      "nvim-telescope/telescope.nvim", -- optional
+      "ibhagwan/fzf-lua",              -- optional
+    },
+    lazy = true,
+    config = true,
+    cmd = "Neogit"
+  },
+
+  {
     -- git changes in sign column
     "lewis6991/gitsigns.nvim",
     lazy = true,
     event = "VeryLazy",
+    keys = {
+
+      { "<leader>gg",   mode = "n", "<esc><Cmd>Octo gist list<cr>",                     desc = "List Gists" },
+      { "<leader>gbc",  mode = "n", "<esc><cmd>Gitsigns blame_line<cr>",                desc = "Show Commit Message" },
+      { "<leader>gb1l", mode = "n", "<esc><cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Blame Line" },
+      { "<leader>gd",   mode = "n", "<esc><cmd>Gitsigns diffthis<cr>",                  desc = "Diff This" },
+      { "<leader>gf",   mode = "n", "<esc><cmd>Gitsigns setqflsit",                     desc = "Set QF List" },
+      { "<leader>gl",   mode = "n", "<esc><cmd>Gitsigns setloclist",                    desc = "Set Location List" },
+      { "<leader>ghn",  mode = "n", "<esc><cmd>Gitsigns next_hunk<cr>",                 desc = "Next Hunk" },
+      { "<leader>ghp",  mode = "n", "<esc><cmd>Gitsigns next_hunk<cr>",                 desc = "Previous Hunk" },
+      { "<leader>gsH",  mode = "n", "<esc><cmd>Gitsigns undo_stage_hunk<cr>",           desc = "Undo Stage Hunk" },
+      { "<leader>gsb",  mode = "n", "<esc><cmd>Gitsigns stage_buffer<cr>",              desc = "Stage Buffer" },
+      { "<leader>gsh",  mode = "n", "<esc><cmd>Gitsigns stage_hunk<cr>",                desc = "Stage Hunk" },
+      { "<leader>grh",  mode = "n", "<esc><cmd>Gitsigns reset_hunk<cr>",                desc = "Reset Hunk" },
+      { "<leader>grb",  mode = "n", "<esc><cmd>Gitsigns reset_buffer<cr>",              desc = "Reset Buffer" },
+    },
     opts = {
       signs = {
         add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },

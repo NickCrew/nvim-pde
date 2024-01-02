@@ -1,6 +1,7 @@
 return {
   {
-    "simrat39/rust-tools.nvim",
+'mrcjkb/rustaceanvim',
+version = '^3',
     lazy = true,
     ft = "rust"
   },

@@ -1,13 +1,21 @@
 return {
 
-    {
+  {
     "folke/which-key.nvim",
     lazy = true,
     event = "VeryLazy",
+    keys = {
+
+      { "<C-g>w", mode = "n", "<esc><Cmd>WhichKey<Cr>", desc = "WhichKey" },
+    },
     cmd = "WhichKey",
     enabled = true,
+    init = function()
+      vim.o.timeoutlen = 300
+      vim.o.timeout = true
+    end,
     opts = {
-      plugins = {
+      plugins            = {
         marks = true,      -- shows a list of your marks on ' and `
         registers = true,  -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
@@ -23,36 +31,47 @@ return {
           windows = true,      -- default bindings on <c-w>
           nav = true,          -- misc bindings to work with windows
           g = true,            -- bindings for prefixed with g
+          z = true             -- bindings for prefixed with z
         },
+      },
+      operators          = {
+        gc = "Comments"
       },
       -- add operators that will trigger motion and text object completion
       -- to enable all native operators, set the preset / operators plugin above
-      key_labels = {
+      key_labels         = {
         -- override the label used to display some keys. It doesn't effect WK in any other way.
         -- For example:
         ["<space>"] = "SPC",
         ["<cr>"] = "RET",
         ["<tab>"] = "TAB",
       },
-      icons = {
+      icons              = {
         breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
         separator = "➜", -- symbol used between a key and it's label
         group = "+", -- symbol prepended to a group
       },
-      window = {
+      window             = {
         border = "single",         -- none, single, double, shadow
         position = "bottom",       -- bottom, top
         margin = { 1.8, 1, 1, 1 }, -- extra window margin [top, right, bottom, left]
         padding = { 1, 1, 1, 1 },  -- extra window padding [top, right, bottom, left]
       },
-      layout = {
+      layout             = {
         height = { min = 1, max = 35 }, -- min and max height of the columns
         width = { min = 20, max = 50 }, -- min and max width of the columns
         spacing = 1,                    -- spacing between columns
         align = "center",               -- align columns left, center or right
       },
-      ignore_missing = false,           -- enable this to hide mappings for which you didn't specify a label
-      hidden = {
+      motions            = {
+        count = true,
+      },
+      popup_mappings     = {
+        scroll_down = "<c-d>", -- binding to scroll down inside the popup
+        scroll_up = "<c-u>",   -- binding to scroll up inside the popup
+      },
+      ignore_missing     = false, -- enable this to hide mappings for which you didn't specify a label
+      hidden             = {
         "<silent>",
         "<cmd>",
         "<Cmd>",
@@ -66,10 +85,22 @@ return {
         "lua",
         "^:",
         "^ ",
-      },                 -- hide mapping boilerplate
-      show_help = true,  -- show help message on the command line when the popup is visible
-      triggers = "auto", -- automatically setup triggers
+      },                -- hide mapping boilerplate
+      show_help          = true, -- show help message on the command line when the popup is visible
+      show_keys          = true,
+      --triggers = { "<leader>", "<ctrl-g>", "<ctrl-t>", "\"", "'" }, -- automatically setup triggers
       -- triggers = { "<leader>" }, -- or specify a list manually
+      triggers           = "auto",
+      triggers_nowait    = {
+        "`",
+        "'",
+        "g`",
+        "g'",
+        '"',  -- double quote
+        "z=", -- spell correction
+        "<c-r>"
+
+      },
 
       triggers_blacklist = {
         -- list of mode / prefixes that should never be hooked by WhichKey
