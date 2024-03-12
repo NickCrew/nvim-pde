@@ -2,6 +2,7 @@
 -- Description: Load plugins using Lazy
 --------------------------------------------------
 
+local devpath = vim.fn.stdpath("config") .. "/lua/devel/plugins"
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -21,6 +22,7 @@ require("lazy").setup({
     { import = "plugins.lang" },
     { import = "plugins.editor" },
     { import = "plugins.ui" },
+    { import = "plugins.devel" },
   }
 }, {
   profiling = {
@@ -30,8 +32,14 @@ require("lazy").setup({
   checker = {
     enabled = true
   },
+  dev = {
+    path =  devpath,
+    pattern = "NickCrew",
+    fallback = false
+  },
+
   install = {
-    colorscheme = "carbonfox"
+    colorscheme = "catppuccin"
   },
   performance = {
     rtp = {

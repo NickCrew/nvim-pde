@@ -48,4 +48,4 @@ local function makefile_targets_picker()
 		:find()
 end
 
-vim.keymap.set("n", "<leader>o", makefile_targets_picker, {})
+vim.api.nvim_create_user_command("Makebro", makefile_targets_picker, {})

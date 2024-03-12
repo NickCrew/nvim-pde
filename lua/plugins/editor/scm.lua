@@ -10,7 +10,6 @@ return {
     -- Github integration
     "pwntester/octo.nvim",
     cmd = "Octo",
-    event = "VeryLazy",
     lazy = true,
     config = true
   },

@@ -25,41 +25,61 @@ return {
             "folke/lsp-colors.nvim",
             lazy = true,
           },
-{
+          {
             "SmiteshP/nvim-navbuddy",
             lazy = true,
             dependencies = {
-                "SmiteshP/nvim-navic",
-                "MunifTanjim/nui.nvim"
+              "SmiteshP/nvim-navic",
+              "MunifTanjim/nui.nvim"
             },
             keys = {
-                {"<C-n>", "<cmd>Navbuddy<CR>", mode = "n", desc = "Toggle NavBuddy"}
+              { "<C-n>", "<cmd>Navbuddy<CR>", mode = "n", desc = "Toggle NavBuddy" }
             },
-            opts = { 
+            opts = {
               lsp = { auto_attach = true },
               border = "rounded",
               position = "90%",
               size = "30%"
 
             }
-        }
+          }
         },
         event = { "BufReadPre", "BufNewFile" },
       },
     },
     config = function()
+      vim.diagnostic.config({
+        underline = true,
+        virtual_text = false,
+        signs = true,
+        update_in_insert = true,
+        float = {
+          header = true,
+          border = 'rounded',
+          focusable = true
+        }
+      })
       local deps = {
+
         "ansiblels",
         "dockerls",
+        "cssls",
+        "html",
+        "htmx",
+        "jsonls",
         "lua_ls",
         "pyright",
         "remark_ls",
         "terraformls",
         "tsserver",
+        "tflint",
         "yamlls",
       }
+
       -- Add additional capabilities supported by nvim-cmp
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+
       local handlers = {
         -- default
         function(server_name)
@@ -67,6 +87,7 @@ return {
             capabilities = capabilities
           }
         end,
+
         -- Python
         ["pyright"] = function()
           require("lspconfig").pyright.setup({
@@ -97,42 +118,9 @@ return {
             }
           })
         end,
-        -- Ansible
-        ["ansiblels"] = function()
-          require("lspconfig").ansiblels.setup({
-            settings = {
-              ansible = {
-                path = "/usr/local/Homebrew/ansible",
-              },
-              ansibleLint = {
-                enabled = true,
-                path = "/usr/local/Homebrew/ansible-lint"
-              },
-              python = {
-                interpreterPath = "/usr/local/Homebrew/python3"
-              },
-            },
-          })
-        end
       }
 
-      require('mason-lspconfig').setup({
-        ensure_installed = {
-        "ansiblels",
-        "dockerls",
-        "cssls",
-        "html",
-        "htmx",
-        "jsonls",
-        "lua_ls",
-        "pyright",
-        "remark_ls",
-        "terraformls",
-        "tsserver",
-        "tflint",
-        "yamlls",
-      }
-      })
+      require('mason-lspconfig').setup({ deps })
       require("mason-lspconfig").setup_handlers(handlers)
     end
   },
@@ -221,7 +209,7 @@ return {
 
     },
     config = function()
-      local icons = require("settings.utils").get_icons()
+      local icons = _G.get_icons()
       local cmp = require('cmp')
       local lspkind = require("lspkind")
       local luasnip = require("luasnip")

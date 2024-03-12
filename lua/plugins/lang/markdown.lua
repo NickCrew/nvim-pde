@@ -2,7 +2,6 @@ return {
   {
     "ellisonleao/glow.nvim",
     lazy = true,
-    ft = "markdown",
     opts = {
       glow_path = "/opt/homebrew/bin/glow"
     },
@@ -20,12 +19,9 @@ return {
   {
     "epwalsh/obsidian.nvim",
     lazy = true,
-    ft = "markdown",
     event = {
-      -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-      -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-      "BufReadPre /Users/nick/Obsidian/**.md",
-      "BufNewFile /Users/nick/Obsidian/**.md",
+      "BufReadPre .. vim.fn.expand '~' .. '/Obsidian/**.md'",
+      "BufNewFile .. vim.fn.expand '~' .. '/Obsidian/**.md'"
     },
     dependencies = {
       "nvim-lua/plenary.nvim",

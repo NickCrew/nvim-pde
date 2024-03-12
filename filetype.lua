@@ -4,6 +4,7 @@ vim.filetype.add({
     ['*.adoc']                = 'asciidoc',
     ['*.asc']                 = 'asciidoc',
     ['.git*']                 = 'gitconfig',
+    ['*.keymap']              = 'devicetree',
     ['.gitconfig']            = 'gitconfig',
     ['~/.config/git/*']       = 'gitconfig',
     ['*.snippets']            = 'snippets',

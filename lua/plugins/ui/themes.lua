@@ -7,6 +7,12 @@ return {
     config = true
   },
   {
+    "sainnhe/gruvbox-material",
+    enabled = truen,
+    lazy = true
+
+  },
+  {
     -- colorscheme development
     "rktjmp/lush.nvim",
     enabled = true,

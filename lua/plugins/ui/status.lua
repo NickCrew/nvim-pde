@@ -1,9 +1,8 @@
---[[ Statusbar customization
---]]
 return {
   {
 
     "smiteshp/nvim-navic",
+    lazy = true,
     config = function()
       require("nvim-navic").setup({
         lsp = {
@@ -117,12 +116,12 @@ return {
 
         },
         winbar_inactive = {
-            lualine_b = {},
-            lualine_a = {
-            },
-            lualine_x = {},
-            lualine_y = {},
-            lualine_z = {}
+          lualine_a = {
+          },
+          lualine_b = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {}
         },
 
         winbar = {
@@ -137,50 +136,20 @@ return {
               separator = ''
             },
 
-          },
 
+          },
         },
 
-        -- tabline = {},
 
-
-        -- tabline_inactive = {
-        --   lualine_a = {},
-        --   lualine_b = {},
-        --   lualine_c = {
-        --   },
-        --   lualine_x = {},
-        --   lualine_y = {},
-        --   lualine_z = {}
-        -- },
-
-
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = {
-          },
-          lualine_x = {},
-          lualine_y = {},
-          lualine_z = {}
-        },
 
         sections = {
           lualine_a = {
 
-            { "tabs" },
             { "mode" },
 
           },
           lualine_b = {
 
-
-            -- {
-            --   "filename",
-            --   path = 2,
-            --   newfile_status = true,
-            --   symbols = { modified = " ", readonly = " ", newfile = " ", unnamed = " " },
-            -- },
 
             {
               "branch",
@@ -190,7 +159,6 @@ return {
           },
 
           lualine_c = {
-            
             {
               "diff",
               source = diff_source,
@@ -201,33 +169,30 @@ return {
               },
               cond = conditions.check_git_workspace,
             },
+            -- {
+            --   "diagnostics",
+            --   sources = { "nvim_diagnostic" },
+            --   symbols = {
+            --     error = " ",
+            --     warn = "  ",
+            --     info = "  ",
+            --     hint = "  ",
+            --   },
+            -- },
 
 
           },
           lualine_x = {
-{
-              "diagnostics",
-              sources = { "nvim_diagnostic" },
-              symbols = {
-                error = " ",
-                warn = "  ",
-                info = "  ",
-                hint = "  ",
-              },
-            },
-
-          },
-          lualine_z = {
-            { "location", icon = "", separator = ' ' },
-            { "progress", icon = "" },
+            treesitter_source(),
           },
           lualine_y = {
-
-            { "filetype", separator = '' },
-
-            { "encoding",          separator = '' },
-            { "fileformat",        separator = '' },
-            { treesitter_source(), separator = '' },
+            { "filetype" , separator = ' ' },
+            { "encoding" , separator = ' ' },
+            { "fileformat" , separator = ' ' }
+          },
+          lualine_z = {
+           { "location", icon = "", separator = ' ' },
+            { "progress", icon = "" },
           },
         },
         extensions = {

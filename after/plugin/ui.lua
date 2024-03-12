@@ -2,18 +2,6 @@
 ----------------
 -- Diagnostics
 --
-vim.diagnostic.config({
-  underline = true,
-  virtual_text = false,
-  signs = true,
-  update_in_insert = true,
-  float = {
-    header = true,
-    border = 'rounded',
-    focusable = true
-  }
-})
-
 
 
 ---------------
@@ -32,7 +20,7 @@ end
 ----------------
 -- Signs & Icons
 --
-local icons = require('settings.utils').get_icons()
+local icons = _G.get_icons()
 local signs = {
   DapBreakpoint             = icons.dap.Breakpoint,
   DapBreakpointCondition    = icons.dap.BreakpointConditional,

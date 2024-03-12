@@ -1,7 +1,17 @@
 return {
 {
+  "otavioschwanck/arrow.nvim",
+  enabled = true,
+  lazy = true,
+ opts = {
+    show_icons = true,
+    leader_key = ';' -- Recommended to be a single key
+  }
+},
+{
     -- Hyperfast project navigation
     "ThePrimeagen/harpoon",
+    enabled = false,
     lazy = true,
     branch = "harpoon2",
     event = "BufReadPre",
