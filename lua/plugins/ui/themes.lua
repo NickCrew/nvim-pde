@@ -8,7 +8,7 @@ return {
   },
   {
     "sainnhe/gruvbox-material",
-    enabled = truen,
+    enabled = true,
     lazy = true
 
   },
@@ -34,7 +34,6 @@ return {
   {
     "scottmckendry/cyberdream.nvim",
     lazy = false,
-    priority = 1000,
     opts = {
       -- recommended - see "configuring" below for more config options
       transparent = true,
@@ -63,7 +62,7 @@ return {
     "catppuccin/nvim",
     enabled = true,
     lazy = true,
-    name = "catppuccin",
+    name = "catppucin",
     opts = {
       integrations = {
         aerial = true,

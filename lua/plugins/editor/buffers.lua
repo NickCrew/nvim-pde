@@ -63,7 +63,7 @@ return {
         close_command = function(n) require("mini.bufremove").delete(n, false) end,
         -- stylua: ignore
         right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
-        diagnostics = "nvim_lsp",
+        diagnostics = false,
         always_show_bufferline = true,
         persist_buffer_sort = true,
         show_tab_indicators = true,

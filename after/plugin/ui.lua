@@ -1,26 +1,22 @@
 
 ----------------
 -- Diagnostics
---
-
 
 ---------------
 -- Highlights
 --
+--
 local highlights = {
-  CmpItemKindCopilot = '#6CC644',
-  CmpItemMenu        = '#6D7084'
 }
 for hl, col in pairs(highlights) do
   vim.api.nvim_set_hl(0, hl, { fg = col })
 end
 
 
-
 ----------------
 -- Signs & Icons
 --
-local icons = _G.get_icons()
+local icons = require("settings.icons")
 local signs = {
   DapBreakpoint             = icons.dap.Breakpoint,
   DapBreakpointCondition    = icons.dap.BreakpointConditional,

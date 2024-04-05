@@ -4,7 +4,8 @@ return {
     "ruifm/gitlinker.nvim",
     config = true,
     lazy = true,
-    event = "VeryLazy"
+    event = "VeryLazy",
+
   },
   {
     -- Github integration
@@ -21,11 +22,14 @@ return {
 
       -- Only one of these is needed, not both.
       "nvim-telescope/telescope.nvim", -- optional
-      "ibhagwan/fzf-lua",              -- optional
     },
     lazy = true,
     config = true,
-    cmd = "Neogit"
+    cmd = "Neogit", 
+    keys = {
+      { "<leader>gg", mode = "n", "<cmd>Neogit<cr>", desc = "Neogit" },
+    },
+
   },
 
   {

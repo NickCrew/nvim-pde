@@ -20,12 +20,16 @@ return {
     },
     dependencies = {
       {
+        "nvim-neotest/nvim-nio",
+      },
+      {
         -- Debugger GUI
         "rcarriga/nvim-dap-ui",
-        keys = {
-          { '<leader>k', mode = 'n', "<cmd>lua require('dapui').eval()<CR>",   desc = "Eval" },
-          { "<F2>",      mode = "n", "<cmd>lua require('dapui').toggle()<cr>", desc = "Dap UI" },
-        },
+        keys ={
+        { '<leader>k', mode = 'n', "<cmd>lua require('dapui').eval()<CR>", desc = "Eval" },
+        { "<F2>", mode = "n", "<cmd>lua require('dapui').toggle()<cr>", desc = "Dap UI" },
+      },
+
         config = function()
           local dap = require("dap")
           local dapui = require("dapui")
@@ -82,7 +86,6 @@ return {
           dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
           dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
         end,
-
       },
       {
         -- Debugger virtual text

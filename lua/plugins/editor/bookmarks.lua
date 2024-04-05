@@ -1,17 +1,22 @@
 return {
+
 {
-  "otavioschwanck/arrow.nvim",
-  enabled = true,
-  lazy = true,
- opts = {
-    show_icons = true,
-    leader_key = ';' -- Recommended to be a single key
-  }
+"chentoast/marks.nvim",
+enabled = true,
+lazy = "VeryLazy",
+config = function()
+  require("marks").setup({
+    default_mappings = true,
+    builtin_marks = true,
+    cyclic = true,
+    force_write_shada = false,
+  })
+  end
 },
 {
     -- Hyperfast project navigation
     "ThePrimeagen/harpoon",
-    enabled = false,
+    enabled = true,
     lazy = true,
     branch = "harpoon2",
     event = "BufReadPre",

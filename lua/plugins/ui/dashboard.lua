@@ -1,5 +1,5 @@
 return {
-{
+
     'nvimdev/dashboard-nvim',
     event = 'VimEnter',
     lazy = true,
@@ -8,13 +8,16 @@ return {
       disable_move = true,
       change_to_vsc_root = true,
       config = {
+        header = {"Hello from Neovim"},
         week_header = {
           enable = true,
         },
-        footer = {
-          "",
-          "  " .. vim.fn.getcwd(),
-        },
+footer = function()
+  local info = {}
+  local fortune = require("fortune").get_fortune()
+  local footer = vim.list_extend(info, fortune)
+  return footer
+  end,
         shortcut = {
         {
             desc = 'Find Files',
@@ -47,6 +50,5 @@ return {
         },
       },
     },
-    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
-  },
-}
+    dependencies = { { 'nvim-tree/nvim-web-devicons' , {"rubiin/fortune.nvim", config = true} }}
+  }

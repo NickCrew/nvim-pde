@@ -60,11 +60,11 @@ return {
         }
       })
       local deps = {
-
         "ansiblels",
         "dockerls",
         "cssls",
         "html",
+        "helm-ls",
         "htmx",
         "jsonls",
         "lua_ls",
@@ -209,7 +209,7 @@ return {
 
     },
     config = function()
-      local icons = _G.get_icons()
+      local icons = require("settings.icons")
       local cmp = require('cmp')
       local lspkind = require("lspkind")
       local luasnip = require("luasnip")
@@ -238,7 +238,7 @@ return {
             symbol_map = icons.kind,
             before = function(entry, vim_item)
               -- vim_item.kind = lspkind.presets.default[vim_item.kind]
-              vim_item.menu = icons.source[entry.source.name]
+              vim_item.menu = icons.alt.source[entry.source.name]
               return vim_item
             end,
           }),
@@ -276,14 +276,15 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         },
         sources = cmp.config.sources({
-          { name = "copilot",    group_index = 2, },
-          { name = "nvim_lsp",   group_index = 2, },
+          { name = "copilot",    group_index = 2, max_item_count = 5 },
+          { name = "nvim_lsp",   group_index = 2, max_item_count = 20 },
           { name = "nvim_lua",   group_index = 2 },
-          { name = "luasnip",    group_index = 2, },
-          { name = "path",       group_index = 2, },
-          { name = "treesitter", group_index = 3 },
-          { name = "emoji",      group_index = 3 },
-          { name = "buffer",     group_index = 3 },
+          { name = "luasnip",    group_index = 2, max_item_count = 20 },
+          { name = "path",       group_index = 2, max_item_count = 5 },
+          { name = "treesitter", group_index = 3, max_item_count = 10 },
+          { name = "emoji",      group_index = 3, max_item_count = 10 },
+          { name = "buffer",     group_index = 3, max_item_count = 10 },
+          { name = "rg",         group_index = 3, max_item_count = 10 },
         }, {}),
         experimental = {
           ghost_text = true,

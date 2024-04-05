@@ -1,15 +1,68 @@
 return {
+  {
+ 'echasnovski/mini.clue',
+ version = false ,
+   enabled = false,
+ opts = function()
+  local miniclue = require('mini.clue')
 
+local opts = {
+  triggers = {
+    -- Leader triggers
+    { mode = 'n', keys = '<Leader>' },
+    { mode = 'x', keys = '<Leader>' },
+
+    -- Built-in completion
+    { mode = 'i', keys = '<C-x>' },
+
+    -- `g` key
+    { mode = 'n', keys = 'g' },
+    { mode = 'x', keys = 'g' },
+
+    -- Marks
+    { mode = 'n', keys = "'" },
+    { mode = 'n', keys = '`' },
+    { mode = 'x', keys = "'" },
+    { mode = 'x', keys = '`' },
+
+    -- Registers
+    { mode = 'n', keys = '"' },
+    { mode = 'x', keys = '"' },
+    { mode = 'i', keys = '<C-r>' },
+    { mode = 'c', keys = '<C-r>' },
+
+    -- Window commands
+    { mode = 'n', keys = '<C-w>' },
+
+    -- `z` key
+    { mode = 'n', keys = 'z' },
+    { mode = 'x', keys = 'z' },
+  },
+
+  clues = {
+    -- Enhance this by adding descriptions for <Leader> mapping groups
+    miniclue.gen_clues.builtin_completion(),
+    miniclue.gen_clues.g(),
+    miniclue.gen_clues.marks(),
+    miniclue.gen_clues.registers(),
+    miniclue.gen_clues.windows(),
+    miniclue.gen_clues.z(),
+  },
+}
+return opts
+ end
+
+  },
   {
     "folke/which-key.nvim",
     lazy = true,
+    enabled = true,
     event = "VeryLazy",
     keys = {
 
       { "<C-g>w", mode = "n", "<esc><Cmd>WhichKey<Cr>", desc = "WhichKey" },
     },
     cmd = "WhichKey",
-    enabled = true,
     init = function()
       vim.o.timeoutlen = 300
       vim.o.timeout = true
@@ -52,16 +105,16 @@ return {
         group = "+", -- symbol prepended to a group
       },
       window             = {
-        border = "single",         -- none, single, double, shadow
-        position = "bottom",       -- bottom, top
+        border = "double",         -- none, single, double, shadow
+        position = "top",       -- bottom, top
         margin = { 1.8, 1, 1, 1 }, -- extra window margin [top, right, bottom, left]
-        padding = { 1, 1, 1, 1 },  -- extra window padding [top, right, bottom, left]
+        padding = { 2, 4, 2, 4 },  -- extra window padding [top, right, bottom, left]
       },
       layout             = {
-        height = { min = 1, max = 35 }, -- min and max height of the columns
-        width = { min = 20, max = 50 }, -- min and max width of the columns
-        spacing = 1,                    -- spacing between columns
-        align = "center",               -- align columns left, center or right
+        height = { min = 4, max = 25 }, -- min and max height of the columns
+        width = { min = 20, max = 50  }, -- min and max width of the columns
+        spacing = 3,                    -- spacing between columns
+        align = "left",               -- align columns left, center or right
       },
       motions            = {
         count = true,
@@ -88,7 +141,7 @@ return {
       },                -- hide mapping boilerplate
       show_help          = true, -- show help message on the command line when the popup is visible
       show_keys          = true,
-      --triggers = { "<leader>", "<ctrl-g>", "<ctrl-t>", "\"", "'" }, -- automatically setup triggers
+      -- --triggers = { "<leader>", "<ctrl-g>", "<ctrl-t>", "\"", "'" }, -- automatically setup triggers
       -- triggers = { "<leader>" }, -- or specify a list manually
       triggers           = "auto",
       triggers_nowait    = {

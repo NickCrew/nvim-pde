@@ -1,4 +1,5 @@
 node_modules/
 .git/
 .venv/
-lazy-lock.json
+*-lock.json
+*.log

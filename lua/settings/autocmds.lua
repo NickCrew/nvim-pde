@@ -1,8 +1,6 @@
 -- Autocmds
 
 
-vim.cmd[[autocmd BufNewFile,BufRead *.keymap setfiletype devicetree]]
-
 ----------
 -- Helpers
 ----------

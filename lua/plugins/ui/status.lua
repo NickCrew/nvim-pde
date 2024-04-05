@@ -77,7 +77,7 @@ return {
         end
       end
 
-      local icons = require('settings.utils').get_icons()
+      local icons = require("settings.icons")
       local separators = {
         thin_slant = {
           left = '',
@@ -107,7 +107,7 @@ return {
           theme = "auto",
           always_divide_middle = true,
           icons_enabled = true,
-          disabled_filetypes = {},
+          disabled_filetypes = { statusline = { "dashboard", "alpha", "starter"}},
           section_separators = {
             right = icons.ui.DividerRoundRight,
             left = icons.ui.DividerRoundLeft,
@@ -169,24 +169,25 @@ return {
               },
               cond = conditions.check_git_workspace,
             },
-            -- {
-            --   "diagnostics",
-            --   sources = { "nvim_diagnostic" },
-            --   symbols = {
-            --     error = " ",
-            --     warn = "  ",
-            --     info = "  ",
-            --     hint = "  ",
-            --   },
-            -- },
+            {
+              "diagnostics",
+              sources = { "nvim_diagnostic" },
+              symbols = {
+                error = " ",
+                warn = "  ",
+                info = "  ",
+                hint = "  ",
+              },
+            },
 
 
           },
           lualine_x = {
-            treesitter_source(),
           },
           lualine_y = {
             { "filetype" , separator = ' ' },
+
+            {treesitter_source(), separator = ' ' },
             { "encoding" , separator = ' ' },
             { "fileformat" , separator = ' ' }
           },

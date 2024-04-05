@@ -17,14 +17,27 @@ return {
         ensure_installed = {
           'bash',
           'css',
+          'dockerfile',
+          'gitcommit',
+          'gitattributes',
+          'gitignore',
+          'fennel',
+          'helm',
           'html',
+          'http',
           'hcl',
           'java',
           'javascript',
+          'json',
+          'jq',
           'lua',
           'markdown',
+          'make',
           'python',
           'rust',
+          'rst',
+          'ssh_config',
+          'terraform',
           'toml',
           'typescript',
           'yaml'
@@ -161,11 +174,11 @@ return {
         i[key] = vim.tbl_extend("force", { name = "Inside " .. name .. " textobject" }, ic)
         a[key] = vim.tbl_extend("force", { name = "Around " .. name .. " textobject" }, ac)
       end
-      require("which-key").register({
-        mode = { "o", "x" },
-        i = i,
-        a = a,
-      })
+      -- require("which-key").register({
+      --   mode = { "o", "x" },
+      --   i = i,
+      --   a = a,
+      -- })
     end
   },
 

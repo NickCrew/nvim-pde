@@ -1,13 +1,16 @@
 -- init.lua
 --
+--
 
+local utils = require("settings.utils")
 
 require("settings.global")
 require("settings.autocmds")
 require("settings.options")
 require("settings.lazy")
+require("settings.mappings")
 
 
-_G.update_theme("rose-pine-moon", "rose-pine-dawn")
+utils.update_theme()
 
 

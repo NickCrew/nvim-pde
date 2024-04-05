@@ -5,11 +5,6 @@ local g             = vim.g
 g.nvim_cache        = os.getenv('HOME') .. "/.cache/nvim"
 g.python3_host_prog = os.getenv("HOME") .. '/.pyenv/versions/neovim/bin/python'
 
-_G.get_icons = function()
-  return require("settings._icons")
-end
-
-
 function _G.set_terminal_keymaps()
   bufmap(0, "n", "<C-\\>", "ToggleTerm", opts)
   bufmap(0, "t", "<esc><esc>", [[<C-\><C-n>]], opts)
@@ -39,23 +34,5 @@ _G.set_lsp_keymaps = function(bufnr)
    bufmap(bufnr, "n", 'gwl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
    bufmap(bufnr, "n", 'gq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 end
-
-_G.update_theme = function(dark_theme, light_theme)
-  local isdark = vim.fn.system("isdark")
-  local theme = "duskfox"
-  local bg = "dark"
-
-  if not isdark == 1 then
-    bg = "light"
-    if light_theme then theme = light_theme
-    else theme = "dawnfox" end
-  else
-    if dark_theme then theme = dark_theme end
-  end
-
-  vim.opt.background = bg
-  vim.cmd("colorscheme ".. theme)
-end
-
 
 
