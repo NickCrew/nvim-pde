@@ -1,4 +1,157 @@
 return {
+{
+    "s1n7ax/nvim-window-picker",
+    name = 'window-picker',
+    event = "VeryLazy",
+    version = '2.*',
+    config = true
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    enabled = true,
+    lazy = true,
+    cmd = {"Neotree"},
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    },
+    keys = {
+      {
+    "<C-g>t", function()
+      require("neo-tree.command").execute({ toggle = true })
+    end,
+      desc = "Toggle NeoTree",
+      },
+      {
+        "<leader>er",
+        function()
+          require("neo-tree.command").execute({ toggle = true })
+        end,
+        desc = "Explorer NeoTree (root dir)",
+      },
+      {
+        "<leader>ec",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+        end,
+        desc = "Explorer NeoTree (cwd)",
+      },
+      {
+        "<leader>ge",
+        function()
+          require("neo-tree.command").execute({ source = "git_status", toggle = true })
+        end,
+        desc = "Git explorer",
+      },
+      {
+        "<leader>be",
+        function()
+          require("neo-tree.command").execute({ source = "buffers", toggle = true })
+        end,
+        desc = "Buffer explorer",
+      },
+    },
+  },
+{
+    -- Enhance LSP Diagnostics
+    "folke/trouble.nvim",
+    lazy = true,
+    cmd = {"Trouble"},
+    branch = "dev",
+    keys = {
+ {
+      "<leader>xx",
+      "<cmd>Trouble diagnostics toggle<cr>",
+      desc = "Diagnostics (Trouble)",
+    },
+    {
+      "<leader>xX",
+      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+      desc = "Buffer Diagnostics (Trouble)",
+    },
+    {
+      "<leader>cs",
+      "<cmd>Trouble symbols toggle focus=false<cr>",
+      desc = "Symbols (Trouble)",
+    },
+    {
+      "<leader>cl",
+      "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+      desc = "LSP Definitions / references / ... (Trouble)",
+    },
+    {
+      "<leader>xL",
+      "<cmd>Trouble loclist toggle<cr>",
+      desc = "Location List (Trouble)",
+    },
+    {
+      "<leader>xQ",
+      "<cmd>Trouble qflist toggle<cr>",
+      desc = "Quickfix List (Trouble)",
+    },
+    },
+    opts = {
+      modes = {
+        test = {
+          mode = "diagnostics",
+          preview = {
+            type = "split",
+            relative = "win",
+            position = "right",
+            size = 0.3
+          }
+        }
+      }
+    }
+  },
+{
+    "simrat39/symbols-outline.nvim",
+    keys = {
+      { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" },
+      { "<C-g>o",     "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" }
+
+    },
+    cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
+    lazy = true,
+    config = true,
+    enabled = false
+  },
+  {
+    -- LSP Symbol Drawer
+    "stevearc/aerial.nvim",
+    keys = {
+      lazy = true,
+      { "<C-g>a", mode = "n", "<esc><cmd>AerialToggle<cr>", desc = "Symbols (Aerial)" },
+    },
+    cmd = { "AerialToggle", "AerialOpen" },
+    opts = {
+      backends = {
+        "lsp",
+        "treesitter",
+        "markdown",
+        "man",
+      },
+      attach_mode = "window",
+      close_automatic_events = {
+        "unsupported",
+        "switch_buffer",
+        "unfocus",
+      },
+      default_bindings = true,
+      layout = {
+        default_direction = "prefer_right",
+        min_width = 30,
+        max_width = 50,
+      },
+      post_jump_cmd = "normal! zz",
+      lsp = {
+        diagnostics_trigger_update = true,
+        update_when_errors = true,
+      },
+    }
+  },
   {
     "folke/noice.nvim",
     lazy = true,
@@ -63,7 +216,6 @@ return {
       },
       routes = {
         { filter = { find = "E21" },                                   skip = true },
-
         { filter = { find = "E162" },                                  skip = true },
         --{ filter = { event = "msg_show", kind = "", find = "written" }, view = "mini" },
         { filter = { event = "msg_show", find = "search hit BOTTOM" }, skip = true },
@@ -78,6 +230,7 @@ return {
   {
   "folke/edgy.nvim",
   event = "VeryLazy",
+  enabled = true,
   init = function()
     vim.opt.laststatus = 3
     vim.opt.splitkeep = "screen"

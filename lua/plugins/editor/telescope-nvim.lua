@@ -422,12 +422,13 @@ return {
     config = true
   },
   {
-      "ANGkeith/telescope-terraform-doc.nvim",
-     "cappyzawa/telescope-terraform.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" , "nvim-lua/plenary.nvim" },
+      "cappyzawa/telescope-terraform.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" , "nvim-lua/plenary.nvim", 
+      "ANGkeith/telescope-terraform-doc.nvim"},
+    ft = { "hcl" , "tf" , "tfvars" },
     lazy = true,
     keys = {
-      {"<leader>ft", mode = "n", "<esc><cmd>Telescope terraform<cr>", desc = "Terraform"}
+      {"<leader>ftd", mode = "n", "<esc><cmd>Telescope terraform<cr>", desc = "Terraform"}
     },
     config = function()
       require('telescope').load_extension('terraform')

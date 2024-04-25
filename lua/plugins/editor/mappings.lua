@@ -3,6 +3,8 @@ return {
  'echasnovski/mini.clue',
  version = false ,
    enabled = false,
+  lazy= true,
+  event = "VeryLazy",
  opts = function()
   local miniclue = require('mini.clue')
 
@@ -59,7 +61,6 @@ return opts
     enabled = true,
     event = "VeryLazy",
     keys = {
-
       { "<C-g>w", mode = "n", "<esc><Cmd>WhichKey<Cr>", desc = "WhichKey" },
     },
     cmd = "WhichKey",
@@ -73,12 +74,11 @@ return opts
         registers = true,  -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
           enabled = true,  -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-          suggestions = 9, -- how many suggestions should be shown in the list?
+          suggestions = 4, -- how many suggestions should be shown in the list?
         },
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
         -- No actual key bindings are created
         presets = {
-          operators = true,    -- adds help for operators like d, y, ... and registers them for motion / text object completion
           motions = true,      -- adds help for motions
           text_objects = true, -- help for text objects triggered after entering an operator
           windows = true,      -- default bindings on <c-w>
@@ -105,8 +105,8 @@ return opts
         group = "+", -- symbol prepended to a group
       },
       window             = {
-        border = "double",         -- none, single, double, shadow
-        position = "top",       -- bottom, top
+        border = "shadow",         -- none, single, double, shadow
+        position = "bottom",       -- bottom, top
         margin = { 1.8, 1, 1, 1 }, -- extra window margin [top, right, bottom, left]
         padding = { 2, 4, 2, 4 },  -- extra window padding [top, right, bottom, left]
       },
@@ -143,7 +143,6 @@ return opts
       show_keys          = true,
       -- --triggers = { "<leader>", "<ctrl-g>", "<ctrl-t>", "\"", "'" }, -- automatically setup triggers
       -- triggers = { "<leader>" }, -- or specify a list manually
-      triggers           = "auto",
       triggers_nowait    = {
         "`",
         "'",

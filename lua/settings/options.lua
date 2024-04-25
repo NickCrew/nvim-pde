@@ -1,4 +1,3 @@
-
 -------------------------------------------------
 -- File: settings.options
 -- Sourced Directly By: init.lua
@@ -13,9 +12,10 @@ g.maplocalleader = "\\"
 o.termguicolors  = true  -- True color support
 o.errorbells     = false -- Shut up
 o.timeoutlen     = 300
+o.lazyredraw     = false
 
 -- Swap
-o.swapfile       = false
+o.swapfile       = false -- No swapfiles
 o.directory      = vim.g.nvim_cache .. "/swap"
 
 -- Backup
@@ -38,20 +38,16 @@ o.clipboard      = "unnamedplus"      -- Sync with system clipboard
 o.mouse          = "a"                -- Enable mouse support for all modes
 
 -- Status
-o.laststatus     = 3     -- Last window status line: always and only
-o.showcmd        = false -- show partial command in last line or screen
-o.showmode       = false -- If in Insert, Replace or Visual mode put a message on the last line.
-o.signcolumn     = "yes" -- Show gutter
-
--- Indentation
-o.autoindent     = true -- Copy indent from current line when starting new
-o.shiftround     = true -- Round indent
-o.smartindent    = true -- Insert indents automatically
+o.laststatus     = 3        -- Last window status line: always and only
+o.showcmd        = false    -- show partial command in last line or screen
+o.showmode       = false    -- If in Insert, Replace or Visual mode put a message on the last line.
+o.signcolumn     = "yes"    -- Show gutter
 
 -- Folding
-o.foldenable     = false
+o.foldenable     = true
 o.foldmethod     = 'expr'
 o.foldexpr       = 'nvim_treesitter#foldexpr()'
+o.foldclose      = "all"
 
 -- Completion
 o.completeopt    = "menu,menuone,noselect"
@@ -59,14 +55,23 @@ o.completeopt    = "menu,menuone,noselect"
 -- Search
 o.hlsearch       = true      -- highlight search results
 o.incsearch      = true      -- Show search matches as you type
+o.ignorecase     = true      -- Needed for smartcase
 o.smartcase      = true      -- Case is ignored unless a capital letter is used explicitly
+o.infercase      = true      -- 'smartcase' for completion
 o.inccommand     = "nosplit" -- preview incremental substitutes
 
 -- Location
 o.number         = true -- Show line numbers
 o.cursorline     = true -- Higlight line of cursor
+o.cursorcolumn   = true
 o.relativenumber = true -- Use relative line numbers
 o.ruler          = true -- Show the line and column number of the cursor position, separated by a comma.
+o.showmatch      = true
+
+-- Indentation
+o.autoindent     = true -- Copy indent from current line when starting new
+o.shiftround     = true -- Round indent
+o.smartindent    = true -- Insert indents automatically
 
 -- Tabs
 o.expandtab      = true -- expand tabs into spaces
@@ -75,8 +80,9 @@ o.softtabstop    = 4
 o.tabstop        = 4
 
 -- Scroll
-o.scrolloff      = 4 -- Lines of context
-o.sidescrolloff  = 8 -- Columns of context
+o.scrolloff      = 20 -- Lines of context
+o.sidescrolloff  = 20 -- Columns of context
+o.sidescroll     = 1
 o.smoothscroll   = true
 
 
@@ -92,6 +98,7 @@ o.winminwidth    = 0 -- Allow maximized windows
 o.wrap           = false -- Do not wrap text
 o.textwidth      = 0     -- Unlimited text width
 o.startofline    = true  -- Place cursor at start of line for certain commands e.g. S-g, gg, Ctrl-U, Ctrl-D
+o.wrapmargin     = 0
 
 -- Syntax
 o.conceallevel   = 3 -- Custom replacement charaters

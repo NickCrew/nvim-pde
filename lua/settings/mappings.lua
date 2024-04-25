@@ -44,17 +44,15 @@ map("n", "<leader><leader>x", '"_x', opts)
 map("n", "<leader><leader>y", '"_y', opts)
 map("n", "<leader><leader>d", '"_dd', opts)
 
-map("n", "<C-\\>", "<cmd>ToggleTerm<cr>", opts)
-
+-- Session Management
 map("n", "<leader>qs", [[<cmd>lua require("persistence").load()<cr>]], {})                -- restore the session for the current directory
 map("n", "<leader>ql", [[<cmd>lua require("persistence").load({ last = true })<cr>]], {}) -- restore the last session
 map("n", "<leader>qd", [[<cmd>lua require("persistence").stop()<cr>]], {})                -- stop Persistence => session won't be saved on exit
 
-map("n", "<leader><leader>rl", "<cmd>ReloadLuafile<cr>", opts)
+map("n", "<leader><leader>r", "<cmd>ReloadLuafile<cr>", opts)
 map("n", "<leader>bd", "<cmd>!bdelete<cr>", opts)
-map("n", "<leader><leader>t",  "<cmd>ToggleTerm<cr>", opts)
-
-map("n", "<leader>bf", "<cmd>lua lsp.buf.format()<cr>", opts)
+map("n", "<leader><leader>t",  "<cmd>ToggleTerm<cr>", opts) -- Toggle Terminal
+map("n", "<leader>bf", "<cmd>lua vim.lsp.buf.format()<cr>", opts)  -- Format buffer
 map("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 map("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 map("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)

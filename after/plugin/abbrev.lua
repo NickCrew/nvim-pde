@@ -8,7 +8,9 @@ local abbrevs = {
   Rh = "resize -20",
   Rv = "vertical resize -20",
   T = "Telescope ",
-  Rlr = "ReloadLuafile"
+  Rlr = "ReloadLuafile",
+  Mi = "lua _G.Mini",
+  Msj = "lua _G.MiniSplitjoin"
 }
 for abr, cmd in pairs(abbrevs) do
   vim.cmd { cmd = 'cnoreabbrev', args = { abr, cmd } }

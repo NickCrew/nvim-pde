@@ -6,6 +6,19 @@ return {
     config = true
   },
   {
+    'echasnovski/mini.splitjoin',
+    version = false,
+    enabled = true,
+    lazy = false,
+    keys = {
+      {'<leader>ms',  mode = 'n', '<cmd>lua MiniSplitjoin.split()<cr>', desc = 'MiniSplitjoin' },
+      {'<leader>mj',  mode = 'n', '<cmd>lua MiniSplitjoin.join()<cr>', desc = 'MiniSplitjoin'}
+    },
+    config = function()
+      require('mini.splitjoin').setup{}
+    end
+  },
+{
     'akinsho/toggleterm.nvim',
     lazy = true,
     cmd = "ToggleTerm",

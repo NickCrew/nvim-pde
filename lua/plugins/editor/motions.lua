@@ -52,6 +52,7 @@ return {
   },
   {
     "folke/flash.nvim",
+    enabled = true,
     lazy = true,
     event = "VeryLazy",
     opts = {
@@ -62,7 +63,7 @@ return {
       },
       jump = {
         nohlsearch = true,
-        autojump = false
+        autojump = true
       },
       search = {
         multi_window = true
@@ -100,13 +101,13 @@ return {
         desc = "Jump To Word Under Cursor"
       },
       {
-        "<leader>'",
+        "<leader>ll",
         mode = { "n" },
         jump_to_line,
         desc = "Jump To Line"
       },
       {
-        "<leader>W",
+        "<leader>ww",
         mode = { "n" },
         select_any_word,
         desc = "Select Any Word"

@@ -1,1 +1,20 @@
-vim.opt.guifont = "OperatorMono Nerd Font:l17"
+local o = vim.opt
+local g = vim.g
+
+o.guifont = "OperatorMono Nerd Font:h17"
+
+if vim.g.neovide then
+  g.neovide_padding_left = 0
+  g.neovide_padding_right = 0
+  g.neovide_padding_top = 0
+  g.neovide_padding_bottom = 0
+
+  g.neovide_transparency = 1.0
+  g.transparency = 0.7
+  g.neovide_floating_blur_amoount_x  = 2.0
+  g.neovide_floating_blur_amoount_y  = 2.0
+
+  g.neovide_input_macos_alt_is_meta = true
+end
+
+

@@ -1,13 +1,13 @@
 return {
   {
     'echasnovski/mini.animate', version = false,
-    enabled = true,
-    event = "VeryLazy",
-    lazy = true,
+    config = function()
+      require('mini.animate').setup()
+    end
   },
   {
     "karb94/neoscroll.nvim",
-    enabled = true,
+    enabled = false,
     lazy =  true,
     event = "VeryLazy",
     opts = {
