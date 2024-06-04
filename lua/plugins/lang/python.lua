@@ -29,6 +29,7 @@ return {
   {
     "linux-cultist/venv-selector.nvim",
     lazy = true,
+    enabled = false,
     ft = 'python',
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
     opts = {

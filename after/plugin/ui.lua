@@ -13,28 +13,29 @@ for hl, col in pairs(highlights) do
 end
 
 
-----------------
--- Signs & Icons
---
-local icons = require("settings.icons")
-local signs = {
-  DapBreakpoint             = icons.dap.Breakpoint,
-  DapBreakpointCondition    = icons.dap.BreakpointConditional,
-  DapBreakpointRejected     = icons.dap.BreakpointRejected,
-  DapLogPoint               = icons.dap.BreakpointLog,
-  DapStopped                = icons.dap.BreakpointStopped,
-  DiagnosticSignError       = icons.diagnostics.BoldError,
-  DiagnosticSignWarning     = icons.diagnostics.BoldWarning,
-  DiagnosticSignWarn        = icons.diagnostics.BoldWarning,
-  DiagnosticSignHint        = icons.diagnostics.BoldHint,
-  DiagnosticSignInformation = icons.diagnostics.BoldInformation,
-  DiagnosticSignInfo        = icons.diagnostics.BoldInformation
-}
-for type, icon in pairs(signs) do
-  vim.fn.sign_define(type, {
-    text = icon,
-    texthl = "",
-    numhl = "",
-    linehl = ""
-  })
-end
+------------------
+---- Signs & Icons
+----
+--local icons = require("settings.icons")
+--local signs = {
+--  DapBreakpoint             = icons.dap.Breakpoint,
+--  DapBreakpointCondition    = icons.dap.BreakpointConditional,
+--  DapBreakpointRejected     = icons.dap.BreakpointRejected,
+--  DapLogPoint               = icons.dap.BreakpointLog,
+--  DapStopped                = icons.dap.BreakpointStopped,
+--  DiagnosticSignError       = icons.diagnostics.BoldError,
+--  DiagnosticSignWarning     = icons.diagnostics.BoldWarning,
+--  DiagnosticSignWarn        = icons.diagnostics.BoldWarning,
+--  DiagnosticSignHint        = icons.diagnostics.BoldHint,
+--  DiagnosticSignInformation = icons.diagnostics.BoldInformation,
+--  DiagnosticSignInfo        = icons.diagnostics.BoldInformation
+--}
+--for type, icon in pairs(signs) do
+--  vim .diagnostic.config = 
+--  vim.fn.sign_define(type, {
+--    text = icon,
+--    texthl = "",
+--    numhl = "",
+--    linehl = ""
+--  })
+--end

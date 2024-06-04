@@ -48,7 +48,7 @@ return {
       {
         "<leader>be",
         function()
-          require("neo-tree.command").execute({ source = "buffers", toggle = true })
+          require("neo-tree.command").execute({ source = "buffers", toggle = true, position = "float"})
         end,
         desc = "Buffer explorer",
       },
@@ -59,7 +59,6 @@ return {
     "folke/trouble.nvim",
     lazy = true,
     cmd = {"Trouble"},
-    branch = "dev",
     keys = {
  {
       "<leader>xx",
@@ -116,7 +115,7 @@ return {
     cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
     lazy = true,
     config = true,
-    enabled = false
+    enabled = true
   },
   {
     -- LSP Symbol Drawer

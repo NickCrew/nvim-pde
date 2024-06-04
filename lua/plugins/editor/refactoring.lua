@@ -19,6 +19,7 @@ return {
 
   {
     "kosayoda/nvim-lightbulb",
+    enabled = false,
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     opts = {

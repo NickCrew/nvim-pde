@@ -1,7 +1,7 @@
 return {
   {
 
-    "smiteshp/nvim-navic",
+    "SmiteshP/nvim-navic",
     lazy = true,
     config = function()
       require("nvim-navic").setup({
@@ -62,15 +62,16 @@ return {
         return function()
           local b = vim.api.nvim_get_current_buf()
           if next(vim.treesitter.highlighter.active[b]) then
-            return ""
+            return "滑"
           end
           return ""
         end
       end
 
+
       local icons = require("settings.icons")
       local separators = {
-        thin_slant = {left = '', right = ''},
+        thin_slant = { left = '', right = '' },
         plain_slant = { left = '', right = '' }
       }
       local colors = {
@@ -90,38 +91,37 @@ return {
         separator = ' ',
         path = 4,
         file_status = true,
-        symbols = {modified = "", readonly = "", newfile = "", unnamed = ""}
+        symbols = { modified = "", readonly = "", newfile = "", unnamed = "" }
       }
-      local filetype_sect = {"filetype", separator = ' '}
+      local filetype_sect = { "filetype", separator = ' ' }
       local diff_sect = {
-              "diff",
-              source = diff_source,
-              separator = ' ',
-              symbols = {added = " ", modified = "柳", removed = " ",},
-              cond = conditions.check_git_workspace,
-            }
+        "diff",
+        source = diff_source,
+        separator = ' ',
+        symbols = { added = " ", modified = "柳", removed = " ", },
+        cond = conditions.check_git_workspace,
+      }
       local git_sect = {
-              "branch",
-              icon = "",
-              separator = ' ',
-              cond = conditions.check_git_workspace
-            }
+        "branch",
+        icon = "",
+        separator = ' ',
+        cond = conditions.check_git_workspace
+      }
       local nav_sect = {
-              function() return require("nvim-navic").get_location() end,
-              cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
-              separator = ''
-            }
+        function() return require("nvim-navic").get_location() end,
+        cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
+        separator = ''
+      }
       local diagnostic_sect = {
-              "diagnostics",
-              sources   = { "nvim_diagnostic" },
-              separator = ' ',
-              symbols   = {error = " ", warn = "  ", info = "  ", hint = "  ",},
-            }
+        "diagnostics",
+        sources   = { "nvim_diagnostic" },
+        separator = ' ',
+        symbols   = { error = " ", warn = "  ", info = "  ", hint = "  ", },
+      }
       local mode_sect = {
-              "mode",
-              fmt = function(str) return str:sub(1,1) end,
-              separator = ' '
-          }
+        "mode",
+        separator = ''
+      }
       --------------------
       -- Lualine Config --
       --------------------
@@ -132,34 +132,33 @@ return {
           always_divide_middle = true,
           icons_enabled = true,
           disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
-          section_separators = {right = icons.ui.DividerRoundRight, left = icons.ui.DividerRoundLeft,},
+          section_separators = { right = icons.ui.DividerRoundRight, left = icons.ui.DividerRoundLeft, },
           component_separators = { left = separators.thin_slant.left, right = separators.thin_slant.right },
         },
-tabline = {
-      lualine_a = {'buffers'},
-      lualine_b = {},
-      lualine_c = {'filename'},
-      lualine_x = {},
-      lualine_y = {},
-      lualine_z = {'tabs'}
-    },
-        winbar_inactive = {lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = {}},
-        winbar = {lualine_a = { }, lualine_b = { filename_sect }, lualine_c = {nav_sect},},
-        sections_inactive = {lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = {}},
+        winbar_inactive = { lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = {} },
+        winbar = { lualine_a = {}, lualine_b = {}, lualine_c = { nav_sect }, lualine_z = { } },
+        sections_inactive = { lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = {} },
         sections = {
-          lualine_a = {mode_sect,},
-          lualine_b = { git_sect, },
-          lualine_c = { diff_sect, diagnostic_sect,},
-          lualine_x = {},
-          lualine_y = {filetype_sect, 
-            { treesitter_source(), separator = '', },
+          lualine_a = { mode_sect, 
+
+            { treesitter_source(), },
+        },
+          lualine_b = {
+            filetype_sect,
+            git_sect, },
+          lualine_c = { diagnostic_sect, },
+          lualine_x = {
+          },
+          lualine_y = {
+            filename_sect,
           },
           lualine_z = {
             { "location", icon = "", separator = ' ' },
             { "progress", icon = "", separator = ' ' },
+            {"tabs"}
           },
         },
-        extensions = {"aerial", "fugitive", "lazy", "mason", "mundo", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm", "trouble",},
+        extensions = { "aerial", "fugitive", "lazy", "mason", "mundo", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm", "trouble", },
       }
 
       -- Inserts a component in lualine_c at left section

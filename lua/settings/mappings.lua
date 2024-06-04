@@ -24,6 +24,13 @@ map("n","<A-j>", "<C-w>j", opts)
 map("n","<A-k>", "<C-w>k", opts)
 map("n","<A-l>", "<C-w>l", opts)
 
+map("n","<A-Left>", "<C-w>h", opts)
+map("n","<A-Down>", "<C-w>j", opts)
+map("n","<A-Up>", "<C-w>k", opts)
+map("n","<A-Right>", "<C-w>l", opts)
+
+
+
 
 -- Last Buffer
 map("n", "<leader><tab>", "<cmd>b#<cr>", opts)

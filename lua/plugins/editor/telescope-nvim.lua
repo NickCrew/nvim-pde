@@ -10,30 +10,32 @@ return {
       { "nvim-lua/plenary.nvim" },
     },
     keys = {
-      { "<leader>fC", mode = "n", "<esc><cmd>Telescope commands<cr>",        desc = "Command" },
-      { "<leader>fH", mode = "n", "<esc><cmd>Telescope command_history<cr>", desc = "Recent Command" },
-      { "<leader>fS", mode = "n", "<esc><cmd>Telescope search_history<cr>",  desc = "in Search History" },
-      { "<leader>fT", mode = "n", "<esc><cmd>Telescope treesitter<cr>",      desc = "Treesitter Symbol" },
-      { "<leader>fa", mode = "n", "<esc><cmd>Telescope aerial<cr>",          desc = "Symbols" },
-      { "<leader>fb", mode = "n", "<esc><cmd>Telescope buffers<cr>",         desc = "Buffer" },
-      { "<leader>fe", mode = "n", "<esc><cmd>Telescope file_browser<cr>",    desc = "in File Browser" },
-      { "<leader>ff", mode = "n", "<esc><cmd>Telescope find_files<cr>",      desc = "File" },
-      { "<leader>fg", mode = "n", "<esc><cmd>Telescope live_grep<cr>",       desc = "String in Files" },
-      { "<leader>fh", mode = "n", "<esc><cmd>Telescope harpoon marks<cr>",   desc = "Harpooned Files" },
-      { "<leader>fj", mode = "n", "<esc><cmd>Telescope jumplist<cr>",        desc = "in Jumplist" },
-      { "<leader>fk", mode = "n", "<esc><cmd>Telescope keymaps<cr>",         desc = "Keymaps" },
-      { "<leader>fm", mode = "n", "<esc><cmd>Telescope marks<cr>",           desc = "in Marks" },
-      { "<leader>fn", mode = "n", "<esc><cmd>Telescope notify<cr>",          desc = "Notification" },
-      { "<leader>fo", mode = "n", "<esc><cmd>Telescope oldfiles<cr>",        desc = "Recent Files" },
-      { "<leader>fr", mode = "n", "<esc><cmd>Telescope registers<cr>",       desc = "in Registers" },
-      { "<leader>fs", mode = "n", "<esc><cmd>Telescope luasnip<cr>",         desc = "Snippet" },
-      { "<leader>fx", mode = "n", "<esc><cmd>Telescope quickfix<cr>",        desc = "Send To QuickFix" },
-      { "<leader>fR", mode = "n", "<esc><cmd>Telescope reloader<cr>",        desc = "Reloader" },
-      { "<leader>fu", mode = "n", "<esc><cmd>Telescope undo<cr>",            desc = "Search Undo" },
-      { "<C-g>p",     mode = "n", "<esc><Cmd>Telescope<cr>",                 desc = "Telescope" },
-      { "<C-p>",     mode = "n", "<esc><Cmd>Telescope buffers<cr>",         desc = "Open Buffer" },
-      { "<C-g>m",     mode = "n", "<esc><cmd>Telescope harpoon marks<cr>",   desc = "Harpoon Marks" },
-      { "<C-g>r",     mode = "n", "<esc><cmd>Telescope oldfiles<cr>",        desc = "Open Recent File" },
+      { "<leader>fC",        mode = "n", "<esc><cmd>Telescope commands<cr>",        desc = "Command" },
+      { "<leader>fH",        mode = "n", "<esc><cmd>Telescope command_history<cr>", desc = "Recent Command" },
+      { "<leader>fS",        mode = "n", "<esc><cmd>Telescope search_history<cr>",  desc = "in Search History" },
+      { "<leader>fT",        mode = "n", "<esc><cmd>Telescope treesitter<cr>",      desc = "Treesitter Symbol" },
+      { "<leader>fa",        mode = "n", "<esc><cmd>Telescope aerial<cr>",          desc = "Symbols" },
+      { "<leader>fb",        mode = "n", "<esc><cmd>Telescope buffers<cr>",         desc = "Buffer" },
+      { "<leader>fe",        mode = "n", "<esc><cmd>Telescope file_browser<cr>",    desc = "in File Browser" },
+      { "<leader>ff",        mode = "n", "<esc><cmd>Telescope find_files<cr>",      desc = "File" },
+      { "<leader>fg",        mode = "n", "<esc><cmd>Telescope live_grep<cr>",       desc = "String in Files" },
+      { "<leader>fh",        mode = "n", "<esc><cmd>Telescope harpoon marks<cr>",   desc = "Harpooned Files" },
+      { "<leader>fj",        mode = "n", "<esc><cmd>Telescope jumplist<cr>",        desc = "in Jumplist" },
+      { "<leader>fk",        mode = "n", "<esc><cmd>Telescope keymaps<cr>",         desc = "Keymaps" },
+      { "<leader>fm",        mode = "n", "<esc><cmd>Telescope marks<cr>",           desc = "in Marks" },
+      { "<leader>fn",        mode = "n", "<esc><cmd>Telescope notify<cr>",          desc = "Notification" },
+      { "<leader>fo",        mode = "n", "<esc><cmd>Telescope oldfiles<cr>",        desc = "Recent Files" },
+      { "<leader>fr",        mode = "n", "<esc><cmd>Telescope registers<cr>",       desc = "in Registers" },
+      { "<leader>fs",        mode = "n", "<esc><cmd>Telescope luasnip<cr>",         desc = "Snippet" },
+      { "<leader>fx",        mode = "n", "<esc><cmd>Telescope quickfix<cr>",        desc = "Send To QuickFix" },
+      { "<leader>fR",        mode = "n", "<esc><cmd>Telescope reloader<cr>",        desc = "Reloader" },
+      { "<leader>fu",        mode = "n", "<esc><cmd>Telescope undo<cr>",            desc = "Search Undo" },
+      { "<leader><leader>o", mode = "n", "<esc><cmd>Telescope smart_open<cr>",      desc = "Smart Open" },
+
+      { "<C-g>p",            mode = "n", "<esc><Cmd>Telescope<cr>",                 desc = "Telescope" },
+      { "<C-p>",             mode = "n", "<esc><Cmd>Telescope buffers<cr>",         desc = "Open Buffer" },
+      { "<C-g>m",            mode = "n", "<esc><cmd>Telescope harpoon marks<cr>",   desc = "Harpoon Marks" },
+      { "<C-g>r",            mode = "n", "<esc><cmd>Telescope oldfiles<cr>",        desc = "Open Recent File" },
     },
     opts = function()
       local actions = require("telescope.actions")
@@ -60,12 +62,15 @@ return {
 
       return {
         defaults = {
+          path_display = {
+            "filename_first"
+          },
           sorting_strategy = "ascending",
           winblend = 0,
-          layout_strategy = "horizontal",
+          layout_strategy = "vertical",
           layout_config = {
-            height = 0.5,
-            width = 0.7,
+            height = 0.7,
+            width = 0.8,
             prompt_position = "top",
 
           },
@@ -74,7 +79,7 @@ return {
           get_selection_window = get_selected_window,
           mappings = {
             i = {
-              ["<C-j>"] = actions.move_selection_next,
+              ["<C-j>o"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
               ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
               ["<C-t>"] = open_with_trouble,
@@ -97,19 +102,22 @@ return {
         },
         pickers = {
           command_history = {
-            theme = "dropdown"
+            -- theme = "dropdown"
           },
           harpoon = {
-            theme = "dropdown"
+            -- theme = "dropdown"
           },
           marks = {
-            theme = "ivy"
+            -- theme = "dropdown"
           },
           find_files = {
-            theme = "dropdown"
+            -- theme = "dropdown"
           },
           buffers = {
-            theme = "dropdown"
+            -- theme = "dropdown"
+          },
+          live_grep = {
+            -- theme = "dropdown"
           },
           spell_suggest = {
             theme = "cursor"
@@ -384,7 +392,7 @@ return {
     "aznhe21/actions-preview.nvim",
     lazy = true,
     keys = {
-      {"<leader>fa", mode = "n", "<esc><cmd>lua require('actions-preview').code_actions<cr>", desc = "Code Actions"}
+      { "<leader>fa", mode = "n", "<esc><cmd>lua require('actions-preview').code_actions<cr>", desc = "Code Actions" }
     },
     config = function()
       require("telescope").load_extension("actions-preview")
@@ -401,7 +409,7 @@ return {
     'olacin/telescope-gitmoji.nvim',
     lazy = true,
     keys = {
-      {"<leader>fE", mode = "n", "<esc><cmd>Telescope gitmoji<cr>", desc = "Gitmoji"}
+      { "<leader>fE", mode = "n", "<esc><cmd>Telescope gitmoji<cr>", desc = "Gitmoji" }
     },
     config = function()
       require('telescope').load_extension('gitmoji')
@@ -422,17 +430,31 @@ return {
     config = true
   },
   {
-      "cappyzawa/telescope-terraform.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" , "nvim-lua/plenary.nvim", 
-      "ANGkeith/telescope-terraform-doc.nvim"},
-    ft = { "hcl" , "tf" , "tfvars" },
+    "cappyzawa/telescope-terraform.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim",
+      "ANGkeith/telescope-terraform-doc.nvim" },
+    ft = { "hcl", "tf", "tfvars" },
     lazy = true,
     keys = {
-      {"<leader>ftd", mode = "n", "<esc><cmd>Telescope terraform<cr>", desc = "Terraform"}
+      { "<leader>ftd", mode = "n", "<esc><cmd>Telescope terraform<cr>", desc = "Terraform" }
     },
     config = function()
       require('telescope').load_extension('terraform')
     end
+  },
+  {
+    "danielfalk/smart-open.nvim",
+    branch = "0.2.x",
+    config = function()
+      require("telescope").load_extension("smart_open")
+    end,
+    dependencies = {
+      "kkharji/sqlite.lua",
+      -- Only required if using match_algorithm fzf
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
+      { "nvim-telescope/telescope-fzy-native.nvim" },
+    },
   },
   {
     "mrjones2014/legendary.nvim",

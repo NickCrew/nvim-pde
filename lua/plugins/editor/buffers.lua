@@ -60,7 +60,7 @@ return {
   },
   {
     "akinsho/bufferline.nvim",
-    enabled = false,
+    enabled = true,
     lazy = true,
     event = "BufEnter",
     keys = {

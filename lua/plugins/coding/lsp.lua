@@ -51,12 +51,19 @@ return {
       vim.diagnostic.config({
         underline = true,
         virtual_text = false,
-        signs = true,
         update_in_insert = true,
         float = {
           header = true,
           border = 'rounded',
           focusable = true
+        },
+        signs = {
+          text = {
+            [ vim.diagnostic.severity.ERROR ] = "",
+            [ vim.diagnostic.severity.WARN ] = "",
+            [ vim.diagnostic.severity.INFO ] = "",
+            [ vim.diagnostic.severity.HINT ] = ""
+          }
         }
       })
       local deps = {
@@ -379,15 +386,15 @@ return {
     opts = {
       suggestion = { enabled = false },
       panel = { enabled = false },
-      fieltypes = {
+      filetypes = {
         markdown = true,
         help = true
       }
     },
   },
+  { 'AndreM222/copilot-lualine' },
   {
     "zbirenbaum/copilot-cmp",
-    after = "copilot.lua",
     event = "InsertEnter",
     config = true
   },

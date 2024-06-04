@@ -1,3 +1,6 @@
+local function getcwd()
+  cwd  = vim.fn.getcwd()
+end
 return {
 
   'nvimdev/dashboard-nvim',
@@ -11,7 +14,10 @@ return {
       header = { "Hello from Neovim" },
       week_header = {
         enable = true,
-        append = {"from"}
+        append = { 
+          "",
+          " " .. vim.fn.getcwd()
+        }
       },
       footer = function()
         local info = {}
@@ -21,32 +27,31 @@ return {
       end,
       shortcut = {
         {
-          desc = 'Find Files',
+          desc = 'New',
+          icon = '  ',
+          group = 'DiagnosticError',
+          action = 'DashboardNewFile',
+          key = 'n',
+        },
+        {
+          desc = "Explore",
+          icon = "פּ ",
+          action = "Neotree reveal",
+          key = 'e',
+        },
+        {
+          desc = 'Find',
           icon = '  ',
           group = '@number',
-          action = 'Telescope find_files',
+          action = 'Telescope smart_open',
           key = 'f',
         },
         {
-          desc = 'Search in Files',
-          icon = " ",
-          action = 'Telescope live_grep',
-          group = '@keyword',
-          key = 'g',
-        },
-        {
-          desc = 'Bookmarks',
-          icon = '  ',
-          group = 'DashboardShortCut',
-          action = 'Telescope harpoon marks',
-          key = 'm'
-        },
-        {
-          desc = 'Source Control',
-          icon = '  ',
-          action = 'Neogit',
-          group = 'DashboardShortCut',
-          key = 'g'
+            desc = "Changes",
+            icon = " ",
+            group = "Variable",
+            key = 's',
+            action = "Neogit"
         },
         {
           desc = 'Plugins',
@@ -62,7 +67,6 @@ return {
     "rubiin/fortune.nvim",
     opts = {
       display_format = "mixed",
-      content_type = "tips"
     }
   } } }
 }
