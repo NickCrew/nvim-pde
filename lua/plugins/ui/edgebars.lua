@@ -266,17 +266,24 @@ return {
       { ft = "spectre_panel", size = { height = 0.4 } },
     },
     left = {
-      -- Neo-tree filesystem always takes half the screen height
       {
         title = "Neo-Tree",
         ft = "neo-tree",
         filter = function(buf)
           return vim.b[buf].neo_tree_source == "filesystem"
         end,
-        size = { height = 0.5 },
+        size = { height = 0.25 },
       },
+     {
+        ft = "Outline",
+        title = "Outline",
+        pinned = true,
+        size = { height = .4},
+        open = "SymbolsOutlineOpen",
+      },
+
       {
-        title = "Neo-Tree Git",
+        title = "Git",
         ft = "neo-tree",
         filter = function(buf)
           return vim.b[buf].neo_tree_source == "git_status"
@@ -285,7 +292,7 @@ return {
         open = "Neotree position=right git_status",
       },
       {
-        title = "Neo-Tree Buffers",
+        title = "Buffers",
         ft = "neo-tree",
         filter = function(buf)
           return vim.b[buf].neo_tree_source == "buffers"
@@ -293,12 +300,7 @@ return {
         pinned = true,
         open = "Neotree position=top buffers",
       },
-      {
-        ft = "Outline",
-        pinned = true,
-        open = "SymbolsOutlineOpen",
-      },
-      -- any other neo-tree windows
+            -- any other neo-tree windows
       "neo-tree",
     },
   },

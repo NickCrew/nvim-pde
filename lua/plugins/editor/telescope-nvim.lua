@@ -445,6 +445,7 @@ return {
   {
     "danielfalk/smart-open.nvim",
     branch = "0.2.x",
+    lazy = true,
     config = function()
       require("telescope").load_extension("smart_open")
     end,
@@ -456,21 +457,5 @@ return {
       { "nvim-telescope/telescope-fzy-native.nvim" },
     },
   },
-  {
-    "mrjones2014/legendary.nvim",
-    version  = "v2.1.0",
-    enabled  = false,
-    lazy     = false,
-    priority = 10000,
-    opts     = {
-      lazy_nvim = {
-        auto_register = true
-      },
-      which_key = {
-        auto_register = true
-      }
-    }
-  },
-
 
 }

@@ -89,7 +89,7 @@ return {
         "filename",
         cond = conditions.buffer_not_empty,
         separator = ' ',
-        path = 4,
+        path = 2,
         file_status = true,
         symbols = { modified = "", readonly = "", newfile = "", unnamed = "" }
       }
@@ -136,26 +136,49 @@ return {
           component_separators = { left = separators.thin_slant.left, right = separators.thin_slant.right },
         },
         winbar_inactive = { lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = {} },
-        winbar = { lualine_a = {}, lualine_b = {}, lualine_c = { nav_sect }, lualine_z = { } },
-        sections_inactive = { lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = {} },
-        sections = {
-          lualine_a = { mode_sect, 
+        winbar = {
+          lualine_a = {
 
-            { treesitter_source(), },
-        },
-          lualine_b = {
-            filetype_sect,
-            git_sect, },
-          lualine_c = { diagnostic_sect, },
-          lualine_x = {
-          },
-          lualine_y = {
-            filename_sect,
-          },
-          lualine_z = {
             { "location", icon = "", separator = ' ' },
             { "progress", icon = "", separator = ' ' },
-            {"tabs"}
+          },
+          lualine_b = {
+
+
+          },
+          lualine_c = {
+
+            nav_sect
+          },
+          lualine_z = { "tabs" }
+        },
+        sections_inactive = { lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = {} },
+        sections = {
+          lualine_a = {
+            mode_sect,
+          },
+          lualine_b = {
+
+            filetype_sect,
+            git_sect,
+          },
+
+          lualine_c = {
+            diff_sect,
+            diagnostic_sect,
+            "selectioncount",
+          },
+          lualine_x = {
+
+
+          },
+          lualine_y = {
+
+          },
+          lualine_z = {
+
+            filename_sect,
+            { treesitter_source() },
           },
         },
         extensions = { "aerial", "fugitive", "lazy", "mason", "mundo", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm", "trouble", },

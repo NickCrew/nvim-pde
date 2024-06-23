@@ -7,6 +7,11 @@ return {
     config = true
   },
   {
+    "rebelot/kanagawa.nvim",
+    enabled = true,
+    lazy = true,
+  },
+  {
     "sainnhe/gruvbox-material",
     enabled = true,
     lazy = true

@@ -7,7 +7,7 @@ local M = {}
 
 M.update_theme = function(dark_theme, light_theme)
   local isdark = vim.fn.system("isdark")
-  local theme = "duskfox"
+  local theme = "kanagawa"
   local bg = "dark"
 
   if not isdark == 1 then
@@ -25,6 +25,7 @@ M.update_theme = function(dark_theme, light_theme)
   vim.opt.laststatus = 3
   vim.cmd("colorscheme " .. theme)
 end
+
 
 M.edit_config = function()
   vim.cmd("cd $HOME/.config/nvim")
