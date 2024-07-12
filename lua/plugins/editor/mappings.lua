@@ -2,7 +2,7 @@ return {
   {
  'echasnovski/mini.clue',
  version = false ,
-   enabled = false,
+   enabled = true,
   lazy= true,
   event = "VeryLazy",
  opts = function()
@@ -58,7 +58,7 @@ return opts
   {
     "folke/which-key.nvim",
     lazy = true,
-    enabled = true,
+    enabled = false,
     event = "VeryLazy",
     keys = {
       { "<C-g>w", mode = "n", "<esc><Cmd>WhichKey<Cr>", desc = "WhichKey" },

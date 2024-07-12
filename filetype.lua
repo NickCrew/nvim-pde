@@ -1,6 +1,7 @@
 -- Custom file type definitions
 vim.filetype.add({
   pattern = {
+    ['*.hcl']                 = 'terraform',
     ['*.adoc']                = 'asciidoc',
     ['*.asc']                 = 'asciidoc',
     ['.git*']                 = 'gitconfig',

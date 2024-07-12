@@ -457,5 +457,14 @@ return {
       { "nvim-telescope/telescope-fzy-native.nvim" },
     },
   },
-
+{
+    "nvim-pack/nvim-spectre",
+    lazy = true,
+    cmd = "Spectre",
+    keys = {
+      { "<C-g><C-h>", mode = "n", "<esc><cmd>Spectre<cr>", desc = "Search and Replace" },
+    },
+    opts = { open_cmd = "noswapfile vnew" },
+    -- stylua: ignore
+  },
 }

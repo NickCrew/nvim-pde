@@ -68,7 +68,6 @@ return {
         end
       end
 
-
       local icons = require("settings.icons")
       local separators = {
         thin_slant = { left = '', right = '' },
@@ -89,22 +88,25 @@ return {
         "filename",
         cond = conditions.buffer_not_empty,
         separator = ' ',
-        path = 2,
-        file_status = true,
+        path = 3,
+        file_status = false,
         symbols = { modified = "", readonly = "", newfile = "", unnamed = "" }
       }
-      local filetype_sect = { "filetype", separator = ' ' }
+      local filetype_sect = {
+        "filetype",
+        separator = ''
+      }
       local diff_sect = {
         "diff",
         source = diff_source,
-        separator = ' ',
+        -- separator = ' ',
         symbols = { added = " ", modified = "柳", removed = " ", },
         cond = conditions.check_git_workspace,
       }
       local git_sect = {
         "branch",
         icon = "",
-        separator = ' ',
+        separator = '',
         cond = conditions.check_git_workspace
       }
       local nav_sect = {
@@ -114,9 +116,14 @@ return {
       }
       local diagnostic_sect = {
         "diagnostics",
-        sources   = { "nvim_diagnostic" },
-        separator = ' ',
-        symbols   = { error = " ", warn = "  ", info = "  ", hint = "  ", },
+        sources = { "nvim_diagnostic" },
+        -- separator = ' ',
+        symbols = {
+          error = " ",
+          warn = " ",
+          info = " ",
+          hint = " ",
+        },
       }
       local mode_sect = {
         "mode",
@@ -131,57 +138,96 @@ return {
           theme = "auto",
           always_divide_middle = true,
           icons_enabled = true,
-          disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
-          section_separators = { right = icons.ui.DividerRoundRight, left = icons.ui.DividerRoundLeft, },
-          component_separators = { left = separators.thin_slant.left, right = separators.thin_slant.right },
+          disabled_filetypes = {
+            statusline = {
+              "dashboard",
+              "alpha",
+              "starter"
+            }
+          },
+          section_separators = { left = '', right = '' },
+          component_separators = { left = '', right = '' }
+
         },
-        winbar_inactive = { lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = {} },
+        winbar_inactive = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {}
+        },
         winbar = {
           lualine_a = {
-
-            { "location", icon = "", separator = ' ' },
-            { "progress", icon = "", separator = ' ' },
           },
           lualine_b = {
-
-
           },
           lualine_c = {
-
             nav_sect
           },
-          lualine_z = { "tabs" }
+          lualine_y = {
+            filename_sect,
+          },
+          lualine_z = {}
         },
-        sections_inactive = { lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = {} },
+        sections_inactive = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {}
+        },
         sections = {
           lualine_a = {
-            mode_sect,
+            mode_sect
           },
           lualine_b = {
-
-            filetype_sect,
             git_sect,
           },
-
           lualine_c = {
             diff_sect,
             diagnostic_sect,
             "selectioncount",
           },
           lualine_x = {
-
-
           },
           lualine_y = {
 
+            filetype_sect,
+            -- { "encoding",          separator = '' },
+            -- { "fileformat",        separator = '' },
+            {
+              treesitter_source(),
+              separator = ''
+            },
           },
           lualine_z = {
-
-            filename_sect,
-            { treesitter_source() },
+            {
+              "progress",
+              icon = "",
+              -- separator = ''
+            },
+            {
+              "location",
+              icon = "",
+              -- separator = ''
+            },
           },
         },
-        extensions = { "aerial", "fugitive", "lazy", "mason", "mundo", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm", "trouble", },
+        extensions = {
+          "aerial",
+          "fugitive",
+          "lazy",
+          "mason",
+          "mundo",
+          "neo-tree",
+          "nvim-dap-ui",
+          "quickfix",
+          "symbols-outline",
+          "toggleterm",
+          "trouble",
+        },
       }
 
       -- Inserts a component in lualine_c at left section

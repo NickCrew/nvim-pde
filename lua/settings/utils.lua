@@ -7,7 +7,7 @@ local M = {}
 
 M.update_theme = function(dark_theme, light_theme)
   local isdark = vim.fn.system("isdark")
-  local theme = "kanagawa"
+  local theme = "tokyonight"
   local bg = "dark"
 
   if not isdark == 1 then
@@ -15,7 +15,7 @@ M.update_theme = function(dark_theme, light_theme)
     if light_theme then
       theme = light_theme
     else
-      theme = "dawnfox"
+      theme = "tokyonight-day"
     end
   else
     if dark_theme then theme = dark_theme end

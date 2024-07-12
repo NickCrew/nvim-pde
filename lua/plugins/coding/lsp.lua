@@ -245,7 +245,7 @@ return {
             symbol_map = icons.kind,
             before = function(entry, vim_item)
               -- vim_item.kind = lspkind.presets.default[vim_item.kind]
-              vim_item.menu = icons.source[entry.source.name]
+              vim_item.menu = icons.alt.source[entry.source.name]
               return vim_item
             end,
           }),
@@ -388,7 +388,9 @@ return {
       panel = { enabled = false },
       filetypes = {
         markdown = true,
-        help = true
+        help = false,
+        hcl = true,
+        terraform = true
       }
     },
   },
@@ -398,5 +400,37 @@ return {
     event = "InsertEnter",
     config = true
   },
-
+{
+    "kosayoda/nvim-lightbulb",
+    enabled = false,
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      float = {
+        enabled = true,
+        text = "💡",
+        win_opts = {
+          winblend = 100,
+          border = "none",
+        },
+      },
+      status_text = {
+        enabled = true
+      },
+      autocmd = {
+        enabled = true
+      },
+      ignore = {
+        ft = {
+          "neo-tree", "lua", "quickfix", "loclist", "telescope", "help"
+        }
+      }
+    },
+  },
+  {
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
+    enabled = false,
+    lazy = true
+  },
 }

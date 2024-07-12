@@ -37,23 +37,7 @@ require("lazy").setup({
     pattern = "NickCrew",
     fallback = false
   },
-
   install = {
-    colorscheme = "duskfox"
-  },
-  performance = {
-    rtp = {
-      disabled_plugins = {
-        "gzip",
-        "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-        "spellfile",
-        "matchit",
-        "matchparen",
-      },
-    },
+    colorscheme = "tokyonight"
   },
 })

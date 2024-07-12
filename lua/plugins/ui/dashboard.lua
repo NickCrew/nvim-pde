@@ -1,5 +1,4 @@
-local function getcwd()
-  cwd  = vim.fn.getcwd()
+local function getcwd() cwd  = vim.fn.getcwd()
 end
 return {
 
@@ -14,10 +13,10 @@ return {
       header = { "Hello from Neovim" },
       week_header = {
         enable = true,
-        append = { 
-          "",
-          " " .. vim.fn.getcwd()
-        }
+        -- append = { 
+        --   "",
+        --   " " .. vim.fn.getcwd()
+        -- }
       },
       footer = function()
         local info = {}
@@ -30,7 +29,7 @@ return {
           desc = 'New',
           icon = '  ',
           group = 'DiagnosticError',
-          action = 'DashboardNewFile',
+          action = 'new',
           key = 'n',
         },
         {

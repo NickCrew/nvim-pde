@@ -9,48 +9,7 @@ local icons = {
 }
 
 return {
-  {
-    -- You can also use the codeberg mirror if you want to use the plugin without relying on GitHub
-    -- "https://codeberg.org/CodingThunder/zincoxide.git" -- for HTTPS
-    -- "git@codeberg.org:CodingThunder/zincoxide.git"     -- for SSH
-    -- NOTE: the username on both github and codeberg are different
-    "thunder-coding/zincoxide",
-    opts = {
-      -- name of zoxide binary in your "$PATH" or path to the binary
-      -- the command is executed using vim.fn.system()
-      -- eg. "zoxide" or "/usr/bin/zoxide"
-      zincoxide_cmd = "zoxide",
-      -- Kinda experimental as of now
-      complete = true,
-      -- Available options { "tabs", "window", "global" }
-      behaviour = "tabs",
-    },
-    cmd = { "Z", "Zg", "Zt", "Zw" },
-  },
-  {
-    "stevearc/dressing.nvim",
-    lazy = true,
-    event = "VeryLazy",
-    opts = {}
-  },
-  {
-    -- Dim parts of your code you're not workingon
-    "folke/zen-mode.nvim",
-    lazy = true,
-    event = "BufReadPre",
-    config = true,
-    dependencies = {
-      "folke/twilight.nvim",
-      lazy = true,
-      cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
-      keys = {
-        { "<leader><leader>t", "<cmd>Twilight<cr>", desc = "Twilight" }
-      },
-      opts = {
-        context = 20,
-      }
-    },
-  },
+  
   {
     "echasnovski/mini.bufremove",
     event = "BufEnter",
@@ -81,11 +40,11 @@ return {
         close_command = function(n) require("mini.bufremove").delete(n, false) end,
         -- stylua: ignore
         right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
-        diagnostics = false,
+        diagnostics = true,
         always_show_bufferline = true,
         persist_buffer_sort = true,
         show_tab_indicators = true,
-        sort_by = "tabs",
+        sort_by = "directory",
         show_close_icon = true,
         separator_style = "padded_slant",
         diagnostics_indicator = function(_, _, diag)

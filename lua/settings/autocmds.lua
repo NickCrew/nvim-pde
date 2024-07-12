@@ -9,6 +9,16 @@ local function augroup(name)
 end
 local aucmd = vim.api.nvim_create_autocmd
 
+-----------------------------------------
+--  Set filetype based on file extennsion
+-----------------------------------------
+aucmd({ "BufNewFile", "BufRead" }, {
+  group = augroup("filetype"),
+  pattern = "*.hcl",
+  callback = function()
+    vim.cmd("set ft=terraform")
+  end,
+})
 
 -----------------------------------------------------
 -- Check if we need to reload the file after changes
@@ -72,11 +82,8 @@ aucmd({ "TermOpen" }, {
 -- User LSP Config
 ------------------
 aucmd('LspAttach', {
-        group = augroup('UserLspConfig'),
-        callback = function(ev)
-          _G.set_lsp_keymaps(ev.buf)
-        end,
+  group = augroup('UserLspConfig'),
+  callback = function(ev)
+    _G.set_lsp_keymaps(ev.buf)
+  end,
 })
-
-
-
