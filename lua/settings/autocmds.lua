@@ -1,17 +1,24 @@
--- Autocmds
+                        --------------
+                        -- AUTOCMDS --
+                        --------------
 
-
-----------
--- Helpers
-----------
 local function augroup(name)
   return vim.api.nvim_create_augroup("custom_" .. name, { clear = true })
 end
 local aucmd = vim.api.nvim_create_autocmd
 
+
 -----------------------------------------
 --  Set filetype based on file extennsion
 -----------------------------------------
+aucmd({ "BufNewFile", "BufRead" }, {
+  group = augroup("filetype"),
+  pattern = "*.tf",
+  callback = function()
+    vim.cmd("set ft=terraform")
+  end,
+})
+
 aucmd({ "BufNewFile", "BufRead" }, {
   group = augroup("filetype"),
   pattern = "*.hcl",
@@ -19,6 +26,7 @@ aucmd({ "BufNewFile", "BufRead" }, {
     vim.cmd("set ft=terraform")
   end,
 })
+
 
 -----------------------------------------------------
 -- Check if we need to reload the file after changes
@@ -67,6 +75,7 @@ aucmd({ "VimResized" }, {
   end,
 })
 
+
 ----------------------------------
 -- Terminal escaping improvements
 ----------------------------------
@@ -87,3 +96,7 @@ aucmd('LspAttach', {
     _G.set_lsp_keymaps(ev.buf)
   end,
 })
+
+
+
+

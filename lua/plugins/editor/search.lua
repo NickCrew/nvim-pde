@@ -1,5 +1,12 @@
 return {
   {
+    "MagicDuck/grug-far.nvim",
+    lazy = true,
+    enabled = true,
+    cmd = "GrugFar",
+    config = true
+  },
+  {
     -- Telescope
     "nvim-telescope/telescope.nvim",
     version = false,
@@ -31,11 +38,8 @@ return {
       { "<leader>fR",        mode = "n", "<esc><cmd>Telescope reloader<cr>",        desc = "Reloader" },
       { "<leader>fu",        mode = "n", "<esc><cmd>Telescope undo<cr>",            desc = "Search Undo" },
       { "<leader><leader>o", mode = "n", "<esc><cmd>Telescope smart_open<cr>",      desc = "Smart Open" },
-
-      { "<C-g>p",            mode = "n", "<esc><Cmd>Telescope<cr>",                 desc = "Telescope" },
+      { "<leader><leader>f", mode = "n", "<esc><Cmd>Telescope<cr>",                 desc = "Telescope" },
       { "<C-p>",             mode = "n", "<esc><Cmd>Telescope buffers<cr>",         desc = "Open Buffer" },
-      { "<C-g>m",            mode = "n", "<esc><cmd>Telescope harpoon marks<cr>",   desc = "Harpoon Marks" },
-      { "<C-g>r",            mode = "n", "<esc><cmd>Telescope oldfiles<cr>",        desc = "Open Recent File" },
     },
     opts = function()
       local actions = require("telescope.actions")
@@ -57,11 +61,16 @@ return {
             return win
           end
         end
-        return 0
       end
 
       return {
         defaults = {
+          file_ignore_patterns = {
+            "%.git/*",
+            "*/tmp/*",
+            "*-lock.json",
+            "node_modules/*",
+          },
           path_display = {
             "filename_first"
           },
@@ -121,7 +130,10 @@ return {
           },
           spell_suggest = {
             theme = "cursor"
-          }
+          },
+          luasnip = {
+            theme = "cursor"
+          },
         },
         extensions = {
           aerial = {
@@ -150,9 +162,7 @@ return {
               ["data"] = os.getenv('HOME') .. "/.local/share"
             }
           },
-          luasnip = {
-            theme = "cursor"
-          },
+          
           lazy = {
             -- Optional theme (the extension doesn't set a default theme)
             theme = "ivy",
@@ -220,13 +230,39 @@ return {
   },
   {
     "gbprod/yanky.nvim",
-    lazy = true,
-    keys = {
-      { "<leader>fp", mode = "n", "<esc><cmd>Telescope yank_history<cr>", desc = "Yank History" }
+    recommended = true,
+    desc = "Better Yank/Paste",
+    opts = {
+      highlight = { timer = 150 },
     },
-    config = function()
-      require("telescope").load_extension("yank_history")
-    end
+    keys = {
+      {
+        "<leader>p",
+        function()
+          require("telescope").extensions.yank_history.yank_history({})
+        end,
+        mode = { "n", "x" },
+        desc = "Open Yank History",
+      },
+      -- stylua: ignore
+      { "y",  "<Plug>(YankyYank)",                      mode = { "n", "x" },                           desc = "Yank Text" },
+      { "p",  "<Plug>(YankyPutAfter)",                  mode = { "n", "x" },                           desc = "Put Text After Cursor" },
+      { "P",  "<Plug>(YankyPutBefore)",                 mode = { "n", "x" },                           desc = "Put Text Before Cursor" },
+      { "gp", "<Plug>(YankyGPutAfter)",                 mode = { "n", "x" },                           desc = "Put Text After Selection" },
+      { "gP", "<Plug>(YankyGPutBefore)",                mode = { "n", "x" },                           desc = "Put Text Before Selection" },
+      { "[y", "<Plug>(YankyCycleForward)",              desc = "Cycle Forward Through Yank History" },
+      { "]y", "<Plug>(YankyCycleBackward)",             desc = "Cycle Backward Through Yank History" },
+      { "]p", "<Plug>(YankyPutIndentAfterLinewise)",    desc = "Put Indented After Cursor (Linewise)" },
+      { "[p", "<Plug>(YankyPutIndentBeforeLinewise)",   desc = "Put Indented Before Cursor (Linewise)" },
+      { "]P", "<Plug>(YankyPutIndentAfterLinewise)",    desc = "Put Indented After Cursor (Linewise)" },
+      { "[P", "<Plug>(YankyPutIndentBeforeLinewise)",   desc = "Put Indented Before Cursor (Linewise)" },
+      { ">p", "<Plug>(YankyPutIndentAfterShiftRight)",  desc = "Put and Indent Right" },
+      { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)",   desc = "Put and Indent Left" },
+      { ">P", "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put Before and Indent Right" },
+      { "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)",  desc = "Put Before and Indent Left" },
+      { "=p", "<Plug>(YankyPutAfterFilter)",            desc = "Put After Applying a Filter" },
+      { "=P", "<Plug>(YankyPutBeforeFilter)",           desc = "Put Before Applying a Filter" },
+    },
   },
   {
     "nvim-telescope/telescope-frecency.nvim",
@@ -457,10 +493,11 @@ return {
       { "nvim-telescope/telescope-fzy-native.nvim" },
     },
   },
-{
+  {
     "nvim-pack/nvim-spectre",
     lazy = true,
     cmd = "Spectre",
+    enabled = false,
     keys = {
       { "<C-g><C-h>", mode = "n", "<esc><cmd>Spectre<cr>", desc = "Search and Replace" },
     },

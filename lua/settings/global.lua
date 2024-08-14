@@ -1,10 +1,16 @@
 local bufmap        = vim.api.nvim_buf_set_keymap
+local hl            = vim.api.nvim_set_hl
 local opts          = { noremap = true, silent = true }
 local g             = vim.g
 
 g.nvim_cache        = os.getenv('HOME') .. "/.cache/nvim"
 g.python3_host_prog = os.getenv("HOME") .. '/.pyenv/versions/neovim/bin/python'
 
+                        ---------------------------
+                        --  Global Key Mappings  -- 
+                        ---------------------------
+
+-- Terminal Keymaps
 function _G.set_terminal_keymaps()
   bufmap(0, "n", "<C-\\>", "ToggleTerm", opts)
   bufmap(0, "t", "<esc><esc>", [[<C-\><C-n>]], opts)
@@ -15,6 +21,7 @@ function _G.set_terminal_keymaps()
   bufmap(0, "t", "<C-w>l", [[<C-\><C-n><C-W>l]], opts)
 end
 
+-- LSP Keymaps
 _G.set_lsp_keymaps = function(bufnr)
  -- Enable completion triggered by <c-x><c-o>
    -- vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -35,4 +42,8 @@ _G.set_lsp_keymaps = function(bufnr)
    bufmap(bufnr, "n", 'gq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 end
 
+                        ------------------
+                        --  Highlights  -- 
+                        ------------------
 
+hl(0, "CmpItemKindSupermaven", {fg ="#6CC644"})

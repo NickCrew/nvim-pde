@@ -21,6 +21,8 @@ return {
     -- colorscheme development
     "rktjmp/lush.nvim",
     enabled = true,
+    lazy = true,
+    cmd = "Lushify",
   },
   {
     "EdenEast/nightfox.nvim",
@@ -38,6 +40,7 @@ return {
   },
   {
     "scottmckendry/cyberdream.nvim",
+    enabled = false,
     lazy = false,
     opts = {
       -- recommended - see "configuring" below for more config options

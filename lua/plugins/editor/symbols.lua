@@ -3,7 +3,6 @@ return {
     "simrat39/symbols-outline.nvim",
     keys = {
       { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" },
-      { "<C-g>o",     "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" }
 
     },
     cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
@@ -16,7 +15,7 @@ return {
     "stevearc/aerial.nvim",
     keys = {
       lazy = true,
-      { "<C-g>a", mode = "n", "<esc><cmd>AerialToggle<cr>", desc = "Symbols (Aerial)" },
+      { "<leader><leader>A", mode = "n", "<esc><cmd>AerialToggle<cr>", desc = "Symbols (Aerial)" },
     },
     cmd = { "AerialToggle", "AerialOpen" },
     opts = {

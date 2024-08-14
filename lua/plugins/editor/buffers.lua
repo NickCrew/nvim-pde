@@ -9,7 +9,6 @@ local icons = {
 }
 
 return {
-  
   {
     "echasnovski/mini.bufremove",
     event = "BufEnter",
@@ -23,15 +22,18 @@ return {
     lazy = true,
     event = "BufEnter",
     keys = {
-      { "<leader>bb",  mode = "n", "<esc><Cmd>BufferLinePick<CR>",                 desc = "Pick Buffer" },
-      { "<leader>bp",  mode = "n", "<esc><Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
-      { "<leader>bx",  mode = "n", "<esc><cmd>BufferLinePickClose<CR>",            desc = "Pick Buffer To Close" },
-      { "<leader>b[",  mode = "n", "<esc><cmd>BufferLineCyclePrev<cr>",            desc = "Prev buffer" },
-      { "<leader>b]",  mode = "n", "<esc><cmd>BufferLineCycleNext<cr>",            desc = "Next buffer" },
-      { "<leader>bcl", mode = "n", "<esc><Cmd>BufferLineCloseLeft<CR>",            desc = "Delete buffers to the left" },
-      { "<leader>bco", mode = "n", "<esc><Cmd>BufferLineCloseOthers<CR>",          desc = "Delete other buffers" },
-      { "<leader>bcr", mode = "n", "<esc><Cmd>BufferLineCloseRight<CR>",           desc = "Delete buffers to the right" },
-      { "<leader>bcu", mode = "n", "<esc><Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+    { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+    { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+    { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
+    { "<leader>bd", "<Cmd>BufferLinePickClose<CR>", desc = "Pick Buffer to Delete" },
+    { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
+    { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
+    { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+    { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+    { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+    { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+    { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
+    { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
     },
     opts = {
       options = {
@@ -67,5 +69,6 @@ return {
         },
       },
     },
+
   },
 }

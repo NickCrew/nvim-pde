@@ -6,13 +6,17 @@
 local o          = vim.o
 local g          = vim.g
 
+-- Leader
 g.mapleader      = " "
 g.maplocalleader = "\\"
 
 o.termguicolors  = true  -- True color support
+
 o.errorbells     = false -- Shut up
-o.timeoutlen     = 300
-o.lazyredraw     = false
+
+o.timeoutlen     = 300   -- Timeout for keycodes
+
+o.lazyredraw     = false -- Redraw only when necessary
 
 -- Swap
 o.swapfile       = false -- No swapfiles
@@ -34,7 +38,7 @@ o.hidden         = true -- Allow switching buffers with unsaved changes
 
 -- Input
 o.backspace      = "indent,eol,start" -- Traditional backspace behavior
-o.clipboard      = "unnamedplus"      -- Sync with system clipboard
+-- o.clipboard      = "unnamedplus"      -- Sync with system clipboard
 o.mouse          = "a"                -- Enable mouse support for all modes
 
 -- Status
@@ -47,7 +51,7 @@ o.signcolumn     = "yes"    -- Show gutter
 o.foldenable     = true
 o.foldmethod     = 'expr'
 o.foldexpr       = 'nvim_treesitter#foldexpr()'
-o.foldclose      = "all"
+-- o.foldclose      = "all"
 
 -- Completion
 o.completeopt    = "menu,menuone,noselect"
@@ -63,7 +67,7 @@ o.inccommand     = "nosplit" -- preview incremental substitutes
 -- Location
 o.number         = true -- Show line numbers
 o.cursorline     = true -- Higlight line of cursor
-o.cursorcolumn   = true
+o.cursorcolumn   = true -- Highlight column of cursor
 o.relativenumber = true -- Use relative line numbers
 o.ruler          = true -- Show the line and column number of the cursor position, separated by a comma.
 o.showmatch      = true
@@ -84,7 +88,6 @@ o.scrolloff      = 20 -- Lines of context
 o.sidescrolloff  = 20 -- Columns of context
 o.sidescroll     = 1
 o.smoothscroll   = true
-
 
 -- Splits
 o.splitbelow     = true -- Always open splits below the current windowop

@@ -1,7 +1,7 @@
-
 -- Abbreviations
 --
 local abbrevs = {
+  AlignTags = '% ! column -t |',
   L = "Lazy",
   Lr = "Lazy reload ",
   RH = "resize +20",

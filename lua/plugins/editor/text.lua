@@ -1,20 +1,25 @@
 return {
+  {
+      "RRethy/nvim-align",
+      enabled = true,
+      lazy = true,
+      cmd = "Align",
+      opts = {}
+  },
 {
     'echasnovski/mini.splitjoin',
     version = false,
     enabled = true,
-    lazy = false,
+    lazy = true,
     keys = {
       { '<leader>ms', mode = 'n', '<cmd>lua MiniSplitjoin.split()<cr>', desc = 'MiniSplitjoin' },
       { '<leader>mj', mode = 'n', '<cmd>lua MiniSplitjoin.join()<cr>',  desc = 'MiniSplitjoin' }
     },
-    config = function()
-      require('mini.splitjoin').setup {}
-    end
+    opts = {}
   }, 
   {
     "echasnovski/mini.pairs",
-    event = "VeryLazy",
+    event = "InsertEnter",
     lazy = true,
     opts = {},
     enabled = true,

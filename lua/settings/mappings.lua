@@ -4,7 +4,7 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 -- Remaps
-map("", "<Space>", "<Nop>", opts)
+map("", "<Space>", "<Nop>", opts) -- For leader 
 map("n", "q:", "<nop>", opts)
 map("n", "Q", "<nop>", opts)
 
@@ -14,22 +14,20 @@ map("n", "N", "Nzz", opts)
 map("n", "n", "nzz", opts)
 
 -- Split Navigation
-map("n","<c-h>", "<C-w>h", opts)
-map("n","<c-j>", "<C-w>j", opts)
-map("n","<c-k>", "<C-w>k", opts)
-map("n","<c-l>", "<C-w>l", opts)
+-- map("n","<c-h>", "<C-w>h", opts)
+-- map("n","<c-j>", "<C-w>j", opts)
+-- map("n","<c-k>", "<C-w>k", opts)
+-- map("n","<c-l>", "<C-w>l", opts)
 
 map("n","<A-h>", "<C-w>h", opts)
 map("n","<A-j>", "<C-w>j", opts)
 map("n","<A-k>", "<C-w>k", opts)
 map("n","<A-l>", "<C-w>l", opts)
 
-map("n","<A-Left>", "<C-w>h", opts)
-map("n","<A-Down>", "<C-w>j", opts)
-map("n","<A-Up>", "<C-w>k", opts)
-map("n","<A-Right>", "<C-w>l", opts)
-
-
+-- map("n","<A-Left>", "<C-w>h", opts)
+-- map("n","<A-Down>", "<C-w>j", opts)
+-- map("n","<A-Up>", "<C-w>k", opts)
+-- map("n","<A-Right>", "<C-w>l", opts)
 
 
 -- Last Buffer
@@ -57,11 +55,11 @@ map("n", "<leader>ql", [[<cmd>lua require("persistence").load({ last = true })<c
 map("n", "<leader>qd", [[<cmd>lua require("persistence").stop()<cr>]], {})                -- stop Persistence => session won't be saved on exit
 
 map("n", "<leader><leader>r", "<cmd>ReloadLuafile<cr>", opts)
-map("n", "<leader>bd", "<cmd>!bdelete<cr>", opts)
 map("n", "<leader><leader>t",  "<cmd>ToggleTerm<cr>", opts) -- Toggle Terminal
+
+-- LSP
 map("n", "<leader>bf", "<cmd>lua vim.lsp.buf.format()<cr>", opts)  -- Format buffer
 map("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 map("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 map("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-
 

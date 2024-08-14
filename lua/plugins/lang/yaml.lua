@@ -16,7 +16,6 @@ return {
     "mfussenegger/nvim-ansible",
     ft = { "yaml.ansible" },
     lazy = true,
-    event = "BufEnter",
   },
   {
     -- Schemas

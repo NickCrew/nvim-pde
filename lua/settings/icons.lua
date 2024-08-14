@@ -33,6 +33,7 @@ return {
     Snippet         = "  ",
     String          = "  ",
     Struct          = " פּ ",
+    Supermaven      = "  ",
     Text            = "  ",
     TypeParameter   = "  ",
     Unit            = "  ",
@@ -197,6 +198,7 @@ return {
       cmdline    = " 💻 CMD",
       dap        = " 🐛 DAP",
       emoji      = " 😀 EMO",
+      supermaven = " ⭐ SPM"
     },
     dap = {
       breakpoints = {

@@ -1,20 +1,5 @@
 return {
   {
-
-    "SmiteshP/nvim-navic",
-    lazy = true,
-    config = function()
-      require("nvim-navic").setup({
-        lsp = {
-          auto_attach = true,
-        },
-        separator = "  ",
-        highlight = true,
-        click = true
-      })
-    end,
-  },
-  {
     "nvim-lualine/lualine.nvim",
     enabled = true,
     event = "VeryLazy",
@@ -67,52 +52,52 @@ return {
           return ""
         end
       end
+        local trouble = require("trouble")
+        local symbols = trouble.statusline({
+          mode = "lsp_document_symbols",
+          groups = {},
+          title = false,
+          filter = { range = true },
+          format = "{kind_icon}{symbol.name:Normal}",
+          -- The following line is needed to fix the background color
+          -- Set it to the lualine section you want to use
+          hl_group = "lualine_c_normal",
+        })
+        local trouble_sect = {
+          symbols.get,
+          cond = symbols.has,
+        }
 
-      local icons = require("settings.icons")
-      local separators = {
-        thin_slant = { left = '', right = '' },
-        plain_slant = { left = '', right = '' }
-      }
-      local colors = {
-        yellow = '#ECBE7B',
-        cyan = '#008080',
-        darkblue = '#081633',
-        green = '#98be65',
-        orange = '#FF8800',
-        violet = '#a9a1e1',
-        magenta = '#c678dd',
-        blue = '#51afef',
-        red = '#ec5f67'
-      }
       local filename_sect = {
         "filename",
         cond = conditions.buffer_not_empty,
-        separator = ' ',
         path = 3,
-        file_status = false,
-        symbols = { modified = "", readonly = "", newfile = "", unnamed = "" }
+        file_status = true,
+        symbols = {
+          modified = "",
+          readonly = "",
+          newfile = "",
+          unnamed = ""
+        }
       }
       local filetype_sect = {
         "filetype",
-        separator = ''
+        cond = conditions.buffer_not_empty,
       }
       local diff_sect = {
         "diff",
         source = diff_source,
-        -- separator = ' ',
-        symbols = { added = " ", modified = "柳", removed = " ", },
+        symbols = {
+          added = " ",
+          modified = "柳",
+          removed = " ",
+        },
         cond = conditions.check_git_workspace,
       }
       local git_sect = {
         "branch",
         icon = "",
-        separator = '',
         cond = conditions.check_git_workspace
-      }
-      local nav_sect = {
-        function() return require("nvim-navic").get_location() end,
-        cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
-        separator = ''
       }
       local diagnostic_sect = {
         "diagnostics",
@@ -124,10 +109,10 @@ return {
           info = " ",
           hint = " ",
         },
+        cond = conditions.buffer_not_empty
       }
       local mode_sect = {
         "mode",
-        separator = ''
       }
       --------------------
       -- Lualine Config --
@@ -153,9 +138,12 @@ return {
           lualine_a = {},
           lualine_b = {},
           lualine_c = {},
-          lualine_x = {},
-          lualine_y = {},
-          lualine_z = {}
+          lualine_x = {
+          },
+          lualine_y = {
+          },
+          lualine_z = {
+          }
         },
         winbar = {
           lualine_a = {
@@ -163,24 +151,26 @@ return {
           lualine_b = {
           },
           lualine_c = {
-            nav_sect
           },
-          lualine_y = {
-            filename_sect,
+          lualine_x = {
+            -- {"filename", path = 3, file_status = false}
           },
-          lualine_z = {}
-        },
+       },
         sections_inactive = {
-          lualine_a = {},
+          lualine_a = {
+            mode_sect
+          },
           lualine_b = {},
           lualine_c = {},
           lualine_x = {},
-          lualine_y = {},
+          lualine_y = {
+            filetype_sect
+          },
           lualine_z = {}
         },
         sections = {
           lualine_a = {
-            mode_sect
+            mode_sect,
           },
           lualine_b = {
             git_sect,
@@ -188,32 +178,24 @@ return {
           lualine_c = {
             diff_sect,
             diagnostic_sect,
-            "selectioncount",
+            trouble_sect,
           },
           lualine_x = {
           },
           lualine_y = {
-
             filetype_sect,
-            -- { "encoding",          separator = '' },
-            -- { "fileformat",        separator = '' },
-            {
-              treesitter_source(),
-              separator = ''
-            },
+            treesitter_source(),
           },
           lualine_z = {
             {
               "progress",
               icon = "",
-              -- separator = ''
             },
             {
               "location",
               icon = "",
-              -- separator = ''
             },
-          },
+          }
         },
         extensions = {
           "aerial",
@@ -229,7 +211,6 @@ return {
           "trouble",
         },
       }
-
       -- Inserts a component in lualine_c at left section
       local function ins_left(component) table.insert(config.sections.lualine_c, component) end
       -- Inserts a component in lualine_x ot right section
