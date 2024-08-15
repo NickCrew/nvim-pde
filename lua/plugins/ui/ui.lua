@@ -1,5 +1,5 @@
 return {
-{
+  {
     "NvChad/nvim-colorizer.lua",
     lazy = true,
     event = "BufReadPre",
@@ -23,7 +23,7 @@ return {
       },
     },
   },
-{
+  {
     "stevearc/dressing.nvim",
     lazy = true,
     event = "VeryLazy",
@@ -48,14 +48,14 @@ return {
     },
   },
 
-{ -- HIghlight TODO comments
+  { -- HIghlight TODO comments
     "folke/todo-comments.nvim",
     lazy = true,
     event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true
   },
-{
+  {
     "folke/noice.nvim",
     lazy = true,
     event = "VeryLazy",
@@ -63,7 +63,6 @@ return {
     dependencies = {
       "rcarriga/nvim-notify",
       "MunifTanjim/nui.nvim",
-
     },
     keys = {
       { "<leader>nd", mode = "n", "<esc><cmd>NoiceDismiss<cr>", desc = "Dismiss Notifications", },
@@ -73,12 +72,10 @@ return {
     opts = {
       cmdline = {
         enabled = true,
-
       },
       popupmenu = {
         enabled = true,
         backend = "cmp"
-
       },
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -130,4 +127,33 @@ return {
       },
     }
   },
+  {
+    "MunifTanjim/nui.nvim",
+    lazy = true,
+    event = "VeryLazy"
+  },
+  {
+    -- Pretty notification windows/popups
+    "rcarriga/nvim-notify",
+    lazy = true,
+    cmd = { "Notifications" },
+    keys = {
+
+      { "<leader>nn", mode = "n", "<esc><cmd>Notifications<cr>", desc = "All Notifications", },
+    },
+    opts = {
+      level = "info",
+      render = "default",
+      stages = "fade_in_slide_out",
+      timeout = 5000,
+      icons = {
+        ERROR = "",
+        WARN  = "",
+        INFO  = "",
+        DEBUG = "",
+      },
+    }
+  },
+
+
 }

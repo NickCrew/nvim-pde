@@ -469,7 +469,7 @@ return {
     "cappyzawa/telescope-terraform.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim",
       "ANGkeith/telescope-terraform-doc.nvim" },
-    ft = { "hcl", "tf", "tfvars" },
+    ft = { "terraform", "tf", "tfvars" },
     lazy = true,
     keys = {
       { "<leader>ftd", mode = "n", "<esc><cmd>Telescope terraform<cr>", desc = "Terraform" }

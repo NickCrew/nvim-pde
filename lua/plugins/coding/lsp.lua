@@ -25,24 +25,6 @@ return {
             "folke/lsp-colors.nvim",
             lazy = true,
           },
-          {
-            "SmiteshP/nvim-navbuddy",
-            lazy = true,
-            dependencies = {
-              "SmiteshP/nvim-navic",
-              "MunifTanjim/nui.nvim"
-            },
-            keys = {
-              { "<C-k>n", "<cmd>Navbuddy<CR>", mode = "n", desc = "Toggle NavBuddy" }
-            },
-            opts = {
-              lsp = { auto_attach = true },
-              border = "rounded",
-              position = "90%",
-              size = "30%"
-
-            }
-          }
         },
         event = { "BufReadPre", "BufNewFile" },
       },
@@ -66,6 +48,7 @@ return {
           }
         }
       })
+
       local deps = {
         "ansiblels",
         "dockerls",
@@ -76,6 +59,7 @@ return {
         "jsonls",
         "lua_ls",
         "pyright",
+        "basedpyright",
         "remark_ls",
         "terraformls",
         "tsserver",
@@ -84,20 +68,20 @@ return {
       }
 
       -- Add additional capabilities supported by nvim-cmp
+      local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 
       local handlers = {
         -- default
         function(server_name)
-          require("lspconfig")[server_name].setup {
+          lspconfig[server_name].setup {
             capabilities = capabilities
           }
         end,
 
         -- Python
         ["pyright"] = function()
-          require("lspconfig").pyright.setup({
+          lspconfig.pyright.setup({
             flags = {
               debounce_text_changes = 300
             },
@@ -121,7 +105,7 @@ return {
         end,
         --- lua
         ["lua_ls"] = function()
-          require("lspconfig").lua_ls.setup({
+          lspconfig.lua_ls.setup({
             settings = {
               Lua = {
                 diagnostics = {

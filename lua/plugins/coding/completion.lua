@@ -1,27 +1,21 @@
 return {
   {
-    "supermaven-inc/supermaven-nvim",
-    enabled = true,
+    -- Docstring generator
+    "danymat/neogen",
+    cmd = "Neogen",
     lazy = true,
-    event = "InsertEnter",
     opts = {
-  keymaps = {
-    accept_suggestion = "<Tab>",
-    clear_suggestion = "<C-;>",
-    accept_word = "<C-j>",
+      enabled = true,
+      languages = {
+        python = {
+          template = {
+            annotation_convention = "google_docstrings",
+          },
+        },
+      },
+    },
   },
-  ignore_filetypes = { cpp = true },
-  color = {
-    suggestion_color = "#ffffff",
-    cterm = 244,
-  },
-  log_level = "info", -- set to "off" to disable logging completely
-  disable_inline_completion = true, -- disables inline completion for use with cmp
-  disable_keymaps = false -- disables built in keymaps for more manual control
-
-},
-  },
-{
+  {
     -- Completion and Snippets
     "hrsh7th/nvim-cmp",
     lazy = true,
@@ -77,7 +71,6 @@ return {
         lazy = true,
         event = "InsertEnter"
       },
-
       {
         "ray-x/cmp-treesitter",
         lazy = true,
@@ -173,16 +166,16 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         },
         sources = cmp.config.sources({
-          { name = "supermaven", group_index = 2, max_item_count = 2},
-          { name = "copilot",    group_index = 2, max_item_count = 5 },
-          { name = "nvim_lsp",   group_index = 2, max_item_count = 20 },
+          { name = "copilot",    group_index = 1 },
+          { name = "supermaven", group_index = 2 },
+          { name = "nvim_lsp",   group_index = 1 },
           { name = "nvim_lua",   group_index = 2 },
-          { name = "luasnip",    group_index = 2, max_item_count = 20 },
-          { name = "path",       group_index = 2, max_item_count = 5 },
-          { name = "treesitter", group_index = 3, max_item_count = 10 },
-          { name = "emoji",      group_index = 3, max_item_count = 10 },
-          { name = "buffer",     group_index = 3, max_item_count = 10 },
-          { name = "rg",         group_index = 3, max_item_count = 10 },
+          { name = "luasnip",    group_index = 2 },
+          { name = "path",       group_index = 1 },
+          { name = "treesitter", group_index = 3 },
+          { name = "emoji",      group_index = 3 },
+          { name = "buffer",     group_index = 3 },
+          { name = "rg",         group_index = 3 }
 
         }, {}),
         experimental = {
@@ -229,7 +222,7 @@ return {
       })
     end,
   },
-{
+  {
     "VonHeikemen/fine-cmdline.nvim",
     enabled = true,
     lazy = true,

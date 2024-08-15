@@ -1,21 +1,6 @@
 return {
-{
-    -- Docstring generator
-    "danymat/neogen",
-    cmd = "Neogen",
-    lazy = true,
-    opts = {
-      enabled = true,
-      languages = {
-        python = {
-          template = {
-            annotation_convention = "google_docstrings",
-          },
-        },
-      },
-    },
-  },
-{
+  
+  {
     -- AI code completion
     "zbirenbaum/copilot.lua",
     enabled = true,
@@ -110,5 +95,26 @@ return {
 
       chat.setup(opts)
     end,
+  },
+  {
+    "supermaven-inc/supermaven-nvim",
+    enabled = true,
+    lazy = true,
+    event = "InsertEnter",
+    opts = {
+      keymaps = {
+        accept_suggestion = "<Tab>",
+        clear_suggestion = "<C-;>",
+        accept_word = "<C-j>",
+      },
+      ignore_filetypes = { cpp = true },
+      color = {
+        suggestion_color = "#ffffff",
+        cterm = 244,
+      },
+      log_level = "info",           -- set to "off" to disable logging completely
+      disable_inline_completion = true, -- disables inline completion for use with cmp
+      disable_keymaps = false       -- disables built in keymaps for more manual control
+    },
   },
 }

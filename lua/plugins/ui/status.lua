@@ -154,6 +154,8 @@ return {
           },
           lualine_x = {
             -- {"filename", path = 3, file_status = false}
+            --
+            -- {"windows", mode = 2, show_modified_status = false, 
           },
        },
         sections_inactive = {
