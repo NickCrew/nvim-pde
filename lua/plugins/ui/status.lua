@@ -8,28 +8,22 @@ return {
 
     },
     opts = function()
-      -----------------
-      -- Conditions --
-      -----------------
       local conditions = {
-        -- Buffer Not Empty
         buffer_not_empty = function()
           return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
         end,
-        --- Hide in width
+
         hide_in_width = function()
           return vim.fn.winwidth(0) > 80
         end,
-        -- Check git workspace
+
         check_git_workspace = function()
           local filepath = vim.fn.expand("%:p:h")
           local gitdir = vim.fn.finddir(".git", filepath .. ";")
           return gitdir and #gitdir > 0 and #gitdir < #filepath
         end,
       }
-      -----------------
-      -- Git Status --
-      -----------------
+
       local diff_source = function()
         local gitsigns = vim.b.gitsigns_status_dict
         if gitsigns then
@@ -40,38 +34,40 @@ return {
           }
         end
       end
-      -----------------------
-      -- Treesitter source --
-      -----------------------
+
       local treesitter_source = function()
         return function()
           local b = vim.api.nvim_get_current_buf()
           if next(vim.treesitter.highlighter.active[b]) then
-            return "滑"
+            return "串"
           end
-          return ""
+          return ""
         end
       end
-        local trouble = require("trouble")
-        local symbols = trouble.statusline({
-          mode = "lsp_document_symbols",
-          groups = {},
-          title = false,
-          filter = { range = true },
-          format = "{kind_icon}{symbol.name:Normal}",
-          -- The following line is needed to fix the background color
-          -- Set it to the lualine section you want to use
-          hl_group = "lualine_c_normal",
-        })
-        local trouble_sect = {
-          symbols.get,
-          cond = symbols.has,
-        }
+
+      local trouble = require("trouble")
+      local symbols = trouble.statusline({
+        mode = "lsp_document_symbols",
+        groups = {},
+        title = false,
+        filter = { range = true },
+        format = "{kind_icon}{symbol.name:Normal}",
+        -- The following line is needed to fix the background color
+        -- Set it to the lualine section you want to use
+        hl_group = "lualine_c_normal",
+      })
+
+      local trouble_sect = {
+        symbols.get,
+        cond = symbols.has,
+      }
 
       local filename_sect = {
         "filename",
         cond = conditions.buffer_not_empty,
-        path = 3,
+        icon = "",
+        path = 4,
+        separator = "",
         file_status = true,
         symbols = {
           modified = "",
@@ -80,25 +76,33 @@ return {
           unnamed = ""
         }
       }
+
       local filetype_sect = {
         "filetype",
         cond = conditions.buffer_not_empty,
+        separator = "",
       }
+
       local diff_sect = {
         "diff",
         source = diff_source,
+        -- icon = " ",
         symbols = {
           added = " ",
           modified = "柳",
           removed = " ",
         },
         cond = conditions.check_git_workspace,
+        separator = ""
       }
+
       local git_sect = {
         "branch",
         icon = "",
-        cond = conditions.check_git_workspace
+        cond = conditions.check_git_workspace,
+        separator = "",
       }
+
       local diagnostic_sect = {
         "diagnostics",
         sources = { "nvim_diagnostic" },
@@ -111,8 +115,10 @@ return {
         },
         cond = conditions.buffer_not_empty
       }
+
       local mode_sect = {
-        "mode",
+        'mode',
+        fmt = function(str) return str:sub(1, 1) end,
       }
       --------------------
       -- Lualine Config --
@@ -155,12 +161,11 @@ return {
           lualine_x = {
             -- {"filename", path = 3, file_status = false}
             --
-            -- {"windows", mode = 2, show_modified_status = false, 
+            -- {"windows", mode = 2, show_modified_status = false,
           },
-       },
+        },
         sections_inactive = {
           lualine_a = {
-            mode_sect
           },
           lualine_b = {},
           lualine_c = {},
@@ -172,31 +177,28 @@ return {
         },
         sections = {
           lualine_a = {
-            mode_sect,
+
+            { "progress", icon = "", },
+            { "location", icon = "", },
           },
           lualine_b = {
-            git_sect,
+            filetype_sect,
+            { treesitter_source(), color = { fg = "#a9b665" }, },
+            filename_sect,
           },
           lualine_c = {
-            diff_sect,
             diagnostic_sect,
             trouble_sect,
           },
           lualine_x = {
+            diff_sect,
           },
           lualine_y = {
-            filetype_sect,
-            treesitter_source(),
+            git_sect,
           },
           lualine_z = {
-            {
-              "progress",
-              icon = "",
-            },
-            {
-              "location",
-              icon = "",
-            },
+
+            mode_sect,
           }
         },
         extensions = {

@@ -87,10 +87,14 @@ return {
         messages = {
           view_search = true,
         },
+        documentation  = {
+          view = "hover",
+        },
         progress = {
           enabled = true,
           throttle = 1000 / 100,
-          format = "lsp_progress"
+          format = "lsp_progress",
+          view = "mini"
         },
         signature = {
           enabled = true,
