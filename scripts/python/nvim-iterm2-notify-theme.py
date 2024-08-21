@@ -22,7 +22,7 @@ async def main(connection):
             venvdir = os.path.join(confdir, ".venv")
 
             try:
-                subprocess.run([f"{venvdir}/bin/python3", f"{confdir}/scripts/nvim-socknotify"])
+                subprocess.run([f"{venvdir}/bin/python3", f"{confdir}/scripts/nvim-notify-theme.py"])
             except subprocess.CalledProcessError as err:
                 print('Unable to notify vim: {0}'.format(err))
 
