@@ -48,6 +48,13 @@ return {
     },
   },
 
+  {
+    "echasnovski/mini.icons",
+    lazy = true,
+    event = "VeryLazy",
+    version = "*"
+
+},
   { -- HIghlight TODO comments
     "folke/todo-comments.nvim",
     lazy = true,
