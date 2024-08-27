@@ -13,12 +13,6 @@ map("n", "<leader>;", "zz", opts)
 map("n", "N", "Nzz", opts)
 map("n", "n", "nzz", opts)
 
--- Split Navigation
--- map("n","<c-h>", "<C-w>h", opts)
--- map("n","<c-j>", "<C-w>j", opts)
--- map("n","<c-k>", "<C-w>k", opts)
--- map("n","<c-l>", "<C-w>l", opts)
-
 map("n","<A-h>", "<C-w>h", opts)
 map("n","<A-j>", "<C-w>j", opts)
 map("n","<A-k>", "<C-w>k", opts)
@@ -29,14 +23,12 @@ map("n","<A-l>", "<C-w>l", opts)
 -- map("n","<A-Up>", "<C-w>k", opts)
 -- map("n","<A-Right>", "<C-w>l", opts)
 
-
 -- Last Buffer
 map("n", "<leader><tab>", "<cmd>b#<cr>", opts)
 
 -- Search Highlighting
 map("n", "<leader>,", "<cmd>noh<cr>", opts)
 map("n", "<leader><leader>;", "<cmd>noh<cr>", opts)
-
 
 -- Saving and Closing
 map("n", "<C-s>", "<cmd>w<cr>", opts)          -- Save
@@ -62,4 +54,5 @@ map("n", "<leader>bf", "<cmd>lua vim.lsp.buf.format()<cr>", opts)  -- Format buf
 map("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 map("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 map("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
+
 

@@ -22,7 +22,7 @@ return {
     event = "InsertEnter",
     lazy = true,
     opts = {},
-    enabled = true,
+    enabled = false,
   },
   {
     "echasnovski/mini.surround",

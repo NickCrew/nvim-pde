@@ -125,6 +125,23 @@ return {
         inc_rename = true,            -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = true,        -- add a border to hover docs and signature help
       },
+      views = {
+cmdline_popup = {
+        border = {
+          style = "none",
+          padding = { 1, 2 },
+        },
+        filter_options = {},
+        win_options = {
+          winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+        },
+      },
+        mini = {
+          win_options = {
+            winblend = 0
+          },
+        }
+      },
       routes = {
         { filter = { find = "E21" },                                   skip = true },
         { filter = { find = "E162" },                                  skip = true },
@@ -165,6 +182,5 @@ return {
       },
     }
   },
-
 
 }

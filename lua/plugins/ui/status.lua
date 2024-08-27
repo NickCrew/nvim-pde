@@ -39,9 +39,9 @@ return {
         return function()
           local b = vim.api.nvim_get_current_buf()
           if next(vim.treesitter.highlighter.active[b]) then
-            return "串"
+            return " TS"
           end
-          return ""
+          return " TS"
         end
       end
 
@@ -79,8 +79,7 @@ return {
 
       local filetype_sect = {
         "filetype",
-        cond = conditions.buffer_not_empty,
-        separator = "",
+        cond = conditions.buffer_not_empty
       }
 
       local diff_sect = {
@@ -182,8 +181,11 @@ return {
             { "location", icon = "", },
           },
           lualine_b = {
+            {"encoding"},
+            -- {treesitter_source(), color = { fg = "#a9b665" }, },
+            {treesitter_source()},
+            {"copilot"},
             filetype_sect,
-            { treesitter_source(), color = { fg = "#a9b665" }, },
             filename_sect,
           },
           lualine_c = {

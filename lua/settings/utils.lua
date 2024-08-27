@@ -1,5 +1,3 @@
--- lua/settings/utils.lua
---
 -- Helpers for applying the neovim configuration
 --
 
@@ -33,6 +31,10 @@ M.edit_config = function()
   vim.cmd("cd -")
 end
 
-
+M.xai = function()
+  vim.cmd("CopilotChatClose") 
+  vim.cmd("CopilotChatStop") 
+  vim.cmd([[Copilot disable]]) 
+end
 
 return M

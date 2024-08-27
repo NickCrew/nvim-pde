@@ -1,17 +1,13 @@
--- init.lua
+-- Neovim configuration
 --
---
 
-
--- Load settings
-require("settings.global")
-require("settings.autocmds")
-require("settings.options")
-require("settings.lazy")      -- Load plugins
-require("settings.mappings")
-require("settings.abbrev")
-
-
-require("settings.utils").update_theme()
-
+require("settings.global") --  Global variables and functions 
+require("settings.autocmds") -- Autocommands
+require("settings.options") -- Options 
+require("settings.lazy") -- Lazy load plugins
+require("settings.mappings") -- Custom key mappings
+require("settings.abbrevs") -- Abbreviations 
+require("settings.highlights") -- highlighting groups 
+vim.cmd("colorscheme tokyonight-moon") -- Set the theme 
+-- That's it!
 

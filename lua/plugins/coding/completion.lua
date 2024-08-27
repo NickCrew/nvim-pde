@@ -50,7 +50,7 @@ return {
       local user = vim.env.USER or "User"
       user = user:sub(1, 1):upper() .. user:sub(2)
       return {
-        model = "gpt-4",
+        model = "gpt-4o",
         auto_insert_mode = true,
         show_help = true,
         question_header = "  " .. user .. " ",
@@ -95,9 +95,33 @@ return {
         mode = { "n", "v" },
       },
       -- Show help actions with telescope
-      -- { "<leader>ad", M.pick("help"),   desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
+      {
+        "<leader>ad",
+        function()
+           require("CopilotChat.actions").pick("help")
+        end,
+        desc = "Diagnostic Help (CopilotChat)",
+        mode = { "n", "v" }
+      },
       -- Show prompts actions with telescope
-      -- { "<leader>ap", M.pick("prompt"), desc = "Prompt Actions (CopilotChat)",  mode = { "n", "v" } },
+      {
+        "<leader>ap",
+        function()
+          require("CopilotChat.actions").pick("prompt")
+        end,
+        desc = "Prompt Actions (CopilotChat)",
+        mode = { "n", "v" }
+      },
+    {
+        "<leader>ccq",
+        function()
+          local input = vim.fn.input("Quick Chat: ")
+          if input ~= "" then
+            require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+          end
+        end,
+        desc = "CopilotChat - Quick chat",
+      },
     },
     config = function(_, opts)
       local chat = require("CopilotChat")
@@ -116,14 +140,14 @@ return {
   },
   {
     "supermaven-inc/supermaven-nvim",
-    enabled = true,
+    enabled = false,
     lazy = true,
     event = "InsertEnter",
     opts = {
       keymaps = {
-        accept_suggestion = "<Tab>",
-        clear_suggestion = "<C-;>",
-        accept_word = "<C-j>",
+        accept_suggestion = "<C-;>",
+        clear_suggestion = "<C-]>",
+        accept_word = "<C-}>",
       },
       ignore_filetypes = { cpp = true },
       color = {
@@ -131,8 +155,8 @@ return {
         cterm = 244,
       },
       log_level = "info",           -- set to "off" to disable logging completely
-      disable_inline_completion = false, -- disables inline completion for use with cmp
-      disable_keymaps = false       -- disables built in keymaps for more manual control
+      disable_inline_completion = true, -- disables inline completion for use with cmp
+      disable_keymaps = true       -- disables built in keymaps for more manual control
     },
   },
 
@@ -226,7 +250,9 @@ return {
       {
         "petertriho/cmp-git",
         lazy = true,
-        event = "InsertEnter"
+        ft = {"gitcommit","octo", "NeogitCommitMessage"},
+        event = "InsertEnter",
+        config = true
       },
       {
         "lukas-reineke/cmp-rg",
@@ -257,6 +283,7 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
+ 
         formatting = {
           format = lspkind.cmp_format({
             mode = "symbol_text",
@@ -265,7 +292,7 @@ return {
             symbol_map = icons.kind,
             before = function(entry, vim_item)
               -- vim_item.kind = lspkind.presets.default[vim_item.kind]
-              vim_item.menu = icons.alt.source[entry.source.name]
+              vim_item.menu = icons.alt.cmp_sources[entry.source.name]
               return vim_item
             end,
           }),
@@ -303,20 +330,66 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         },
         sources = cmp.config.sources({
-          { name = "nvim_lsp_signature_help", group_index = 1 },
-          { name = "copilot",    group_index = 1 },
-          { name = "nvim_lsp",   group_index = 1 },
-          { name = "nvim_lua",   group_index = 2 },
-          { name = "luasnip",    group_index = 2 },
-          { name = "path",       group_index = 1 },
-          { name = "treesitter", group_index = 3 },
-          { name = "emoji",      group_index = 3 },
-          { name = "buffer",     group_index = 3 },
-          { name = "rg",         group_index = 3 }
+          {
+            name = "nvim_lsp_signature_help",
+            group_index = 1
+          },
+          {
+            name = "copilot",
+            group_index = 1
+          },
+          {
+            name = "supermaven",
+            group_index = 1
+          },
+          {
+            name = "nvim_lsp",
+            group_index = 1
+          },
+          {
+            name = "nvim_lua",
+            group_index = 1
+          },
+          {
+            name = "luasnip",
+            group_index = 1
+          },
+          {
+            name = "path",
+            group_index = 1
+          },
+          {
+            name = "treesitter",
+            group_index = 2
+          },
+          {
+            name = "emoji",
+            group_index = 3
+          },
+          {
+            name = "buffer",
+            group_index = 2
+          },
+          {
+            name = "rg",
+            group_index = 3
+          },
+          -- {
+          --   name = "spell",
+          --   option = {
+          --       keep_all_entries = false,
+          --       enable_in_context = function()
+          --           return true
+          --       end,
+          --       preselect_correct_word = true,
+          --   },
+          --   group_index = 3,
+          --   max_item_count = 5,
+        -- }
 
         }, {}),
         experimental = {
-          ghost_text = true,
+          ghost_text = false,
         },
         window = {
           completion = cmp.config.window.bordered(),
@@ -350,12 +423,11 @@ return {
       })
 
       -- Git
-      cmp.setup.filetype({ "gitcommit" }, {
+      cmp.setup.filetype({ "gitcommit", "octo", "NeogitCommitMessage" }, {
         sources = cmp.config.sources({
-          { name = "cmp_git" },
-        }, {
+          { name = "git" },
           { name = "buffer" },
-        })
+        } )
       })
     end,
   },

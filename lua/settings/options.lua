@@ -6,11 +6,19 @@
 local o          = vim.o
 local g          = vim.g
 
+
+g.nvim_cache        = os.getenv('HOME') .. "/.cache/nvim"
+g.python3_host_prog = os.getenv("HOME") .. '/.pyenv/versions/neovim/bin/python'
+
+ 
+
 -- Leader
 g.mapleader      = " "
 g.maplocalleader = "\\"
 
 o.termguicolors  = true  -- True color support
+
+o.spell          = true -- Spell check
 
 o.errorbells     = false -- Shut up
 

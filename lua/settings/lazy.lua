@@ -1,7 +1,5 @@
---------------------------------------------------
--- Description: Load plugins using Lazy
---------------------------------------------------
-
+-- Plugin manager
+--
 local devpath = vim.fn.stdpath("config") .. "/lua/devel/plugins"
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -38,6 +36,6 @@ require("lazy").setup({
     fallback = false
   },
   install = {
-    colorscheme = "tokyonight"
+    colorscheme = "tokyonight-moon",
   },
 })

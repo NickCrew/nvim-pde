@@ -19,14 +19,6 @@ aucmd({ "BufNewFile", "BufRead" }, {
   end,
 })
 
--- aucmd({ "BufNewFile", "BufRead" }, {
---   group = augroup("filetype"),
---   pattern = "*.hcl",
---   callback = function()
---     vim.cmd("set ft=terraform")
---   end,
--- })
-
 
 -----------------------------------------------------
 -- Check if we need to reload the file after changes

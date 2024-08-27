@@ -1,5 +1,4 @@
 local bufmap        = vim.api.nvim_buf_set_keymap
-local hl            = vim.api.nvim_set_hl
 local opts          = { noremap = true, silent = true }
 local g             = vim.g
 
@@ -42,8 +41,4 @@ _G.set_lsp_keymaps = function(bufnr)
    bufmap(bufnr, "n", 'gq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 end
 
-                        ------------------
-                        --  Highlights  -- 
-                        ------------------
 
-hl(0, "CmpItemKindSupermaven", {fg ="#6CC644"})

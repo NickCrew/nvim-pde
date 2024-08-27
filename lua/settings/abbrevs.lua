@@ -1,5 +1,4 @@
 -- Abbreviations
---
 local abbrevs = {
   AlignTags = '% ! column -t |',
   L = "Lazy",
@@ -14,7 +13,7 @@ local abbrevs = {
   Msj = "lua _G.MiniSplitjoin"
 }
 for abr, cmd in pairs(abbrevs) do
-  vim.cmd { cmd = 'cnoreabbrev', args = { abr, cmd } }
-end
+    vim.cmd { cmd = 'cnoreabbrev', args = { abr, cmd } }
+  end
 
 

@@ -6,6 +6,7 @@ return {
     lazy = true,
     config = true
   },
+  { "lifepillar/vim-gruvbox8", enabled  = false},
   {
     "rebelot/kanagawa.nvim",
     enabled = false,
@@ -23,7 +24,12 @@ return {
     enabled = true,
     lazy = true,
     cmd = "Lushify",
+
   },
+  {
+    "arcticicestudio/nord-vim",
+    enabled = false
+},
   {
     "EdenEast/nightfox.nvim",
     enabled = false,
@@ -40,7 +46,7 @@ return {
   },
   {
     "scottmckendry/cyberdream.nvim",
-    enabled = false,
+    enabled = true,
     lazy = false,
     opts = {
       -- recommended - see "configuring" below for more config options
