@@ -42,13 +42,15 @@ return {
         close_command = function(n) require("mini.bufremove").delete(n, false) end,
         -- stylua: ignore
         right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
-        diagnostics = true,
+        diagnostics = "nvim_lsp",
+        diagnostics_update_in_insert = false,
+        diagnostics_update_on_event = true,
         always_show_bufferline = true,
         persist_buffer_sort = true,
         show_tab_indicators = true,
         sort_by = "directory",
         show_close_icon = true,
-        separator_style = "padded_slant",
+        separator_style = "thick",
         diagnostics_indicator = function(_, _, diag)
           local ret = (diag.error and icons.error .. diag.error .. " " or "")
               .. (diag.warning and icons.warning .. diag.warning or "")

@@ -1,6 +1,3 @@
---[[ FILE MANAGER
-There are two options: `echasnovski/mini.files` and `stevearc/oil.nvim`.
---]]
 return {
   {
     -- You can also use the codeberg mirror if you want to use the plugin without relying on GitHub
@@ -62,7 +59,7 @@ return {
       {
         "<leader>be",
         function()
-          require("neo-tree.command").execute({ source = "buffers", toggle = true, position = "float" })
+          require("neo-tree.command").execute({ source = "buffers", toggle = true })
         end,
         desc = "Buffer explorer",
       },
@@ -87,27 +84,5 @@ return {
       },
     },
   },
-{
-    -- Hyperfast project navigation
-    "ThePrimeagen/harpoon",
-    enabled = true,
-    lazy = true,
-    branch = "harpoon2",
-    event = "BufReadPre",
-    config = function()
-      local harpoon = require("harpoon")
-      harpoon:setup({})
-      vim.keymap.set("n", "<leader><leader>a", function() harpoon:list():add() end)
-      vim.keymap.set("n", "<leader><leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-      vim.keymap.set("n", "<A-a>", function() harpoon:list():select(1) end)
-      vim.keymap.set("n", "<A-s>", function() harpoon:list():select(2) end)
-      vim.keymap.set("n", "<A-d>", function() harpoon:list():select(3) end)
-      vim.keymap.set("n", "<A-f>", function() harpoon:list():select(4) end)
-      vim.keymap.set("n", "<A-[>", function() harpoon:list():prev() end)
-      vim.keymap.set("n", "<A-]>", function() harpoon:list():next() end)
-      require("telescope").load_extension("harpoon")
 
-    end
-
-  }
 }

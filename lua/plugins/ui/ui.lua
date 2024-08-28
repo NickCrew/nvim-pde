@@ -126,7 +126,7 @@ return {
         lsp_doc_border = true,        -- add a border to hover docs and signature help
       },
       views = {
-cmdline_popup = {
+        cmdline_popup = {
         border = {
           style = "none",
           padding = { 1, 2 },

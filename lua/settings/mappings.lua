@@ -9,7 +9,6 @@ map("n", "q:", "<nop>", opts)
 map("n", "Q", "<nop>", opts)
 
 -- Center Cursor
-map("n", "<leader>;", "zz", opts)
 map("n", "N", "Nzz", opts)
 map("n", "n", "nzz", opts)
 
@@ -28,7 +27,6 @@ map("n", "<leader><tab>", "<cmd>b#<cr>", opts)
 
 -- Search Highlighting
 map("n", "<leader>,", "<cmd>noh<cr>", opts)
-map("n", "<leader><leader>;", "<cmd>noh<cr>", opts)
 
 -- Saving and Closing
 map("n", "<C-s>", "<cmd>w<cr>", opts)          -- Save
@@ -55,4 +53,9 @@ map("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 map("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 map("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
 
+
+map("n", "<leader>;", "<cmd>Arrow open<cr>", opts)
+map("n", "<leader><leader>a", "<cmd>Arrow toggle_current_line_for_buffer<cr>", opts)
+map("n", "<leader><leader>h", "<cmd>Arrow next_buffer_bookmark<cr>", opts)
+map("n", "<leader><leader>l", "<cmd>Arrow previous_buffer_bookmark<cr>", opts)
 

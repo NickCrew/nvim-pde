@@ -292,7 +292,7 @@ return {
             symbol_map = icons.kind,
             before = function(entry, vim_item)
               -- vim_item.kind = lspkind.presets.default[vim_item.kind]
-              vim_item.menu = icons.alt.cmp_sources[entry.source.name]
+              vim_item.menu = icons.cmp_sources[entry.source.name]
               return vim_item
             end,
           }),

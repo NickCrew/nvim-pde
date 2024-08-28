@@ -67,7 +67,6 @@ return {
         cond = conditions.buffer_not_empty,
         icon = "",
         path = 4,
-        separator = "",
         file_status = true,
         symbols = {
           modified = "",
@@ -92,20 +91,17 @@ return {
           removed = " ",
         },
         cond = conditions.check_git_workspace,
-        separator = ""
       }
 
       local git_sect = {
         "branch",
         icon = "",
         cond = conditions.check_git_workspace,
-        separator = "",
       }
 
       local diagnostic_sect = {
         "diagnostics",
         sources = { "nvim_diagnostic" },
-        -- separator = ' ',
         symbols = {
           error = " ",
           warn = " ",
@@ -118,6 +114,21 @@ return {
       local mode_sect = {
         'mode',
         fmt = function(str) return str:sub(1, 1) end,
+      }
+      local file_sect = {
+        -- filename_sect,
+        filetype_sect,
+        -- { "encoding" },
+        { treesitter_source() },
+        { "copilot" },
+      }
+      local location_sect = {
+        { "progress", icon = "", },
+        { "location", icon = "", },
+      }
+      local scm_sect = {
+        git_sect,
+        diff_sect
       }
       --------------------
       -- Lualine Config --
@@ -132,7 +143,8 @@ return {
             statusline = {
               "dashboard",
               "alpha",
-              "starter"
+              "starter",
+              "neo-tree"
             }
           },
           section_separators = { left = '', right = '' },
@@ -143,65 +155,40 @@ return {
           lualine_a = {},
           lualine_b = {},
           lualine_c = {},
-          lualine_x = {
-          },
-          lualine_y = {
-          },
-          lualine_z = {
-          }
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {}
         },
         winbar = {
-          lualine_a = {
-          },
-          lualine_b = {
-          },
+          lualine_a = {},
+          lualine_b = {},
           lualine_c = {
           },
-          lualine_x = {
-            -- {"filename", path = 3, file_status = false}
-            --
-            -- {"windows", mode = 2, show_modified_status = false,
-          },
+          lualine_x = {},
         },
         sections_inactive = {
-          lualine_a = {
+          lualine_a = {},
+          lualine_b = {
           },
-          lualine_b = {},
           lualine_c = {},
           lualine_x = {},
-          lualine_y = {
-            filetype_sect
-          },
+          lualine_y = {},
           lualine_z = {}
         },
         sections = {
           lualine_a = {
-
-            { "progress", icon = "", },
-            { "location", icon = "", },
+            mode_sect
           },
-          lualine_b = {
-            {"encoding"},
-            -- {treesitter_source(), color = { fg = "#a9b665" }, },
-            {treesitter_source()},
-            {"copilot"},
-            filetype_sect,
-            filename_sect,
-          },
+          lualine_b = scm_sect,
           lualine_c = {
-            diagnostic_sect,
-            trouble_sect,
+            trouble_sect
           },
           lualine_x = {
-            diff_sect,
+            -- diagnostic_sect,
+            -- diff_sect,
           },
-          lualine_y = {
-            git_sect,
-          },
-          lualine_z = {
-
-            mode_sect,
-          }
+          lualine_y = file_sect,
+          lualine_z = location_sect
         },
         extensions = {
           "aerial",
