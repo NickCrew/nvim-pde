@@ -15,26 +15,25 @@ return {
       },
       {
         'echasnovski/mini.starter',
+        enabled = false,
         dependencies = {
           "rubiin/fortune.nvim",
         },
         version      = false,
         opts         = {
           header = function()
-           return  header .. "\n" ..  "שּ  Welcome Back, " .. vim.fn.system("echo ${USER}!")  ..  "\n" .. "  " .. vim.fn.getcwd() .. "\n" ..
-          "  " .. vim.fn.system("git my | awk 'FNR==1' | cut -d '-' -f 1,2")
+           return  header .. "\n" ..  "שּ  Hello, " .. vim.fn.system("echo ${USER}!")  ..  "\n" .. "It's " .. os.date("%Y-%m-%d %H:%M:%S") ..  "\nYou're in   " .. vim.fn.getcwd() 
           end,
           footer =  function()
             return vim.fn.system("csfortune")
           end
         },
-      enabled = true
       },
     {
 
       'nvimdev/dashboard-nvim',
       event = 'VimEnter',
-      enabled = false,
+      enabled = true,
       lazy = true,
       opts = {
         theme = 'hyper',
@@ -44,10 +43,10 @@ return {
           header = { "Hello from Neovim" },
           week_header = {
             enable = true,
-            -- append = {
-            --   "",
-            --   " " .. vim.fn.getcwd()
-            -- }
+            append = {
+              "",
+              "  " .. vim.fn.getcwd()
+            }
           },
           footer = function()
             local info = {}
@@ -59,29 +58,23 @@ return {
             {
               desc = 'New',
               icon = '  ',
-              group = 'DiagnosticError',
+              group = 'DashboardDesc',
               action = 'new',
               key = 'n',
             },
             {
               desc = "Explore",
               icon = "פּ ",
+              group = "DashboardKey",
               action = "Neotree reveal",
               key = 'e',
             },
             {
               desc = 'Find',
               icon = '  ',
-              group = '@number',
+              group = '@attribute',
               action = 'Telescope smart_open',
               key = 'f',
-            },
-            {
-              desc = "Changes",
-              icon = " ",
-              group = "Variable",
-              key = 's',
-              action = "Neogit"
             },
             {
               desc = 'Plugins',

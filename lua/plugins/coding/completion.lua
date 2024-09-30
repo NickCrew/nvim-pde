@@ -1,5 +1,51 @@
 return {
-{
+  {
+    "yetone/avante.nvim",
+    enabled = false,
+    event = "VeryLazy",
+    lazy = false,
+    version = false, -- set this if you want to always pull the latest change
+    opts = {
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua",    -- for providers='copilot'
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+    },
+  },
+  {
     -- Lua-based snippet engine
     "L3MON4D3/LuaSnip",
     lazy = true,
@@ -17,7 +63,7 @@ return {
       updateevents = "TextChanged,TextChangedI",
     }
   },
-{
+  {
     -- AI code completion
     "zbirenbaum/copilot.lua",
     enabled = true,
@@ -34,8 +80,7 @@ return {
       }
     },
   },
-  { 'AndreM222/copilot-lualine' ,
- },
+  { 'AndreM222/copilot-lualine',},
   {
     "zbirenbaum/copilot-cmp",
     event = "InsertEnter",
@@ -43,7 +88,9 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
+    enabled = true,
     branch = "canary",
+    build = "make tiktoken",
     lazy = true,
     cmd = "CopilotChat",
     opts = function()
@@ -98,7 +145,7 @@ return {
       {
         "<leader>ad",
         function()
-           require("CopilotChat.actions").pick("help")
+          require("CopilotChat.actions").pick("help")
         end,
         desc = "Diagnostic Help (CopilotChat)",
         mode = { "n", "v" }
@@ -112,7 +159,7 @@ return {
         desc = "Prompt Actions (CopilotChat)",
         mode = { "n", "v" }
       },
-    {
+      {
         "<leader>ccq",
         function()
           local input = vim.fn.input("Quick Chat: ")
@@ -138,28 +185,6 @@ return {
       chat.setup(opts)
     end,
   },
-  {
-    "supermaven-inc/supermaven-nvim",
-    enabled = false,
-    lazy = true,
-    event = "InsertEnter",
-    opts = {
-      keymaps = {
-        accept_suggestion = "<C-;>",
-        clear_suggestion = "<C-]>",
-        accept_word = "<C-}>",
-      },
-      ignore_filetypes = { cpp = true },
-      color = {
-        suggestion_color = "#ffffff",
-        cterm = 244,
-      },
-      log_level = "info",           -- set to "off" to disable logging completely
-      disable_inline_completion = true, -- disables inline completion for use with cmp
-      disable_keymaps = true       -- disables built in keymaps for more manual control
-    },
-  },
-
   {
     -- Docstring generator
     "danymat/neogen",
@@ -250,7 +275,7 @@ return {
       {
         "petertriho/cmp-git",
         lazy = true,
-        ft = {"gitcommit","octo", "NeogitCommitMessage"},
+        ft = { "gitcommit", "octo", "NeogitCommitMessage" },
         event = "InsertEnter",
         config = true
       },
@@ -283,7 +308,7 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
- 
+
         formatting = {
           format = lspkind.cmp_format({
             mode = "symbol_text",
@@ -330,50 +355,16 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         },
         sources = cmp.config.sources({
-          {
-            name = "nvim_lsp_signature_help",
-            group_index = 1
-          },
-          {
-            name = "copilot",
-            group_index = 1
-          },
-          {
-            name = "supermaven",
-            group_index = 1
-          },
-          {
-            name = "nvim_lsp",
-            group_index = 1
-          },
-          {
-            name = "nvim_lua",
-            group_index = 1
-          },
-          {
-            name = "luasnip",
-            group_index = 1
-          },
-          {
-            name = "path",
-            group_index = 1
-          },
-          {
-            name = "treesitter",
-            group_index = 2
-          },
-          {
-            name = "emoji",
-            group_index = 3
-          },
-          {
-            name = "buffer",
-            group_index = 2
-          },
-          {
-            name = "rg",
-            group_index = 3
-          },
+          {name = "nvim_lsp_signature_help", group_index = 1},
+          { name = "copilot", group_index = 1 },
+          {name = "nvim_lsp", group_index = 1},
+          {name = "nvim_lua", group_index = 1},
+          {name = "luasnip", group_index = 1},
+          {name = "path", group_index = 1},
+          {name = "treesitter", group_index = 2},
+          {name = "emoji", group_index = 3},
+          {name = "buffer", group_index = 2},
+          {name = "rg", group_index = 3},
           -- {
           --   name = "spell",
           --   option = {
@@ -385,7 +376,7 @@ return {
           --   },
           --   group_index = 3,
           --   max_item_count = 5,
-        -- }
+          -- }
 
         }, {}),
         experimental = {
@@ -427,7 +418,7 @@ return {
         sources = cmp.config.sources({
           { name = "git" },
           { name = "buffer" },
-        } )
+        })
       })
     end,
   },

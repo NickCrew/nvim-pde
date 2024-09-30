@@ -132,7 +132,7 @@ return {
         {
           title = "Issues",
           ft = "trouble",
-          size = { height = 0.4 }
+          size = { height = 0.3 }
         },
         {
           ft = "qf",
