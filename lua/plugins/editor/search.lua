@@ -44,6 +44,7 @@ return {
     opts = function()
       local actions = require("telescope.actions")
       local themes = require("telescope.themes")
+      local z_utils = require("telescope._extensions.zoxide.utils")
       local open_with_trouble = function(...)
         return require("trouble.providers.telescope").open_with_trouble(...)
       end
@@ -136,6 +137,24 @@ return {
           },
         },
         extensions = {
+          zoxide = {
+            prompt_title = "[ Walking on the shoulders of TJ ]",
+            mappings = {
+              default = {
+                after_action = function(selection)
+                  print("Update to (" .. selection.z_score .. ") " .. selection.path)
+                end
+              },
+              ["<C-s>"] = {
+                before_action = function(selection) print("before C-s") end,
+                action = function(selection)
+                  vim.cmd.edit(selection.path)
+                end
+              },
+              -- Opens the selected entry in a new split
+              ["<C-q>"] = { action = z_utils.create_basic_command("split") },
+            },
+          },
           aerial = {
             show_nesting = true,
             theme = "dropdown"
@@ -162,7 +181,6 @@ return {
               ["data"] = os.getenv('HOME') .. "/.local/share"
             }
           },
-          
           lazy = {
             -- Optional theme (the extension doesn't set a default theme)
             theme = "ivy",
@@ -305,6 +323,10 @@ return {
     config = function()
       require("telescope").load_extension('fzf')
     end
+  },
+  {
+    "jvgrootveld/telescope-zoxide",
+    lazy = true
   },
   {
     "LinArcX/telescope-env.nvim",

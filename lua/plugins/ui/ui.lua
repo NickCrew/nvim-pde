@@ -1,5 +1,23 @@
 return {
   {
+    "OXY2DEV/helpview.nvim",
+    lazy = false, -- Recommended
+
+    -- In case you still want to lazy load
+    -- ft = "help",
+
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter"
+    }
+ },
+ {
+     "aznhe21/actions-preview.nvim",
+     lazy = true,
+     keys = {
+       { "<leader>ap", mode = {"v", "n"}, require("actions-preview").code_actions, desc = "Preview LSP Code actions"}
+     }
+ },
+  {
     "NvChad/nvim-colorizer.lua",
     lazy = true,
     event = "BufReadPre",
@@ -54,7 +72,7 @@ return {
     event = "VeryLazy",
     version = "*"
 
-},
+  },
   { -- HIghlight TODO comments
     "folke/todo-comments.nvim",
     lazy = true,
@@ -86,24 +104,24 @@ return {
       },
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-        override = {
+        override      = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true,
         },
-        messages = {
+        messages      = {
           view_search = true,
         },
-        documentation  = {
+        documentation = {
           view = "hover",
         },
-        progress = {
+        progress      = {
           enabled = true,
           throttle = 1000 / 100,
           format = "lsp_progress",
           view = "mini"
         },
-        signature = {
+        signature     = {
           enabled = true,
           auto_open = {
             enabled = true,
@@ -112,7 +130,7 @@ return {
             throttle = 50
           }
         },
-        hover = {
+        hover         = {
           enabled = true,
           silent = false,
         }
@@ -127,15 +145,15 @@ return {
       },
       views = {
         cmdline_popup = {
-        border = {
-          style = "none",
-          padding = { 1, 2 },
+          border = {
+            style = "none",
+            padding = { 1, 2 },
+          },
+          filter_options = {},
+          win_options = {
+            winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+          },
         },
-        filter_options = {},
-        win_options = {
-          winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-        },
-      },
         mini = {
           win_options = {
             winblend = 0
