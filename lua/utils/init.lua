@@ -1,3 +1,4 @@
+
 -- Helpers for applying the neovim configuration
 --
 

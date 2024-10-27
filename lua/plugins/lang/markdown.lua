@@ -3,6 +3,7 @@ return {
     "toppair/peek.nvim",
     lazy = true,
     build = "deno task --quiet build:fast",
+    enabled = false,
     keys = {
       {
         "<leader>op",
@@ -32,9 +33,6 @@ return {
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
     lazy = true,
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
   },
   {
     "epwalsh/obsidian.nvim",

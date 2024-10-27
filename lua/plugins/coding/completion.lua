@@ -287,7 +287,7 @@ return {
 
     },
     config = function()
-      local icons = require("settings.icons")
+      local icons = require("settings").icons()
       local cmp = require('cmp')
       local luasnip = require("luasnip")
       local lspkind = require("lspkind")

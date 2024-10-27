@@ -64,7 +64,6 @@ return {
     init = function()
       vim.opt.laststatus = 3
       vim.opt.splitkeep = "screen"
-      local utils = require("settings.utils")
     end,
     keys = {
       -- Go to last focused main window

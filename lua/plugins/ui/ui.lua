@@ -1,21 +1,11 @@
 return {
   {
     "OXY2DEV/helpview.nvim",
-    lazy = false, -- Recommended
-
-    -- In case you still want to lazy load
-    -- ft = "help",
-
     dependencies = {
       "nvim-treesitter/nvim-treesitter"
-    }
- },
- {
-     "aznhe21/actions-preview.nvim",
-     lazy = true,
-     keys = {
-       { "<leader>ap", mode = {"v", "n"}, require("actions-preview").code_actions, desc = "Preview LSP Code actions"}
-     }
+    },
+    lazy = true,
+     ft = "help",
  },
   {
     "NvChad/nvim-colorizer.lua",

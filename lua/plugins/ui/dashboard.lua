@@ -45,14 +45,13 @@ return {
             enable = true,
             append = {
               "",
-              "  " .. vim.fn.getcwd()
+              " " ..  vim.fn.getcwd()
             }
           },
           footer = function()
-            local info = {}
             local fortune = require("fortune").get_fortune()
-            local footer = vim.list_extend(info, fortune)
-            return footer
+            local info = {}
+            return vim.list_extend(info, fortune)
           end,
           shortcut = {
             {
