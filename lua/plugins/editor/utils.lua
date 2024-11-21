@@ -1,10 +1,10 @@
 return {
   {
-      "stevearc/overseer.nvim",
-      opts = {},
-      lazy = true
+    "stevearc/overseer.nvim",
+    opts = {},
+    lazy = true
   },
-    {
+  {
     'willothy/wezterm.nvim',
     lazy = true,
     enabled = true,
@@ -36,12 +36,18 @@ return {
     enabled = false,
   },
   {
-    -- Smart Session Management
-    "folke/persistence.nvim",
-    lazy = true,
-    enabled = true,
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    'rmagatti/auto-session',
+    lazy = false,
+
+    ---enables autocomplete for opts
+    ---@module "auto-session"
+    ---@type AutoSession.Config
+    opts = {
+      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      -- log_level = 'debug',
+    }
   },
+
   -- better diffing
   {
     "sindrets/diffview.nvim",
@@ -50,5 +56,5 @@ return {
     config = true,
     keys = { { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "DiffView" } },
   },
-  
+
 }

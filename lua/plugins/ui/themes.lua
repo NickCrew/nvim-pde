@@ -46,7 +46,7 @@ return {
   },
   {
     "scottmckendry/cyberdream.nvim",
-    enabled = true,
+    enabled = false,
     lazy = false,
     opts = {
       -- recommended - see "configuring" below for more config options

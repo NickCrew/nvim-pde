@@ -1,10 +1,11 @@
 return {
   {
     'tigion/nvim-asciidoc-preview',
-    enabled = false,
+    enabled = true,
 
     ft = { 'asciidoc' },
     lazy = true,
-    opts = {},
+    opts = {
+    },
   }
 }

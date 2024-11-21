@@ -39,14 +39,13 @@ return {
         return function()
           local b = vim.api.nvim_get_current_buf()
           if next(vim.treesitter.highlighter.active[b]) then
-            return " TS"
+            return " "
           end
-          return " TS"
+          return " "
         end
       end
 
-      local trouble = require("trouble")
-      local symbols = trouble.statusline({
+      local symbols_source = require("trouble").statusline({
         mode = "lsp_document_symbols",
         groups = {},
         title = false,
@@ -58,16 +57,18 @@ return {
       })
 
       local trouble_sect = {
-        symbols.get,
-        cond = symbols.has,
+        symbols_source.get,
+        cond = symbols_source.has,
+        icon = "פּ"
       }
 
       local filename_sect = {
         "filename",
         cond = conditions.buffer_not_empty,
-        icon = "",
-        path = 4,
+        -- icon = "",
+        path = 3,
         file_status = true,
+        newfile_status = true,
         symbols = {
           modified = "",
           readonly = "",
@@ -111,25 +112,7 @@ return {
         cond = conditions.buffer_not_empty
       }
 
-      local mode_sect = {
-        'mode',
-        fmt = function(str) return str:sub(1, 1) end,
-      }
-      local file_sect = {
-        -- filename_sect,
-        filetype_sect,
-        -- { "encoding" },
-        { treesitter_source() },
-        { "copilot" },
-      }
-      local location_sect = {
-        { "progress", icon = "", },
-        { "location", icon = "", },
-      }
-      local scm_sect = {
-        git_sect,
-        diff_sect
-      }
+
       --------------------
       -- Lualine Config --
       --------------------
@@ -140,16 +123,24 @@ return {
           always_divide_middle = true,
           icons_enabled = true,
           disabled_filetypes = {
+            winbar = {
+              "dashboard",
+              "neo-tree",
+              "Outline",
+              "symbols-outline",
+              "help",
+              "trouble",
+              "quickfix",
+              "copilot-chat",
+              "grug-far"
+            },
             statusline = {
               "dashboard",
-              "alpha",
-              "starter",
               "neo-tree"
             }
           },
           section_separators = { left = '', right = '' },
           component_separators = { left = '', right = '' }
-
         },
         winbar_inactive = {
           lualine_a = {},
@@ -163,13 +154,15 @@ return {
           lualine_a = {},
           lualine_b = {},
           lualine_c = {
+            trouble_sect
           },
           lualine_x = {},
+          lualine_y = {},
+          lualine_z = {}
         },
         sections_inactive = {
           lualine_a = {},
-          lualine_b = {
-          },
+          lualine_b = {},
           lualine_c = {},
           lualine_x = {},
           lualine_y = {},
@@ -177,18 +170,29 @@ return {
         },
         sections = {
           lualine_a = {
-            mode_sect
+            { 'mode', fmt = function(str) return str:sub(1, 1) end, }
           },
-          lualine_b = scm_sect,
+          lualine_b = {
+
+            filetype_sect,
+            git_sect,
+          },
           lualine_c = {
-            trouble_sect
+            diff_sect
           },
           lualine_x = {
-            -- diagnostic_sect,
-            -- diff_sect,
+            {require("recorder").recordingStatus},
           },
-          lualine_y = file_sect,
-          lualine_z = location_sect
+          lualine_y = {
+            filename_sect,
+            { treesitter_source() },
+            { "copilot" },
+          },
+          lualine_z = {
+            {require("recorder").displaySlots},
+            { "progress", icon = "", },
+            { "location", icon = "", },
+          }
         },
         extensions = {
           "aerial",

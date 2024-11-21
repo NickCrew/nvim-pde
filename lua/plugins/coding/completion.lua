@@ -1,4 +1,14 @@
+
 return {
+  {
+    "garymjr/nvim-snippets",
+    lazy  = true,
+    event = "InsertEnter",
+    opts = {
+      friendly_snippets = true,
+    },
+    dependencies = { "rafamadriz/friendly-snippets" },
+  },
   {
     "yetone/avante.nvim",
     enabled = false,
@@ -17,7 +27,7 @@ return {
       "MunifTanjim/nui.nvim",
       --- The below dependencies are optional,
       "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua",    -- for providers='copilot'
+      "zbirenbaum/copilot.lua",      -- for providers='copilot'
       {
         -- support for image pasting
         "HakonHarnes/img-clip.nvim",
@@ -49,6 +59,7 @@ return {
     -- Lua-based snippet engine
     "L3MON4D3/LuaSnip",
     lazy = true,
+    enabled = false,
     event = "VeryLazy",
     dependencies = {
       {
@@ -73,14 +84,11 @@ return {
       suggestion = { enabled = false },
       panel = { enabled = false },
       filetypes = {
-        markdown = true,
         help = false,
-        hcl = true,
-        terraform = true
       }
     },
   },
-  { 'AndreM222/copilot-lualine',},
+  { 'AndreM222/copilot-lualine', },
   {
     "zbirenbaum/copilot-cmp",
     event = "InsertEnter",
@@ -287,9 +295,11 @@ return {
 
     },
     config = function()
+      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local icons = require("settings").icons()
       local cmp = require('cmp')
-      local luasnip = require("luasnip")
+      local defaults = require("cmp.config.default")()
+      -- local luasnip = require("luasnip")
       local lspkind = require("lspkind")
 
       local has_words_before = function()
@@ -297,6 +307,7 @@ return {
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
       end
+      local auto_select = true
 
       cmp.setup({
         enabled = function()
@@ -304,11 +315,15 @@ return {
               or require("cmp_dap").is_dap_buffer()
         end,
         snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
+          -- expand = function(args)
+          --   luasnip.lsp_expand(args.body)
+          -- end,
         },
-
+        auto_brackets = {}, -- configure any filetype to auto add brackets
+        completion = {
+          completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
+        },
+        preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
         formatting = {
           format = lspkind.cmp_format({
             mode = "symbol_text",
@@ -326,8 +341,10 @@ return {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
+            elseif vim.snippet.active({ direction = 1 }) then
+              vim.schedule(function()
+                vim.snippet.jump(1)
+              end)
             elseif has_words_before() then
               cmp.complete()
             else
@@ -337,8 +354,10 @@ return {
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
-            elseif luasnip.expand_or_jumpable(-1) then
-              luasnip.expand_or_jump(-1)
+            elseif vim.snippet.active({ direction = -1 }) then
+              vim.schedule(function()
+                vim.snippet.jump(1)
+              end)
             else
               fallback()
             end
@@ -355,16 +374,17 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         },
         sources = cmp.config.sources({
-          {name = "nvim_lsp_signature_help", group_index = 1},
-          { name = "copilot", group_index = 1 },
-          {name = "nvim_lsp", group_index = 1},
-          {name = "nvim_lua", group_index = 1},
-          {name = "luasnip", group_index = 1},
-          {name = "path", group_index = 1},
-          {name = "treesitter", group_index = 2},
-          {name = "emoji", group_index = 3},
-          {name = "buffer", group_index = 2},
-          {name = "rg", group_index = 3},
+          { name = "nvim_lsp_signature_help", group_index = 1, priority = 1000 },
+          { name = "copilot",                 group_index = 2, priority = 1000 },
+          { name = "nvim_lsp",                group_index = 3, priority = 800, max_item_count = 20, },
+          { name = "nvim_lsp_document_symbol",group_index = 3, priority = 700 },
+          { name = "nvim_lua",                group_index = 3, priority = 800, max_item_count = 20 },
+          -- { name = "luasnip",                 group_index = 1 },
+          { name = "path",                    group_index = 1 },
+          { name = "treesitter",              group_index = 4, priority = 400, max_item_count = 20 },
+          { name = "emoji",                   group_index = 3 },
+          { name = "buffer",                  group_index = 4, priorty = 400.,  max_item_count = 20 },
+          { name = "rg",                      group_index = 4, priority = 300, max_item_count = 20 },
           -- {
           --   name = "spell",
           --   option = {
@@ -380,7 +400,10 @@ return {
 
         }, {}),
         experimental = {
-          ghost_text = false,
+          ghost_text = vim.g.ai_cmp and {
+            hl_group = "CmpGhostText",
+          } or false,
+          sorting = defaults.sorting
         },
         window = {
           completion = cmp.config.window.bordered(),

@@ -1,12 +1,23 @@
 return {
   {
-      "RRethy/nvim-align",
-      enabled = true,
-      lazy = true,
-      cmd = "Align",
-      opts = {}
+    "chrisgrieser/nvim-recorder",
+    dependencies = "rcarriga/nvim-notify", -- optional
+    lazy = true,
+    event = "BufEnter",
+    opts = {
+      mapping = {
+        playMacro = "<leader>q"
+      }
+    },
   },
-{
+  {
+    "RRethy/nvim-align",
+    enabled = true,
+    lazy = true,
+    cmd = "Align",
+    opts = {}
+  },
+  {
     'echasnovski/mini.splitjoin',
     version = false,
     enabled = true,
@@ -16,7 +27,7 @@ return {
       { '<leader>mj', mode = 'n', '<cmd>lua MiniSplitjoin.join()<cr>',  desc = 'MiniSplitjoin' }
     },
     opts = {}
-  }, 
+  },
   {
     "echasnovski/mini.pairs",
     event = "InsertEnter",

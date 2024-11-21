@@ -22,7 +22,8 @@ require("lazy").setup({
     { import = "plugins.ui" },
     { import = "plugins.devel" },
   }
-}, {
+},
+{
   profiling = {
     loader = true,
     require = true,
@@ -38,4 +39,21 @@ require("lazy").setup({
   install = {
     colorscheme = "tokyonight-moon",
   },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "netrwPlugin",
+        "matchparen",
+        "spellfile",
+        "shada",
+        "rplugin",
+        "matchit",
+        "gzip",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      }
+    }
+  }
 })

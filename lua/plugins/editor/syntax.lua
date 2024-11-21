@@ -15,7 +15,9 @@ return {
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           'bash',
+          'c',
           'css',
+          'devicetree',
           'dockerfile',
           'gitcommit',
           'gitattributes',
@@ -33,6 +35,7 @@ return {
           'markdown',
           'make',
           'python',
+          'ruby',
           'rust',
           'rst',
           'ssh_config',

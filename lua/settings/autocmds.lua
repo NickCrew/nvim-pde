@@ -1,10 +1,8 @@
-                        --------------
-                        -- AUTOCMDS --
-                        --------------
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("custom_" .. name, { clear = true })
 end
+
 local aucmd = vim.api.nvim_create_autocmd
 
 
@@ -88,7 +86,4 @@ aucmd('LspAttach', {
     _G.set_lsp_keymaps(ev.buf)
   end,
 })
-
-
-
 

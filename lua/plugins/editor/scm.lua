@@ -5,7 +5,6 @@ return {
     config = true,
     lazy = true,
     event = "VeryLazy",
-
   },
   {
     -- Github integration

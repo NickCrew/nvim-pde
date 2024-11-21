@@ -51,6 +51,7 @@ return {
 
       local deps = {
         "ansiblels",
+        "bashls",
         "dockerls",
         "cssls",
         "html",
@@ -58,12 +59,12 @@ return {
         "htmx",
         "jsonls",
         "lua_ls",
-        "pyright",
         "basedpyright",
         "remark_ls",
-        "terraformls",
+        -- "terraformls",
         "tsserver",
         "tflint",
+        "vale_ls",
         "yamlls",
       }
 
@@ -80,14 +81,14 @@ return {
         end,
 
         -- Python
-        ["pyright"] = function()
-          lspconfig.pyright.setup({
+        ["basedpyright"] = function()
+          lspconfig.basedpyright.setup({
             flags = {
               debounce_text_changes = 300
             },
             single_file_support = true,
             settings = {
-              pyright = {
+              basedpyright = {
                 disableLanguageServices = false,
                 disableOrganizeImports = false
               },
@@ -110,7 +111,7 @@ return {
               Lua = {
                 diagnostics = {
                   globals = { 'vim' }
-                }
+               }
               }
             }
           })

@@ -163,7 +163,7 @@ return {
           title = "Outline",
           pinned = true,
           size = { height = 0.30  , width = 40 },
-          open = "SymbolsOutlineOpen",
+          open = "Outline",
         },
         {
           title = "Buffers",
