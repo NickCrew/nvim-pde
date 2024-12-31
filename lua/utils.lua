@@ -1,12 +1,10 @@
 
--- Helpers for applying the neovim configuration
---
-
 local M = {}
 
 M.update_theme = function(dark_theme, light_theme)
+  local defaults = vim.g.PREFS.ui.colorscheme
   local isdark = vim.fn.system("isdark")
-  local theme = "tokyonight"
+  local theme = defaults.dark
   local bg = "dark"
 
   if not isdark == 1 then
@@ -14,7 +12,7 @@ M.update_theme = function(dark_theme, light_theme)
     if light_theme then
       theme = light_theme
     else
-      theme = "tokyonight-day"
+      theme = defaults.light
     end
   else
     if dark_theme then theme = dark_theme end
@@ -25,17 +23,5 @@ M.update_theme = function(dark_theme, light_theme)
   vim.cmd("colorscheme " .. theme)
 end
 
-
-M.edit_config = function()
-  vim.cmd("cd $HOME/.config/nvim")
-  vim.cmd("edit $MYVIMRC")
-  vim.cmd("cd -")
-end
-
-M.xai = function()
-  vim.cmd("CopilotChatClose") 
-  vim.cmd("CopilotChatStop") 
-  vim.cmd([[Copilot disable]]) 
-end
 
 return M

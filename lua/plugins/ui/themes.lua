@@ -7,6 +7,7 @@ return {
     config = true
   },
   { "lifepillar/vim-gruvbox8", enabled  = false},
+  { "ellisonleao/gruvbox.nvim" },
   {
     "rebelot/kanagawa.nvim",
     enabled = false,
@@ -59,7 +60,7 @@ return {
   {
     "rose-pine/neovim",
     lazy = false,
-    enabled = false,
+    enabled = true,
     name = "rose-pine",
     opts = {
       disable_background = false,
@@ -74,12 +75,13 @@ return {
   },
   {
     "catppuccin/nvim",
-    enabled = false,
+    enabled = true,
     lazy = true,
-    name = "catppucin",
+    name = "catppuccin",
   },
   {
     'folke/tokyonight.nvim',
+    enabled = true,
     lazy = false,
     opts = { style = "moon" }
   },

@@ -1,10 +1,5 @@
 return {
   {
-    "stevearc/overseer.nvim",
-    opts = {},
-    lazy = true
-  },
-  {
     'willothy/wezterm.nvim',
     lazy = true,
     enabled = true,

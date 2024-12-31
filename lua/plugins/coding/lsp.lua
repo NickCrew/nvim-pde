@@ -72,7 +72,6 @@ return {
         "dockerls",
         "cssls",
         "codelldb",
-        "rust_analyzer",
         "html",
         "helm-ls",
         "htmx",

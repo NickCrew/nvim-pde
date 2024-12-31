@@ -34,6 +34,8 @@ return {
           'lua',
           'markdown',
           'make',
+          'nginx',
+          'pem',
           'python',
           'ruby',
           'rust',

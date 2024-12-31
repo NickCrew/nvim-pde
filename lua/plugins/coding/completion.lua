@@ -1,5 +1,5 @@
 return {
-{
+  {
     -- Completion and Snippets
     "hrsh7th/nvim-cmp",
     lazy = true,
@@ -86,17 +86,18 @@ return {
     },
     config = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-      local icons = require("settings").ICONS
+
       local cmp = require('cmp')
       local luasnip = require("luasnip")
       local lspkind = require("lspkind")
+      local icons = vim.g.PREFS.ui.icons
+      local auto_select = true
 
       local has_words_before = function()
         if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
       end
-      local auto_select = true
 
       cmp.setup({
         enabled = function()
@@ -175,7 +176,7 @@ return {
           { name = "nvim_lsp" },
           { name = "copilot" },
           { name = "path" },
-          { name = "luasnip"},
+          { name = "luasnip" },
           { name = "buffer",  keyword_length = 5, max_item_count = 20 },
         }, {}),
         experimental = {

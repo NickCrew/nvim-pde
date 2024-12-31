@@ -4,19 +4,10 @@ vim.g.rustaceanvim = function()
   local opts = { noremap = true, silent = false }
 
   -- Update this path
-  local extension_path = vim.env.HOME .. '/.vscode-insiders/extensions/vadimcn.vscode-lldb-1.10.0/'
+  local codelldb_version = "1.11.1"
+  local extension_path = vim.env.HOME .. '/.vscode/extensions/vadimcn.vscode-lldb-' .. codelldb_version .. '/'
   local codelldb_path = extension_path .. 'adapter/codelldb'
-  local liblldb_path = extension_path .. 'lldb/lib/liblldb'
-  local this_os = vim.uv.os_uname().sysname;
-
-  -- The path is different on Windows
-  if this_os:find "Windows" then
-    codelldb_path = extension_path .. "adapter\\codelldb.exe"
-    liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
-  else
-    -- The liblldb extension is .so for Linux and .dylib for MacOS
-    liblldb_path = liblldb_path .. (this_os == "Linux" and ".so" or ".dylib")
-  end
+  local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
 
   local cfg = require('rustaceanvim.config')
   return {
@@ -40,11 +31,6 @@ vim.g.rustaceanvim = function()
         bufmap(bufnr, "n", "<leader><leader>?", "<esc>lua vim.cmd.RustLsp('workspace/executeCommand')   <cr>", opts)
         bufmap(bufnr, "n", "<leader><leader>;", "<esc>lua vim.cmd.RustLsp('workspace/applyEdit')        <cr>", opts)
         bufmap(bufnr, "n", "<leader><leader>:", "<esc>lua vim.cmd.RustLsp('workspace/symbol')           <cr>", opts)
-
-        map('n', '<space>e', "<cmd>lua vim.diagnostic.open_float", opts)
-        map('n', '[d', "<cmd>lua vim.diagnostic.goto_prev", opts)
-        map('n', ']d', "<cmd>lua vim.diagnostic.goto_next", opts)
-        map('n', '<space>q', "<cmd>lua vim.diagnostic.setloclist", opts)
       end,
       settings = function(project_root)
         local ra = require('rustaceanvim.config.server')
