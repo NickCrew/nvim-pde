@@ -159,13 +159,6 @@ return {
           size = { width = 40 , height = 0.30},
         },
         {
-          ft = "Outline",
-          title = "Outline",
-          pinned = true,
-          size = { height = 0.30  , width = 40 },
-          open = "Outline",
-        },
-        {
           title = "Buffers",
           ft = "neo-tree",
           size = { width = 40, height = 0.20 },
@@ -184,6 +177,13 @@ return {
           pinned = true,
           open = "Neotree position=right git_status",
           size = { height = 0.20 },
+        },
+        {
+          ft = "Outline",
+          title = "Outline",
+          pinned = true,
+          size = { height = 0.30  , width = 40 },
+          open = "SymbolsOutlineOpen",
         },
         -- any other neo-tree windows
         "neo-tree",

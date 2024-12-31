@@ -1,14 +1,75 @@
+
 return {
+  {
+    "VonHeikemen/fine-cmdline.nvim",
+    enabled = true,
+    lazy = true,
+    event = "CmdlineEnter"
+  },
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy", -- Or `LspAttach`
+    priority = 1000,    -- needs to be loaded in first
+    config = function()
+      require('tiny-inline-diagnostic').setup()
+    end
+  },
   { 'echasnovski/mini.icons', version = false },
   {
     "folke/snacks.nvim",
+    dependencies = {
+    {
+        "rubiin/fortune.nvim",
+        enabled = true,
+        opts = {
+          display_format = "mixed",
+        }
+      }
+    },
     priority = 1000,
     lazy = false,
     ---@type snacks.Config
     opts = {
       bigfile = { enabled = true },
+      dashboard = {
+        sections = {
+
+
+          { section = "header" },
+
+          { section = "keys", gap = 1, padding = 1 },
+         { section = "startup" },
+
+          { pane = 2, icon = "ﯦ", title = "Tips", section = "terminal", cmd = 'echo -e "\\033[1;92m$(csfortune)\\033[1;97m"', ttl = 5, height = 2, indent = 3, padding = 1},
+          { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+          { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+            function()
+      local cmds = { 
+        {
+          icon = " ",
+          title = "Git Status",
+          cmd = "hub --no-pager diff --stat -B -M -C",
+          height = 5,
+        },
+      }
+      return vim.tbl_map(function(cmd)
+        return vim.tbl_extend("force", {
+          pane = 2,
+          section = "terminal",
+          enabled = function() 
+              return Snacks.git.get_root() ~= nil
+            end,
+          padding = 1,
+          ttl = 5 * 60,
+          indent = 3,
+        }, cmd)
+      end, cmds)
+    end,
+
+        },
+      },
       notifier = {
-        enabled = true,
+        enabled = false,
         timeout = 3000,
       },
       quickfile = { enabled = true },
@@ -72,7 +133,7 @@ return {
           Snacks.toggle.diagnostics():map("<leader>ud")
           Snacks.toggle.line_number():map("<leader>ul")
           Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
-          "<leader>uc")
+            "<leader>uc")
           Snacks.toggle.treesitter():map("<leader>uT")
           Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
           Snacks.toggle.inlay_hints():map("<leader>uh")

@@ -9,6 +9,17 @@ return {
     { "<leader>o", mode = "n", "<cmd>Outline<cr>", desc = "Outline" },
   }
 },
+{
+    "simrat39/symbols-outline.nvim",
+    keys = {
+      { "<leader>ol", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" },
+
+    },
+    cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
+    lazy = true,
+    config = true,
+    enabled = true
+  },
   {
     -- LSP Symbol Drawer
     "stevearc/aerial.nvim",

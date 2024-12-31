@@ -10,8 +10,8 @@ return {
     -- Telescope
     "nvim-telescope/telescope.nvim",
     version = false,
+    enabled = true,
     lazy = true,
-    event = "VeryLazy",
     cmd = "Telescope",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
@@ -86,7 +86,7 @@ return {
           },
           prompt_prefix = "  ",
           selection_caret = "   ",
-          get_selection_window = get_selected_window,
+          -- get_selection_window = get_selected_window,
           mappings = {
             i = {
               ["<C-j>o"] = actions.move_selection_next,

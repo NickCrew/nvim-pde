@@ -1,12 +1,10 @@
 local M = {}
 
-M.icons = function() 
-  return require("settings._icons")
-end
+M.ICONS = require("settings._icons")
 
 M.load = function()
+  require("settings.global")
   require("settings.autocmds")
-  require("settings.commands")
   require("settings.options")
   require("settings.plugins")
   require("settings.mappings")

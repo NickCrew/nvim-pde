@@ -33,7 +33,7 @@ return {
 
       'nvimdev/dashboard-nvim',
       event = 'VimEnter',
-      enabled = true,
+      enabled = false,
       lazy = true,
       opts = {
         theme = 'hyper',

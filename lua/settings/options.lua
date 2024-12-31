@@ -2,15 +2,6 @@
 --
 
 local o = vim.o
-local g = vim.g
-
--- PATHS
-g.nvim_cache        = os.getenv('HOME') .. "/.cache/nvim"
-g.python3_host_prog = os.getenv("HOME") .. '/.pyenv/versions/neovim/bin/python'
-
--- LEADER
-g.mapleader         = " "  -- Leader
-g.maplocalleader    = "\\"  -- Local Leader
 
 -- OPTIONS
 o.termguicolors  = true  -- True color support

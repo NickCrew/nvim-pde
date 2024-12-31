@@ -1,5 +1,22 @@
 return {
   {
+    "Davidyz/inlayhint-filler.nvim",
+    keys = {
+      {
+        "<Leader>I",     -- Use whatever keymap you want.
+        function()
+          require("inlayhint-filler").fill()
+        end,
+        desc = "Insert the inlay-hint under cursor into the buffer."
+      }
+    }
+  },
+  {
+    'VidocqH/lsp-lens.nvim',
+    event = "LspAttach",
+    config = true
+  },
+  {
     "zeioth/garbage-day.nvim",
     event = "VeryLazy",
     enabled = true,
@@ -54,6 +71,8 @@ return {
         "bashls",
         "dockerls",
         "cssls",
+        "codelldb",
+        "rust_analyzer",
         "html",
         "helm-ls",
         "htmx",
@@ -83,23 +102,17 @@ return {
         -- Python
         ["basedpyright"] = function()
           lspconfig.basedpyright.setup({
-            flags = {
-              debounce_text_changes = 300
-            },
-            single_file_support = true,
+            capabilities = capabilities,
             settings = {
               basedpyright = {
                 disableLanguageServices = false,
-                disableOrganizeImports = false
-              },
-              python = {
+                disableOrganizeImports = false,
+                typeCheckingMode = "standard",
                 analysis = {
-                  autoImportCompletions = true,
                   autoSearchPaths = true,
-                  diagnosticMode = "openFilesOnly",
-                  useLibraryCodeForTypes = false,
-                  typeCheckingMode = "basic",
-                },
+                  useLibraryCodeForTypes = true,
+                  diagnosticMode = "openFilesOnly"
+                }
               },
             },
           })
@@ -107,11 +120,12 @@ return {
         --- lua
         ["lua_ls"] = function()
           lspconfig.lua_ls.setup({
+            capabilities = capabilities,
             settings = {
               Lua = {
                 diagnostics = {
                   globals = { 'vim' }
-               }
+                }
               }
             }
           })
@@ -122,5 +136,5 @@ return {
       require("mason-lspconfig").setup_handlers(handlers)
     end
   },
-  
+
 }
