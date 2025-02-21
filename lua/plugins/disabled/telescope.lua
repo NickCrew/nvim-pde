@@ -1,16 +1,10 @@
 return {
-  {
-    "MagicDuck/grug-far.nvim",
-    lazy = true,
-    enabled = true,
-    cmd = "GrugFar",
-    config = true
-  },
+  
   {
     -- Telescope
     "nvim-telescope/telescope.nvim",
     version = false,
-    enabled = true,
+    enabled = false,
     lazy = true,
     cmd = "Telescope",
     dependencies = {
@@ -246,42 +240,7 @@ return {
       }
     end
   },
-  {
-    "gbprod/yanky.nvim",
-    recommended = true,
-    desc = "Better Yank/Paste",
-    opts = {
-      highlight = { timer = 150 },
-    },
-    keys = {
-      {
-        "<leader>p",
-        function()
-          require("telescope").extensions.yank_history.yank_history({})
-        end,
-        mode = { "n", "x" },
-        desc = "Open Yank History",
-      },
-      -- stylua: ignore
-      { "y",  "<Plug>(YankyYank)",                      mode = { "n", "x" },                           desc = "Yank Text" },
-      { "p",  "<Plug>(YankyPutAfter)",                  mode = { "n", "x" },                           desc = "Put Text After Cursor" },
-      { "P",  "<Plug>(YankyPutBefore)",                 mode = { "n", "x" },                           desc = "Put Text Before Cursor" },
-      { "gp", "<Plug>(YankyGPutAfter)",                 mode = { "n", "x" },                           desc = "Put Text After Selection" },
-      { "gP", "<Plug>(YankyGPutBefore)",                mode = { "n", "x" },                           desc = "Put Text Before Selection" },
-      { "[y", "<Plug>(YankyCycleForward)",              desc = "Cycle Forward Through Yank History" },
-      { "]y", "<Plug>(YankyCycleBackward)",             desc = "Cycle Backward Through Yank History" },
-      { "]p", "<Plug>(YankyPutIndentAfterLinewise)",    desc = "Put Indented After Cursor (Linewise)" },
-      { "[p", "<Plug>(YankyPutIndentBeforeLinewise)",   desc = "Put Indented Before Cursor (Linewise)" },
-      { "]P", "<Plug>(YankyPutIndentAfterLinewise)",    desc = "Put Indented After Cursor (Linewise)" },
-      { "[P", "<Plug>(YankyPutIndentBeforeLinewise)",   desc = "Put Indented Before Cursor (Linewise)" },
-      { ">p", "<Plug>(YankyPutIndentAfterShiftRight)",  desc = "Put and Indent Right" },
-      { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)",   desc = "Put and Indent Left" },
-      { ">P", "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put Before and Indent Right" },
-      { "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)",  desc = "Put Before and Indent Left" },
-      { "=p", "<Plug>(YankyPutAfterFilter)",            desc = "Put After Applying a Filter" },
-      { "=P", "<Plug>(YankyPutBeforeFilter)",           desc = "Put Before Applying a Filter" },
-    },
-  },
+  
   {
     "nvim-telescope/telescope-frecency.nvim",
     lazy = true,
@@ -475,24 +434,12 @@ return {
 
   },
   {
-    'Shatur/neovim-session-manager',
-    lazy = true,
-    config = function()
-      require('telescope').load_extension('session_manager')
-    end
-  },
-  {
-    "ryanmsnyder/toggleterm-manager.nvim",
-    lazy = true,
-    cmd = "Telescope toggleterm_manager",
-    config = true
-  },
-  {
     "cappyzawa/telescope-terraform.nvim",
+    enabled = false,
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim",
       "ANGkeith/telescope-terraform-doc.nvim" },
     ft = { "terraform", "tf", "tfvars" },
-    lazy = true,
+    
     keys = {
       { "<leader>ftd", mode = "n", "<esc><cmd>Telescope terraform<cr>", desc = "Terraform" }
     },

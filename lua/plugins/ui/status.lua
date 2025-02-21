@@ -66,13 +66,13 @@ return {
         "filename",
         cond = conditions.buffer_not_empty,
         -- icon = "",
-        path = 3,
+        path = 4,
         file_status = true,
         newfile_status = true,
         symbols = {
           modified = "",
           readonly = "",
-          newfile = "",
+          newfile = "󱇬",
           unnamed = ""
         }
       }
@@ -85,11 +85,11 @@ return {
       local diff_sect = {
         "diff",
         source = diff_source,
-        -- icon = " ",
+        icon = "",
         symbols = {
-          added = " ",
-          modified = "柳",
-          removed = " ",
+          added = " ",
+          modified = "󰐑 ",
+          removed = " ",
         },
         cond = conditions.check_git_workspace,
       }
@@ -102,16 +102,37 @@ return {
 
       local diagnostic_sect = {
         "diagnostics",
+        icon = "",
         sources = { "nvim_diagnostic" },
         symbols = {
           error = " ",
           warn = " ",
-          info = " ",
-          hint = " ",
+          info = " ",
+          hint = " ",
         },
         cond = conditions.buffer_not_empty
       }
 
+      local overseer = require('overseer')
+      local codeium_sect = function()
+        local status = require('codeium.virtual_text').status()
+
+        if status.state == 'idle' then
+          -- Output was cleared, for example when leaving insert mode
+          return ' '
+        end
+
+        if status.state == 'waiting' then
+          -- Waiting for response
+          return "Waiting..."
+        end
+
+        if status.state == 'completions' and status.total > 0 then
+          return string.format('%d/%d', status.current, status.total)
+        end
+
+        return ' 0 '
+      end
 
       --------------------
       -- Lualine Config --
@@ -132,15 +153,30 @@ return {
               "trouble",
               "quickfix",
               "copilot-chat",
-              "grug-far"
+              "grug-far",
+              "snacks_dashboard"
             },
             statusline = {
               "dashboard",
+              "snacks_dashboard",
               "neo-tree"
+
             }
           },
           section_separators = { left = '', right = '' },
           component_separators = { left = '', right = '' }
+        },
+        tabline = {
+          lualine_a = {
+          },
+          lualine_b = {
+            { "buffers", mode = 4, use_mode_colors = true }
+          },
+          lualine_y = {
+          },
+          lualine_z = {
+            "tabs"
+          }
         },
         winbar_inactive = {
           lualine_a = {},
@@ -156,9 +192,14 @@ return {
           lualine_c = {
             trouble_sect
           },
-          lualine_x = {},
-          lualine_y = {},
-          lualine_z = {}
+          lualine_x = {
+          },
+          lualine_y = {
+            diagnostic_sect
+          },
+          lualine_z = {
+            filename_sect
+          }
         },
         sections_inactive = {
           lualine_a = {},
@@ -170,26 +211,43 @@ return {
         },
         sections = {
           lualine_a = {
-            { 'mode', fmt = function(str) return str:sub(1, 1) end, }
+            { 'mode' }
           },
           lualine_b = {
 
             filetype_sect,
             git_sect,
+            diff_sect,
           },
           lualine_c = {
-            diff_sect
           },
           lualine_x = {
-            {require("recorder").recordingStatus},
+            {
+              "overseer",
+              icon = "",
+              label = "",     -- Prefix for task counts
+              colored = true, -- Color the task icons and counts
+              symbols = {
+                [overseer.STATUS.FAILURE] = "F:",
+                [overseer.STATUS.CANCELED] = "C:",
+                [overseer.STATUS.SUCCESS] = "S:",
+                [overseer.STATUS.RUNNING] = "R:",
+              },
+              unique = false,     -- Unique-ify non-running task count by name
+              name = nil,         -- List of task names to search for
+              name_not = false,   -- When true, invert the name search
+              status = nil,       -- List of task statuses to display
+              status_not = false, -- When true, invert the status search
+            },
+            { require("recorder").recordingStatus },
           },
           lualine_y = {
-            filename_sect,
             { treesitter_source() },
             { "copilot" },
+            {  codeium_sect() }
           },
           lualine_z = {
-            {require("recorder").displaySlots},
+            { require("recorder").displaySlots },
             { "progress", icon = "", },
             { "location", icon = "", },
           }

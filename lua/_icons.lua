@@ -1,3 +1,6 @@
+-- Icons
+-- Used by global.lua to create a global variable g.ICONS
+--
 return {
   kind = {
     Array           = "  ",
@@ -8,6 +11,7 @@ return {
     Conditional     = "  ",
     Constructor     = "  ",
     Copilot         = "  ",
+    Codeium         =  " ",
     Comment         = "  ",
     Enum            = "  ",
     EnumMember      = "  ",
@@ -185,6 +189,7 @@ return {
     emoji      = "  Emoji",
     git        = "  Git",
     spell      = "  Spell",
+    codeium    = "  AI"
   }, 
   fancy = {
       nvim_lsp   = "👐 LSP",

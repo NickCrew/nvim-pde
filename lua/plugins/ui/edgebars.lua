@@ -4,58 +4,8 @@ return {
     name = 'window-picker',
     event = "VeryLazy",
     version = '2.*',
-    config = true
-  },
-  {
-    -- Enhance LSP Diagnostics
-    "folke/trouble.nvim",
-    lazy = true,
-    cmd = { "Trouble" },
-    keys = {
-      {
-        "<leader>xx",
-        "<cmd>Trouble diagnostics toggle<cr>",
-        desc = "Diagnostics (Trouble)",
-      },
-      {
-        "<leader>xX",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-        desc = "Buffer Diagnostics (Trouble)",
-      },
-      {
-        "<leader>cs",
-        "<cmd>Trouble symbols toggle focus=false<cr>",
-        desc = "Symbols (Trouble)",
-      },
-      {
-        "<leader>cl",
-        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-        desc = "LSP Definitions / references / ... (Trouble)",
-      },
-      {
-        "<leader>xL",
-        "<cmd>Trouble loclist toggle<cr>",
-        desc = "Location List (Trouble)",
-      },
-      {
-        "<leader>xQ",
-        "<cmd>Trouble qflist toggle<cr>",
-        desc = "Quickfix List (Trouble)",
-      },
-    },
-    opts = {
-      modes = {
-        test = {
-          mode = "diagnostics",
-          preview = {
-            type = "split",
-            relative = "win",
-            position = "right",
-            size = 0.3
-          }
-        }
-      }
-    }
+    config = true,
+    enabled = false
   },
   {
     "folke/edgy.nvim",
@@ -112,23 +62,6 @@ return {
       bottom = {
         -- toggleterm / lazyterm at the bottom with a height of 40% of the screen
         {
-          ft = "toggleterm",
-          title  = "Terminal",
-          size = { height = 0.4 },
-          -- exclude floating windows
-          filter = function(buf, win)
-            return vim.api.nvim_win_get_config(win).relative == ""
-          end,
-        },
-        {
-          ft = "lazyterm",
-          title = "LazyTerm",
-          size = { height = 0.4 },
-          filter = function(buf)
-            return not vim.b[buf].lazyterm_cmd
-          end,
-        },
-        {
           title = "Issues",
           ft = "trouble",
           size = { height = 0.3 }
@@ -148,35 +81,13 @@ return {
         },
       },
       left = {
-        {
+                {
+          ft = "snacks_explorer",
           title = "Explorer",
-          ft = "neo-tree",
-          open = "Neotree",
-          pinned  = true,
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == "filesystem"
-          end,
-          size = { width = 40 , height = 0.30},
-        },
-        {
-          title = "Buffers",
-          ft = "neo-tree",
-          size = { width = 40, height = 0.20 },
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == "buffers"
-          end,
           pinned = true,
-          open = "Neotree position=top buffers",
-        },
-        {
-          title = "Changes",
-          ft = "neo-tree",
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == "git_status"
-          end,
-          pinned = true,
-          open = "Neotree position=right git_status",
-          size = { height = 0.20 },
+          open = function()
+            return Snacks.explorer.open()
+          end
         },
         {
           ft = "Outline",
@@ -185,8 +96,6 @@ return {
           size = { height = 0.30  , width = 40 },
           open = "SymbolsOutlineOpen",
         },
-        -- any other neo-tree windows
-        "neo-tree",
       },
       right = {
         {

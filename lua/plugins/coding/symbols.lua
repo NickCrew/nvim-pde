@@ -1,15 +1,6 @@
+
 return {
   {
-  "hedyhli/outline.nvim",
-  lazy = true,
-  event = "BufRead",
-  cmd = "Outline",
-  opts = {},
-  keys = {
-    { "<leader>o", mode = "n", "<cmd>Outline<cr>", desc = "Outline" },
-  }
-},
-{
     "simrat39/symbols-outline.nvim",
     keys = {
       { "<leader>ol", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" },
@@ -54,4 +45,27 @@ return {
       },
     }
   },
+{
+  "bassamsdata/namu.nvim",
+  opts = {
+    menu_symbols = { 
+      enable = true,
+      options = {
+      },
+    colorscheme = {
+        enable = false,
+        options = {
+          -- NOTE: if you activate persist, then please remove any vim.cmd("colorscheme ...") in your config, no needed anymore
+          persist = true, -- very efficient mechanism to Remember selected colorscheme
+          write_shada = false, -- If you open multiple nvim instances, then probably you need to enable this
+        },
+      },
+      ui_select = { enable = false }, -- vim.ui.select() wrapper
+  },
+},
+  keys = {
+    { "<leader>ss", "<cmd>Namu symbols<cr>", desc = "Jump to LSP symbol"}
+  }
+}
+
 }

@@ -1,17 +1,26 @@
 return {
   {
+  "dupeiran001/nord.nvim",
+  lazy = false,
+  priority = 1000,
+  opts = {},
+},
+  {
     -- macos system dark/mode
     "vimpostor/vim-lumen",
     enabled = false,
     lazy = true,
     config = true
   },
-  { "lifepillar/vim-gruvbox8", enabled  = false},
-  { "ellisonleao/gruvbox.nvim" },
+  { "lifepillar/vim-gruvbox8",   enabled = false },
+  { "ellisonleao/gruvbox.nvim",  enabled = false },
   {
     "rebelot/kanagawa.nvim",
     enabled = false,
     lazy = true,
+    config = function()
+      require('kanagawa').setup()
+    end
   },
   {
     "sainnhe/gruvbox-material",
@@ -22,7 +31,7 @@ return {
   {
     -- colorscheme development
     "rktjmp/lush.nvim",
-    enabled = true,
+    enabled = false,
     lazy = true,
     cmd = "Lushify",
 
@@ -30,7 +39,7 @@ return {
   {
     "arcticicestudio/nord-vim",
     enabled = false
-},
+  },
   {
     "EdenEast/nightfox.nvim",
     enabled = false,
@@ -45,6 +54,16 @@ return {
 
     }
   },
+  {
+  'uloco/bluloco.nvim',
+  enabled = false,
+  lazy = false,
+  priority = 1000,
+  dependencies = { 'rktjmp/lush.nvim' },
+  config = function()
+    -- your optional config goes here, see below.
+  end,
+},
   {
     "scottmckendry/cyberdream.nvim",
     enabled = false,
@@ -81,7 +100,7 @@ return {
   },
   {
     'folke/tokyonight.nvim',
-    enabled = true,
+    enabled = false,
     lazy = false,
     opts = { style = "moon" }
   },

@@ -34,5 +34,4 @@ return {
       updateevents = "TextChanged,TextChangedI",
     }
   },
-
-}
+  }

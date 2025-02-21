@@ -17,7 +17,17 @@ map("n", "<A-h>", "<C-w>h", opts)              -- Move to window left
 map("n", "<A-j>", "<C-w>j", opts)              -- Move to window down
 map("n", "<A-k>", "<C-w>k", opts)              -- Move to window up
 map("n", "<A-l>", "<C-w>l", opts)              -- Move to window right
+
+map("n", "<C-h>", "<C-w>h", opts)              -- Move to window left
+map("n", "<C-j>", "<C-w>j", opts)              -- Move to window down
+map("n", "<C-k>", "<C-w>k", opts)              -- Move to window up
+map("n", "<C-l>", "<C-w>l", opts)              -- Move to window right
+
+map("n", "<S-l>", "<cmd>:bnext<cr>", opts) -- Next buffer
+map("n", "<S-h>", "<cmd>:bprevious<cr>", opts) -- Previous buffer
 map("n", "<leader><tab>", "<cmd>b#<cr>", opts) -- Go to last buffer
+
+
 
 -- Save and quit
 map("n", "<C-s>", ":w<cr>", opts)        -- Save

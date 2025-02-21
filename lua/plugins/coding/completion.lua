@@ -12,6 +12,7 @@ return {
       },
       {
         "hrsh7th/cmp-nvim-lsp-signature-help",
+        enabled = false,
         lazy = true,
         event = "InsertEnter"
       },
@@ -42,6 +43,7 @@ return {
       },
       {
         "hrsh7th/cmp-emoji",
+        enabled = false,
         lazy = true,
         event = "InsertEnter"
       },
@@ -57,12 +59,14 @@ return {
       },
       {
         "ray-x/cmp-treesitter",
+        enabled = false,
         lazy = true,
         event = "InsertEnter"
       },
       {
         "rcarriga/cmp-dap",
         lazy = true,
+        ft = { "dap-repl", "dapui_watches", "dapui_hover" },
         event = "InsertEnter"
       },
       {
@@ -79,6 +83,7 @@ return {
       },
       {
         "lukas-reineke/cmp-rg",
+        enabled = false,
         lazy = true,
         event = "InsertEnter"
       },
@@ -90,7 +95,7 @@ return {
       local cmp = require('cmp')
       local luasnip = require("luasnip")
       local lspkind = require("lspkind")
-      local icons = vim.g.PREFS.ui.icons
+      local icons = vim.g.ICONS
       local auto_select = true
 
       local has_words_before = function()
@@ -174,7 +179,8 @@ return {
         sources = cmp.config.sources({
           { name = "nvim_lua" },
           { name = "nvim_lsp" },
-          { name = "copilot" },
+          -- { name = "copilot" },
+          { name = "codeium" },
           { name = "path" },
           { name = "luasnip" },
           { name = "buffer",  keyword_length = 5, max_item_count = 20 },

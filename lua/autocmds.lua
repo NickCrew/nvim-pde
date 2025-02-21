@@ -2,26 +2,12 @@
 --
 --
 
-local prefs   = vim.g.PREFS
 local aucmd   = vim.api.nvim_create_autocmd
 local bufmap  = vim.api.nvim_buf_set_keymap
 local opts    = { noremap = true, silent = true }
 
 local augroup = function(name)
   return vim.api.nvim_create_augroup("custom_" .. name, { clear = true })
-end
-
---[[
-  Set filetype based on file extension
-]] --
-for p, v in pairs(prefs.filetypes) do
-  aucmd({ "BufNewFile", "BufRead" }, {
-    group = augroup("filetype"),
-    pattern = v.ext,
-    callback = function()
-      vim.cmd("set ft=" .. v.name)
-    end,
-  })
 end
 
 

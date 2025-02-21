@@ -31,7 +31,7 @@ return {
     lazy = true,
     enabled = false,
     ft = 'python',
-    dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
+    dependencies = { "neovim/nvim-lspconfig","mfussenegger/nvim-dap-python" },
     opts = {
       -- Your options go here
       -- name = "venv",
